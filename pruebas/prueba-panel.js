@@ -1,0 +1,556 @@
+/* Prueba del panel de AnimPlayer, de punta a punta y sin abrir Skyrim.
+ *
+ * COMO FUNCIONA
+ *   1. Se carga el plugin de verdad (plugin/animplayer.js, sin tocarlo) contra
+ *      un SkyrimPlatform falso. El plugin, creyendose dentro del juego, manda
+ *      a la pagina el codigo de su panel. Ese codigo se guarda.
+ *   2. Se abre un Chromium de verdad (Electron) con una pagina como la de
+ *      SkyMP, y se le inyecta ESE MISMO codigo. No una copia, no una version
+ *      simplificada: el texto exacto que el plugin manda al juego.
+ *   3. Se maneja el panel como lo haria una persona: se escribe en la barra, se
+ *      pulsan filas, se usan las flechas y el Enter.
+ *   4. Los mensajes que el panel manda hacia el juego se recogen y se le pasan
+ *      al plugin, y se comprueba que acaba llamando a Debug.sendAnimationEvent
+ *      con el evento correcto.
+ *
+ *   Asi lo que se prueba es la cadena completa: interfaz -> mensaje -> cola ->
+ *   reproductor. Lo unico que queda fuera es si Havok mueve el cuerpo, que solo
+ *   se puede ver en el juego.
+ *
+ * COMO SE EJECUTA
+ *   Necesita Electron. Se reutiliza el que ya hay en el proyecto RolePlayHub
+ *   para no descargar otra copia de 200 MB; si no esta, se pasa la ruta en la
+ *   variable ELECTRON.
+ *
+ *     node pruebas/ejecutar.js
+ *
+ *   Devuelve 0 si todo pasa y 1 si algo falla, para poder meterlo en CI.
+ */
+'use strict';
+
+const { app, BrowserWindow } = require('electron');
+const path = require('path');
+const fs = require('fs');
+
+const RAIZ = path.resolve(__dirname, '..');
+const PLUGIN = path.join(RAIZ, 'plugin', 'animplayer.js');
+const SALIDA = path.join(__dirname, 'salida');
+
+const falsoSp = require('./sp-falso');
+
+const esperar = (ms) => new Promise((r) => setTimeout(r, ms));
+app.disableHardwareAcceleration();
+
+let fallos = 0;
+const comprobar = (bien, que, detalle) => {
+  console.log(`  ${bien ? 'ok ' : 'MAL'} ${que}${detalle ? '   (' + detalle + ')' : ''}`);
+  if (!bien) fallos++;
+};
+
+/* La pagina anfitriona: lo mismo que Data/Platform/UI/index.html, que es
+   literalmente un body con un div#root. El panel se cuelga de body, no de
+   #root, justamente para que React no lo borre al repintarse. */
+const PAGINA = 'data:text/html;charset=utf-8,' + encodeURIComponent(
+  '<!doctype html><html><head><meta charset="utf-8">' +
+  '<style>html,body{margin:0;height:100%;background:#20303a}</style>' +
+  '</head><body><div id="root"></div></body></html>');
+
+app.whenReady().then(async () => {
+  const win = new BrowserWindow({ width: 1280, height: 900, show: false });
+  const problemas = [];
+  win.webContents.on('console-message', (_e, nivel, msg) => {
+    if (nivel >= 2 && !/Content-Security-Policy|Insecure|favicon/.test(msg)) problemas.push(msg);
+  });
+
+  /* executeJavaScript devuelve el valor de la ultima expresion, y Electron lo
+     clona para pasarlo al proceso principal. Si ese valor es un objeto con
+     funciones dentro, revienta con "An object could not be cloned" — que es lo
+     que pasaba al asignar window.skyrimPlatform. Se le pega un "; true" a todo
+     lo que no pida resultado, y asi el valor clonado es siempre un booleano. */
+  const js = (src) => win.webContents.executeJavaScript(src);
+  const jsMudo = (src) => win.webContents.executeJavaScript('(function(){' + src + '})(); true;');
+  const captura = async (n) => {
+    fs.mkdirSync(SALIDA, { recursive: true });
+    fs.writeFileSync(path.join(SALIDA, n + '.png'),
+                     (await win.webContents.capturePage()).toPNG());
+  };
+  /* Recoge lo que el panel ha mandado al juego y se lo pasa al plugin, tal cual
+     lo haria SkyrimPlatform con el suceso browserMessage. Despues un "update",
+     que es donde el plugin vacia su cola. */
+  const pasarMensajesAlPlugin = async (falso) => {
+    const mensajes = await js('window.__mensajes.splice(0)');
+    for (const m of mensajes) falso.disparar('browserMessage', { arguments: [m] });
+    falso.tic();
+    return mensajes;
+  };
+
+  // =====================================================================
+  console.log('=== el plugin arranca y manda su panel a la pagina ===');
+  const falso = falsoSp.cargarPlugin(PLUGIN, {});
+  comprobar(falso.hayOyente('update'), 'registra el oyente de update (la cola)');
+  comprobar(falso.hayOyente('buttonEvent'), 'registra la tecla');
+  comprobar(falso.hayOyente('browserMessage'), 'registra los mensajes de la pagina');
+  comprobar(falso.hayOyente('menuOpen') && falso.hayOyente('menuClose'),
+            'vigila la pantalla de carga');
+  comprobar(falso.registro.animaciones.length === 0,
+            'no toca el juego solo por cargarse');
+
+  falso.tic();                          // el primer update: aqui inyecta
+  const fuentePanel = falso.ultimaInyeccion('__animplayer');
+  comprobar(!!fuentePanel, 'manda el codigo del panel a la pagina');
+  comprobar(/"evento":"IdleWave"/.test(fuentePanel),
+            'y el catalogo viaja dentro', (fuentePanel || '').length + ' caracteres');
+  const arranque = falso.registro.consola.join(' | ');
+  comprobar(/animaciones/.test(arranque), 'y deja constancia en la consola',
+            falso.registro.consola[0]);
+
+  // =====================================================================
+  console.log('\n=== el panel se construye en un Chromium de verdad ===');
+  await win.loadURL(PAGINA);
+  await esperar(400);
+  // Un skyrimPlatform de mentira tambien en la pagina, para recoger mensajes.
+  await jsMudo('window.__mensajes = [];' +
+               'window.skyrimPlatform = { sendMessage: function (s) { window.__mensajes.push(s); } };');
+  await jsMudo(fuentePanel);
+  await esperar(250);
+
+  comprobar(await js('!!window.__animplayer'), 'el panel se instala');
+  comprobar(await js('!!document.getElementById("animplayer")'), 'y deja su nodo');
+  const primeros = await js('window.__mensajes.slice()');
+  comprobar(primeros.some((m) => m.indexOf('animplayer:listo') !== -1),
+            'y avisa de que esta listo');
+  const cuantas = JSON.parse(primeros.find((m) => m.indexOf('listo') !== -1)).data.animaciones;
+  comprobar(cuantas > 500, `con el catalogo entero (${cuantas} animaciones)`);
+  await pasarMensajesAlPlugin(falso);
+
+  console.log('\n=== la pestana solo sale cuando se puede pulsar ===');
+  /* Mientras el navegador no tiene el foco, el raton no llega a la pagina: una
+     pestana ahi seria un adorno tapando el juego. Se escuchan los mismos
+     sucesos con los que SkyMP avisa del foco, asi que se prueban con ellos. */
+  const verPestana = () => js(
+    `getComputedStyle(document.querySelector('#animplayer .ap-tirador')).display !== 'none'`);
+  const foco = (hay) => jsMudo(
+    "window.dispatchEvent(new CustomEvent('skymp5-client:browser" +
+    (hay ? 'Focused' : 'Unfocused') + "'))");
+
+  await foco(false);
+  await esperar(120);
+  comprobar(!(await verPestana()), 'sin foco del navegador, no se ve');
+  await captura('1-sin-foco');
+
+  await foco(true);
+  await esperar(120);
+  comprobar(await verPestana(), 'con foco, aparece');
+
+  console.log('\n=== sale arriba a la derecha, y plegado ===');
+  const sitio = await js(`(() => {
+    const t = document.querySelector('#animplayer .ap-tirador').getBoundingClientRect();
+    const p = document.querySelector('#animplayer .ap-panel');
+    return { top: t.top, derecha: innerWidth - t.right, ancho: innerWidth,
+             panelVisible: getComputedStyle(p).display !== 'none' };
+  })()`);
+  comprobar(sitio.top < 2, 'pegado al borde de arriba', 'top=' + sitio.top);
+  comprobar(sitio.derecha > 18 && sitio.derecha < 30,
+            'y a la derecha', 'a ' + sitio.derecha + 'px del borde');
+  comprobar(sitio.panelVisible === false, 'empieza plegado: solo se ve la pestana');
+  await captura('1-plegado');
+
+  console.log('\n=== se despliega ===');
+  await js('window.__animplayer.abrir()');
+  await esperar(250);
+  comprobar(await js(`getComputedStyle(document.querySelector('#animplayer .ap-panel')).display !== 'none'`),
+            'el panel se ve');
+  comprobar(await js(`document.activeElement === document.querySelector('#animplayer .ap-buscar')`),
+            'y el cursor esta ya en la barra de busqueda');
+  await foco(false);
+  await esperar(120);
+  comprobar(await verPestana(),
+            'y con el panel abierto la pestana no se escapa aunque se pierda el foco');
+  await foco(true);
+  await captura('2-abierto');
+
+  console.log('\n=== de entrada solo las recomendadas ===');
+  const dentro = await js(`(() => {
+    const filas = document.querySelectorAll('#animplayer .ap-fila');
+    const grupo = document.querySelector('#animplayer .ap-grupo');
+    return { filas: filas.length, grupo: grupo ? grupo.textContent : '' };
+  })()`);
+  comprobar(dentro.filas > 20 && dentro.filas < 80,
+            'la lista no empieza con setecientas', dentro.filas + ' filas');
+  comprobar(/Recomendadas/.test(dentro.grupo) && /\d{3}/.test(dentro.grupo),
+            'y dice como ver el resto', dentro.grupo.replace(/\s+/g, ' ').trim());
+
+  comprobar(await js(`document.querySelector('#animplayer .ap-titulo').textContent === 'Recomendadas'`),
+            'y la cabecera dice que estas mirando');
+
+  console.log('\n=== la busqueda ===');
+  const buscar = async (texto) => {
+    await js(`(() => { const c = document.querySelector('#animplayer .ap-buscar');
+      c.value = ${JSON.stringify(texto)};
+      c.dispatchEvent(new Event('input', { bubbles: true })); })()`);
+    await esperar(160);
+    return js(`[...document.querySelectorAll('#animplayer .ap-fila')]
+      .map(f => f.dataset.evento)`);
+  };
+
+  const porNombre = await buscar('lute');
+  comprobar(porNombre.includes('IdleLuteStart'), 'por nombre en ingles: lute',
+            porNombre.slice(0, 3).join(', '));
+
+  const porEvento = await buscar('IdleWave');
+  comprobar(porEvento.includes('IdleWave'), 'por nombre del evento');
+
+  const porEspanol = await buscar('sentarse');
+  comprobar(porEspanol.length > 30 && porEspanol.includes('IdleChairFrontEnter'),
+            'por palabra en espanol: sentarse', porEspanol.length + ' resultados');
+
+  const conAcento = await buscar('música');
+  comprobar(conAcento.length > 10, 'con acentos y todo: musica',
+            conAcento.length + ' resultados');
+
+  const dosPalabras = await buscar('chair front');
+  comprobar(dosPalabras.length > 0 && dosPalabras.every((e) => /chair/i.test(e)),
+            'con dos palabras, y tienen que cumplirse las dos',
+            dosPalabras.join(', '));
+
+  const nada = await buscar('zzzznoexiste');
+  comprobar(nada.length === 0, 'y cuando no hay nada, lo dice');
+  comprobar(/Nada con eso/.test(await js(`document.querySelector('#animplayer .ap-lista').textContent`)),
+            'con un mensaje, no una lista vacia');
+
+  console.log('\n=== pulsar una fila reproduce ===');
+  await buscar('wave');
+  await js(`document.querySelector('#animplayer .ap-fila[data-evento="IdleWave"]').click()`);
+  await esperar(160);
+  const mensajes = await pasarMensajesAlPlugin(falso);
+  comprobar(mensajes.some((m) => m.indexOf('animplayer:reproducir') !== -1),
+            'el panel avisa al juego');
+  const hechas = falso.registro.animaciones;
+  comprobar(hechas.length >= 1 && hechas[hechas.length - 1].evento === 'IdleWave',
+            'y el plugin manda la animacion al juego',
+            JSON.stringify(hechas[hechas.length - 1]));
+  comprobar(hechas[hechas.length - 1].actor === 'jugador', 'sobre el jugador');
+  comprobar(falso.registro.terceraPersona > 0,
+            'pasando a tercera persona, que en primera no se veria');
+  comprobar(await js(`document.querySelector('#animplayer .ap-ahora').textContent.length > 2`),
+            'y el pie dice cual esta en marcha',
+            await js(`document.querySelector('#animplayer .ap-ahora').textContent`));
+
+  console.log('\n=== escribir y dar a Enter, sin raton ===');
+  falso.registro.animaciones.length = 0;
+  await buscar('salute');
+  await js(`(() => { const c = document.querySelector('#animplayer .ap-buscar');
+    c.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true })); })()`);
+  await esperar(160);
+  await pasarMensajesAlPlugin(falso);
+  comprobar(falso.registro.animaciones.some((a) => a.evento === 'IdleSalute'),
+            'Enter reproduce la primera de la lista',
+            JSON.stringify(falso.registro.animaciones));
+
+  console.log('\n=== las flechas mueven la eleccion ===');
+  falso.registro.animaciones.length = 0;
+  const lista = await buscar('chair');
+  await js(`(() => { const c = document.querySelector('#animplayer .ap-buscar');
+    c.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+    c.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true })); })()`);
+  await esperar(160);
+  comprobar(await js(`document.querySelector('#animplayer .ap-fila.ap-elegida').dataset.i === '2'`),
+            'baja dos');
+  await js(`(() => { const c = document.querySelector('#animplayer .ap-buscar');
+    c.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true }));
+    c.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true })); })()`);
+  await esperar(160);
+  await pasarMensajesAlPlugin(falso);
+  comprobar(falso.registro.animaciones.length === 1 &&
+            falso.registro.animaciones[0].evento === lista[1],
+            'y Enter reproduce la que esta marcada',
+            (falso.registro.animaciones[0] || {}).evento + ' = ' + lista[1]);
+
+  console.log('\n=== las categorias ===');
+  await buscar('');
+  const chips = await js(`[...document.querySelectorAll('#animplayer .ap-chip')]
+    .map(c => c.dataset.cat)`);
+  comprobar(chips.length > 8, `hay una por categoria (${chips.length})`);
+  comprobar(chips[0] === '', 'y la primera son las recomendadas');
+  await js(`document.querySelector('#animplayer .ap-chip[data-cat="musica"]').click()`);
+  await esperar(180);
+  const soloMusica = await js(`[...document.querySelectorAll('#animplayer .ap-fila')]
+    .map(f => f.dataset.evento)`);
+  comprobar(soloMusica.length > 10 && soloMusica.includes('IdleLuteStart'),
+            'al pulsar una sale solo lo suyo', soloMusica.length + ' de musica');
+  comprobar(await js(`document.querySelector('#animplayer .ap-chip[data-cat="musica"]').classList.contains('ap-puesto')`),
+            'y se marca cual esta puesta');
+  await captura('3-categoria');
+  await js(`document.querySelector('#animplayer .ap-chip[data-cat=""]').click()`);
+  await esperar(150);
+
+  console.log('\n=== las que los demas no veran se avisan ===');
+  const aviso = await js(`(() => {
+    const c = document.querySelector('#animplayer .ap-buscar');
+    c.value = 'WeapEquip'; c.dispatchEvent(new Event('input', { bubbles: true }));
+    const f = document.querySelector('#animplayer .ap-fila');
+    return f ? { sinSinc: f.classList.contains('ap-sinsinc'), titulo: f.title } : null;
+  })()`);
+  comprobar(aviso && aviso.sinSinc, 'se marcan en la lista');
+  comprobar(aviso && /no la veran/.test(aviso.titulo || ''),
+            'y explican por que', aviso && aviso.titulo);
+
+  console.log('\n=== el bucle ===');
+  falso.registro.animaciones.length = 0;
+  comprobar(!(await js('window.__animplayer.enBucle()')), 'la casilla empieza quitada');
+
+  /* Sin la casilla: se manda una vez y no se repite por muchos updates que
+     pasen, ni aunque pase media vida entre uno y otro. */
+  await buscar('wave');
+  await js(`document.querySelector('#animplayer .ap-fila[data-evento="IdleWave"]').click()`);
+  await esperar(150);
+  await pasarMensajesAlPlugin(falso);
+  const unaSola = falso.registro.animaciones.length;
+  const reloj = Date.now;
+  Date.now = () => reloj() + 30000;
+  falso.tic(); falso.tic();
+  Date.now = reloj;
+  comprobar(falso.registro.animaciones.length === unaSola,
+            'sin la casilla, se reproduce una sola vez',
+            unaSola + ' vez tras 30 s de updates');
+
+  /* Con la casilla: se vuelve a mandar cada vez que pasa el intervalo. */
+  await js(`document.querySelector('#animplayer .ap-bucle').click()`);
+  await esperar(150);
+  comprobar(await js('window.__animplayer.enBucle()'), 'la casilla se marca');
+  comprobar(await js(`document.querySelector('#animplayer .ap-bucle').classList.contains('ap-puesto')`),
+            'y se ve marcada');
+  comprobar(await js(`/en bucle/.test(document.querySelector('#animplayer .ap-ahora').textContent)`),
+            'y el pie lo dice',
+            await js(`document.querySelector('#animplayer .ap-ahora').textContent`));
+  await pasarMensajesAlPlugin(falso);
+
+  falso.registro.animaciones.length = 0;
+  falso.tic();
+  comprobar(falso.registro.animaciones.length === 0, 'no se repite antes de que toque');
+  Date.now = () => reloj() + 4000;              // el intervalo son 3 s
+  falso.tic();
+  Date.now = reloj;
+  comprobar(falso.registro.animaciones.length === 1 &&
+            falso.registro.animaciones[0].evento === 'IdleWave',
+            'y cuando toca, se vuelve a mandar la misma',
+            JSON.stringify(falso.registro.animaciones));
+
+  /* Elegir otra con la casilla puesta cambia de animacion, no acumula dos. */
+  falso.registro.animaciones.length = 0;
+  await buscar('salute');
+  await js(`document.querySelector('#animplayer .ap-fila[data-evento="IdleSalute"]').click()`);
+  await esperar(150);
+  await pasarMensajesAlPlugin(falso);
+  Date.now = () => reloj() + 8000;
+  falso.tic();
+  Date.now = reloj;
+  const enBucle = falso.registro.animaciones.map((a) => a.evento);
+  comprobar(enBucle.filter((e) => e === 'IdleWave').length === 0,
+            'al elegir otra, la anterior deja de repetirse', enBucle.join(', '));
+  comprobar(enBucle.filter((e) => e === 'IdleSalute').length === 2,
+            'y se repite la nueva', enBucle.join(', '));
+
+  /* Quitar la casilla corta el bucle, pero deja la pose puesta: para deshacerla
+     esta el boton de parar, que es otra cosa. */
+  falso.registro.animaciones.length = 0;
+  await js(`document.querySelector('#animplayer .ap-bucle').click()`);
+  await esperar(150);
+  await pasarMensajesAlPlugin(falso);
+  Date.now = () => reloj() + 20000;
+  falso.tic();
+  Date.now = reloj;
+  comprobar(falso.registro.animaciones.length === 0,
+            'al quitar la casilla deja de repetirse');
+  comprobar(!(await js(`/en bucle/.test(document.querySelector('#animplayer .ap-ahora').textContent)`)),
+            'y el pie deja de decirlo');
+
+  console.log('\n=== el boton de parar ===');
+  falso.registro.animaciones.length = 0;
+  await js(`document.querySelector('#animplayer .ap-parar').click()`);
+  await esperar(160);
+  await pasarMensajesAlPlugin(falso);
+  const paradas = falso.registro.animaciones.map((a) => a.evento);
+  comprobar(paradas.length === 2 && paradas[0] === 'IdleFurnitureExit' &&
+            paradas[1] === 'IdleForceDefaultState',
+            'levanta del mueble y luego vuelve a la postura normal, en ese orden',
+            paradas.join(' + '));
+  comprobar(await js(`/Nada en marcha/.test(document.querySelector('#animplayer .ap-ahora').textContent)`),
+            'y el pie se limpia');
+
+  falso.registro.animaciones.length = 0;
+  await buscar('wave');
+  await js(`document.querySelector('#animplayer .ap-bucle').click();
+            document.querySelector('#animplayer .ap-fila[data-evento="IdleWave"]').click()`);
+  await esperar(150);
+  await pasarMensajesAlPlugin(falso);
+  await js(`document.querySelector('#animplayer .ap-parar').click()`);
+  await esperar(150);
+  await pasarMensajesAlPlugin(falso);
+  falso.registro.animaciones.length = 0;
+  const reloj3 = Date.now;
+  Date.now = () => reloj3() + 20000;
+  falso.tic();
+  Date.now = reloj3;
+  comprobar(falso.registro.animaciones.length === 0,
+            'con el bucle puesto, Parar lo corta tambien');
+  await js(`document.querySelector('#animplayer .ap-bucle').click()`);   // se deja como estaba
+  await esperar(120);
+  await pasarMensajesAlPlugin(falso);
+
+  console.log('\n=== cerrar devuelve el control al juego ===');
+  const movimientoAntes = falso.registro.movimientoDevuelto;
+  await js(`document.querySelector('#animplayer .ap-cerrar').click()`);
+  await esperar(160);
+  await pasarMensajesAlPlugin(falso);
+  comprobar(await js(`getComputedStyle(document.querySelector('#animplayer .ap-panel')).display === 'none'`),
+            'el panel se pliega');
+  comprobar(falso.registro.enfocado === false, 'el navegador suelta el foco');
+  comprobar(falso.registro.movimientoDevuelto > movimientoAntes,
+            'y el personaje vuelve a poder moverse');
+
+  console.log('\n=== Esc tambien cierra ===');
+  await js('window.__animplayer.abrir()');
+  await esperar(150);
+  await js(`(() => { const c = document.querySelector('#animplayer .ap-buscar');
+    c.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })); })()`);
+  await esperar(150);
+  comprobar(await js(`!window.__animplayer.estaAbierto()`), 'Esc lo pliega');
+  await pasarMensajesAlPlugin(falso);
+
+  // =====================================================================
+  console.log('\n=== la tecla: abre, y no antes de tiempo ===');
+  const nuevo = falsoSp.cargarPlugin(PLUGIN, { tecla: 61, margenTrasPantallaDeCarga: 15000 });
+  nuevo.tic();
+  nuevo.registro.inyectado.length = 0;
+  nuevo.disparar('buttonEvent', { code: 61, isDown: true, isRepeating: false });
+  nuevo.tic();
+  comprobar(nuevo.registro.consola.some((l) => /todavia se esta cargando/.test(l)),
+            'nada mas arrancar la ignora, que abrir paneles ahi cuelga el juego');
+  comprobar(nuevo.registro.enfocado === null, 'y no toca el navegador');
+
+  // Se simula que ya paso el margen: la pantalla de carga se cerro hace rato.
+  nuevo.disparar('menuOpen', { name: 'Loading Menu' });
+  nuevo.disparar('menuClose', { name: 'Loading Menu' });
+  await esperar(50);
+  const falsoAhora = Date.now;
+  Date.now = () => falsoAhora() + 20000;      // 20 s despues
+  nuevo.disparar('buttonEvent', { code: 61, isDown: true, isRepeating: false });
+  nuevo.tic();
+  Date.now = falsoAhora;
+  comprobar(nuevo.registro.enfocado === true, 'pasado el margen, abre');
+  comprobar(nuevo.registro.movimientoQuitado === 1,
+            'y quita el movimiento mientras escribes');
+  comprobar(nuevo.ultimaInyeccion('__animplayer.abrir') !== null,
+            'y le dice al panel que se despliegue');
+
+  nuevo.disparar('buttonEvent', { code: 61, isDown: true, isRepeating: false });
+  nuevo.tic();
+  comprobar(nuevo.registro.enfocado === false && nuevo.registro.movimientoDevuelto === 1,
+            'la misma tecla lo cierra');
+
+  nuevo.registro.enfocado = null;
+  nuevo.disparar('buttonEvent', { code: 62, isDown: true, isRepeating: false });
+  nuevo.tic();
+  comprobar(nuevo.registro.enfocado === null, 'otra tecla no hace nada');
+  nuevo.disparar('buttonEvent', { code: 61, isDown: true, isRepeating: true });
+  nuevo.tic();
+  comprobar(nuevo.registro.enfocado === null, 'y dejarla pulsada no la repite');
+
+  // =====================================================================
+  console.log('\n=== animaciones de otros mods, desde los ajustes ===');
+  const conMod = falsoSp.cargarPlugin(PLUGIN, {
+    animaciones: [
+      { evento: 'MiModSaludoElegante', nombre: 'Saludo elegante',
+        categoria: 'gestos', busqueda: 'reverencia', destacada: true },
+      { evento: 'MiModPoseSuelta' },                        // solo el evento
+      { evento: 'IdleWave', nombre: 'Saludar con la mano' }  // pisa una vanilla
+    ]
+  });
+  conMod.tic();
+  const fuenteConMod = conMod.ultimaInyeccion('__animplayer');
+  /* El plugin manda a la pagina esto: (funcion)({catalogo}, "auto");  — se
+     recortan los dos argumentos y se leen como una lista. */
+  const cat = JSON.parse('[' + fuenteConMod.slice(
+    fuenteConMod.lastIndexOf(')(') + 2, fuenteConMod.lastIndexOf(');')) + ']')[0];
+  const buscarEn = (e) => cat.animaciones.find((a) => a.evento === e);
+  comprobar(!!buscarEn('MiModSaludoElegante'), 'la del mod entra en el catalogo');
+  comprobar(buscarEn('MiModPoseSuelta') &&
+            buscarEn('MiModPoseSuelta').categoria === 'mods',
+            'con solo el evento, cae en su propia categoria');
+  comprobar(buscarEn('MiModPoseSuelta').nombre === 'MiModPoseSuelta',
+            'y se llama como su evento');
+  comprobar(buscarEn('IdleWave').nombre === 'Saludar con la mano',
+            'y puede renombrar una del juego sin regenerar nada');
+  comprobar(cat.categorias.some((c) => c.clave === 'mods'),
+            'la categoria "De otros mods" se crea sola');
+  comprobar(cat.animaciones.filter((a) => a.evento === 'IdleWave').length === 1,
+            'y no se duplica ninguna');
+
+  // =====================================================================
+  console.log('\n=== el transporte al servidor ===');
+  const alServidor = falsoSp.cargarPlugin(PLUGIN, {
+    transporte: 'servidor',
+    servidor: { url: 'http://127.0.0.1:9099/api/animacion' }
+  });
+  alServidor.tic();
+  alServidor.disparar('browserMessage', {
+    arguments: [JSON.stringify({ type: 'animplayer:reproducir', data: { evento: 'IdleWave' } })]
+  });
+  alServidor.tic();
+  comprobar(alServidor.registro.animaciones.some((a) => a.evento === 'IdleWave'),
+            'sigue reproduciendose en el sitio');
+  const env = alServidor.registro.peticionesHttp[0];
+  comprobar(!!env, 'y ademas se avisa al servidor');
+  comprobar(env && env.origen === 'http://127.0.0.1:9099' && env.camino === '/api/animacion',
+            'a la direccion partida como pide HttpClient',
+            env && env.origen + ' + ' + env.camino);
+  const cuerpo = env && JSON.parse(env.opciones.body);
+  comprobar(cuerpo && cuerpo.evento === 'IdleWave' && cuerpo.quien === 0x14 &&
+            cuerpo.origen === 'interfaz',
+            'con la peticion entera, lista para la red', env && env.opciones.body);
+
+  const sinUrl = falsoSp.cargarPlugin(PLUGIN, { transporte: 'servidor', servidor: {} });
+  sinUrl.tic();
+  sinUrl.disparar('browserMessage', {
+    arguments: [JSON.stringify({ type: 'animplayer:reproducir', data: { evento: 'IdleWave' } })]
+  });
+  sinUrl.tic();
+  comprobar(sinUrl.registro.peticionesHttp.length === 0 &&
+            sinUrl.registro.animaciones.length === 1,
+            'sin URL puesta, no llama a nadie pero reproduce igual');
+
+  // =====================================================================
+  console.log('\n=== lo que no debe pasar ===');
+  const raro = falsoSp.cargarPlugin(PLUGIN, {});
+  raro.tic();
+  raro.registro.animaciones.length = 0;
+  ['no es json', '{}', JSON.stringify({ type: 'otracosa' }),
+   JSON.stringify({ type: 'animplayer:reproducir', data: {} }),
+   JSON.stringify({ type: 'animplayer:reproducir' })].forEach((m) => {
+    raro.disparar('browserMessage', { arguments: [m] });
+  });
+  raro.disparar('browserMessage', { arguments: [123] });
+  raro.disparar('browserMessage', {});
+  raro.tic();
+  comprobar(raro.registro.animaciones.length === 0,
+            'mensajes basura no reproducen nada ni revientan');
+
+  const sinAjustes = falsoSp.cargarPlugin(PLUGIN, undefined);
+  sinAjustes.tic();
+  comprobar(sinAjustes.ultimaInyeccion('__animplayer') !== null,
+            'sin archivo de ajustes, el mod funciona igual');
+  comprobar(/DIK 61/.test(sinAjustes.registro.consola.join(' ')),
+            'con F3 por defecto');
+
+  if (problemas.length) {
+    console.log('\nPROBLEMAS EN LA CONSOLA DE LA PAGINA:');
+    problemas.slice(0, 8).forEach((p) => console.log('  ' + p));
+    fallos += problemas.length;
+  }
+  console.log('\n' + (fallos ? fallos + ' FALLOS' : 'TODO OK'));
+  app.exit(fallos ? 1 : 0);
+}).catch((e) => {
+  console.log('FALLO: ' + ((e && e.stack) || e));
+  app.exit(1);
+});

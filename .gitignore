@@ -1,0 +1,9 @@
+# Las capturas que deja la prueba al ejecutarse.
+pruebas/salida/
+
+# Lo que dejan las herramientas al hurgar en los archivos del juego.
+herramientas/idles.json
+herramientas/salida/
+
+node_modules/
+__pycache__/

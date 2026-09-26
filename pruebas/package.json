@@ -1,0 +1,6 @@
+{
+  "name": "animplayer-pruebas",
+  "private": true,
+  "main": "prueba-panel.js",
+  "description": "Prueba del panel de AnimPlayer en un Chromium de verdad."
+}

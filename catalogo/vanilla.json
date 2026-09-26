@@ -1,0 +1,4871 @@
+{
+ "version": 1,
+ "fuente": "registros IDLE de Skyrim.esm, Update.esm, Dawnguard.esm, HearthFires.esm, Dragonborn.esm",
+ "categorias": [
+  {
+   "clave": "combate",
+   "nombre": "Combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito"
+  },
+  {
+   "clave": "sentarse",
+   "nombre": "Sentarse y apoyarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono"
+  },
+  {
+   "clave": "dormir",
+   "nombre": "Dormir y tumbarse",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo"
+  },
+  {
+   "clave": "oficios",
+   "nombre": "Oficios y tareas",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger"
+  },
+  {
+   "clave": "comer",
+   "nombre": "Comer y beber",
+   "busqueda": "comer beber cenar hidromiel sopa brindar calentarse manos fuego"
+  },
+  {
+   "clave": "musica",
+   "nombre": "Musica y fiesta",
+   "busqueda": "musica bailar tocar laud flauta tambor aplaudir animar cuerno vitorear"
+  },
+  {
+   "clave": "magia",
+   "nombre": "Magia y rituales",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse"
+  },
+  {
+   "clave": "leer",
+   "nombre": "Leer y estudiar",
+   "busqueda": "leer libro estudiar nota pergamino traducir pagina"
+  },
+  {
+   "clave": "gestos",
+   "nombre": "Gestos y expresion",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose"
+  },
+  {
+   "clave": "dialogo",
+   "nombre": "Dialogo",
+   "busqueda": "hablar conversar charlar discutir responder"
+  },
+  {
+   "clave": "herido",
+   "nombre": "Herido y muerte",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion"
+  },
+  {
+   "clave": "control",
+   "nombre": "Control",
+   "busqueda": "parar detener cancelar"
+  },
+  {
+   "clave": "otras",
+   "nombre": "Otras",
+   "busqueda": ""
+  }
+ ],
+ "animaciones": [
+  {
+   "evento": "ExecutionNextClip",
+   "nombre": "00 Next Clip",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove1HMBackStab",
+   "nombre": "1 HM Kill Move Back Stab",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMoveBearA",
+   "nombre": "1 HM Kill Move Bear A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove1HMBearB",
+   "nombre": "1 HM Kill Move Bear B",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillingBlow",
+   "nombre": "1 HM Kill Move Bleed Out Kill",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMoveC",
+   "nombre": "1 HM Kill Move C",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove1HMChaurusFlyerKick",
+   "nombre": "1 HM Kill Move Chaurus Flyer Kick",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMoveD",
+   "nombre": "1 HM Kill Move D",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove1HMDecapBleedOut",
+   "nombre": "1 HM Kill Move Decap Bleed Out",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove1HMDecapKnife",
+   "nombre": "1 HM Kill Move Decap Knife",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove1HMDragonRodeoSlash",
+   "nombre": "1 HM Kill Move Dragon Rodeo Slash",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove1HMDragonRodeoStabShort",
+   "nombre": "1 HM Kill Move Dragon Rodeo Stab Short",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMoveDraugr",
+   "nombre": "1 HM Kill Move Draugr A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMoveDraugrB",
+   "nombre": "1 HM Kill Move Draugr B",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMoveDraugrShortA",
+   "nombre": "1 HM Kill Move Draugr Short A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMoveDualWieldA",
+   "nombre": "1 HM Kill Move Dual Wield A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMoveF",
+   "nombre": "1 HM Kill Move F",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove1HMFalmerA",
+   "nombre": "1 HM Kill Move Falmer A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove1HMFalmerB",
+   "nombre": "1 HM Kill Move Falmer B",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove1HMFalmerC",
+   "nombre": "1 HM Kill Move Falmer C",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMoveGiantA",
+   "nombre": "1 HM Kill Move Giant A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove1HMGiantB",
+   "nombre": "1 HM Kill Move Giant B",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove1HMGiantBleedOutA",
+   "nombre": "1 HM Kill Move Giant Bleed Out A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove1HMHagravenA",
+   "nombre": "1 HM Kill Move Hagraven A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove1HMHagravenB",
+   "nombre": "1 HM Kill Move Hagraven B",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMoveSabreCat",
+   "nombre": "1 HM Kill Move Sabre Cat",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMoveSabreCatShortA",
+   "nombre": "1 HM Kill Move Sabre Cat Short A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMoveSabreCatShortB",
+   "nombre": "1 HM Kill Move Sabre Cat Short B",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMoveShortA",
+   "nombre": "1 HM Kill Move Short A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMoveShortB",
+   "nombre": "1 HM Kill Move Short B",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMoveShortC",
+   "nombre": "1 HM Kill Move Short C",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMoveShortD",
+   "nombre": "1 HM Kill Move Short D",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMoveJ",
+   "nombre": "1 HM Kill Move Short J",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove1HMSpiderSmashA",
+   "nombre": "1 HM Kill Move Spider Smash A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove1HMSpiderStabA",
+   "nombre": "1 HM Kill Move Spider Stab A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove1HMSprigganA",
+   "nombre": "1 HM Kill Move Spriggan A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove1HMSprigganB",
+   "nombre": "1 HM Kill Move Spriggan B",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove1HMSteamCenturionA",
+   "nombre": "1 HM Kill Move Steam Centurion A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove1HMSteamCenturionB",
+   "nombre": "1 HM Kill Move Steam Centurion B",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMoveTrollA",
+   "nombre": "1 HM Kill Move Troll A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove1HMTrollB",
+   "nombre": "1 HM Kill Move Troll B",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove1HMWolfA",
+   "nombre": "1 HM Kill Move Wolf A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove1HMWolfB",
+   "nombre": "1 HM Kill Move Wolf B",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMoveSneakBackA",
+   "nombre": "1 HM Sneak Kill Back A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove1HMVBSlowBackStab",
+   "nombre": "1 HMVB Slow Back Stab",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove1HMVBSoccerKick",
+   "nombre": "1 HMVB Soccer Kick",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HMBearA",
+   "nombre": "2 HM Kill Move Bear A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HMBearB",
+   "nombre": "2 HM Kill Move Bear B",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HMChaurusFlyerStabDown",
+   "nombre": "2 HM Kill Move Chaurus Flyer",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HMDecapBleedOut",
+   "nombre": "2 HM Kill Move Decap Bleed Out",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HMDecap",
+   "nombre": "2 HM Kill Move Decap Slash",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HMDragonSlash",
+   "nombre": "2 HM Kill Move Dragon Slash",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HMDraugrA",
+   "nombre": "2 HM Kill Move Draugr A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HMFalmerA",
+   "nombre": "2 HM Kill Move Falmer A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HMFalmerB",
+   "nombre": "2 HM Kill Move Falmer B",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HMGiantA",
+   "nombre": "2 HM Kill Move Giant A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HMHagravenA",
+   "nombre": "2 HM Kill Move Hagraven A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HMSabreCatA",
+   "nombre": "2 HM Kill Move Sabre Cat A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HMSabreCatB",
+   "nombre": "2 HM Kill Move Sabre Cat B",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HMSpiderSlamA",
+   "nombre": "2 HM Kill Move Spider Slam A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HMSprigganA",
+   "nombre": "2 HM Kill Move Spriggan A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HMStabA",
+   "nombre": "2 HM Kill Move Stab A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HMSteamCenturionA",
+   "nombre": "2 HM Kill Move Steam Centurion A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HMTrollA",
+   "nombre": "2 HM Kill Move Troll A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HMTrollB",
+   "nombre": "2 HM Kill Move Troll B",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HMVBBlockAndSlash",
+   "nombre": "2 HM Kill Move Vampire Brute",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HMWolfA",
+   "nombre": "2 HM Kill Move Wolf A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HMWolfB",
+   "nombre": "2 HM Kill Move Wolf B",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HWBearA",
+   "nombre": "2 HW Kill Move Bear A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HWChaurusFlyerPullDownSlash",
+   "nombre": "2 HW Kill Move Chaurus Flyer",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_2HWKillMoveA",
+   "nombre": "2 HW Kill Move Decap A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HWDragonRodeoSlash",
+   "nombre": "2 HW Kill Move Dragon Rodeo Slash",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HWDragonSlash",
+   "nombre": "2 HW Kill Move Dragon Slash",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HWGiantA",
+   "nombre": "2 HW Kill Move Giant A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HWSabreCatA",
+   "nombre": "2 HW Kill Move Sabre Cat",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HWSpiderSlamA",
+   "nombre": "2 HW Kill Move Spider Slam A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HWSprigganA",
+   "nombre": "2 HW Kill Move Spriggan A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HWTrollA",
+   "nombre": "2 HW Kill Move Troll A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HWVBBackBreaker",
+   "nombre": "2 HW Kill Move Vampire Brute",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HWWolfA",
+   "nombre": "2 HW Kill Move Wolf A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "Magic_Equip",
+   "nombre": "Attack Left Equip Spell",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla",
+   "sincroniza": false,
+   "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"
+  },
+  {
+   "evento": "WeapEquip",
+   "nombre": "Attack Left Equip Weapon",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla",
+   "sincroniza": false,
+   "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"
+  },
+  {
+   "evento": "AttackStartH2HLeft",
+   "nombre": "Attack Left H2 H",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "attackStart_MC_1HMLeft",
+   "nombre": "Attack Left Side",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "AttackStartH2HRight",
+   "nombre": "Attack Right H2 H",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "attackStart_MC_1HMRight",
+   "nombre": "Attack Right Side",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "bashFail",
+   "nombre": "Bash Fail",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "BashFail",
+   "nombre": "Bash Fail",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "bashRelease",
+   "nombre": "Bash Release",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "bleedOutStart",
+   "nombre": "Bleedout Start",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "bleedOutStop",
+   "nombre": "Bleedout Stop",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "blockAnticipateStart",
+   "nombre": "Block Anticipate",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "blockHitStart",
+   "nombre": "Block Hit",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "WeapOutRightReplaceForceEquip",
+   "nombre": "Both Hands Change",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla",
+   "sincroniza": false,
+   "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"
+  },
+  {
+   "evento": "bowAttackStart",
+   "nombre": "Bow Attack",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "bashStart",
+   "nombre": "Bow Bash",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "blockStart",
+   "nombre": "Bow Zoom",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "NPC_BumpFromFront",
+   "nombre": "Bumped From Front",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "MLh_SpellAimedConcentrationStart",
+   "nombre": "Cast Left Concentration Aimed",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "MLh_SpellAimedStart",
+   "nombre": "Cast Left Fire Forget Target Actor",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RitualSpellAimConcentrationStart",
+   "nombre": "Cast Left Ritual Concentration Aim",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RitualSpellStart",
+   "nombre": "Cast Left Ritual Fire And Forget Self",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "MLh_SpellTelekinesisStart",
+   "nombre": "Cast Left Telekinesis",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "MLh_WardStart",
+   "nombre": "Cast Left Ward",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "MRh_SpellSelfStart",
+   "nombre": "Cast Right Fire Forget Self",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "MRh_SpellAimedStart",
+   "nombre": "Cast Right Fire Forget Target Actor",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "MRh_SpellTelekinesisStart",
+   "nombre": "Cast Right Telekinesis",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "MRh_WardStart",
+   "nombre": "Cast Right Ward",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "moveStart",
+   "nombre": "Character Move Start",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla",
+   "sincroniza": false,
+   "motivo": "esta en la lista de eventos que SkyMP ignora"
+  },
+  {
+   "evento": "moveStop",
+   "nombre": "Character Move Stop",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla",
+   "sincroniza": false,
+   "motivo": "esta en la lista de eventos que SkyMP ignora"
+  },
+  {
+   "evento": "turnLeft",
+   "nombre": "Character Turn Left",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "turnRight",
+   "nombre": "Character Turn Right",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "turnStop",
+   "nombre": "Character Turn Stop",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla",
+   "sincroniza": false,
+   "motivo": "esta en la lista de eventos que SkyMP ignora"
+  },
+  {
+   "evento": "IdleCombatShieldStart",
+   "nombre": "Civil War Shield Cheer",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCombatLookingAroundStart",
+   "nombre": "Combat Idle Looking Around",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCombatSpecialStart",
+   "nombre": "Combat Idle Special",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCombatStart",
+   "nombre": "Combat Idle Stagger Regular",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCombatStretchingStart",
+   "nombre": "Combat Idle Stretching",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCombatWeaponCheckStart",
+   "nombre": "Combat Idle Weapon Check",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "crossbowAttackStart",
+   "nombre": "crossbow Attack Start",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "crossbowDwarvenAttackStart",
+   "nombre": "crossbow Dwarven Attack Start",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "bowEnd",
+   "nombre": "Crossbow Release During Reload",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "HorseExit",
+   "nombre": "Dismount",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "HorseExitSwim",
+   "nombre": "Dismount Swim",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_DLC1SeranaHoldsVyrthur",
+   "nombre": "DLC1 Serana Holds Vyrthur",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "DragonMountExit",
+   "nombre": "Dragon Dismount",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "DragonMountEnter",
+   "nombre": "Dragon Mount",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "DragonMountEnterInstant",
+   "nombre": "Dragon Mount Instant",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "attackStartDualWield",
+   "nombre": "Dual Wield Power Attack",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "attackPowerStartDualWield",
+   "nombre": "Dual Wield Special Power Attack",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "HorseEnterInstant",
+   "nombre": "Enter Horse Instant",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_ExtractWerewolfSpirit",
+   "nombre": "Extract Werewolf Spirit",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "FlinchStart",
+   "nombre": "Flinch",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "UnequipNoAnim",
+   "nombre": "Force Sheathe",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla",
+   "sincroniza": false,
+   "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"
+  },
+  {
+   "evento": "Ground_Dismount_Dragon",
+   "nombre": "Ground Dismount Dragon NPC",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "attackPowerStartForwardH2HLeftHand",
+   "nombre": "H2 H Left Hand Power Attack",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "attackPowerStartForwardH2HRightHand",
+   "nombre": "H2 H Right Hand Power Attack",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_HugA",
+   "nombre": "Hug A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "MLh_Equipped_Event",
+   "nombre": "Interrupt Left",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla",
+   "sincroniza": false,
+   "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"
+  },
+  {
+   "evento": "MRh_Equipped_Event",
+   "nombre": "Interrupt Right",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla",
+   "sincroniza": false,
+   "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"
+  },
+  {
+   "evento": "RitualSpellOut",
+   "nombre": "Interrupt Right Ritual Spell",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "JumpDirectionalStart",
+   "nombre": "Jump Directional Start",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "JumpFall",
+   "nombre": "Jump Fall",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "JumpLandDirectional",
+   "nombre": "Jump Land Directional",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "SwimStart",
+   "nombre": "Jump Land Swimming",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "JumpLandEnd",
+   "nombre": "Jump Soft End",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "JumpStandingStart",
+   "nombre": "Jump Standing Start",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove1HMDecap",
+   "nombre": "Kill Move Decap Slash",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMoveDLC02RipHeartOut",
+   "nombre": "Kill Move DLC02 Rip Heart Out",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMoveDWDecap",
+   "nombre": "Kill Move Dual Wield Decap",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMoveH2HComboA",
+   "nombre": "Kill Move H2 H Combo A",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMoveH2HSlamA",
+   "nombre": "Kill Move H2 H Slam",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_KillMove2HWDecapBleedOut",
+   "nombre": "Kill Move2 HW Decap Bleed Out",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "attackReleaseL",
+   "nombre": "Left Attack Release",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "WeapSoloEquip",
+   "nombre": "Left H2 H Equip",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla",
+   "sincroniza": false,
+   "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"
+  },
+  {
+   "evento": "attackStartLeftHand",
+   "nombre": "Left Hand Attack",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "attackPowerStartInPlaceLeftHand",
+   "nombre": "Left Hand Power Attack",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "attackPowerStartBackLeftHand",
+   "nombre": "Left Hand Power Attack Back",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "attackPowerStartLeftLeftHand",
+   "nombre": "Left Hand Power Attack Left",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "attackPowerStartRightLeftHand",
+   "nombre": "Left Hand Power Attack Right",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "MagicForceEquipLeft",
+   "nombre": "Left Magic Force Equip",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla",
+   "sincroniza": false,
+   "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"
+  },
+  {
+   "evento": "Magic_Solo_Equip",
+   "nombre": "Left Magic Force Unequip",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla",
+   "sincroniza": false,
+   "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"
+  },
+  {
+   "evento": "attackPowerStart_MC_1HMLeft",
+   "nombre": "Left Power Attack",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "Lever_PlayerPush",
+   "nombre": "Lever Push Player",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "staggerStart",
+   "nombre": "Loose Full Body Stagger",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "MRh_SpellRelease_Event",
+   "nombre": "Magic Right Release",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "MagicWeap_ForceEquip",
+   "nombre": "Magic Weapon Force Equip",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla",
+   "sincroniza": false,
+   "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"
+  },
+  {
+   "evento": "HorseEnter",
+   "nombre": "Mount",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "MountedStaggerStart",
+   "nombre": "Mounted Stagger Start",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "MountedSwimStart",
+   "nombre": "Mounted Swim Start",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "MountedSwimStop",
+   "nombre": "Mounted Swim Stop",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "MC_shoutStart",
+   "nombre": "Mounted Voice",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "attackStart",
+   "nombre": "Normal Attack",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "Ragdoll",
+   "nombre": "NPC Knock Down",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "NPC_TurnRight90",
+   "nombre": "NPC Turn Right90 End",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "NPC_TurnToWalkRight90",
+   "nombre": "NPC Turn To Walk Right90",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "NPCshoutStart",
+   "nombre": "NPC Voice Start",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_OffsetBoundStandingCut",
+   "nombre": "Offset Bound Standing Cut",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "MagicForceEquipRight",
+   "nombre": "Only Right Hand Changes Magic Out",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla",
+   "sincroniza": false,
+   "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"
+  },
+  {
+   "evento": "StaggerPlayer",
+   "nombre": "Player Stagger",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "attackPowerStartLeft",
+   "nombre": "Power Attack Left",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "bashPowerStart",
+   "nombre": "Power Bash",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "MLh_SpellReady_Event",
+   "nombre": "Ready Left",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "MRh_SpellReady_Event",
+   "nombre": "Ready Right",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "recoilStart",
+   "nombre": "Recoil",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "recoilLargeStart",
+   "nombre": "Recoil Large",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "MLh_SpellRelease_Event",
+   "nombre": "Release Left",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "MLH_SpellRelease_event",
+   "nombre": "Release Left",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "reloadStart",
+   "nombre": "Reload Root",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "torchUnequip",
+   "nombre": "Removed",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "attackRelease",
+   "nombre": "Right Attack Release",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "attackPowerStartH2HCombo",
+   "nombre": "Right H2 H Combo Power Attack",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "attackPowerStart_MC_1HMRight",
+   "nombre": "Right Power Attack",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idleRitualSpellRelease",
+   "nombre": "Ritual Spell Release",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idleRitualSpellStart",
+   "nombre": "Ritual Spell Start",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "ShdEquip",
+   "nombre": "shield Force Equip",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla",
+   "sincroniza": false,
+   "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"
+  },
+  {
+   "evento": "SneakStart",
+   "nombre": "Sneak Start",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla",
+   "sincroniza": false,
+   "motivo": "SkyMP lo usa para su propio sincronizado de agacharse"
+  },
+  {
+   "evento": "SneakStop",
+   "nombre": "Sneak Stop",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla",
+   "sincroniza": false,
+   "motivo": "SkyMP lo usa para su propio sincronizado de agacharse"
+  },
+  {
+   "evento": "SprintStop",
+   "nombre": "Sprint Root Stop",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "SprintStart",
+   "nombre": "Sprint Start",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "StaffBashRelease",
+   "nombre": "Staff Bash Release",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "WeapOutLeftReplaceForceEquip",
+   "nombre": "Staff Magic Shield Torch AND Weap Equip",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla",
+   "sincroniza": false,
+   "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"
+  },
+  {
+   "evento": "blockStop",
+   "nombre": "Stop Blocking",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "SwimStop",
+   "nombre": "Swim Stop",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "swimForceEquip",
+   "nombre": "Swimming Force Equip",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla",
+   "sincroniza": false,
+   "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"
+  },
+  {
+   "evento": "torchForceEquip",
+   "nombre": "Torch Equip",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "torchEquip",
+   "nombre": "torch Force Equip",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_VampireFeedStanding_Back",
+   "nombre": "Vampire Standing Back",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "pa_VampireFeedStanding_Front",
+   "nombre": "Vampire Standing Feed Front Loose",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "shoutStop",
+   "nombre": "Voice Interrupt Root",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "MT_BreathExhaleShort",
+   "nombre": "Voice Release",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "shoutReleaseSlowTime",
+   "nombre": "Voice Release Slow Time",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "CombatReady_BreathExhaleShort",
+   "nombre": "Voice Release Weapon Out",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "shoutStart",
+   "nombre": "Voice Start",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "ShoutSprintLongestStart",
+   "nombre": "Voice Whirlwind Sprint Long",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "ShoutSprintLongStart",
+   "nombre": "Voice Whirlwind Sprint Medium",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "ShoutSprintMediumStart",
+   "nombre": "Voice Whirlwind Sprint Short",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "wardAbsorb",
+   "nombre": "Ward Absorbed",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "MC_WeapOutRightReplaceForceEquip",
+   "nombre": "Weapon Right Hand Equip",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla",
+   "sincroniza": false,
+   "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"
+  },
+  {
+   "evento": "pa_WW_CutWrist",
+   "nombre": "Were Wolf Cut Wrist",
+   "categoria": "combate",
+   "busqueda": "pelear luchar atacar espada arco escudo grito",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idleBarDrinkingStart",
+   "nombre": "Bar Drinking Start",
+   "categoria": "comer",
+   "busqueda": "comer beber cenar hidromiel sopa brindar calentarse manos fuego",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleDrink",
+   "nombre": "Drink",
+   "categoria": "comer",
+   "busqueda": "comer beber cenar hidromiel sopa brindar calentarse manos fuego",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleDrinkFromFountain",
+   "nombre": "Drink Fountain",
+   "categoria": "comer",
+   "busqueda": "comer beber cenar hidromiel sopa brindar calentarse manos fuego",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleDrinkPotion",
+   "nombre": "Drink Potion",
+   "categoria": "comer",
+   "busqueda": "comer beber cenar hidromiel sopa brindar calentarse manos fuego",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idleDrinkingStandingStart",
+   "nombre": "Drinking Standing Start",
+   "categoria": "comer",
+   "busqueda": "comer beber cenar hidromiel sopa brindar calentarse manos fuego",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "DrunkStart",
+   "nombre": "Drunk Start",
+   "categoria": "comer",
+   "busqueda": "comer beber cenar hidromiel sopa brindar calentarse manos fuego",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "DrunkStop",
+   "nombre": "Drunk Stop",
+   "categoria": "comer",
+   "busqueda": "comer beber cenar hidromiel sopa brindar calentarse manos fuego",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleEatSoup",
+   "nombre": "Eat Soup",
+   "categoria": "comer",
+   "busqueda": "comer beber cenar hidromiel sopa brindar calentarse manos fuego",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idleEatingStandingStart",
+   "nombre": "Eating Standing Start",
+   "categoria": "comer",
+   "busqueda": "comer beber cenar hidromiel sopa brindar calentarse manos fuego",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "idleEatingStandingStart_DLC1Vampire",
+   "nombre": "Eating Standing Start Vampire Meat",
+   "categoria": "comer",
+   "busqueda": "comer beber cenar hidromiel sopa brindar calentarse manos fuego",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleMQ201Drink",
+   "nombre": "MQ201 Drink",
+   "categoria": "comer",
+   "busqueda": "comer beber cenar hidromiel sopa brindar calentarse manos fuego",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleMQ201HoldingDrinkTray",
+   "nombre": "MQ201 Holding Drink Tray",
+   "categoria": "comer",
+   "busqueda": "comer beber cenar hidromiel sopa brindar calentarse manos fuego",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleMQ201ToastStart",
+   "nombre": "MQ201 Toast Start",
+   "categoria": "comer",
+   "busqueda": "comer beber cenar hidromiel sopa brindar calentarse manos fuego",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "OffsetCarryMQ201DrinkR",
+   "nombre": "Offset Carry MQ201 Drink R",
+   "categoria": "comer",
+   "busqueda": "comer beber cenar hidromiel sopa brindar calentarse manos fuego",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "OffsetCarryMQ201DrinkTray",
+   "nombre": "Offset Carry MQ201 Drink Tray",
+   "categoria": "comer",
+   "busqueda": "comer beber cenar hidromiel sopa brindar calentarse manos fuego",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleTG03UseMeadBarrel",
+   "nombre": "Use Mead Barrel Enter",
+   "categoria": "comer",
+   "busqueda": "comer beber cenar hidromiel sopa brindar calentarse manos fuego",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleTG03UseMeadBarrelEnterInstant",
+   "nombre": "Use Mead Barrel Enter Instant",
+   "categoria": "comer",
+   "busqueda": "comer beber cenar hidromiel sopa brindar calentarse manos fuego",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWarmArms",
+   "nombre": "Warm Arms",
+   "categoria": "comer",
+   "busqueda": "comer beber cenar hidromiel sopa brindar calentarse manos fuego",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWarmHands",
+   "nombre": "Warm Hands",
+   "categoria": "comer",
+   "busqueda": "comer beber cenar hidromiel sopa brindar calentarse manos fuego",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWarmHandsCrouched",
+   "nombre": "Warm Hands Crouched",
+   "categoria": "comer",
+   "busqueda": "comer beber cenar hidromiel sopa brindar calentarse manos fuego",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWarmHandsStanding",
+   "nombre": "Warm Hands Standing",
+   "categoria": "comer",
+   "busqueda": "comer beber cenar hidromiel sopa brindar calentarse manos fuego",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleFurnitureExit",
+   "nombre": "Levantarse del mueble",
+   "categoria": "control",
+   "busqueda": "levantarse salir silla cama mueble",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleStopInstant",
+   "nombre": "Parar al instante",
+   "categoria": "control",
+   "busqueda": "parar detener cancelar instante",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleStop",
+   "nombre": "Parar la animacion",
+   "categoria": "control",
+   "busqueda": "parar detener cancelar",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleForceDefaultState",
+   "nombre": "Parar y volver a la postura normal",
+   "categoria": "control",
+   "busqueda": "parar detener cancelar normal quieto",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "OffsetStop",
+   "nombre": "Soltar lo que lleva en las manos",
+   "categoria": "control",
+   "busqueda": "soltar dejar manos",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_OpenStart",
+   "nombre": "Caring",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "MotionDrivenDialogueAngry",
+   "nombre": "Dialogue Angry Motion Driven",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleDialogueDefensiveHandGesture",
+   "nombre": "Dialogue Defensive Hand Gesture",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "MotionDrivenDialogueGeneric",
+   "nombre": "Dialogue Generic Motion Driven",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleDialogueHandOnChinGesture",
+   "nombre": "Dialogue Hand On Chin Gesture",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleDialogueMovingTalkA",
+   "nombre": "Dialogue Moving Talk A",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleDialogueMovingTalkB",
+   "nombre": "Dialogue Moving Talk B",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleDialogueMovingTalkC",
+   "nombre": "Dialogue Moving Talk C",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleDialogueMovingTalkD",
+   "nombre": "Dialogue Moving Talk D",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "DialogueNeutral",
+   "nombre": "Dialogue Neutral Expressive",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "MotionDrivenDialogueNextClip",
+   "nombre": "Dialogue Neutral Shift Motion Driven",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleDialogueWelcomeHandGesture",
+   "nombre": "Dialogue Welcome Hand Gesture",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "PairEnd",
+   "nombre": "DLC1 Pair End",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_PlayfulStart",
+   "nombre": "Flirty",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_GuardedDismissive_In",
+   "nombre": "Guarded Dismissive",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_GuardedInterested_In",
+   "nombre": "Guarded Interested",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_GuardedPleading_In",
+   "nombre": "Guarded Pleading",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_GuardedThrowHands_In",
+   "nombre": "Guarded Throw Hands",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "LooseDialogueResponseNegative",
+   "nombre": "Loose Dialogue Response Negative",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "LooseDialogueResponsePositive",
+   "nombre": "Loose Dialogue Response Positive",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_MoodChangeGuarded",
+   "nombre": "Mood Change Guarded",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_MoodChangeOpen",
+   "nombre": "Mood Change Open",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_MoodChangePlayful",
+   "nombre": "Mood Change Playful",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_MoodChangeSerious",
+   "nombre": "Mood Change Serious",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_OpenDismissive_In",
+   "nombre": "Open Dismissive",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_OpenInterested_In",
+   "nombre": "Open Interested",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_OpenPleading_In",
+   "nombre": "Open Pleading",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_OpenThrowHands_In",
+   "nombre": "Open Throw Hands",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_PlayfulDismissive_In",
+   "nombre": "Playful Dismissive",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_PlayfulInterested_In",
+   "nombre": "Playful Interested",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_PlayfulPleading_In",
+   "nombre": "Playful Pleading",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_PlayfulThrowHands_In",
+   "nombre": "Playful Throw Hands",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_Idle_Out",
+   "nombre": "Romantic Follower Stop",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_SeriousStart",
+   "nombre": "Sarcastic",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_SeriousDismissive_In",
+   "nombre": "Serious Dismissive",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_SeriousInterested_In",
+   "nombre": "Serious Interested",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_SeriousPleading_In",
+   "nombre": "Serious Pleading",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_SeriousThrowHands_In",
+   "nombre": "Serious Throw Hands",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_Shock_Guarded",
+   "nombre": "Shock Guarded",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_Shock_Open",
+   "nombre": "Shock Open",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_Shock_Playful",
+   "nombre": "Shock Playful",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_Shock_Serious",
+   "nombre": "Shock Serious",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_GuardedStart",
+   "nombre": "Standoffish",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "RF_Talk_In",
+   "nombre": "Talk",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleDialogueStart",
+   "nombre": "Talking",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleDialogueAngryStart",
+   "nombre": "Talking Angry",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleDialogueExpressiveStart",
+   "nombre": "Talking Expressive",
+   "categoria": "dialogo",
+   "busqueda": "hablar conversar charlar discutir responder",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "Idle_1stPersonWoozyGetUpFromBed",
+   "nombre": "1st Person Woozy Get Up From Bed",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleBedQuickExitStart",
+   "nombre": "Bed Quick Exit",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChildLayOnFloor",
+   "nombre": "Child Lay On Floor Enter",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChildLayOnFloorInstant",
+   "nombre": "Child Lay On Floor Enter Instant",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCoffinEnter",
+   "nombre": "Coffin Enter",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCoffinEnterInstant",
+   "nombre": "Coffin Enter Instant Left",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleActivateCoffinPuzzle",
+   "nombre": "DLC1 Coffin Puzzle Bowl Idle",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCoffinHorzEnter",
+   "nombre": "DLC1 Idle Coffin Horz Enter",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCoffinHorzEnterInstant",
+   "nombre": "DLC1 Idle Coffin Horz Enter Instant",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCoffinVertEnter",
+   "nombre": "DLC1 Idle Coffin Vert",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCoffinVertEnterInstant",
+   "nombre": "Dlc1 Idle Coffin Vert Enter Instant",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "DLC01CoffinEnterInstant",
+   "nombre": "DLC1 Serana Coffin Enter Instant",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWebEnterInstant",
+   "nombre": "Enter Web Instant",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleBedExitStart",
+   "nombre": "Exit Bed",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleBedRollFrontEnterStart",
+   "nombre": "Front Bed Roll Enter",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleBedRollFrontEnterInstant",
+   "nombre": "Front Bed Roll Enter Instant",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleBedLeftEnterStart",
+   "nombre": "Left Bed Enter",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleBedLeftEnterInstant",
+   "nombre": "Left Bed Enter Instant",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleBedRollLeftEnterStart",
+   "nombre": "Left Bed Roll Enter",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleBedRollLeftEnterInstant",
+   "nombre": "Left Bed Roll Enter Instant",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "MS12BedDeath",
+   "nombre": "MS12 Bed Death",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleBedRightEnterStart",
+   "nombre": "Right Bed Enter",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleBedRightEnterInstant",
+   "nombre": "Right Bed Enter Instant",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleBedRollRightEnterStart",
+   "nombre": "Right Bed Roll Enter",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleBedRollRightEnterInstant",
+   "nombre": "Right Bed Roll Enter Instant",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleSleepNod",
+   "nombre": "Sleep Nod",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "VampireFeedingBedLeft",
+   "nombre": "Vampire Bed Left",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "VampireFeedingBedRight",
+   "nombre": "Vampire Bed Right",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "VampireFeedingBedRollLeft",
+   "nombre": "Vampire Bedroll Left",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "VampireFeedingBedRollRight",
+   "nombre": "Vampire Bedroll Right",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWebExit",
+   "nombre": "Web Idle Exit",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWebExitQuickTurn",
+   "nombre": "Web Idle Exit Quick Turn",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWebThrashShort",
+   "nombre": "Web Thrash Short",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWebThrashShort2",
+   "nombre": "Web Thrash Short2",
+   "categoria": "dormir",
+   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idle_A_left_longTrans",
+   "nombre": "A left long Trans",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idle_A_leg_shift",
+   "nombre": "A leg shift",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idle_A_pull_pants",
+   "nombre": "A pull pants",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idle_A_scratch_back",
+   "nombre": "A scratch back",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idle_A_shakeout",
+   "nombre": "A shakeout",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idle_A_shoulders",
+   "nombre": "A shoulders",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idle_A_shouldersVar1",
+   "nombre": "A shoulders Var1",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idle_A_sigh_var1Trans",
+   "nombre": "A sigh var1 Trans",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idle_A_sigh_var2Trans",
+   "nombre": "A sigh var2 Trans",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idle_A_soft_rightTrans",
+   "nombre": "A soft right trans",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idle_A_swat_flies",
+   "nombre": "A swat flies",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idle_A_sway_fastTrans",
+   "nombre": "A sway fast Trans",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleAstridEnter",
+   "nombre": "Astrid",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleGrave_01",
+   "nombre": "Bow Head At Grave 01",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleGrave_02",
+   "nombre": "Bow Head At Grave 02",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleKneeling",
+   "nombre": "Check Corpse",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChildApologize",
+   "nombre": "Child Apologize",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChildCryingEnd",
+   "nombre": "Child Crying End",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChildCryingStart",
+   "nombre": "Child Crying Start",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChildFidget",
+   "nombre": "Child Fidget",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChildLegsOutStart",
+   "nombre": "Child Legs Out",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChildPlayDirt",
+   "nombre": "Child Play Dirt",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChildPlayDoll",
+   "nombre": "Child Play Doll",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChildShy",
+   "nombre": "Child Shy",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChildSitOnKnees",
+   "nombre": "Child Sit On Knees Enter",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChildSitOnKneesInstant",
+   "nombre": "Child Sit On Knees Enter Instant",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChildTaunt1",
+   "nombre": "Child Taunt1",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChildTaunt2",
+   "nombre": "Child Taunt2",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChildTaunt3",
+   "nombre": "Child Taunt3",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChildTaunt4",
+   "nombre": "Child Taunt4",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChildWhineKick",
+   "nombre": "Child Whine Kick",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChildWhineStompFeet",
+   "nombre": "Child Whine Stomp",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCleanSword",
+   "nombre": "Clean Sword",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleComeThisWay",
+   "nombre": "Come This Way",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleCowering",
+   "nombre": "Cower",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleCowerEnter",
+   "nombre": "Cower Enter",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCowerEnterInstant",
+   "nombre": "Cower Enter Instant",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idleFreaReactionStart",
+   "nombre": "DLC2 Frea Disbelief Start",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idleFreaDisbeliefLoopStop",
+   "nombre": "DLC2 Frea Reaction Stop",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idleFreaSorrowLoopEnter",
+   "nombre": "DLC2 Frea Sorrow Enter",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleFreaSorrowLoopEnterInstant",
+   "nombre": "DLC2 Frea Sorrow Enter Instant",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idleFreaSorrowExit",
+   "nombre": "DLC2 Frea Sorrow Exit",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleFreaReaction2Start",
+   "nombre": "DLC2 Idle Frea Disbelief2 Start",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleFreaDisbelief2LoopStop",
+   "nombre": "DLC2 Idle Frea Disbelief2 Stop",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idleDisbelief01Start",
+   "nombre": "DLC2 Storn Reaction1 Start",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idleDisbelief01Exit",
+   "nombre": "DLC2 Storn Reaction1 Stop",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idleDisbelief02Start",
+   "nombre": "DLC2 Storn Reaction2 Start",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idleDisbelief02Exit",
+   "nombre": "DLC2 Storn Reaction2 Stop",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleGetAttention",
+   "nombre": "Get Attention",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleHandsBehindBack",
+   "nombre": "Hands Behind Back",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleHDRight",
+   "nombre": "HD Right",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleHHRight",
+   "nombre": "HH Right",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleKneelingEnter",
+   "nombre": "Kneeling Enter",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleKneelingEnterInstant",
+   "nombre": "Kneeling Enter Instant",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleLaugh",
+   "nombre": "Laugh",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleLookFar",
+   "nombre": "Look Far",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleSilentBow",
+   "nombre": "MQ Phantom Unsummon",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleMT_DoorBang",
+   "nombre": "MT Door Bang",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleNervous",
+   "nombre": "Nervous",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "OffsetArmsCrossedStart",
+   "nombre": "Offset Arms Crossed Start",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdlePlayer",
+   "nombre": "Player Stop",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdlePointClose",
+   "nombre": "Point Close",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdlePointFar_01",
+   "nombre": "Point Far 01",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdlePointFar_02",
+   "nombre": "Point Far 02",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdlePresentSkeletonKey",
+   "nombre": "Present Skeleton Key",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleSalute",
+   "nombre": "Salute",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleSnapToAttention",
+   "nombre": "Snap To Attention",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleStaticPoseAStart",
+   "nombre": "Static Pose A",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleStaticPoseBStart",
+   "nombre": "Static Pose B",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleStaticPoseCStart",
+   "nombre": "Static Pose C",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleSurrender",
+   "nombre": "Surrender",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleTalkAndUseItem",
+   "nombre": "Talking With Item",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleValericaWalkForward",
+   "nombre": "Valerica Walk Forward",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWalkingCameraEnd",
+   "nombre": "Walking Camera End",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWalkingCameraStart",
+   "nombre": "Walking Camera Start",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWave",
+   "nombre": "Wave",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleWipeBrow",
+   "nombre": "Wipe Brow",
+   "categoria": "gestos",
+   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleBoundKneesEnterInstant",
+   "nombre": "Bound Knees Enter Instant",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "BoundStandingCut",
+   "nombre": "Bound Standing Cut",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "BoundStandingCutNPC",
+   "nombre": "Bound Standing Cut NPC",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleBracedPain",
+   "nombre": "Braced Pain",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCartExitInstant",
+   "nombre": "Cart Exit Instant",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCartPrisonerAExit",
+   "nombre": "Cart Prisoner A Exit",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCartPrisonerAIdle",
+   "nombre": "Cart Prisoner A Idle",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCartPrisonerASway",
+   "nombre": "Cart Prisoner A Sway",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCartPrisonerBExit",
+   "nombre": "Cart Prisoner B Exit",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCartPrisonerBIdle",
+   "nombre": "Cart Prisoner B Idle",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCartPrisonerBSway",
+   "nombre": "Cart Prisoner B Sway",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCartPrisonerCExit",
+   "nombre": "Cart Prisoner C Exit",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCartPrisonerCIdle",
+   "nombre": "Cart Prisoner C Idle",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCartPrisonerCSway",
+   "nombre": "Cart Prisoner C Sway",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCartPrisonerDExit",
+   "nombre": "Cart Prisoner D Exit",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCartPrisonerDIdle",
+   "nombre": "Cart Prisoner D Idle",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCartPrisonerDSway",
+   "nombre": "Cart Prisoner D Sway",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "DeathAnim",
+   "nombre": "Death Animation Start",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleDLC02FallOnKnees",
+   "nombre": "DLC02 Fall On Knees",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleDLC02MiraakDeathFinish",
+   "nombre": "DLC02 Miraak Death Finish",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleDLC02MiraakDeath",
+   "nombre": "DLC02 Miraak Death Start",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleExecutionGuardIdleEnterInstant",
+   "nombre": "Esxecutioner Guard Enter Instant",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleExecutionerAlduinReaction",
+   "nombre": "Executioner Alduin Reaction",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleExecutionerAlduinReactionDeath",
+   "nombre": "Executioner Alduin Reaction Death",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleExecutionerChop_Player",
+   "nombre": "Executioner Chop Player",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleExecutionGuardIdle",
+   "nombre": "Executioner Guard Enter",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleFurnitureExitTriggered",
+   "nombre": "Executioner Guard Exit",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleHandCut",
+   "nombre": "Hand Cut",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleExecutionerChop",
+   "nombre": "Head Chop",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleInjured",
+   "nombre": "Injured",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "GetUpBegin",
+   "nombre": "NPC Get Up",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "OffsetBoundStandingPlayerInstant",
+   "nombre": "Offset Bound Standing Player Instant",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "OffsetBoundStandingStart",
+   "nombre": "Offset Bound Standing Start",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdlePrisonerBeat",
+   "nombre": "Prisoner Beat",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleSoupDeath",
+   "nombre": "Soup Death",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "TG05_GetUp",
+   "nombre": "TG05 Get Up",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "TG05_KnockOut",
+   "nombre": "TG05 Knock Out",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "TG05_StabPlayer",
+   "nombre": "TG05 Stab Player",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleUncontrollableCough",
+   "nombre": "Uncontrollable Cough",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWounded_01",
+   "nombre": "Wounded 01",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleWounded_02",
+   "nombre": "Wounded 02",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWounded_03",
+   "nombre": "Wounded 03",
+   "categoria": "herido",
+   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleBook_ReadTG06",
+   "nombre": "Book Read TG06",
+   "categoria": "leer",
+   "busqueda": "leer libro estudiar nota pergamino traducir pagina",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleBook_Read",
+   "nombre": "Book Reading",
+   "categoria": "leer",
+   "busqueda": "leer libro estudiar nota pergamino traducir pagina",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleBook_PageTurn",
+   "nombre": "Book Turn Many Pages",
+   "categoria": "leer",
+   "busqueda": "leer libro estudiar nota pergamino traducir pagina",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleBook_OnePage",
+   "nombre": "Book Turn One Page",
+   "categoria": "leer",
+   "busqueda": "leer libro estudiar nota pergamino traducir pagina",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleMQ203EsbernBookEnter",
+   "nombre": "MQ203 Esbern Book Enter",
+   "categoria": "leer",
+   "busqueda": "leer libro estudiar nota pergamino traducir pagina",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleMQ203EsbernBookEnterInstant",
+   "nombre": "MQ203 Esbern Book Enter Instant",
+   "categoria": "leer",
+   "busqueda": "leer libro estudiar nota pergamino traducir pagina",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleNoteRead",
+   "nombre": "Note Read",
+   "categoria": "leer",
+   "busqueda": "leer libro estudiar nota pergamino traducir pagina",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleRFPickUpScroll",
+   "nombre": "RF Pick Up Scroll",
+   "categoria": "leer",
+   "busqueda": "leer libro estudiar nota pergamino traducir pagina",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleStudy",
+   "nombre": "Study",
+   "categoria": "leer",
+   "busqueda": "leer libro estudiar nota pergamino traducir pagina",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleTG06FlipPage",
+   "nombre": "TG06 Flip Page",
+   "categoria": "leer",
+   "busqueda": "leer libro estudiar nota pergamino traducir pagina",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleTG06TranslationEnter",
+   "nombre": "TG06 Translate Enter",
+   "categoria": "leer",
+   "busqueda": "leer libro estudiar nota pergamino traducir pagina",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleTG06TranslationEnterInstant",
+   "nombre": "TG06 Translate Enter Instant",
+   "categoria": "leer",
+   "busqueda": "leer libro estudiar nota pergamino traducir pagina",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleBlessingKneelEnter",
+   "nombre": "Blessing Kneel Enter",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleBlessingKneelEnterInstant",
+   "nombre": "Blessing Kneel Enter Instant",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleBloodPortalActivate",
+   "nombre": "Blood Portal Activate",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleBoyRitual",
+   "nombre": "Boy Ritual",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCannibalFeedCrouching",
+   "nombre": "Cannibal Feed Crouching",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCannibalFeedStanding",
+   "nombre": "Cannibal Feed Standing",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCO2Ceremony1Welcome",
+   "nombre": "CO2 Ceremony1 Welcome",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCO2Ceremony2Blessing",
+   "nombre": "CO2 Ceremony2 Blessing",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCO2Ceremony3Chest",
+   "nombre": "CO2 Ceremony3 Chest",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdlePrayCrouchedEnter",
+   "nombre": "Crouched Pray Enter",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdlePrayCrouchedEnterInstant",
+   "nombre": "Crouched Pray Enter Instant",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleDA02BoethiahPostEnter",
+   "nombre": "DA02 Boethiah Post Enter",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleDA02BoethiahPostEnterInstant",
+   "nombre": "DA02 Boethiah Post Enter Instant",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleDLC02TentacleWordBurnBegin",
+   "nombre": "DLC02 Tentacle Word Burn Begin",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleDLC02TentacleWordBurnEnd",
+   "nombre": "DLC02 Tentacle Word Burn End",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleDLC1BossExplosion1stP",
+   "nombre": "DLC1 Boss Explosion1st P",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleReadElderScroll3rdP",
+   "nombre": "DLC1 Read Elder Scroll3rd P Enter",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleReadElderScrollEnd",
+   "nombre": "DLC1 Read Elder Scroll3rd P Exit",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleDLC2TentacleWarpBook",
+   "nombre": "DLC2 Tentacle Warp Book",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleGreybeardMeditateEnter",
+   "nombre": "Greybeard Meditate Enter",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleGreybeardMeditateEnterInstant",
+   "nombre": "Greybeard Meditate Enter Instant",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleGreybeardWordTeach",
+   "nombre": "Greybeard Word Teach",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleMagic_01",
+   "nombre": "Magic 01",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleMesmerize",
+   "nombre": "Mesmerize",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleMesmerizeStop",
+   "nombre": "Mesmerize Stop",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleMQ206FelldirRitualEnter",
+   "nombre": "MQ206 Felldir Ritual Enter",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleMQ206FelldirRitualEnterInstant",
+   "nombre": "MQ206 Felldir Ritual Enter Instant",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleMQ206FelldirShowScroll",
+   "nombre": "MQ206 Felldir Show Scroll",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleNocturnalEnter",
+   "nombre": "Nocturnal Enter DUPLICATE000",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleNocturnal_Exit",
+   "nombre": "Nocturnal Exit",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleNocturnal_IdleA",
+   "nombre": "Nocturnal Idle A",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleNocturnal_IdleAMirror",
+   "nombre": "Nocturnal Idle A Mirror",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleNocturnal_IdleB",
+   "nombre": "Nocturnal Idle B",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleNocturnal_LookLeft",
+   "nombre": "Nocturnal Look Left",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleNocturnal_LookRight",
+   "nombre": "Nocturnal Look Right",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleNocturnal_Rise",
+   "nombre": "Nocturnal Rise",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdlePray",
+   "nombre": "Pray",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleReadElderScroll",
+   "nombre": "Read Elder Scroll",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleReadElderScrollLonger",
+   "nombre": "Read Elder Scroll Longer",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleRitualSkull1",
+   "nombre": "Ritual Skull1",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleRitualSkull2",
+   "nombre": "Ritual Skull2",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleRitualSkull3",
+   "nombre": "Ritual Skull3",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleRitualStart",
+   "nombre": "Ritual Start",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleSnowElfPrinceAscensionBurning",
+   "nombre": "Snow Elf Prince Ascension",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleSnowElfPrinceBigSpell",
+   "nombre": "Snow Elf Prince Big Spell",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleSnowElfPrinceBigSpellRelease",
+   "nombre": "Snow Elf Prince Big Spell Release",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleT02AscendFemale",
+   "nombre": "T02 Ascend Female",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleT02AscendMale",
+   "nombre": "T02 Ascend Male",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleTelvanniTowerFloatDown",
+   "nombre": "Telvanni Tower Float Down Enter",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleTelvanniTowerFloatUp",
+   "nombre": "Telvanni Tower Float Up Enter",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleVampireFeastVictim",
+   "nombre": "Vampire Feast Victim Enter",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleVampireLordTransformation",
+   "nombre": "Vampire Lord Transformation",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWalkThroughWallEnter",
+   "nombre": "Walk Through Wall Enter",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWalkThroughWallEnterInstant",
+   "nombre": "Walk Through Wall Enter Instant",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWerewolfTransformation",
+   "nombre": "Werewolf Transformation",
+   "categoria": "magia",
+   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleApplaudSarcastic",
+   "nombre": "Applaud Sarcastic",
+   "categoria": "musica",
+   "busqueda": "musica bailar tocar laud flauta tambor aplaudir animar cuerno vitorear",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleApplaud2",
+   "nombre": "Applaud2",
+   "categoria": "musica",
+   "busqueda": "musica bailar tocar laud flauta tambor aplaudir animar cuerno vitorear",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleApplaud3",
+   "nombre": "Applaud3",
+   "categoria": "musica",
+   "busqueda": "musica bailar tocar laud flauta tambor aplaudir animar cuerno vitorear",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleApplaud4",
+   "nombre": "Applaud4",
+   "categoria": "musica",
+   "busqueda": "musica bailar tocar laud flauta tambor aplaudir animar cuerno vitorear",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleApplaud5",
+   "nombre": "Applaud5",
+   "categoria": "musica",
+   "busqueda": "musica bailar tocar laud flauta tambor aplaudir animar cuerno vitorear",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleBlowHornImperial",
+   "nombre": "Blow Horn Imperial",
+   "categoria": "musica",
+   "busqueda": "musica bailar tocar laud flauta tambor aplaudir animar cuerno vitorear",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleBlowHornStormcloak",
+   "nombre": "Blow Horn Stormcloak",
+   "categoria": "musica",
+   "busqueda": "musica bailar tocar laud flauta tambor aplaudir animar cuerno vitorear",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCiceroAgitated",
+   "nombre": "Cicero Agitated",
+   "categoria": "musica",
+   "busqueda": "musica bailar tocar laud flauta tambor aplaudir animar cuerno vitorear",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCiceroDance1",
+   "nombre": "Cicero Dance1",
+   "categoria": "musica",
+   "busqueda": "musica bailar tocar laud flauta tambor aplaudir animar cuerno vitorear",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleCiceroDance2",
+   "nombre": "Cicero Dance2",
+   "categoria": "musica",
+   "busqueda": "musica bailar tocar laud flauta tambor aplaudir animar cuerno vitorear",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCiceroDance3",
+   "nombre": "Cicero Dance3",
+   "categoria": "musica",
+   "busqueda": "musica bailar tocar laud flauta tambor aplaudir animar cuerno vitorear",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCiceroHappy",
+   "nombre": "Cicero Happy",
+   "categoria": "musica",
+   "busqueda": "musica bailar tocar laud flauta tambor aplaudir animar cuerno vitorear",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCivilWarCheer",
+   "nombre": "Civil War Cheer",
+   "categoria": "musica",
+   "busqueda": "musica bailar tocar laud flauta tambor aplaudir animar cuerno vitorear",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleDrumStart",
+   "nombre": "Drum Start",
+   "categoria": "musica",
+   "busqueda": "musica bailar tocar laud flauta tambor aplaudir animar cuerno vitorear",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleFluteStart",
+   "nombre": "Flute Start",
+   "categoria": "musica",
+   "busqueda": "musica bailar tocar laud flauta tambor aplaudir animar cuerno vitorear",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleLuteStart",
+   "nombre": "Lute Start",
+   "categoria": "musica",
+   "busqueda": "musica bailar tocar laud flauta tambor aplaudir animar cuerno vitorear",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "SpectatorCheer",
+   "nombre": "Spectator Cheer",
+   "categoria": "musica",
+   "busqueda": "musica bailar tocar laud flauta tambor aplaudir animar cuerno vitorear",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "SpectatorClap",
+   "nombre": "Spectator Clap",
+   "categoria": "musica",
+   "busqueda": "musica bailar tocar laud flauta tambor aplaudir animar cuerno vitorear",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "SpectatorGawk",
+   "nombre": "Spectator Gawk",
+   "categoria": "musica",
+   "busqueda": "musica bailar tocar laud flauta tambor aplaudir animar cuerno vitorear",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "SpectatorTalking",
+   "nombre": "Spectator Talk Fail Safe",
+   "categoria": "musica",
+   "busqueda": "musica bailar tocar laud flauta tambor aplaudir animar cuerno vitorear",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleActivatePickUp",
+   "nombre": "Activate Pick Up",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleBlackSmithingEnterStart",
+   "nombre": "Black Smithing Enter",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleBlackSmithEnterInstant",
+   "nombre": "Black Smithing Instant",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCartDriverExit",
+   "nombre": "Cart Driver Exit",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCartDriverIdle",
+   "nombre": "Cart Driver Idle",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCartDriverSway",
+   "nombre": "Cart Driver Sway",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCartTravelDriverEnter",
+   "nombre": "Cart Travel Driver Enter",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCartTravelDriverEnterInstant",
+   "nombre": "Cart Travel Driver Enter Instant",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCartTravelPlayerEnter",
+   "nombre": "Cart Travel Player Enter",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCartTravelPlayerEnterInstant",
+   "nombre": "Cart Travel Player Enter Instant",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChiselKneelingEnter",
+   "nombre": "Chisel Kneeling Enter",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChiselKneelingEnterInstant",
+   "nombre": "Chisel Kneeling Enter Instant",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChiselStandingEnter",
+   "nombre": "Chisel Standing Enter",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChiselStandingEnterInstant",
+   "nombre": "Chisel Standing Enter Instant",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleDwemerExtractorEnter",
+   "nombre": "Dwemer Extractor",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleExamine",
+   "nombre": "Examine",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleFeedChicken",
+   "nombre": "Feed Chickens",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleGive",
+   "nombre": "Give",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleGiveMQ105Horn",
+   "nombre": "Give MQ105 Horn",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWriteLedgerChargenEnter",
+   "nombre": "Hadvar Write Ledger Enter",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWriteLedgerEnterInstant",
+   "nombre": "Hadvar Write Ledger Enter Instant",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleHoe",
+   "nombre": "Hoe",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleLightSconce",
+   "nombre": "Light Sconce",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleLockPick",
+   "nombre": "Lock Pick",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idleLooseSweepingStart",
+   "nombre": "Loose Sweeping Start",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "OffsetCarryBasketStart",
+   "nombre": "Offset Carry Basket Start",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "OffsetCarryFlowerBasketPickStart",
+   "nombre": "Offset Carry Flower Basket Pick Start",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleOffsetCarryPotServe",
+   "nombre": "Offset Carry Pot Serve",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "OffsetCarryPotStart",
+   "nombre": "Offset Carry Pot Start",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "OffsetFlowerBasketStart",
+   "nombre": "Offset Flower Basket Start",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdlePickaxeEnter",
+   "nombre": "Pickaxe Enter",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdlePickaxeEnterInstant",
+   "nombre": "Pickaxe Enter Instant",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdlePickup_Ground",
+   "nombre": "Pickup Ground",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdlePullChain",
+   "nombre": "Pull Chain Enter",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleSearchChestEnter",
+   "nombre": "Search Chest Enter",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleSearchChestEnterInstant",
+   "nombre": "Search Chest Enter Instant",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleSearchTableEnter",
+   "nombre": "Search Table Enter",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleSearchTableEnterInstant",
+   "nombre": "Search Table Enter Instant",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleSearchingChest",
+   "nombre": "Searching Chest",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleSearchingTable",
+   "nombre": "Searching Table",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleSell",
+   "nombre": "Sell",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleSharpeningWheelEnterInstant",
+   "nombre": "Sharpening Wheel Enter Instant",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleSharpeningWheelStart",
+   "nombre": "Sharpening Wheel Start",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleStonePickUpEnterInstant",
+   "nombre": "Stone Pick Up Enter Instant",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleStonePickUpEnter",
+   "nombre": "Stone Pick Up Exit",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleStonePutDownEnter",
+   "nombre": "Stone Put Down Enter",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleTake",
+   "nombre": "Take",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWayShrineWaterScoopEnter",
+   "nombre": "Way Shrine Water Scoop",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWoodChopEnterInstant",
+   "nombre": "Wood Chop Enter Instant",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWoodChopStart",
+   "nombre": "Wood Chop Start",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleWoodPickUpEnter",
+   "nombre": "Wood Pick Up Enter",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdlewoodputdownEnter",
+   "nombre": "woodputdown Enter",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWriteLedgerEnter",
+   "nombre": "Write Ledger Enter",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWriteLedgerWrite",
+   "nombre": "Write Ledger Write",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWriteTableStandingEnter",
+   "nombre": "Write Table Standing Enter",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWriteTableStandingEnterInstant",
+   "nombre": "Write Table Standing Enter Instant",
+   "categoria": "oficios",
+   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCraftingCookingPotAddIngredient",
+   "nombre": "Crafting Cooking Pot Add Ingredient",
+   "categoria": "otras",
+   "busqueda": "",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCraftingCookingPotTalkA",
+   "nombre": "Crafting Cooking Pot Talk A",
+   "categoria": "otras",
+   "busqueda": "",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCraftingCookingPotTalkB",
+   "nombre": "Crafting Cooking Pot Talk B",
+   "categoria": "otras",
+   "busqueda": "",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleDLC02BoatRide",
+   "nombre": "DLC02 Boat Ride",
+   "categoria": "otras",
+   "busqueda": "",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleTGFalmerStatueEnter",
+   "nombre": "TG Falmer Statue Enter",
+   "categoria": "otras",
+   "busqueda": "",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleTGStatueEnterInstant",
+   "nombre": "TG Falmer Statue Enter Instant",
+   "categoria": "otras",
+   "busqueda": "",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleTG08_Phase1",
+   "nombre": "TG08 Ceremony Enter",
+   "categoria": "otras",
+   "busqueda": "",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleTG08_Phase1_EnterInstant",
+   "nombre": "TG08 Ceremony Enter Instant",
+   "categoria": "otras",
+   "busqueda": "",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleTG08_Phase2",
+   "nombre": "TG08 Phase2",
+   "categoria": "otras",
+   "busqueda": "",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleTG08_Phase3",
+   "nombre": "TG08 Phase3",
+   "categoria": "otras",
+   "busqueda": "",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleTG08_Phase4",
+   "nombre": "TG08 Phase4",
+   "categoria": "otras",
+   "busqueda": "",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleTG08_Phase5",
+   "nombre": "TG08 Phase5",
+   "categoria": "otras",
+   "busqueda": "",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "WardBreak",
+   "nombre": "Ward Broken",
+   "categoria": "otras",
+   "busqueda": "",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleAltarEnterInstant",
+   "nombre": "Altar Enter Instant Left",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleAltarEnter",
+   "nombre": "Altar Enter Left",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleBarCounterEnter",
+   "nombre": "Bar Counter Enter",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleBarCounterEnterInstant",
+   "nombre": "Bar Counter Enter Instant",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleBarCounterWipe",
+   "nombre": "Bar Counter Wipe",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "ChairReadingStart",
+   "nombre": "Book Sitting Reading",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "ChairReadingIdles",
+   "nombre": "Book Sitting Turn Many Pages",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "ChairDrinkingStart",
+   "nombre": "Chair Drinking Start",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "ChairEatingSoupStart",
+   "nombre": "Chair Eating Soup Start",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "ChairEatingStart",
+   "nombre": "Chair Eating Start",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "ChairEatingStart_VampireMeat",
+   "nombre": "Chair Eating Vampire Meat",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChairWrite",
+   "nombre": "Chair Write",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCounterEnterInstant",
+   "nombre": "Counter Enter Instant",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleCounterStart",
+   "nombre": "Counter Start",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChairCHILDFrontEnter",
+   "nombre": "Enter Chair CHILD Front",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChairCHILDEnterInstant",
+   "nombre": "Enter Chair CHILD Instant",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChairCHILDLeftEnter",
+   "nombre": "Enter Chair CHILD Left",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChairCHILDRightEnter",
+   "nombre": "Enter Chair CHILD Right",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChairFrontEnter",
+   "nombre": "Enter Chair Front",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleChairEnterInstant",
+   "nombre": "Enter Chair Instant",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChairLeftEnter",
+   "nombre": "Enter Chair Left",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChairRightEnter",
+   "nombre": "Enter Chair Right",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWallLeanStart",
+   "nombre": "Enter Wall Lean",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleTableBackExit",
+   "nombre": "Exit Chair Back Quick",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChairCHILDFrontExit",
+   "nombre": "Exit Chair CHILD Front",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChairCHILDLeftExit",
+   "nombre": "Exit Chair CHILD Left",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChairCHILDRightExit",
+   "nombre": "Exit Chair CHILD Right",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChairFrontExit",
+   "nombre": "Exit Chair Front",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChairFrontQuickExit",
+   "nombre": "Exit Chair Front Quick",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idleChairLeftExit",
+   "nombre": "Exit Chair Left",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChairLeftQuickExit",
+   "nombre": "Exit Chair Left Quick",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idleChairRightExit",
+   "nombre": "Exit Chair Right",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChairRightQuickExit",
+   "nombre": "Exit Chair Right Quick",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChairExitStart",
+   "nombre": "Hadvar Write Ledger Exit",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleHideREnter",
+   "nombre": "Hide R Enter",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleHideREnterInstant",
+   "nombre": "Hide R Enter Instant",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleJarlChairEnter",
+   "nombre": "Jarl Chair Enter",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleJarlChairEnterInstant",
+   "nombre": "Jarl Chair Enter Instant",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleRailLeanEnter",
+   "nombre": "Rail Lean Enter",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleRailLeanEnterInstant",
+   "nombre": "Rail Lean Enter Instant",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleRailLeanExit",
+   "nombre": "Rail Lean Exit",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleLounge",
+   "nombre": "Shelf Enter Instant",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleLounge_Exit",
+   "nombre": "Shelf Exit",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idleChairArmsCrossedVar1",
+   "nombre": "Sitting Chair Arms Crossed Var1",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idleChairArmsCrossedVar2",
+   "nombre": "Sitting Chair Arms Crossed Var2",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idleChairLookDown",
+   "nombre": "Sitting Chair Look Down",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idleChairShoulderFlex",
+   "nombre": "Sitting Chair Shoulder Flex",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleChairVar1",
+   "nombre": "Sitting Chair Var1",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "idleChairVar2",
+   "nombre": "Sitting Chair Var2",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleSnowElfPrinceFireAndForget",
+   "nombre": "Snow Elf Prince Chair Fire And Forget",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleSnowElfPrinceChairDialogue",
+   "nombre": "Snow Elf Prince Dialogue",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWallSoldierEnter",
+   "nombre": "Soldier Wall Enter",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWallSoldierEnterInstant",
+   "nombre": "Soldier Wall Enter Instant",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleStoolEnter",
+   "nombre": "Stool Enter",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla",
+   "destacada": true
+  },
+  {
+   "evento": "IdleStoolEnterInstant",
+   "nombre": "Stool Enter Instant",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleStoolBackExit",
+   "nombre": "Stool Exit",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleTableDrinkAndMugEnter",
+   "nombre": "Table Drink And Mug Enter Loose",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleTableDrinkEnter",
+   "nombre": "Table Drink Enter Loose",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleTableLeanPoint",
+   "nombre": "Table Lean Point",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleTableMugEnter",
+   "nombre": "Table Mug Enter Loose",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleTablePassOutEnter",
+   "nombre": "Table Pass Out Enter Loose",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "ChairVampireEatingStart",
+   "nombre": "Vampire Chair Drinking",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWallCornerPeekLEnter",
+   "nombre": "Wall Corner Peek L Enter",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWallCornerPeekLEnterInstant",
+   "nombre": "Wall Corner Peek L Enter Instant",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWallCornerPeekREnter",
+   "nombre": "Wall Corner Peek R Enter",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWallCornerPeekREnterInstant",
+   "nombre": "Wall Corner Peek R Enter Instant",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWallLeanEnterInstant",
+   "nombre": "Wall Lean Enter Instant",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWriteTableChairEnterInstant",
+   "nombre": "Write Table Chair Enter Instant",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWriteTableChairLeftEnter",
+   "nombre": "Write Table Chair Enter Left",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWriteTableChairRightEnter",
+   "nombre": "Write Table Chair Enter Right",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWriteTableChairLeftExit",
+   "nombre": "Write Table Chair Exit Left",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  },
+  {
+   "evento": "IdleWriteTableChairRightExit",
+   "nombre": "Write Table Chair Exit Right",
+   "categoria": "sentarse",
+   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono",
+   "origen": "vanilla"
+  }
+ ]
+}

@@ -1,0 +1,50 @@
+{
+  "_que_es_esto": [
+    "Ejemplos de como se anaden animaciones que no son del juego base.",
+    "",
+    "Este archivo NO lo lee nadie: es una chuleta. Lo que se lee de verdad es la",
+    "lista animaciones de animplayer-settings.txt, junto al plugin instalado.",
+    "Copia de aqui lo que te sirva y pegalo alli.",
+    "",
+    "Como se averigua el nombre del evento de un mod: docs/anadir-animaciones.md",
+    "Como se comprueba que existe: en la consola del juego, player.sae ElEvento"
+  ],
+
+  "animaciones": [
+    {
+      "_nota": "Lo minimo: solo el evento. Se llamara como el evento y caera en la categoria De otros mods.",
+      "evento": "MiModPoseSuelta"
+    },
+    {
+      "_nota": "Lo normal: nombre en espanol, una categoria de las que ya hay, y palabras extra para buscarla.",
+      "evento": "MiModSaludoElegante",
+      "nombre": "Saludo elegante",
+      "categoria": "gestos",
+      "busqueda": "saludar reverencia cortesia",
+      "destacada": true
+    },
+    {
+      "_nota": "Una categoria que no existe se crea sola. Util para agrupar todo un mod.",
+      "evento": "PosesRP_ApoyadoEnLaPared",
+      "nombre": "Apoyado en la pared",
+      "categoria": "posesrp",
+      "busqueda": "apoyarse pared esperar"
+    },
+    {
+      "_nota": "Si el evento lleva equip en el nombre, SkyMP no lo sincroniza (docs/sincronizacion.md). Marcalo y el panel lo avisa.",
+      "evento": "MiModEquiparCapa",
+      "nombre": "Ponerse la capa",
+      "categoria": "gestos",
+      "sincroniza": false,
+      "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"
+    },
+    {
+      "_nota": "Repetir un evento del juego base lo pisa. Sirve para renombrarlo al espanol sin regenerar el catalogo.",
+      "evento": "IdleWave",
+      "nombre": "Saludar con la mano",
+      "categoria": "gestos",
+      "busqueda": "saludar adios hola",
+      "destacada": true
+    }
+  ]
+}
