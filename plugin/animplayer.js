@@ -941,8 +941,11 @@
       var actor = Reproductor.actorDe(peticion);
       if (!actor) return false;
 
-      // En primera persona las poses no se ven: el cuerpo no se dibuja.
-      if (TERCERA_PERSONA) Reproductor.aTerceraPersona();
+      /* En primera persona las poses no se ven: el cuerpo no se dibuja. Pero
+         esto no se hace en las repeticiones del bucle: si no, cada tres
+         segundos te sacaria de primera persona y no podrias volver mientras
+         dure el bucle. Se decide una vez, al pedirla. */
+      if (TERCERA_PERSONA && peticion.origen !== 'bucle') Reproductor.aTerceraPersona();
 
       try {
         sp.Debug.sendAnimationEvent(actor, peticion.evento);
