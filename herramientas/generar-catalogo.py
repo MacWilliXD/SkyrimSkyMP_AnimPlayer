@@ -42,6 +42,7 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.dirname(AQUI)
 sys.path.insert(0, AQUI)
 import idles
+import traducciones
 
 RUTA_POR_DEFECTO = ("C:/Program Files (x86)/Steam/steamapps/common/"
                     "Skyrim Special Edition/Data")
@@ -114,7 +115,7 @@ CATEGORIAS = [
          r"WarmHands", r"WarmArms", r"^Drunk", r"^IdleMQ201",
          r"^IdleOffsetCarryPotServe",
      ]),
-    ("musica", "Musica y fiesta",
+    ("musica", "Música y fiesta",
      "musica bailar tocar laud flauta tambor aplaudir animar cuerno vitorear", [
          r"^IdleLuteStart", r"^IdleDrumStart", r"^IdleFluteStart", r"[Dd]ance",
          r"[Aa]pplaud", r"^IdleCivilWarCheer", r"^Spectator", r"BlowHorn",
@@ -137,7 +138,7 @@ CATEGORIAS = [
          r"^IdleChairReading", r"^ChairReading", r"^IdleRFPickUpScroll",
          r"^IdleMQ203Esbern",
      ]),
-    ("gestos", "Gestos y expresion",
+    ("gestos", "Gestos y expresión",
      "saludar senalar reir asentir rendirse burlarse gesto encogerse pose", [
          r"^IdleWave", r"^IdleSalute", r"^IdleLaugh", r"^IdlePoint",
          r"ComeThisWay", r"^IdleNervous", r"[Cc]ower", r"^IdleSurrender",
@@ -151,7 +152,7 @@ CATEGORIAS = [
          r"^IdlePresentSkeletonKey", r"^IdleGiveMQ105Horn",
          r"^IdleDrinkFromFountain", r"^IdleFeedChicken",
      ]),
-    ("dialogo", "Dialogo", "hablar conversar charlar discutir responder", [
+    ("dialogo", "Diálogo", "hablar conversar charlar discutir responder", [
         r"[Dd]ialogue", r"^RF_", r"^Loose", r"^MotionDriven", r"^PairEnd",
     ]),
     ("herido", "Herido y muerte",
@@ -167,14 +168,15 @@ CATEGORIAS = [
 
 # Lo esencial, con nombre a mano porque es lo que mas se va a usar y el nombre
 # automatico ("Force Default State") no le dice nada a nadie.
+# Estas van en su propia categoria, la de control. El nombre en espanol lo
+# pone traducciones.py como todas las demas; aqui solo estan las palabras
+# extra con las que se las tiene que poder encontrar.
 CONTROL = {
-    "IdleForceDefaultState": ("Parar y volver a la postura normal",
-                              "parar detener cancelar normal quieto"),
-    "IdleStop": ("Parar la animacion", "parar detener cancelar"),
-    "IdleStopInstant": ("Parar al instante", "parar detener cancelar instante"),
-    "IdleFurnitureExit": ("Levantarse del mueble",
-                          "levantarse salir silla cama mueble"),
-    "OffsetStop": ("Soltar lo que lleva en las manos", "soltar dejar manos"),
+    "IdleForceDefaultState": ("", "parar detener cancelar normal quieto"),
+    "IdleStop": ("", "parar detener cancelar"),
+    "IdleStopInstant": ("", "parar detener cancelar instante"),
+    "IdleFurnitureExit": ("", "levantarse salir silla cama mueble"),
+    "OffsetStop": ("", "soltar dejar manos"),
 }
 
 # Las que merecen aparecer primero: son las que de verdad se usan para
@@ -258,15 +260,20 @@ def generar(data):
         if enam == "00NextClip":
             continue                    # pegamento interno, no es una pose
         clave = categoria(enam, edid)
+        ingles = bonito(edid, enam)
         ficha = {
             "evento": enam,
-            "nombre": bonito(edid, enam),
+            "nombre": traducciones.traducir(enam, ingles),
             "categoria": clave,
-            "busqueda": porClave.get(clave, (0, 0, "", 0))[2],
+            # El nombre original entra en las palabras de busqueda: asi
+            # buscar "chair" sigue encontrando las sillas aunque en la lista
+            # pongan "Sentarse de frente".
+            "busqueda": ingles,
+            "categoria_busqueda": porClave.get(clave, (0, 0, "", 0))[2],
             "origen": "vanilla",
         }
         if enam in CONTROL:
-            ficha["nombre"], ficha["busqueda"] = CONTROL[enam]
+            ficha["busqueda"] = ingles + " " + CONTROL[enam][1]
             ficha["categoria"] = "control"
         if enam in DESTACADAS:
             ficha["destacada"] = True

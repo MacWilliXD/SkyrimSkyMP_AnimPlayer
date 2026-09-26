@@ -47,6 +47,41 @@ recategorizar una animación del juego sin regenerar nada.
 Se guarda compacto: las palabras de búsqueda de cada categoría no se repiten en
 las 674 fichas, se pegan en el navegador al cargar la lista.
 
+### Los nombres, en español
+
+Los que trae el juego son los identificadores de editor de Bethesda, en inglés
+y a veces mal puestos: el EDID de `IdleKneeling` dice *CheckCorpse*, el de
+`IdleChairExitStart` dice *HadvarWriteLedgerExit*, el de `blockStart` dice
+*BowZoom*. Traducirlos al pie de la letra habría dado nombres falsos.
+
+`herramientas/traducciones.py` los traduce mirando el **nombre del evento**, que
+es lo único fiable, en tres capas:
+
+- una tabla a mano, que es la que manda,
+- reglas para los ochenta y pico golpes de gracia, que siguen todos el mismo
+  patrón (arma, criatura, golpe, variante) y escribirlos uno a uno habría sido
+  copiar la misma frase ochenta veces,
+- un diccionario palabra a palabra como red de seguridad, para que una
+  animación nueva que nadie haya traducido no salga en inglés del todo.
+
+El nombre original entra en las palabras de búsqueda, así que buscar `chair`
+sigue funcionando.
+
+### Los favoritos
+
+Viven aquí porque son datos del catálogo, no de la interfaz: el panel solo los
+pinta. Se guardan con `sp.writePlugin(..., 'PluginsNoLoad')` y se leen con
+`sp.getPluginSourceCode`, que son las dos funciones que SkyrimPlatform da para
+datos en disco y las que usa SkyMP para recordar tu sesión.
+
+**No se usa `localStorage`**, que sería lo evidente: el navegador que
+SkyrimPlatform monta encima del juego no garantiza que su almacenamiento
+sobreviva a cerrar Skyrim, y unos favoritos que se borran al salir no son
+favoritos.
+
+El archivo empieza por `//` para que siga siendo JavaScript válido, que es el
+mismo truco que hace SkyMP con los suyos.
+
 ---
 
 ## 2. El reproductor
@@ -133,7 +168,14 @@ entra por sus parámetros.
   En el navegador que Skyrim dibuja encima del juego los controles nativos se
   ven como quieren. Lo mismo pasa con `<select>`: por eso las categorías son
   botones y no una lista desplegable.
-- **De entrada solo salen las recomendadas.** Abrir un menú de 674 filas que
+- **Los favoritos van siempre delante**, salvo cuando ya estás mirando solo los
+  favoritos, que entonces sería ordenar por nada.
+- **Pulsar la estrella no reproduce.** Se mira antes que la fila y se corta el
+  suceso ahí: si no, marcar algo te dejaría al personaje haciendo la animación
+  sin haberla pedido.
+- **La categoría Favoritos solo sale si tienes alguno.** Una categoría vacía y
+  permanente es un botón que no hace nada.
+- **De entrada salen tus favoritos y las recomendadas.** Abrir un menú de 674 filas que
   empieza por "Ambush Enter Instant" no le sirve a nadie. En cuanto escribes o
   eliges una categoría, se busca en todo.
 - **El texto de búsqueda de cada ficha se calcula una vez**, al cargar, no en

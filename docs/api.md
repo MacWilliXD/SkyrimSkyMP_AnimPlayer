@@ -174,6 +174,16 @@ repeticiones vale `"bucle"`.
 Cada observador va en su propio `try`: si el tuyo revienta, no deja sin
 animación a nadie, solo queda apuntado en la consola.
 
+### Favoritos
+
+```js
+ap.favoritos()                    // → ['IdleLuteStart', 'IdleWave']
+ap.favorito('IdleLuteStart', true)   // marcar
+ap.favorito('IdleLuteStart', false)  // desmarcar
+```
+
+Se guardan en disco al momento y el panel se entera sin reiniciar nada.
+
 ### El panel
 
 ```js

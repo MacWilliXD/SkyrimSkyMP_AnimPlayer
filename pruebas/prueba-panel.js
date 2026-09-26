@@ -77,6 +77,16 @@ app.whenReady().then(async () => {
   /* Recoge lo que el panel ha mandado al juego y se lo pasa al plugin, tal cual
      lo haria SkyrimPlatform con el suceso browserMessage. Despues un "update",
      que es donde el plugin vacia su cola. */
+  /* Escribe en la barra y devuelve lo que queda en la lista. */
+  const buscar = async (texto) => {
+    await js(`(() => { const c = document.querySelector('#animplayer .ap-buscar');
+      c.value = ${JSON.stringify(texto)};
+      c.dispatchEvent(new Event('input', { bubbles: true })); })()`);
+    await esperar(160);
+    return js(`[...document.querySelectorAll('#animplayer .ap-fila')]
+      .map(f => f.dataset.evento)`);
+  };
+
   const pasarMensajesAlPlugin = async (falso) => {
     const mensajes = await js('window.__mensajes.splice(0)');
     for (const m of mensajes) falso.disparar('browserMessage', { arguments: [m] });
@@ -184,15 +194,120 @@ app.whenReady().then(async () => {
   comprobar(await js(`document.querySelector('#animplayer .ap-donde').textContent === 'Recomendadas'`),
             'y al lado pone que parte de la lista se esta viendo');
 
+  console.log('\n=== los nombres estan en espanol ===');
+  const nombres = await js(`[...document.querySelectorAll('#animplayer .ap-fila')]
+    .map(f => f.querySelector('.ap-nombre').textContent)`);
+  comprobar(nombres.includes('Tocar el laúd') || nombres.length > 0,
+            'la lista trae nombres', nombres.slice(0, 3).join(' / '));
+  /* Nadie traduce "Lute Start" a medias: o esta en espanol o no lo esta. Se
+     buscan restos del ingles de Bethesda en TODO el catalogo, no solo en lo
+     que se ve. */
+  const apCat = falso.sp.storage.AnimPlayer;
+  const todos = apCat.lista().animaciones.map((a) => a.nombre);
+  const restos = todos.filter((n) => /\b(Enter|Exit|Start|Stop|Instant|Chair|Bed|Attack|Hand|Weapon|Left|Right|Idle)\b/.test(n));
+  comprobar(restos.length === 0, `ninguno de los ${todos.length} se quedo en ingles`,
+            restos.slice(0, 4).join(' / ') || 'ninguno');
+  comprobar(todos.some((n) => /[áéíóúñ¿¡]/.test(n)),
+            'y llevan acentos donde toca',
+            todos.filter((n) => /[áéíóúñ]/.test(n)).slice(0, 3).join(' / '));
+  comprobar(apCat.ficha('IdleLuteStart').nombre === 'Tocar el laúd',
+            'IdleLuteStart es "Tocar el laúd"');
+  comprobar(apCat.ficha('pa_KillMove2HMFalmerA').nombre.indexOf('Remate') === 0,
+            'y los remates se montan solos',
+            apCat.ficha('pa_KillMove2HMFalmerA').nombre);
+
+  console.log('\n=== los favoritos ===');
+  const estrellaDe = (e) => `document.querySelector('#animplayer .ap-fila[data-evento="${e}"] .ap-estrella')`;
+  const hayEstrellas = await js(`document.querySelectorAll('#animplayer .ap-estrella').length`);
+  const hayFilas = await js(`document.querySelectorAll('#animplayer .ap-fila').length`);
+  comprobar(hayEstrellas === hayFilas,
+            'todas las filas llevan su estrella', hayEstrellas + ' de ' + hayFilas);
+  comprobar(!(await js(`${estrellaDe('IdleDrink')}.classList.contains('ap-puesta')`)),
+            'apagadas de entrada');
+
+  falso.registro.animaciones.length = 0;
+  await js(`${estrellaDe('IdleDrink')}.click()`);
+  await esperar(160);
+  comprobar(await js(`${estrellaDe('IdleDrink')}.classList.contains('ap-puesta')`),
+            'al pulsarla se enciende');
+  comprobar(falso.registro.animaciones.length === 0,
+            'y NO reproduce la animacion: solo la marca');
+  await pasarMensajesAlPlugin(falso);
+  const guardado = falso.registro.archivos['PluginsNoLoad/animplayer-favoritos'];
+  comprobar(!!guardado && guardado.indexOf('IdleDrink') !== -1,
+            'y queda escrito en disco', guardado);
+  comprobar(guardado.slice(0, 2) === '//',
+            'con el // delante, como hace SkyMP con sus datos');
+
+  await captura('4-favorito');
+  const chip = await js(`(() => { const c = document.querySelector('#animplayer .ap-chip[data-cat="favoritos"]');
+    return c ? c.textContent.trim() : null; })()`);
+  comprobar(!!chip && /1/.test(chip), 'aparece la categoria Favoritos con su cuenta', chip);
+
+  await js(`document.querySelector('#animplayer .ap-chip[data-cat="favoritos"]').click()`);
+  await esperar(160);
+  const soloFav = await js(`[...document.querySelectorAll('#animplayer .ap-fila')]
+    .map(f => f.dataset.evento)`);
+  comprobar(soloFav.length === 1 && soloFav[0] === 'IdleDrink',
+            'y al pulsarla sale solo lo marcado', soloFav.join(', '));
+  await js(`document.querySelector('#animplayer .ap-chip[data-cat=""]').click()`);
+  await esperar(160);
+
+  console.log('\n  --- sin la categoria puesta, salen los primeros ---');
+  /* Se marca algo que en la lista de sentarse queda muy abajo, y se comprueba
+     que al buscar aparece el primero de todos. */
+  await buscar('silla');
+  const antes = await js(`[...document.querySelectorAll('#animplayer .ap-fila')]
+    .map(f => f.dataset.evento)`);
+  const tardon = antes[antes.length - 1];
+  comprobar(antes.length > 3 && tardon !== antes[0],
+            'hay varias, y una de ellas va la ultima', tardon);
+  await js(`${estrellaDe(tardon)}.click()`);
+  await esperar(180);
+  await pasarMensajesAlPlugin(falso);
+  const despues = await js(`[...document.querySelectorAll('#animplayer .ap-fila')]
+    .map(f => f.dataset.evento)`);
+  comprobar(despues[0] === tardon,
+            'al marcarla se pone la primera', despues[0] + ' (antes iba la ultima)');
+  comprobar(await js(`document.querySelector('#animplayer .ap-grupo').textContent
+    .indexOf('Favoritos') !== -1`), 'y con su cabecera de Favoritos');
+
+  await js(`${estrellaDe(tardon)}.click()`);
+  await esperar(180);
+  await pasarMensajesAlPlugin(falso);
+  const quitada = await js(`[...document.querySelectorAll('#animplayer .ap-fila')]
+    .map(f => f.dataset.evento)`);
+  comprobar(quitada[0] !== tardon, 'y al quitarla vuelve a su sitio');
+
+  console.log('\n  --- sobreviven a reiniciar el juego ---');
+  /* Se carga el plugin otra vez con el disco que dejo el anterior, que es
+     exactamente lo que pasa al volver a entrar al servidor. */
+  const otraPartida = falsoSp.cargarPlugin(PLUGIN, {}, falso.registro.archivos);
+  otraPartida.tic();
+  const ap0 = otraPartida.sp.storage.AnimPlayer;
+  comprobar(ap0.favoritos().indexOf('IdleDrink') !== -1,
+            'al arrancar se leen del disco', JSON.stringify(ap0.favoritos()));
+  comprobar(otraPartida.ultimaInyeccion('IdleDrink') !== null,
+            'y se le pasan al panel con el catalogo');
+  comprobar(otraPartida.registro.consola.some((l) => /favoritos recuperados/.test(l)),
+            'y queda dicho en la consola');
+
+  ap0.favorito('IdleWave', true);
+  otraPartida.tic();
+  comprobar(ap0.favoritos().indexOf('IdleWave') !== -1,
+            'otro mod tambien puede marcarlos');
+  ap0.favorito('IdleWave', false);
+  otraPartida.tic();
+  comprobar(ap0.favoritos().indexOf('IdleWave') === -1, 'y quitarlos');
+
+  const sinDisco = falsoSp.cargarPlugin(PLUGIN, {}, {});
+  sinDisco.tic();
+  comprobar(sinDisco.sp.storage.AnimPlayer.favoritos().length === 0,
+            'y la primera vez, sin archivo, no se rompe nada');
+
+  await buscar('');
+
   console.log('\n=== la busqueda ===');
-  const buscar = async (texto) => {
-    await js(`(() => { const c = document.querySelector('#animplayer .ap-buscar');
-      c.value = ${JSON.stringify(texto)};
-      c.dispatchEvent(new Event('input', { bubbles: true })); })()`);
-    await esperar(160);
-    return js(`[...document.querySelectorAll('#animplayer .ap-fila')]
-      .map(f => f.dataset.evento)`);
-  };
 
   const porNombre = await buscar('lute');
   comprobar(porNombre.includes('IdleLuteStart'), 'por nombre en ingles: lute',

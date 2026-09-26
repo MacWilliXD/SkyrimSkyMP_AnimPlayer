@@ -11,6 +11,9 @@ no hay nada encima del juego.
 ![el panel abierto](docs/panel.png)
 
 - **674 animaciones**, sacadas del propio Skyrim instalado, no escritas a mano.
+- **Todas con nombre en español**: «Tocar el laúd», no `IdleLuteStart`.
+- **Favoritos**: una estrella en cada fila. Lo que marques se guarda en disco,
+  sale en su propia categoría y aparece siempre el primero al buscar.
 - **Buscador** por nombre, por nombre del evento y por palabras en español:
   escribir `sentarse` encuentra las sillas aunque ninguna se llame así.
 - **Categorías** con su cuenta: gestos, sentarse, oficios, comer, música,
@@ -61,6 +64,7 @@ lanzadores y lo que pongas ahí te lo pueden borrar.
 | **Flechas ↑ ↓ y Enter** | elegir y reproducir sin tocar el ratón |
 | **Clic en una fila** | la reproduce |
 | **En bucle** | la repite hasta que pulses Parar |
+| **★ La estrella** | guarda en favoritos. Se enciende en dorado |
 | **Parar** | corta la animación y levanta de la silla o la cama |
 | **Esc** | cierra el panel |
 
@@ -84,6 +88,44 @@ Es la única tecla de función libre en este servidor:
 
 Se puede cambiar en `animplayer-settings.txt`, pero si pones una de esas, las
 dos cosas pasarán a la vez.
+
+---
+
+## Los nombres están en español
+
+El juego no los trae así: los suyos son los identificadores de editor de
+Bethesda (`IdleWarmHandsStanding`), en inglés y a veces directamente mal
+puestos — el de `IdleKneeling` dice *CheckCorpse*, el de `blockStart` dice
+*BowZoom*. Se traducen a mano en
+[herramientas/traducciones.py](herramientas/traducciones.py), mirando el
+**nombre del evento**, que es lo único que no miente.
+
+Los ochenta y pico golpes de gracia (`pa_KillMove...`) se montan con reglas,
+que siguen todos el mismo patrón: arma, criatura, golpe y variante.
+
+El nombre original no se pierde: entra en las palabras de búsqueda, así que
+buscar `chair` sigue encontrando las sillas, y el nombre del evento se ve
+siempre a la derecha de cada fila.
+
+---
+
+## Los favoritos se guardan en disco
+
+No en `localStorage`. Esta página la dibuja el navegador que SkyrimPlatform
+monta encima del juego, y ese no garantiza que su almacenamiento sobreviva a
+cerrar Skyrim; unos favoritos que se borran cada vez que cierras el juego no son
+favoritos.
+
+Se guardan con las dos funciones que SkyrimPlatform da para eso, y que el propio
+cliente de SkyMP usa para recordar tu sesión:
+
+```js
+sp.writePlugin('animplayer-favoritos', '//' + JSON.stringify(lista), 'PluginsNoLoad')
+sp.getPluginSourceCode('animplayer-favoritos', 'PluginsNoLoad')
+```
+
+El archivo acaba en `Data\Platform\PluginsNoLoad\`, que es la carpeta de la
+que SkyrimPlatform **no** carga nada: su sitio para datos.
 
 ---
 
@@ -222,6 +264,7 @@ catalogo/
   vanilla.json               generado desde el juego
   ejemplo-mod.json           cómo añadir las de otros mods
 herramientas/
+  traducciones.py            los nombres en español
   generar-catalogo.py        lee los IDLE del juego
   generar-plugin.py          mete el catálogo en el plugin
   idles.py                   lector de registros IDLE de esm/esp

@@ -22,7 +22,7 @@
  */
 'use strict';
 
-function crear(ajustes) {
+function crear(ajustes, archivosDePartida) {
   var registro = {
     consola: [],
     inyectado: [],          // todo lo que se manda a la pagina
@@ -32,7 +32,8 @@ function crear(ajustes) {
     movimientoQuitado: 0,
     movimientoDevuelto: 0,
     terceraPersona: 0,
-    peticionesHttp: []
+    peticionesHttp: [],
+    archivos: archivosDePartida || {}    // lo que writePlugin deja en disco
   };
 
   var oyentes = {};
@@ -85,6 +86,16 @@ function crear(ajustes) {
 
     Ui: { isMenuOpen: function () { return false; } },
 
+    /* Los dos que SkyrimPlatform da para guardar datos en disco. Aqui son un
+       objeto en memoria, pero con la misma forma: asi la prueba puede mirar
+       que se escribe, y volver a cargar el plugin con lo que quedo escrito. */
+    writePlugin: function (nombre, contenido, carpeta) {
+      registro.archivos[carpeta + '/' + nombre] = String(contenido);
+    },
+    getPluginSourceCode: function (nombre, carpeta) {
+      return registro.archivos[carpeta + '/' + nombre];
+    },
+
     HttpClient: function (origen) {
       this.post = function (camino, opciones) {
         registro.peticionesHttp.push({ origen: origen, camino: camino, opciones: opciones });
@@ -121,9 +132,9 @@ function crear(ajustes) {
 }
 
 /** Carga el plugin de verdad contra este SkyrimPlatform falso. */
-function cargarPlugin(rutaDelPlugin, ajustes) {
+function cargarPlugin(rutaDelPlugin, ajustes, archivosDePartida) {
   var fs = require('fs');
-  var falso = crear(ajustes);
+  var falso = crear(ajustes, archivosDePartida);
   globalThis.skyrimPlatform = falso.sp;
   // eval y no require: el plugin es un IIFE sin exports, igual que en el juego.
   // eslint-disable-next-line no-eval
