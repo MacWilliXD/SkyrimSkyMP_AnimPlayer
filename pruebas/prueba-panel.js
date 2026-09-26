@@ -521,6 +521,148 @@ app.whenReady().then(async () => {
             'sin URL puesta, no llama a nadie pero reproduce igual');
 
   // =====================================================================
+  // =====================================================================
+  console.log('\n=== la puerta para otros mods ===');
+  /* Se llama exactamente como lo haria el mod del bardo: cogiendo la puerta de
+     sp.storage, sin saber nada de como funciona AnimPlayer por dentro. */
+  const otroMod = falsoSp.cargarPlugin(PLUGIN, {});
+  otroMod.tic();
+  const ap = otroMod.sp.storage.AnimPlayer;
+
+  comprobar(!!ap, 'se publica en sp.storage.AnimPlayer');
+  comprobar(globalThis.AnimPlayer === ap, 'y en globalThis, apuntando a lo mismo');
+  comprobar(ap && ap.version === 1, 'con un numero de version para poder comprobarlo');
+
+  otroMod.registro.animaciones.length = 0;
+  comprobar(ap.reproducir('IdleLuteStart') === true, 'acepta la peticion');
+  comprobar(otroMod.registro.animaciones.length === 0,
+            'pero no toca el juego en el momento: lo encola');
+  otroMod.tic();
+  comprobar(otroMod.registro.animaciones.length === 1 &&
+            otroMod.registro.animaciones[0].evento === 'IdleLuteStart',
+            'y en el siguiente update la reproduce',
+            JSON.stringify(otroMod.registro.animaciones));
+
+  console.log('\n  --- las tres formas de pedirla ---');
+  otroMod.registro.animaciones.length = 0;
+  ap.reproducir({ evento: 'IdleWave', origen: 'bardo' });
+  otroMod.tic();
+  comprobar(otroMod.registro.animaciones[0].evento === 'IdleWave',
+            'con un objeto entero');
+  comprobar(otroMod.registro.consola.some((l) => /IdleWave \(bardo\)/.test(l)),
+            'y el origen queda apuntado, para saber quien la pidio');
+
+  comprobar(ap.reproducir('') === false, 'sin evento, la rechaza');
+  comprobar(ap.reproducir(null) === false, 'y con nada, tambien');
+
+  console.log('\n  --- el bucle desde fuera ---');
+  otroMod.registro.animaciones.length = 0;
+  ap.reproducir('IdleLuteStart', { bucle: true });
+  otroMod.tic();
+  comprobar(ap.enBucle() === 'IdleLuteStart', 'reproducir con bucle lo deja repitiendose');
+  const relojPuerta = Date.now;
+  Date.now = () => relojPuerta() + 5000;
+  otroMod.tic();
+  Date.now = relojPuerta;
+  comprobar(otroMod.registro.animaciones.length === 2,
+            'y se repite solo', otroMod.registro.animaciones.map((a) => a.evento).join(', '));
+
+  ap.parar();
+  otroMod.tic();
+  comprobar(ap.enBucle() === null, 'parar corta el bucle');
+  const trasParar = otroMod.registro.animaciones.map((a) => a.evento);
+  comprobar(trasParar.slice(-2).join(' + ') === 'IdleFurnitureExit + IdleForceDefaultState',
+            'y levanta del mueble antes de volver a la postura normal',
+            trasParar.slice(-2).join(' + '));
+
+  console.log('\n  --- consultar el catalogo ---');
+  comprobar(ap.existe('IdleLuteStart'), 'se puede preguntar si un evento esta');
+  comprobar(!ap.existe('EstoNoExisteSeguro'), 'y si no esta, dice que no');
+  const ficha = ap.ficha('IdleLuteStart');
+  comprobar(ficha && ficha.categoria === 'musica' && ficha.nombre,
+            'y pedir su ficha', ficha && ficha.nombre + ' / ' + ficha.categoria);
+
+  const halla = ap.buscar('laud');
+  comprobar(halla.length > 0 && halla.some((a) => a.evento === 'IdleLuteStart'),
+            'busca igual que la barra del panel, en espanol',
+            halla.length + ' resultados');
+  comprobar(halla[0].evento && halla[0].nombre && halla[0].categoria !== undefined &&
+            halla[0].sincroniza !== undefined,
+            'y devuelve lo que hace falta para pintarlo');
+  comprobar(ap.buscar('chair', 3).length === 3, 'se le puede poner tope');
+  comprobar(ap.lista().animaciones.length > 600, 'y se puede pedir el catalogo entero');
+
+  console.log('\n  --- un mod trae sus propias animaciones ---');
+  const cuantasAntes = ap.lista().animaciones.length;
+  const puestas = ap.anadir([
+    { evento: 'BardoLaudLargo', nombre: 'Tocar el laud (largo)', categoria: 'musica',
+      busqueda: 'bardo cancion', destacada: true },
+    { evento: 'BardoReverencia' },
+    { evento: 'IdleWave', nombre: 'Saludar al publico' },
+    { nombre: 'sin evento, no vale' }
+  ]);
+  comprobar(puestas === 3, 'entran las que tienen evento, no las demas', 'entraron ' + puestas);
+  comprobar(ap.existe('BardoLaudLargo'), 'y quedan registradas');
+  comprobar(ap.ficha('BardoReverencia').categoria === 'mods',
+            'sin categoria caen en De otros mods');
+  comprobar(ap.ficha('IdleWave').nombre === 'Saludar al publico',
+            'y se puede renombrar una del juego');
+  comprobar(ap.lista().animaciones.length === cuantasAntes + 2,
+            'la que pisa a otra no la duplica',
+            cuantasAntes + ' -> ' + ap.lista().animaciones.length);
+  comprobar(ap.buscar('bardo').some((a) => a.evento === 'BardoLaudLargo'),
+            'y se buscan por sus propias palabras');
+  comprobar(otroMod.ultimaInyeccion('BardoLaudLargo') !== null,
+            'y el panel se entera sin reiniciar nada');
+
+  otroMod.registro.animaciones.length = 0;
+  ap.reproducir('BardoLaudLargo');
+  otroMod.tic();
+  comprobar(otroMod.registro.animaciones[0].evento === 'BardoLaudLargo',
+            'y se pueden reproducir');
+
+  console.log('\n  --- enterarse de lo que pasa ---');
+  const visto = [];
+  const parados = [];
+  const dejarDeVer = ap.alReproducir((p) => visto.push(p.evento + ':' + p.origen));
+  ap.alParar((p) => parados.push(p.origen));
+
+  ap.reproducir('IdleWave', { origen: 'bardo' });
+  otroMod.tic();
+  comprobar(visto.length === 1 && visto[0] === 'IdleWave:bardo',
+            'avisa de lo que se reproduce, y de quien lo pidio', visto.join(', '));
+
+  ap.parar();
+  otroMod.tic();
+  comprobar(parados.length === 1, 'y de cuando se para');
+
+  dejarDeVer();
+  ap.reproducir('IdleWave');
+  otroMod.tic();
+  comprobar(visto.length === 1, 'y se puede dejar de escuchar');
+
+  const roto = ap.alReproducir(() => { throw new Error('observador roto'); });
+  otroMod.registro.animaciones.length = 0;
+  ap.reproducir('IdleSalute');
+  otroMod.tic();
+  comprobar(otroMod.registro.animaciones.length === 1,
+            'un observador que revienta no deja sin animacion al que la pidio');
+  comprobar(otroMod.registro.consola.some((l) => /observador ha fallado/.test(l)),
+            'aunque si queda apuntado');
+  roto();
+
+  console.log('\n  --- y el panel, desde fuera ---');
+  comprobar(ap.panelAbierto() === false, 'se puede preguntar si esta abierto');
+  ap.abrirPanel();
+  otroMod.tic();
+  comprobar(ap.panelAbierto() === true && otroMod.registro.enfocado === true,
+            'abrirlo');
+  ap.cerrarPanel();
+  otroMod.tic();
+  comprobar(ap.panelAbierto() === false && otroMod.registro.enfocado === false,
+            'y cerrarlo');
+
+  // =====================================================================
   console.log('\n=== lo que no debe pasar ===');
   const raro = falsoSp.cargarPlugin(PLUGIN, {});
   raro.tic();

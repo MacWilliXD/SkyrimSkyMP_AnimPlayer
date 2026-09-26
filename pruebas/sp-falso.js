@@ -11,6 +11,7 @@
  *     prueba lo inyecta en un Chromium de verdad)
  *   - que al recibir un mensaje de la pagina acaba llamando a
  *     Debug.sendAnimationEvent con el evento correcto
+ *   - que la puerta para otros mods (sp.storage.AnimPlayer) hace lo que dice
  *   - que la cola funciona: nada toca el juego dentro del callback del mensaje,
  *     solo en el siguiente "update"
  *
@@ -39,6 +40,11 @@ function crear(ajustes) {
 
   var sp = {
     settings: { animplayer: ajustes || {} },
+
+    /* El objeto que SkyrimPlatform comparte entre todos los plugins. Es por
+       donde AnimPlayer publica su puerta, asi que la prueba lo necesita para
+       poder llamarla como lo haria otro mod. */
+    storage: {},
 
     printConsole: function (t) { registro.consola.push(String(t)); },
 

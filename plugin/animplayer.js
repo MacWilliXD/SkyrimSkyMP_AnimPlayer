@@ -35,6 +35,10 @@
  *                      de la pagina, y la cola de acciones. Lo aburrido pero
  *                      imprescindible.
  *
+ *     6. LA PUERTA     Lo que otros mods pueden llamar para pedir animaciones,
+ *                      publicado en sp.storage.AnimPlayer. Un mod de musica
+ *                      que haga tocar el laud entra por aqui.
+ *
  * LO QUE HAY QUE SABER ANTES DE TOCAR NADA
  *
  *   · Una animacion se reproduce mandando un EVENTO al grafo de Havok del
@@ -888,6 +892,37 @@
 
   var catalogo = mezclarCatalogo();
 
+  /* Dos indices sobre el catalogo, para que la puerta de la capa 6 pueda
+     responder deprisa a "existe este evento?" y "buscame algo que suene a
+     laud". Se rehacen si otro mod anade animaciones en caliente. */
+  var porEvento = {};
+  function reconstruirIndice() {
+    porEvento = {};
+    var palabrasDe = {};
+    for (var c = 0; c < catalogo.categorias.length; c++) {
+      palabrasDe[catalogo.categorias[c].clave] = catalogo.categorias[c].busqueda || '';
+    }
+    for (var i = 0; i < catalogo.animaciones.length; i++) {
+      var a = catalogo.animaciones[i];
+      porEvento[a.evento] = a;
+      a._busca = sinAcentos(a.nombre + ' ' + a.evento + ' ' +
+                            (a.busqueda || '') + ' ' + (palabrasDe[a.categoria] || ''));
+    }
+  }
+
+  /** Minusculas y sin acentos, para buscar como se escribe de verdad. */
+  function sinAcentos(t) {
+    return String(t || '').toLowerCase()
+      .replace(/\u00e1|\u00e0|\u00e4/g, 'a')
+      .replace(/\u00e9|\u00e8|\u00eb/g, 'e')
+      .replace(/\u00ed|\u00ec|\u00ef/g, 'i')
+      .replace(/\u00f3|\u00f2|\u00f6/g, 'o')
+      .replace(/\u00fa|\u00f9|\u00fc/g, 'u')
+      .replace(/\u00f1/g, 'n');
+  }
+
+  reconstruirIndice();
+
   /* =======================================================================
    * CAPA 2 — EL REPRODUCTOR
    * =======================================================================
@@ -1113,12 +1148,40 @@
     if (!limpia.evento) return false;
 
     var llevar = Transportes[TRANSPORTE] || Transportes.local;
-    return llevar(limpia);
+    var hecho = llevar(limpia);
+    if (hecho) avisarA(observadoresReproducir, limpia);
+    return hecho;
   }
 
-  function pedirParar(origen) {
+  /* Quien quiera enterarse de lo que se reproduce. Lo usan otros mods: el de
+     musica, por ejemplo, para saber que alguien ha empezado a tocar el laud.
+     Cada observador va en su propio try: uno que falle no puede dejar sin
+     animacion a los demas ni al que la pidio. */
+  var observadoresReproducir = [];
+  var observadoresParar = [];
+
+  function avisarA(lista, dato) {
+    for (var i = 0; i < lista.length; i++) {
+      try { lista[i](dato); } catch (e) { apuntar('un observador ha fallado: ' + e); }
+    }
+  }
+
+  function apuntarObservador(lista, cb) {
+    if (typeof cb !== 'function') return function () {};
+    lista.push(cb);
+    // Se devuelve la forma de dejar de escuchar, que si no no hay manera.
+    return function () {
+      var i = lista.indexOf(cb);
+      if (i !== -1) lista.splice(i, 1);
+    };
+  }
+
+  function pedirParar(origen, quien) {
     Bucle.quitar();          // parar es parar: si habia bucle, se acaba
-    return Reproductor.parar({ quien: FORMID_JUGADOR, origen: origen || 'desconocido' });
+    var peticion = { quien: quien || FORMID_JUGADOR, origen: origen || 'desconocido' };
+    var hecho = Reproductor.parar(peticion);
+    if (hecho) avisarA(observadoresParar, peticion);
+    return hecho;
   }
 
   /* =======================================================================
@@ -1798,6 +1861,223 @@
         break;
     }
   });
+
+  /* =======================================================================
+   * CAPA 6 — LA PUERTA PARA OTROS MODS
+   * =======================================================================
+   *
+   * Para que otro plugin pueda hacer que el personaje toque el laud sin saber
+   * nada de como funciona esto por dentro:
+   *
+   *     var ap = skyrimPlatform.storage.AnimPlayer;
+   *     if (ap) ap.reproducir('IdleLuteStart', { bucle: true });
+   *
+   * Se publica en dos sitios, y los dos apuntan al mismo objeto:
+   *
+   *   sp.storage.AnimPlayer   Es la via buena. storage es el objeto que
+   *                           SkyrimPlatform comparte entre todos los plugins
+   *                           y que sobrevive a las recargas en caliente. Es
+   *                           donde el propio cliente de SkyMP deja las cosas
+   *                           que otros tienen que poder tocar.
+   *
+   *   globalThis.AnimPlayer   Lo mismo, por comodidad.
+   *
+   * REGLA IMPORTANTE PARA QUIEN LLAME
+   *   No mires si existe al cargar tu plugin: el orden de carga no esta
+   *   garantizado y puede que AnimPlayer todavia no haya arrancado. Miralo en
+   *   el momento de usarlo, dentro de un update, un tick o lo que sea.
+   *
+   * TODO SE ENCOLA
+   *   Cualquier cosa que pidas por aqui se ejecuta en el siguiente update, no
+   *   en el momento. Es a proposito: asi se puede llamar desde donde sea, y en
+   *   particular desde el callback de un mensaje del navegador o de una
+   *   peticion HTTP, donde llamar al juego da el error "can't be called in
+   *   this context". El retraso es un cuadro, no se nota.
+   *
+   *   Lo que devuelven las funciones es por tanto "he aceptado la peticion",
+   *   no "ya esta hecho". Si te hace falta saber que ha pasado de verdad,
+   *   apuntate con alReproducir.
+   * ======================================================================= */
+
+  /**
+   * Acepta las dos formas de pedir una animacion:
+   *     reproducir('IdleLuteStart')
+   *     reproducir('IdleLuteStart', { bucle: true })
+   *     reproducir({ evento: 'IdleLuteStart', quien: 0x14, origen: 'bardo' })
+   */
+  function normalizarPeticion(algo, opciones) {
+    var o = opciones || {};
+    var p = (typeof algo === 'string') ? { evento: algo } : (algo || {});
+    return {
+      evento: String(p.evento || ''),
+      quien: p.quien || o.quien || FORMID_JUGADOR,
+      origen: String(p.origen || o.origen || 'otro mod'),
+      bucle: !!(p.bucle || o.bucle)
+    };
+  }
+
+  var API = {
+    /* Sube si alguna vez cambia algo de forma incompatible, para que quien
+       llame pueda comprobarlo antes de fiarse. */
+    version: 1,
+
+    /**
+     * Reproduce una animacion.
+     * @returns true si la peticion es valida y se ha encolado.
+     */
+    reproducir: function (algo, opciones) {
+      var p = normalizarPeticion(algo, opciones);
+      if (!p.evento) return false;
+      encolar(function () {
+        if (!pedirAnimacion(p)) return;
+        if (p.bucle) Bucle.poner(p);
+        else Bucle.quitar();
+      });
+      return true;
+    },
+
+    /** Corta la animacion, el bucle incluido, y levanta de la silla o la cama. */
+    parar: function (quien) {
+      encolar(function () { pedirParar('otro mod', quien); });
+      return true;
+    },
+
+    /**
+     * Pone o quita el bucle.
+     *     bucle('IdleLuteStart')   lo pone en esa
+     *     bucle(false)             lo quita
+     * Poner el bucle NO reproduce: solo dice que se repita. Para empezar,
+     * reproducir(algo, { bucle: true }).
+     */
+    bucle: function (algo) {
+      if (!algo) { encolar(function () { Bucle.quitar(); }); return true; }
+      var p = normalizarPeticion(algo);
+      if (!p.evento) return false;
+      encolar(function () { Bucle.poner(p); });
+      return true;
+    },
+
+    /** El evento que se esta repitiendo ahora mismo, o null. */
+    enBucle: function () {
+      return Bucle.activo() ? Bucle.peticion.evento : null;
+    },
+
+    /** Si un evento esta en el catalogo. Ojo: uno que no este puede existir
+     *  igualmente en el juego; esto solo dice si AnimPlayer lo conoce. */
+    existe: function (evento) {
+      return !!porEvento[String(evento)];
+    },
+
+    /** La ficha de un evento, o null. */
+    ficha: function (evento) {
+      return porEvento[String(evento)] || null;
+    },
+
+    /**
+     * Busca igual que la barra del panel: por nombre, por evento y por
+     * palabras en espanol. Todas las palabras que escribas tienen que estar.
+     *     buscar('laud')  ->  [{ evento, nombre, categoria, sincroniza }, ...]
+     */
+    buscar: function (texto, limite) {
+      var partes = sinAcentos(texto).trim().split(/\s+/);
+      var tope = limite || 30;
+      var salida = [];
+      for (var i = 0; i < catalogo.animaciones.length && salida.length < tope; i++) {
+        var a = catalogo.animaciones[i];
+        var vale = true;
+        for (var j = 0; j < partes.length; j++) {
+          if (partes[j] && a._busca.indexOf(partes[j]) === -1) { vale = false; break; }
+        }
+        if (vale) {
+          salida.push({
+            evento: a.evento, nombre: a.nombre, categoria: a.categoria,
+            sincroniza: a.sincroniza !== false
+          });
+        }
+      }
+      return salida;
+    },
+
+    /** El catalogo entero: { version, categorias, animaciones }. */
+    lista: function () { return catalogo; },
+
+    /**
+     * Registra animaciones en caliente, sin tocar el archivo de ajustes.
+     * Sirve para que un mod traiga las suyas: las anade al arrancar y ya salen
+     * en el panel, buscables, como las demas.
+     *
+     *     ap.anadir([{ evento: 'MiLaudLargo', nombre: 'Tocar el laud (largo)',
+     *                  categoria: 'musica' }]);
+     *
+     * Las que ya estuvieran con ese mismo evento se pisan, asi que tambien
+     * sirve para renombrar o recategorizar.
+     * @returns cuantas han entrado.
+     */
+    anadir: function (animaciones) {
+      if (!animaciones || !animaciones.length) return 0;
+      var puestas = 0;
+      for (var i = 0; i < animaciones.length; i++) {
+        var f = animaciones[i];
+        if (!f || !f.evento) continue;
+        var ficha = {
+          evento: String(f.evento),
+          nombre: String(f.nombre || f.evento),
+          categoria: String(f.categoria || 'mods'),
+          busqueda: String(f.busqueda || ''),
+          destacada: !!f.destacada,
+          sincroniza: f.sincroniza === false ? false : true,
+          motivo: f.motivo || '',
+          origen: f.origen || 'mod'
+        };
+        var viejo = porEvento[ficha.evento];
+        if (viejo) {
+          catalogo.animaciones[catalogo.animaciones.indexOf(viejo)] = ficha;
+        } else {
+          catalogo.animaciones.push(ficha);
+        }
+        // Si trae una categoria que no existia, se declara sobre la marcha.
+        var hay = false;
+        for (var c = 0; c < catalogo.categorias.length; c++) {
+          if (catalogo.categorias[c].clave === ficha.categoria) { hay = true; break; }
+        }
+        if (!hay) {
+          catalogo.categorias.push({
+            clave: ficha.categoria,
+            nombre: ficha.categoria === 'mods' ? 'De otros mods'
+              : (ficha.categoria.charAt(0).toUpperCase() + ficha.categoria.slice(1)),
+            busqueda: ''
+          });
+        }
+        puestas++;
+      }
+      if (!puestas) return 0;
+      reconstruirIndice();
+      // Y que el panel se entere. inyectar vuelve a mandarle el catalogo; si ya
+      // estaba puesto, solo recarga la lista.
+      if (puesto) inyectar();
+      apuntar('otro mod ha anadido ' + puestas + ' animaciones');
+      return puestas;
+    },
+
+    /** Avisa cada vez que se reproduce algo, venga de donde venga (el panel,
+     *  la tecla, otro mod, o una vuelta del bucle: mira peticion.origen).
+     *  Devuelve la funcion para dejar de escuchar. */
+    alReproducir: function (cb) {
+      return apuntarObservador(observadoresReproducir, cb);
+    },
+
+    /** Lo mismo para cuando se para. */
+    alParar: function (cb) {
+      return apuntarObservador(observadoresParar, cb);
+    },
+
+    abrirPanel: function () { encolar(function () { abrir(); }); return true; },
+    cerrarPanel: function () { encolar(function () { cerrar(); }); return true; },
+    panelAbierto: function () { return abierto; }
+  };
+
+  try { sp.storage.AnimPlayer = API; } catch (e) { apuntar('sin storage: ' + e); }
+  try { globalThis.AnimPlayer = API; } catch (e) { /* tampoco pasa nada */ }
 
   /* ------------------------------------------------------------------ arranque */
 

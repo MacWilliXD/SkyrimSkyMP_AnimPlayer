@@ -14,6 +14,8 @@ pulsas la animación y tu personaje la hace. Los demás jugadores la ven.
 - **En bucle**: una casilla que deja la animación repitiéndose hasta que pulsas
   Parar. Sin marcar, se reproduce una sola vez.
 - **Preparado para otros mods**: se añaden animaciones sin tocar el código.
+- **Llamable desde otros mods**: un mod de bardo puede pedir la animación del
+  laúd con una línea, sin saber nada de cómo funciona esto por dentro.
 - **Preparado para que lo lleve el servidor**: reproducir está aislado en su
   propia capa, y la petición es un objeto plano listo para mandar por la red.
 
@@ -83,7 +85,7 @@ dos cosas pasarán a la vez.
 
 ## Cómo está hecho
 
-Cinco capas, de dentro hacia fuera. Están separadas a propósito, sobre todo las
+Seis capas, de dentro hacia fuera. Están separadas a propósito, sobre todo las
 dos primeras.
 
 | Capa | Qué es |
@@ -93,6 +95,7 @@ dos primeras.
 | **Transporte** | A dónde va una petición: aquí mismo, o al servidor. |
 | **Interfaz** | El panel. Vive en la página del navegador de SkyMP, no en el plugin. |
 | **Pegamento** | La tecla, el foco, los mensajes de la página y la cola de acciones. |
+| **La puerta** | Lo que otros mods pueden llamar. |
 
 Todo lo que quiera una animación pasa por **una sola puerta**,
 `pedirAnimacion(peticion)`, y la petición es un objeto plano:
@@ -106,6 +109,31 @@ día que las animaciones las reparta el servidor. Cambiar de camino es cambiar e
 transporte; ni la interfaz ni el reproductor se enteran.
 
 Más detalle en [docs/arquitectura.md](docs/arquitectura.md).
+
+---
+
+## Llamarlo desde otro mod
+
+```js
+var ap = skyrimPlatform.storage.AnimPlayer;
+if (ap) ap.reproducir('IdleLuteStart', { bucle: true, origen: 'bardo' });
+```
+
+Se publica en `skyrimPlatform.storage`, que es el objeto que SkyrimPlatform
+comparte entre plugins y donde el propio cliente de SkyMP deja lo que otros
+tienen que poder tocar.
+
+Además de reproducir y parar, se puede buscar en el catálogo, poner y quitar el
+bucle, registrar animaciones propias en caliente (salen en el panel al momento,
+sin tocar ningún archivo) y escuchar lo que se va reproduciendo.
+
+Dos reglas: míralo en el momento de usarlo y no al cargar tu plugin (el orden de
+carga no está garantizado), y ten en cuenta que todo se encola hasta el
+siguiente `update`, para que se pueda llamar desde cualquier sitio sin que el
+juego se queje.
+
+El manual entero, con un ejemplo completo de mod de bardo, en
+[docs/api.md](docs/api.md).
 
 ---
 
@@ -168,8 +196,9 @@ su panel; la prueba coge ese mismo texto y lo inyecta en un Chromium de verdad.
 Luego maneja el panel como lo haría una persona y comprueba que el plugin acaba
 llamando a `Debug.sendAnimationEvent` con el evento correcto.
 
-Se prueba la cadena entera: interfaz → mensaje → cola → reproductor. Unas ochenta
-comprobaciones.
+Se prueba la cadena entera: interfaz → mensaje → cola → reproductor, y también
+la puerta para otros mods, llamándola igual que lo haría el mod del bardo. Unas
+ciento veinte comprobaciones.
 
 Lo que **no** se puede probar así, y hay que mirar dentro del juego:
 
@@ -195,7 +224,8 @@ herramientas/
   bsa.py                     lector de BSA de Skyrim
   lz4puro.py                 descompresor LZ4 en Python puro
 docs/
-  arquitectura.md            las cinco capas y por qué
+  api.md                     llamar a AnimPlayer desde otro mod
+  arquitectura.md            las seis capas y por qué
   sincronizacion.md          cómo sincroniza SkyMP y qué no sincroniza
   anadir-animaciones.md      añadir animaciones de otros mods
 pruebas/

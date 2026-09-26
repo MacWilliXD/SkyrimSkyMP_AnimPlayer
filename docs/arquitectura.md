@@ -10,10 +10,12 @@ hacia fuera.
 
 ---
 
-## Las cinco capas
+## Las seis capas
 
 ```
    ┌──────────────────────────────────────────────────────┐
+   │ 6. LA PUERTA   lo que otros mods pueden llamar       │
+   ├──────────────────────────────────────────────────────┤
    │ 5. PEGAMENTO   tecla · foco · mensajes · cola        │
    ├──────────────────────────────────────────────────────┤
    │ 4. INTERFAZ    el panel (vive en la página)          │
@@ -186,6 +188,30 @@ Mientras el panel está abierto se llama a `disablePlayerControls(true, false,
 quedan como estaban, igual que hace el inventario del servidor.
 
 Sin esto, escribir `saludar` en la barra de búsqueda te hace caminar.
+
+---
+
+## 6. La puerta para otros mods
+
+Se publica en `sp.storage.AnimPlayer` (y en `globalThis.AnimPlayer`, que apunta
+a lo mismo). `storage` es el objeto que SkyrimPlatform comparte entre plugins y
+que sobrevive a las recargas en caliente; es donde el propio cliente de SkyMP
+deja las cosas que otros tienen que poder tocar, incluso objetos con métodos.
+
+**Todo lo que entra por la puerta se encola** hasta el siguiente `update`. Es lo
+que hace que se pueda llamar desde cualquier sitio: si un mod pide una animación
+desde el callback de un mensaje del navegador o de una petición HTTP, la llamada
+al juego se haría en un contexto inválido y fallaría. Encolando, no.
+
+La consecuencia es que las funciones devuelven "he aceptado la petición", no "ya
+está hecho". Para lo segundo están los observadores (`alReproducir`, `alParar`),
+que además avisan de lo que piden los demás, con su `origen`.
+
+`anadir()` permite que un mod registre sus animaciones en caliente: entran en el
+catálogo, se reconstruye el índice de búsqueda y se le vuelve a mandar la lista
+al panel, que se entera sin reiniciar nada.
+
+El manual está en [api.md](api.md).
 
 Aviso heredado del mod de inventario, que conviene no olvidar: **no usar
 `Input.releaseKey` / `holdKey` / `tapKey`**. Su código documenta cuelgues reales
