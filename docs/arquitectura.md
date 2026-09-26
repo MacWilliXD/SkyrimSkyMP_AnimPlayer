@@ -114,7 +114,7 @@ manda convertida en texto:
 
 ```js
 sp.browser.executeJavaScript(
-  '(' + panelEnLaPagina.toString() + ')(' + JSON.stringify(catalogo) + ', "auto");');
+  '(' + panelEnLaPagina.toString() + ')(' + JSON.stringify(catalogo) + ');');
 ```
 
 Es el mismo truco que usa el propio cliente de SkyMP para sus widgets
@@ -138,11 +138,13 @@ entra por sus parámetros.
   eliges una categoría, se busca en todo.
 - **El texto de búsqueda de cada ficha se calcula una vez**, al cargar, no en
   cada tecla.
-- **La pestaña solo sale cuando el navegador tiene el foco.** Sin foco el ratón
-  no llega a la página: sería un adorno tapando el juego. Se escuchan los mismos
-  sucesos con los que SkyMP avisa del foco
-  (`skymp5-client:browserFocused` / `Unfocused`), así que la pestaña también
-  aparece cuando el foco lo da otra cosa, como el inventario del servidor.
+- **No hay pestaña ni nada que pulsar antes.** La tecla saca el panel ya
+  abierto. Cerrado no dibuja un solo píxel encima del juego, que es lo que de
+  verdad importa: sin el foco del navegador el ratón no llega a la página, así
+  que una pestaña sería un adorno que ni se puede pulsar.
+- **Si SkyMP le quita el foco al navegador, el panel se cierra.** Se escucha
+  `skymp5-client:browserUnfocused`, el mismo suceso con el que SkyMP avisa. Si
+  no, quedaría una ventana ahí puesta que no se puede ni tocar ni cerrar.
 - **El aspecto copia al panel de inventario del servidor**: mismos colores
   (`#e8c987` oro, `#6b5a3a` borde, degradado 42,33,24 → 20,16,12), mismas
   tipografías (`Bankir-Retro` en títulos, `Din-pro` en el resto) y los mismos
@@ -172,14 +174,27 @@ con cargas lentas. Lo que les funcionó, y se copia aquí, es mirar la pantalla 
 carga de verdad (`menuOpen` / `menuClose` con `Loading Menu`) y esperar un rato
 más después de que se cierre.
 
-### Abrir y cerrar, por los dos lados
+### El estado se cambia ya; el efecto se encola
 
-El panel se puede abrir con la tecla o pulsando su pestaña. Cuando se abre desde
-la página, el panel avisa (`animplayer:abierto`) y el plugin hace lo demás
-(quitar el movimiento, apuntar el estado) **sin volver a decirle al panel que se
-abra**, que ya lo está. Por eso `abrir` y `cerrar` llevan un parámetro
-`avisarAlPanel`, y por eso los del panel no hacen nada si ya estabas así: sin
-esas dos guardas serían dos espejos mirándose.
+Abrir y cerrar son dos cosas distintas y no conviene mezclarlas:
+
+- **el estado** (la variable `abierto`) se cambia en el momento,
+- **el efecto** (foco del navegador, movimiento del personaje) se encola.
+
+Si el estado se cambiara también dentro de la cola, dos avisos seguidos de la
+página se pisarían: al llegar el *"me he cerrado"*, la variable todavía diría
+que está cerrado —porque el *"me he abierto"* anterior sigue en la cola— y el
+cierre se descartaría. El plugin se quedaría creyendo que hay un panel abierto
+que ya no existe, con el movimiento del personaje bloqueado y sin nada en
+pantalla que lo explique.
+
+No es hipotético: pasa cuando SkyMP le quita el foco al navegador, el panel se
+cierra solo, y los dos avisos llegan en la misma vuelta. Lo encontró la prueba.
+
+Y cuando el panel se abre desde la página, el plugin hace lo suyo **sin volver a
+decirle al panel que se abra**, que ya lo está. Por eso `abrir` y `cerrar`
+llevan un parámetro `avisarAlPanel`, y por eso los del panel no hacen nada si ya
+estabas así: sin esas guardas serían dos espejos mirándose.
 
 ### El movimiento
 

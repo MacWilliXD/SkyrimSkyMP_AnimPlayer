@@ -1,8 +1,12 @@
 # AnimPlayer
 
-Un reproductor de animaciones para Skyrim dentro de SkyMP. Pulsas **F3**, se
-descuelga un panel en la esquina de arriba a la derecha, escribes lo que buscas,
-pulsas la animación y tu personaje la hace. Los demás jugadores la ven.
+Un reproductor de animaciones para Skyrim dentro de SkyMP. Pulsas **F3** y se
+descuelga, ya abierta, la lista en la esquina de arriba a la derecha: escribes
+lo que buscas, pulsas la animación y tu personaje la hace. Los demás jugadores
+la ven.
+
+Una tecla y la lista. Sin pestañas ni pasos intermedios, y con el panel cerrado
+no hay nada encima del juego.
 
 ![el panel abierto](docs/panel.png)
 

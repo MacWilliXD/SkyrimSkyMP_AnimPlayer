@@ -123,51 +123,52 @@ app.whenReady().then(async () => {
   comprobar(cuantas > 500, `con el catalogo entero (${cuantas} animaciones)`);
   await pasarMensajesAlPlugin(falso);
 
-  console.log('\n=== la pestana solo sale cuando se puede pulsar ===');
-  /* Mientras el navegador no tiene el foco, el raton no llega a la pagina: una
-     pestana ahi seria un adorno tapando el juego. Se escuchan los mismos
-     sucesos con los que SkyMP avisa del foco, asi que se prueban con ellos. */
-  const verPestana = () => js(
-    `getComputedStyle(document.querySelector('#animplayer .ap-tirador')).display !== 'none'`);
   const foco = (hay) => jsMudo(
     "window.dispatchEvent(new CustomEvent('skymp5-client:browser" +
     (hay ? 'Focused' : 'Unfocused') + "'))");
+  const panelVisible = () => js(
+    `getComputedStyle(document.querySelector('#animplayer .ap-panel')).display !== 'none'`);
 
-  await foco(false);
-  await esperar(120);
-  comprobar(!(await verPestana()), 'sin foco del navegador, no se ve');
-  await captura('1-sin-foco');
+  console.log('\n=== cerrado no se ve nada, no hay pestana ===');
+  comprobar(!(await panelVisible()), 'cerrado, el panel no se ve');
+  comprobar(!(await js(`!!document.querySelector('#animplayer .ap-tirador')`)),
+            'y no hay ninguna pestana que pulsar antes: la tecla lo abre y ya');
+  const tapa = await js(`(() => {
+    const r = document.getElementById('animplayer').getBoundingClientRect();
+    return r.width * r.height;
+  })()`);
+  comprobar(tapa === 0, 'cerrado no tapa un solo pixel del juego', tapa + ' px2');
 
-  await foco(true);
-  await esperar(120);
-  comprobar(await verPestana(), 'con foco, aparece');
-
-  console.log('\n=== sale arriba a la derecha, y plegado ===');
+  console.log('\n=== abierto sale arriba a la derecha, de una vez ===');
+  await js('window.__animplayer.abrir()');
+  await esperar(250);
+  comprobar(await panelVisible(), 'el panel se ve');
   const sitio = await js(`(() => {
-    const t = document.querySelector('#animplayer .ap-tirador').getBoundingClientRect();
-    const p = document.querySelector('#animplayer .ap-panel');
-    return { top: t.top, derecha: innerWidth - t.right, ancho: innerWidth,
-             panelVisible: getComputedStyle(p).display !== 'none' };
+    const p = document.querySelector('#animplayer .ap-panel').getBoundingClientRect();
+    return { top: p.top, derecha: innerWidth - p.right, alto: p.height };
   })()`);
   comprobar(sitio.top < 2, 'pegado al borde de arriba', 'top=' + sitio.top);
   comprobar(sitio.derecha > 18 && sitio.derecha < 30,
             'y a la derecha', 'a ' + sitio.derecha + 'px del borde');
-  comprobar(sitio.panelVisible === false, 'empieza plegado: solo se ve la pestana');
-  await captura('1-plegado');
-
-  console.log('\n=== se despliega ===');
-  await js('window.__animplayer.abrir()');
-  await esperar(250);
-  comprobar(await js(`getComputedStyle(document.querySelector('#animplayer .ap-panel')).display !== 'none'`),
-            'el panel se ve');
+  comprobar(sitio.alto > 200, 'con la lista ya desplegada', 'alto=' + Math.round(sitio.alto));
   comprobar(await js(`document.activeElement === document.querySelector('#animplayer .ap-buscar')`),
-            'y el cursor esta ya en la barra de busqueda');
-  await foco(false);
-  await esperar(120);
-  comprobar(await verPestana(),
-            'y con el panel abierto la pestana no se escapa aunque se pierda el foco');
-  await foco(true);
+            'y el cursor esta ya en la barra de busqueda: se puede escribir directo');
+  comprobar(await js(`/ANIMACIONES/i.test(document.querySelector('#animplayer .ap-titulo').textContent)`),
+            'la cabecera dice de que va la ventana');
   await captura('2-abierto');
+
+  console.log('\n=== si SkyMP le quita el foco al navegador, se cierra ===');
+  /* Sin foco el raton no llega a la pagina: dejar la ventana puesta seria dejar
+     algo que no se puede ni tocar ni cerrar tapando el juego. */
+  await foco(false);
+  await esperar(150);
+  comprobar(!(await panelVisible()), 'se cierra solo');
+  await pasarMensajesAlPlugin(falso);
+  comprobar(falso.registro.movimientoDevuelto > 0,
+            'y el personaje recupera el movimiento');
+  await js('window.__animplayer.abrir()');
+  await esperar(150);
+  await pasarMensajesAlPlugin(falso);
 
   console.log('\n=== de entrada solo las recomendadas ===');
   const dentro = await js(`(() => {
@@ -180,8 +181,8 @@ app.whenReady().then(async () => {
   comprobar(/Recomendadas/.test(dentro.grupo) && /\d{3}/.test(dentro.grupo),
             'y dice como ver el resto', dentro.grupo.replace(/\s+/g, ' ').trim());
 
-  comprobar(await js(`document.querySelector('#animplayer .ap-titulo').textContent === 'Recomendadas'`),
-            'y la cabecera dice que estas mirando');
+  comprobar(await js(`document.querySelector('#animplayer .ap-donde').textContent === 'Recomendadas'`),
+            'y al lado pone que parte de la lista se esta viendo');
 
   console.log('\n=== la busqueda ===');
   const buscar = async (texto) => {
@@ -403,8 +404,7 @@ app.whenReady().then(async () => {
   await js(`document.querySelector('#animplayer .ap-cerrar').click()`);
   await esperar(160);
   await pasarMensajesAlPlugin(falso);
-  comprobar(await js(`getComputedStyle(document.querySelector('#animplayer .ap-panel')).display === 'none'`),
-            'el panel se pliega');
+  comprobar(!(await panelVisible()), 'el panel se va');
   comprobar(falso.registro.enfocado === false, 'el navegador suelta el foco');
   comprobar(falso.registro.movimientoDevuelto > movimientoAntes,
             'y el personaje vuelve a poder moverse');
@@ -415,7 +415,7 @@ app.whenReady().then(async () => {
   await js(`(() => { const c = document.querySelector('#animplayer .ap-buscar');
     c.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })); })()`);
   await esperar(150);
-  comprobar(await js(`!window.__animplayer.estaAbierto()`), 'Esc lo pliega');
+  comprobar(await js(`!window.__animplayer.estaAbierto()`), 'Esc lo cierra');
   await pasarMensajesAlPlugin(falso);
 
   // =====================================================================
@@ -442,7 +442,7 @@ app.whenReady().then(async () => {
   comprobar(nuevo.registro.movimientoQuitado === 1,
             'y quita el movimiento mientras escribes');
   comprobar(nuevo.ultimaInyeccion('__animplayer.abrir') !== null,
-            'y le dice al panel que se despliegue');
+            'y le dice al panel que salga');
 
   nuevo.disparar('buttonEvent', { code: 61, isDown: true, isRepeating: false });
   nuevo.tic();
@@ -663,6 +663,35 @@ app.whenReady().then(async () => {
             'y cerrarlo');
 
   // =====================================================================
+  // =====================================================================
+  console.log('\n=== dos avisos de la pagina en la misma vuelta ===');
+  /* Esto lo encontro la prueba y por poco se cuela: si el estado (la variable
+     abierto) se cambiara dentro de la cola en vez de al momento, el segundo
+     aviso miraria un valor viejo y se descartaria. El plugin se quedaria
+     creyendo que hay un panel abierto que ya no existe, con el movimiento del
+     personaje bloqueado y nada en pantalla que lo explicara. */
+  const seguidos = falsoSp.cargarPlugin(PLUGIN, {});
+  seguidos.tic();
+  seguidos.disparar('browserMessage',
+    { arguments: [JSON.stringify({ type: 'animplayer:abierto' })] });
+  seguidos.disparar('browserMessage',
+    { arguments: [JSON.stringify({ type: 'animplayer:cerrado' })] });
+  seguidos.tic();
+  comprobar(seguidos.registro.movimientoQuitado === 1 &&
+            seguidos.registro.movimientoDevuelto === 1,
+            'se quita el movimiento y se devuelve, en ese orden',
+            seguidos.registro.movimientoQuitado + ' quitado / ' +
+            seguidos.registro.movimientoDevuelto + ' devuelto');
+  /* Y lo que de verdad importa: que el plugin haya quedado creyendo que esta
+     cerrado. Si se hubiera quedado con que esta abierto, este segundo aviso de
+     apertura se descartaria y el movimiento no se volveria a quitar. */
+  seguidos.disparar('browserMessage',
+    { arguments: [JSON.stringify({ type: 'animplayer:abierto' })] });
+  seguidos.tic();
+  comprobar(seguidos.registro.movimientoQuitado === 2,
+            'y el plugin quedo sabiendo que estaba cerrado, no abierto',
+            seguidos.registro.movimientoQuitado + ' quitado');
+
   console.log('\n=== lo que no debe pasar ===');
   const raro = falsoSp.cargarPlugin(PLUGIN, {});
   raro.tic();

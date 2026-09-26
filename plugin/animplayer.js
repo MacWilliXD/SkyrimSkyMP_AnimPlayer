@@ -3,9 +3,12 @@
  * ===========================================================================
  *
  * QUE ES
- *   Un panel que baja desde la esquina de arriba a la derecha con la lista de
- *   animaciones de Skyrim y una barra de busqueda. Escribes, pulsas una, y tu
- *   personaje la hace. Se abre y se cierra con F3.
+ *   Con F3 aparece en la esquina de arriba a la derecha la lista de animaciones
+ *   de Skyrim con una barra de busqueda. Escribes, pulsas una, y tu personaje
+ *   la hace. F3 otra vez, o Esc, y se va.
+ *
+ *   Sale directamente abierto: no hay pestana que pulsar antes. Una tecla, la
+ *   lista, y a buscar.
  *
  *   La casilla "En bucle" del pie la deja repitiendose hasta que pulsas Parar.
  *   Sin marcar, se reproduce una sola vez.
@@ -114,7 +117,6 @@
   var TRANSPORTE = opcion('transporte', 'local');
   var SERVIDOR = opcion('servidor', {});
   var MARGEN_CARGA = opcion('margenTrasPantallaDeCarga', 15000);
-  var PESTANA = opcion('pestana', 'auto');      // auto | siempre | nunca
 
   /* =======================================================================
    * CAPA 1 — EL CATALOGO
@@ -1210,7 +1212,7 @@
    * asi que se piden por nombre con una alternativa por si no estan.
    * ======================================================================= */
 
-  function panelEnLaPagina(datos, comoSaleLaPestana) {
+  function panelEnLaPagina(datos) {
     // Si ya estaba puesto, solo se le pasan los datos nuevos y no se duplica.
     if (window.__animplayer) {
       window.__animplayer.cargar(datos);
@@ -1241,23 +1243,9 @@
       '  pointer-events:none;user-select:none}',
       '#' + ID + ' *{box-sizing:border-box}',
 
-      /* La pestana de arriba. Siempre visible, pegada al borde superior. */
-      '#' + ID + ' .ap-tirador{pointer-events:auto;display:flex;align-items:center;',
-      '  gap:8px;margin-left:auto;width:max-content;padding:7px 14px 8px;cursor:pointer;',
-      '  background:linear-gradient(180deg,rgba(42,33,24,.97),rgba(20,16,12,.97));',
-      '  border:2px solid #6b5a3a;border-top:none;border-radius:0 0 4px 4px;',
-      '  box-shadow:0 4px 14px rgba(0,0,0,.55);',
-      '  font-family:"Bankir-Retro",serif;letter-spacing:2px;text-transform:uppercase;',
-      '  color:#e8c987;text-shadow:0 1px 2px rgba(0,0,0,.8)}',
-      '#' + ID + ' .ap-tirador:hover{border-color:#c9a35a}',
-      /* Mientras el navegador no tiene el foco, el raton no llega a la pagina:
-         la pestana no se podria pulsar y seria un adorno tapando el juego. Asi
-         que por defecto solo aparece cuando se puede usar. */
-      '#' + ID + '.ap-sinraton .ap-tirador{display:none}',
-      '#' + ID + ' .ap-flecha{font-size:10px;color:#c9a35a;transition:transform .15s}',
-      '#' + ID + '.ap-abierto .ap-flecha{transform:rotate(180deg)}',
-
-      /* El panel que se descuelga. */
+      /* El panel, descolgado del borde de arriba. No hay pestana ni nada que
+         pulsar antes: con la tecla aparece esto directamente. Por eso no lleva
+         borde arriba, para que se vea pegado al canto de la pantalla. */
       '#' + ID + ' .ap-panel{pointer-events:auto;position:relative;width:360px;',
       '  max-height:74vh;display:none;flex-direction:column;',
       '  background:linear-gradient(180deg,rgba(42,33,24,.97) 0%,rgba(20,16,12,.97) 100%);',
@@ -1276,9 +1264,14 @@
       '#' + ID + ' .ap-cabecera{display:flex;align-items:center;gap:8px;',
       '  padding:2px 14px 9px;margin-bottom:9px;',
       '  border-bottom:1px solid rgba(107,90,58,.6)}',
-      '#' + ID + ' .ap-titulo{flex:1;font-family:"Bankir-Retro",serif;font-size:15px;',
+      '#' + ID + ' .ap-titulo{font-family:"Bankir-Retro",serif;font-size:15px;',
       '  letter-spacing:2px;text-transform:uppercase;color:#e8c987;',
       '  text-shadow:0 1px 2px rgba(0,0,0,.8)}',
+      /* A la derecha del titulo, en pequeno: que parte de la lista se esta
+         viendo. Antes esto ocupaba el titulo entero, pero sin la pestana
+         encima ya no habia nada que dijera de que va esta ventana. */
+      '#' + ID + ' .ap-donde{flex:1;font-size:11px;color:#b9ae94;',
+      '  text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
       '#' + ID + ' .ap-cerrar{cursor:pointer;color:#b9ae94;font-size:15px;',
       '  line-height:1;padding:2px 4px}',
       '#' + ID + ' .ap-cerrar:hover{color:#e8c987}',
@@ -1361,11 +1354,10 @@
     var raiz = document.createElement('div');
     raiz.id = ID;
     raiz.innerHTML =
-      '<div class="ap-tirador"><span class="ap-rotulo">Animaciones</span>' +
-      '<span class="ap-flecha">&#9660;</span></div>' +
       '<div class="ap-panel">' +
-      '  <div class="ap-cabecera"><div class="ap-titulo">Recomendadas</div>' +
-      '    <div class="ap-cerrar" title="Cerrar">&#10005;</div></div>' +
+      '  <div class="ap-cabecera"><div class="ap-titulo">Animaciones</div>' +
+      '    <div class="ap-donde">Recomendadas</div>' +
+      '    <div class="ap-cerrar" title="Cerrar (Esc)">&#10005;</div></div>' +
       '  <input class="ap-buscar" type="text" spellcheck="false"' +
       '         placeholder="Buscar: sentarse, laud, rezar...">' +
       '  <div class="ap-categorias"></div>' +
@@ -1377,13 +1369,11 @@
       '</div>';
     document.body.appendChild(raiz);
 
-    var tirador = raiz.querySelector('.ap-tirador');
-    var rotulo = raiz.querySelector('.ap-rotulo');
     var caja = raiz.querySelector('.ap-buscar');
     var chips = raiz.querySelector('.ap-categorias');
     var lista = raiz.querySelector('.ap-lista');
     var ahora = raiz.querySelector('.ap-ahora');
-    var titulo = raiz.querySelector('.ap-titulo');
+    var donde = raiz.querySelector('.ap-donde');
     var bucle = raiz.querySelector('.ap-bucle');
 
     /* ------------------------------------------------------------------ estado */
@@ -1479,7 +1469,7 @@
 
       if (!r.lista.length) {
         lista.innerHTML = '<div class="ap-vacio">Nada con eso</div>';
-        titulo.textContent = 'Sin resultados';
+        donde.textContent = 'sin resultados';
         return;
       }
 
@@ -1505,7 +1495,7 @@
           '<span class="ap-evento">' + escapar(a.evento) + '</span></div>');
       }
       lista.innerHTML = html.join('');
-      titulo.textContent = caja.value.trim()
+      donde.textContent = caja.value.trim()
         ? r.lista.length + (r.lista.length === 1 ? ' resultado' : ' resultados')
         : (categoria ? nombreDe(categoria) : 'Recomendadas');
       var viva = lista.querySelector('.ap-elegida');
@@ -1563,7 +1553,6 @@
     function alternar() { if (abierto) cerrar(); else abrir(); }
 
     /* ------------------------------------------------------------------ sucesos */
-    tirador.addEventListener('click', alternar);
     raiz.querySelector('.ap-cerrar').addEventListener('click', cerrar);
     raiz.querySelector('.ap-parar').addEventListener('click', function () {
       ahora.textContent = 'Nada en marcha';
@@ -1620,20 +1609,10 @@
       }
     });
 
-    /* Cuando se ve la pestana.
-       SkyMP avisa de que el navegador ha ganado o perdido el foco con estos dos
-       sucesos, y son los mismos que manda el plugin al abrir y cerrar. Se
-       escuchan en vez de inventarse otra senal: asi la pestana tambien aparece
-       cuando el foco lo da otra cosa (F6, o el inventario del servidor). */
-    function ajustarPestana(hayRaton) {
-      if (comoSaleLaPestana === 'nunca') { raiz.classList.add('ap-sinraton'); return; }
-      if (comoSaleLaPestana === 'siempre') { raiz.classList.remove('ap-sinraton'); return; }
-      if (hayRaton || abierto) raiz.classList.remove('ap-sinraton');
-      else raiz.classList.add('ap-sinraton');
-    }
-    window.addEventListener('skymp5-client:browserFocused', function () { ajustarPestana(true); });
-    window.addEventListener('skymp5-client:browserUnfocused', function () { ajustarPestana(false); });
-    ajustarPestana(document.hasFocus && document.hasFocus());
+    /* Si SkyMP le quita el foco al navegador por su cuenta (con F6, o al abrir
+       otra cosa), el panel se cierra: sin foco el raton no llega a la pagina y
+       quedaria una ventana ahi puesta que no se puede ni tocar ni cerrar. */
+    window.addEventListener('skymp5-client:browserUnfocused', function () { cerrar(); });
 
     /* Lo que el plugin puede pedirle al panel desde el juego. */
     window.__animplayer = {
@@ -1642,8 +1621,7 @@
       alternar: alternar,
       cargar: cargar,
       estaAbierto: function () { return abierto; },
-      enBucle: function () { return enBucle; },
-      pestana: ajustarPestana
+      enBucle: function () { return enBucle; }
     };
 
     cargar(datos);
@@ -1695,8 +1673,7 @@
   function inyectar() {
     try {
       sp.browser.executeJavaScript(
-        '(' + panelEnLaPagina.toString() + ')(' +
-        JSON.stringify(catalogo) + ',' + JSON.stringify(PESTANA) + ');');
+        '(' + panelEnLaPagina.toString() + ')(' + JSON.stringify(catalogo) + ');');
       puesto = true;
       apuntar('panel puesto en la pagina, ' + catalogo.animaciones.length + ' animaciones');
     } catch (e) {
@@ -1713,9 +1690,22 @@
 
   /* ------------------------------------------------------------ abrir y cerrar */
 
-  function abrir(avisarAlPanel) {
-    if (!puesto) inyectar();
-    abierto = true;
+  /* Abrir y cerrar son dos cosas distintas y conviene no mezclarlas:
+   *
+   *   el ESTADO   (la variable abierto) se cambia al momento
+   *   el EFECTO   (foco del navegador, movimiento del personaje) se encola
+   *
+   * Si el estado se cambiara tambien dentro de la cola, dos avisos seguidos de
+   * la pagina se pisarian: al llegar el "me he cerrado" la variable todavia
+   * diria que esta cerrado —porque el "me he abierto" anterior sigue en la
+   * cola— y el cierre se descartaria. El plugin se quedaria creyendo que hay
+   * un panel abierto que ya no existe, con el movimiento del personaje
+   * bloqueado y sin nada en pantalla que lo explique.
+   *
+   * Pasa de verdad: SkyMP le quita el foco al navegador por su cuenta, el panel
+   * se cierra solo, y los dos avisos llegan en la misma vuelta. */
+
+  function aplicarAbierto() {
     try {
       sp.browser.setVisible(true);
       sp.browser.setFocused(true);
@@ -1733,11 +1723,9 @@
         sp.Game.disablePlayerControls(true, false, false, false, false, false, false, false, 0);
       } catch (e) { /* si no se puede, se abre igual */ }
     }
-    if (avisarAlPanel !== false) decirAlPanel('abrir');
   }
 
-  function cerrar(avisarAlPanel) {
-    abierto = false;
+  function aplicarCerrado() {
     try {
       sp.browser.setFocused(false);
       sp.browser.executeJavaScript(
@@ -1748,6 +1736,18 @@
         sp.Game.enablePlayerControls(true, false, false, false, false, false, false, false, 0);
       } catch (e) { /* da igual */ }
     }
+  }
+
+  function abrir(avisarAlPanel) {
+    if (!puesto) inyectar();
+    abierto = true;
+    aplicarAbierto();
+    if (avisarAlPanel !== false) decirAlPanel('abrir');
+  }
+
+  function cerrar(avisarAlPanel) {
+    abierto = false;
+    aplicarCerrado();
     if (avisarAlPanel !== false) decirAlPanel('cerrar');
   }
 
@@ -1842,17 +1842,17 @@
         break;
 
       case 'animplayer:cerrado':
-        // El panel se cerro solo (con la X o con Esc dentro de la pagina):
-        // hay que devolver el foco y el movimiento al juego.
-        if (abierto) encolar(function () { cerrar(false); });
+        // El panel se cerro solo: con la X, con Esc, o porque SkyMP le quito el
+        // foco al navegador. Hay que devolver el foco y el movimiento al juego.
+        // El estado, ya; el efecto, en la cola (ver aplicarAbierto).
+        if (abierto) { abierto = false; encolar(aplicarCerrado); }
         break;
 
       case 'animplayer:abierto':
-        // El panel se abrio desde la pagina (pulsando su pestana). Hay que
-        // hacer lo demas: quitarle el movimiento al personaje y apuntar que
-        // esta abierto. No se le vuelve a decir al panel que se abra, que ya
-        // lo esta; su abrir() no haria nada, pero pedirlo seria dar vueltas.
-        if (!abierto) encolar(function () { abrir(false); });
+        // El panel se abrio desde la pagina. Hay que hacer lo demas: quitarle
+        // el movimiento al personaje y apuntar que esta abierto. No se le
+        // vuelve a decir al panel que se abra, que ya lo esta.
+        if (!abierto) { abierto = true; encolar(aplicarAbierto); }
         break;
 
       case 'animplayer:listo':
