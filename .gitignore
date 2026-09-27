@@ -7,3 +7,6 @@ herramientas/salida/
 
 node_modules/
 __pycache__/
+
+# El zip que se le manda a la gente; se rehace cuando haga falta.
+AnimPlayer-para-enviar.zip

@@ -32,6 +32,16 @@ function crear(ajustes, archivosDePartida) {
     movimientoQuitado: 0,
     movimientoDevuelto: 0,
     terceraPersona: 0,
+    colision: null,             // lo que deja setCollision
+    dontMove: null,
+    recargado: 0,
+    armaFuera: false,           // lo que responde isWeaponDrawn
+    envainadoLento: false,      // si guardar el arma tarda, como en el juego
+    sentado: false,             // si el personaje esta metido en un mueble
+    modosDelArma: [],           // cada setWeaponDrawnMode que se hace
+    envainadas: 0,              // cada vez que se guarda el arma
+    enganches: [],              // los hooks del grafo de animacion
+    controlesDevueltosTodos: 0,
     peticionesHttp: [],
     teclas: {},             // codigo -> pulsada, lo que ve Input
     archivos: archivosDePartida || {}    // lo que writePlugin deja en disco
@@ -66,15 +76,52 @@ function crear(ajustes, archivosDePartida) {
     },
 
     Game: {
-      getPlayer: function () { return { __actor: 'jugador', getFormID: function () { return 0x14; } }; },
+      getPlayer: function () {
+        return {
+          __actor: 'jugador',
+          getFormID: function () { return 0x14; },
+          setDontMove: function (v) { registro.dontMove = v; },
+          isWeaponDrawn: function () { return !!registro.armaFuera; },
+          sheatheWeapon: function () {
+            registro.envainadas++;
+            /* En el juego guardar el arma tarda lo que dura su animacion. Con
+               envainadoLento puesto, la prueba decide cuando termina: es lo
+               que permite comprobar que la pose ESPERA. */
+            if (!registro.envainadoLento) registro.armaFuera = false;
+          },
+          getFurnitureReference: function () {
+            return registro.sentado ? { __mueble: 'silla' } : null;
+          },
+          moveTo: function () { registro.recargado++; }
+        };
+      },
       getFormEx: function (id) { return { __actor: 'forma ' + id, getFormID: function () { return id; } }; },
       disablePlayerControls: function () { registro.movimientoQuitado++; },
-      enablePlayerControls: function () { registro.movimientoDevuelto++; },
+      enablePlayerControls: function (a, b, c) {
+        registro.movimientoDevuelto++;
+        // El reinicio los devuelve TODOS; el cierre del panel, solo el primero.
+        if (b === true && c === true) registro.controlesDevueltosTodos++;
+      },
       getCameraState: function () { return 0; },          // primera persona
       forceThirdPerson: function () { registro.terceraPersona++; }
     },
 
     Actor: { from: function (f) { return f; } },
+
+    /* SkyrimPlatform la expone suelta, y SkyMP la usa para quitarte la colision
+       al sentarte. El reinicio tiene que poder devolverla. */
+    setCollision: function (formId, hay) { registro.colision = hay; },
+
+    /* La via que usa el propio SkyMP para envainar: 0 envaina y fuerza,
+       -1 suelta el bloqueo. */
+    TESModPlatform: {
+      /* Fuerza la postura del arma: 0 la guarda, -1 deja de forzar. Es la via
+         que usa el propio SkyMP, y la que funciona en el juego. */
+      setWeaponDrawnMode: function (actor, modo) {
+        registro.modosDelArma.push(modo);
+        if (modo === 0) { registro.envainadas++; registro.armaFuera = false; }
+      }
+    },
 
     Debug: {
       sendAnimationEvent: function (actor, evento) {
@@ -82,10 +129,26 @@ function crear(ajustes, archivosDePartida) {
           actor: actor && (actor.__actor || String(actor)),
           evento: evento
         });
+        /* Como en el juego: el enganche se dispara tambien con lo que manda el
+           propio mod. Asi la prueba comprueba que el plugin sabe distinguir su
+           propio ruido de lo que hace el jugador. */
+        dispararEnganches(evento);
       }
     },
 
     Ui: { isMenuOpen: function () { return false; } },
+
+    /* Los enganches al grafo de animacion. La prueba se queda con los que se
+       registran para poder dispararlos, que es como saltar en el juego. */
+    hooks: {
+      sendAnimationEvent: {
+        add: function (manejador, min, max, patron) {
+          registro.enganches.push({ manejador: manejador, patron: patron });
+          return registro.enganches.length;
+        },
+        remove: function () { }
+      }
+    },
 
     /* El teclado, como lo lee SkyMP: preguntando si la tecla esta pulsada.
        La prueba lo maneja con falso.tecla(codigo, true/false). */
@@ -115,6 +178,16 @@ function crear(ajustes, archivosDePartida) {
     }
   };
 
+  /** Dispara los enganches del grafo, como hace el juego con cada evento. */
+  function dispararEnganches(evento) {
+    for (var i = 0; i < registro.enganches.length; i++) {
+      var e = registro.enganches[i];
+      var patron = e.patron && e.patron.replace('*', '');
+      if (patron && evento.indexOf(patron) !== 0) continue;
+      e.manejador.enter({ selfId: 0x14, animEventName: evento });
+    }
+  }
+
   /* Disparadores: la prueba los usa para simular lo que hace el juego. */
   function disparar(nombre, suceso) {
     var deUnaVez = unaVez[nombre] || [];
@@ -131,8 +204,19 @@ function crear(ajustes, archivosDePartida) {
       return !!((oyentes[nombre] && oyentes[nombre].length) ||
                 (unaVez[nombre] && unaVez[nombre].length));
     },
-    /** Un "update", que es donde el plugin vacia su cola de acciones. */
-    tic: function () { disparar('update'); },
+    /** Deja que el plugin se ponga al dia: dos "update" seguidos.
+     *
+     * Dos y no uno porque el plugin encola cosas desde dentro de la propia
+     * cola —al relevar una animacion, el corte va ahora y la nueva en el
+     * cuadro siguiente—, y con un solo update la prueba veria las cosas a
+     * medio hacer. En el juego esos dos cuadros son treinta milisegundos. */
+    tic: function () { disparar('update'); disparar('update'); },
+    /** Saltar, como en el juego. */
+    saltar: function () { dispararEnganches('JumpStandingStart'); },
+
+    /** Otra cosa que hace el jugador: empezar a andar, atacar, desenfundar. */
+    elJuegoHace: function (evento) { dispararEnganches(evento); },
+
     /** Pulsar o soltar una tecla, como lo veria el sondeo del plugin. */
     tecla: function (codigo, pulsada) { registro.teclas[codigo] = !!pulsada; },
     /** El codigo que el plugin ha mandado a la pagina, del mas reciente atras. */

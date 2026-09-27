@@ -108,6 +108,23 @@ ap.parar()          // corta la animación y el bucle, y levanta de la silla
 ap.parar(0x14)      // sobre un actor concreto
 ```
 
+### Qué hay puesto
+
+```js
+ap.enMarcha()       // el evento que suena ahora, o null
+```
+
+Vuelve a `null` cuando se para, y también cuando el mod **da la animación por
+terminada**: Skyrim no avisa de que una animación acaba, así que se deduce de lo
+que sí se puede ver — que el jugador se ponga a andar, atacar o desenfundar, o
+que pase de sobra el tiempo que podía durar (`limpiarAlMoverse` y
+`duracionMaxima` en los ajustes). Cabe que el personaje siga con la última
+postura y esto ya diga que no hay nada; es lo más cerca de la verdad que se
+puede estar sin que el juego lo cuente.
+
+Los observadores de `alParar()` se enteran igual en los dos casos: para quien
+escucha, que la pose se corte o que se acabe sola es lo mismo, ya no está.
+
 ### El bucle
 
 ```js

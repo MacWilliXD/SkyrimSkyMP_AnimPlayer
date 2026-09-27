@@ -84,8 +84,8 @@ EXACTOS = {
     "IdleStaticPoseBStart": "Pose fija B",
     "IdleStaticPoseCStart": "Pose fija C",
     "IdlePlayer": "Postura del jugador",
-    "IdleAstridEnter": "Pose de Astrid",
-    "IdleValericaWalkForward": "Valerica: caminar hacia delante",
+    "IdleAstridEnter": "Pose de espera",
+    "IdleValericaWalkForward": "Caminar hacia delante",
     "IdleWalkingCameraStart": "Paseo de cámara",
     "IdleWalkingCameraEnd": "Fin del paseo de cámara",
     "IdleHDRight": "Gesto hacia la derecha (variante HD)",
@@ -106,31 +106,31 @@ EXACTOS = {
     "idle_A_sway_fastTrans": "Balancearse",
 
     # niños
-    "IdleChildApologize": "Niño: pedir perdón",
-    "IdleChildCryingStart": "Niño: llorar",
-    "IdleChildCryingEnd": "Niño: dejar de llorar",
-    "IdleChildFidget": "Niño: moverse inquieto",
-    "IdleChildLegsOutStart": "Niño: sentarse con las piernas estiradas",
-    "IdleChildPlayDirt": "Niño: jugar con la tierra",
-    "IdleChildPlayDoll": "Niño: jugar con una muñeca",
-    "IdleChildShy": "Niño: timidez",
-    "IdleChildSitOnKnees": "Niño: sentarse de rodillas",
+    "IdleChildApologize": "Pedir perdón",
+    "IdleChildCryingStart": "Llorar",
+    "IdleChildCryingEnd": "Dejar de llorar",
+    "IdleChildFidget": "Moverse inquieto",
+    "IdleChildLegsOutStart": "Sentarse con las piernas estiradas",
+    "IdleChildPlayDirt": "Jugar con la tierra",
+    "IdleChildPlayDoll": "Jugar con una muñeca",
+    "IdleChildShy": "Timidez",
+    "IdleChildSitOnKnees": "Sentarse de rodillas",
     "IdleChildSitOnKneesInstant": "Niño: sentarse de rodillas (al instante)",
-    "IdleChildTaunt1": "Niño: burlarse (1)",
-    "IdleChildTaunt2": "Niño: burlarse (2)",
-    "IdleChildTaunt3": "Niño: burlarse (3)",
-    "IdleChildTaunt4": "Niño: burlarse (4)",
-    "IdleChildWhineKick": "Niño: rabieta a patadas",
-    "IdleChildWhineStompFeet": "Niño: rabieta pataleando",
+    "IdleChildTaunt1": "Burlarse (1)",
+    "IdleChildTaunt2": "Burlarse (2)",
+    "IdleChildTaunt3": "Burlarse (3)",
+    "IdleChildTaunt4": "Burlarse (4)",
+    "IdleChildWhineKick": "Rabieta a patadas",
+    "IdleChildWhineStompFeet": "Rabieta pataleando",
 
     # reacciones de personajes concretos
-    "idleFreaReactionStart": "Frea: incredulidad",
-    "idleFreaDisbeliefLoopStop": "Frea: dejar la incredulidad",
-    "IdleFreaReaction2Start": "Frea: incredulidad (2)",
-    "IdleFreaDisbelief2LoopStop": "Frea: dejar la incredulidad (2)",
-    "idleFreaSorrowLoopEnter": "Frea: pena",
+    "idleFreaReactionStart": "Incredulidad (3)",
+    "idleFreaDisbeliefLoopStop": "Salir de la incredulidad (3)",
+    "IdleFreaReaction2Start": "Incredulidad (4)",
+    "IdleFreaDisbelief2LoopStop": "Salir de la incredulidad (4)",
+    "idleFreaSorrowLoopEnter": "Pena",
     "IdleFreaSorrowLoopEnterInstant": "Frea: pena (al instante)",
-    "idleFreaSorrowExit": "Frea: salir de la pena",
+    "idleFreaSorrowExit": "Salir de la pena",
     "idleDisbelief01Start": "Incredulidad",
     "idleDisbelief01Exit": "Salir de la incredulidad",
     "idleDisbelief02Start": "Incredulidad (2)",
@@ -160,8 +160,8 @@ EXACTOS = {
     "ChairDrinkingStart": "Beber sentado",
     "ChairEatingStart": "Comer sentado",
     "ChairEatingSoupStart": "Tomar sopa sentado",
-    "ChairEatingStart_VampireMeat": "Comer carne cruda sentado (vampiro)",
-    "ChairVampireEatingStart": "Vampiro: beber sentado",
+    "ChairEatingStart_VampireMeat": "Comer carne cruda sentado",
+    "ChairVampireEatingStart": "Beber sangre sentado",
     "IdleChairCHILDFrontEnter": "Niño: sentarse de frente",
     "IdleChairCHILDLeftEnter": "Niño: sentarse por la izquierda",
     "IdleChairCHILDRightEnter": "Niño: sentarse por la derecha",
@@ -207,8 +207,8 @@ EXACTOS = {
     "IdleWriteTableChairEnterInstant": "Sentarse a escribir (al instante)",
     "IdleWriteTableChairLeftExit": "Levantarse del escritorio por la izquierda",
     "IdleWriteTableChairRightExit": "Levantarse del escritorio por la derecha",
-    "IdleSnowElfPrinceFireAndForget": "Príncipe elfo de las nieves: hechizo sentado",
-    "IdleSnowElfPrinceChairDialogue": "Príncipe elfo de las nieves: hablar sentado",
+    "IdleSnowElfPrinceFireAndForget": "Lanzar un hechizo sentado",
+    "IdleSnowElfPrinceChairDialogue": "Hablar sentado con gesto solemne",
 
     # -------------------------------------------------------------- dormir
     "IdleBedLeftEnterStart": "Acostarse por la izquierda",
@@ -225,7 +225,7 @@ EXACTOS = {
     "IdleBedRollRightEnterInstant": "Meterse en el petate por la derecha (al instante)",
     "Idle_1stPersonWoozyGetUpFromBed": "Levantarse de la cama aturdido (1ª persona)",
     "IdleSleepNod": "Dar cabezadas",
-    "IdleChildLayOnFloor": "Niño: tumbarse en el suelo",
+    "IdleChildLayOnFloor": "Tumbarse en el suelo",
     "IdleChildLayOnFloorInstant": "Niño: tumbarse en el suelo (al instante)",
     "IdleCoffinEnter": "Meterse en el ataúd",
     "IdleCoffinEnterInstant": "Meterse en el ataúd (al instante)",
@@ -233,13 +233,13 @@ EXACTOS = {
     "IdleCoffinHorzEnterInstant": "Meterse en el ataúd tumbado (al instante)",
     "IdleCoffinVertEnter": "Meterse en el ataúd de pie",
     "IdleCoffinVertEnterInstant": "Meterse en el ataúd de pie (al instante)",
-    "DLC01CoffinEnterInstant": "Serana: meterse en el ataúd",
+    "DLC01CoffinEnterInstant": "Meterse en el ataúd (2)",
     "IdleActivateCoffinPuzzle": "Accionar el cuenco del ataúd",
     "MS12BedDeath": "Morir en la cama",
-    "VampireFeedingBedLeft": "Vampiro: alimentarse en la cama, por la izquierda",
-    "VampireFeedingBedRight": "Vampiro: alimentarse en la cama, por la derecha",
-    "VampireFeedingBedRollLeft": "Vampiro: alimentarse en el petate, por la izquierda",
-    "VampireFeedingBedRollRight": "Vampiro: alimentarse en el petate, por la derecha",
+    "VampireFeedingBedLeft": "Alimentarse en la cama, por la izquierda",
+    "VampireFeedingBedRight": "Alimentarse en la cama, por la derecha",
+    "VampireFeedingBedRollLeft": "Alimentarse en el petate, por la izquierda",
+    "VampireFeedingBedRollRight": "Alimentarse en el petate, por la derecha",
     "IdleWebEnterInstant": "Quedar atrapado en la telaraña",
     "IdleWebExit": "Soltarse de la telaraña",
     "IdleWebExitQuickTurn": "Soltarse de la telaraña y girarse",
@@ -253,7 +253,7 @@ EXACTOS = {
     "IdleDrinkFromFountain": "Beber de la fuente",
     "IdleDrinkPotion": "Beberse una poción",
     "idleEatingStandingStart": "Comer de pie",
-    "idleEatingStandingStart_DLC1Vampire": "Comer carne cruda de pie (vampiro)",
+    "idleEatingStandingStart_DLC1Vampire": "Comer carne cruda de pie",
     "IdleEatSoup": "Tomar sopa",
     "DrunkStart": "Ponerse a hacer eses",
     "DrunkStop": "Dejar de hacer eses",
@@ -281,11 +281,11 @@ EXACTOS = {
     "IdleBlowHornImperial": "Tocar el cuerno imperial",
     "IdleBlowHornStormcloak": "Tocar el cuerno de los Capas de la Tormenta",
     "IdleCivilWarCheer": "Vitorear",
-    "IdleCiceroDance1": "Cicerón: baile (1)",
-    "IdleCiceroDance2": "Cicerón: baile (2)",
-    "IdleCiceroDance3": "Cicerón: baile (3)",
-    "IdleCiceroHappy": "Cicerón: contento",
-    "IdleCiceroAgitated": "Cicerón: alterado",
+    "IdleCiceroDance1": "Baile (1)",
+    "IdleCiceroDance2": "Baile (2)",
+    "IdleCiceroDance3": "Baile (3)",
+    "IdleCiceroHappy": "Dar saltos de alegría",
+    "IdleCiceroAgitated": "Gesticular alterado",
     "SpectatorCheer": "Público: vitorear",
     "SpectatorClap": "Público: aplaudir",
     "SpectatorGawk": "Público: quedarse boquiabierto",
@@ -302,7 +302,7 @@ EXACTOS = {
     "IdleTG06FlipPage": "Pasar la página",
     "IdleTG06TranslationEnter": "Traducir un texto",
     "IdleTG06TranslationEnterInstant": "Traducir un texto (al instante)",
-    "IdleMQ203EsbernBookEnter": "Esbern: consultar un libro",
+    "IdleMQ203EsbernBookEnter": "Consultar un libro",
     "IdleMQ203EsbernBookEnterInstant": "Esbern: consultar un libro (al instante)",
 
     # ------------------------------------------------------------- oficios
@@ -326,7 +326,7 @@ EXACTOS = {
     "IdleLightSconce": "Encender una antorcha de pared",
     "IdleLockPick": "Forzar una cerradura",
     "IdlePullChain": "Tirar de la cadena",
-    "IdleDwemerExtractorEnter": "Manejar el extractor dwemer",
+    "IdleDwemerExtractorEnter": "Manejar un extractor",
     "IdleWayShrineWaterScoopEnter": "Recoger agua del santuario",
     "IdleExamine": "Examinar algo",
     "IdleTake": "Coger algo",
@@ -373,46 +373,46 @@ EXACTOS = {
     "IdleRitualSkull1": "Ritual con la calavera (1)",
     "IdleRitualSkull2": "Ritual con la calavera (2)",
     "IdleRitualSkull3": "Ritual con la calavera (3)",
-    "IdleBoyRitual": "Niño: ritual",
+    "IdleBoyRitual": "Ritual",
     "IdleMagic_01": "Gesto de magia",
     "IdleMesmerize": "Hipnotizar",
     "IdleMesmerizeStop": "Dejar de hipnotizar",
     "IdleBloodPortalActivate": "Activar el portal de sangre",
-    "IdleCannibalFeedStanding": "Caníbal: devorar de pie",
-    "IdleCannibalFeedCrouching": "Caníbal: devorar en cuclillas",
-    "IdleVampireFeastVictim": "Víctima del banquete vampírico",
-    "IdleVampireLordTransformation": "Transformarse en Señor Vampiro",
-    "IdleWerewolfTransformation": "Transformarse en hombre lobo",
-    "IdleGreybeardMeditateEnter": "Barbas Grises: meditar",
+    "IdleCannibalFeedStanding": "Devorar de pie",
+    "IdleCannibalFeedCrouching": "Devorar en cuclillas",
+    "IdleVampireFeastVictim": "Dejarse morder el cuello",
+    "IdleVampireLordTransformation": "Transformarse (2)",
+    "IdleWerewolfTransformation": "Transformarse",
+    "IdleGreybeardMeditateEnter": "Meditar",
     "IdleGreybeardMeditateEnterInstant": "Barbas Grises: meditar (al instante)",
-    "IdleGreybeardWordTeach": "Barbas Grises: enseñar una Palabra",
+    "IdleGreybeardWordTeach": "Enseñar una Palabra",
     "IdleReadElderScroll": "Leer el Pergamino Ancestral",
     "IdleReadElderScrollLonger": "Leer el Pergamino Ancestral (largo)",
     "IdleReadElderScroll3rdP": "Leer el Pergamino Ancestral (3ª persona)",
     "IdleReadElderScrollEnd": "Terminar de leer el Pergamino Ancestral",
     "IdleWalkThroughWallEnter": "Atravesar la pared",
     "IdleWalkThroughWallEnterInstant": "Atravesar la pared (al instante)",
-    "IdleTelvanniTowerFloatUp": "Ascender flotando (torre Telvanni)",
-    "IdleTelvanniTowerFloatDown": "Descender flotando (torre Telvanni)",
-    "IdleNocturnalEnter": "Nocturnal: aparecer",
-    "IdleNocturnal_Exit": "Nocturnal: desaparecer",
-    "IdleNocturnal_Rise": "Nocturnal: alzarse",
-    "IdleNocturnal_IdleA": "Nocturnal: pose A",
-    "IdleNocturnal_IdleAMirror": "Nocturnal: pose A (reflejada)",
-    "IdleNocturnal_IdleB": "Nocturnal: pose B",
-    "IdleNocturnal_LookLeft": "Nocturnal: mirar a la izquierda",
-    "IdleNocturnal_LookRight": "Nocturnal: mirar a la derecha",
+    "IdleTelvanniTowerFloatUp": "Ascender flotando",
+    "IdleTelvanniTowerFloatDown": "Descender flotando",
+    "IdleNocturnalEnter": "Aparecer",
+    "IdleNocturnal_Exit": "Desaparecer",
+    "IdleNocturnal_Rise": "Alzarse",
+    "IdleNocturnal_IdleA": "Pose solemne",
+    "IdleNocturnal_IdleAMirror": "Pose solemne (reflejada)",
+    "IdleNocturnal_IdleB": "Pose solemne (2)",
+    "IdleNocturnal_LookLeft": "Volver la mirada a la izquierda",
+    "IdleNocturnal_LookRight": "Volver la mirada a la derecha",
     "IdleCO2Ceremony1Welcome": "Ceremonia: dar la bienvenida",
     "IdleCO2Ceremony2Blessing": "Ceremonia: bendecir",
     "IdleCO2Ceremony3Chest": "Ceremonia: abrir el cofre",
-    "IdleDA02BoethiahPostEnter": "Atado al poste de Boethiah",
+    "IdleDA02BoethiahPostEnter": "Atado a un poste",
     "IdleDA02BoethiahPostEnterInstant": "Atado al poste de Boethiah (al instante)",
-    "IdleMQ206FelldirRitualEnter": "Felldir: ritual",
+    "IdleMQ206FelldirRitualEnter": "Ritual con las manos en alto",
     "IdleMQ206FelldirRitualEnterInstant": "Felldir: ritual (al instante)",
-    "IdleMQ206FelldirShowScroll": "Felldir: mostrar el pergamino",
-    "IdleSnowElfPrinceAscensionBurning": "Príncipe elfo: ascensión en llamas",
-    "IdleSnowElfPrinceBigSpell": "Príncipe elfo: gran hechizo",
-    "IdleSnowElfPrinceBigSpellRelease": "Príncipe elfo: soltar el gran hechizo",
+    "IdleMQ206FelldirShowScroll": "Mostrar el pergamino",
+    "IdleSnowElfPrinceAscensionBurning": "Ascensión en llamas",
+    "IdleSnowElfPrinceBigSpell": "Gran hechizo",
+    "IdleSnowElfPrinceBigSpellRelease": "Soltar el gran hechizo",
     "IdleT02AscendFemale": "Ascender (mujer)",
     "IdleT02AscendMale": "Ascender (hombre)",
     "IdleDLC02TentacleWordBurnBegin": "Grabar la Palabra (empezar)",
@@ -481,20 +481,20 @@ EXACTOS = {
     "IdleSoupDeath": "Morir sobre el plato",
     "IdleHandCut": "Cortarse la mano",
     "IdleDLC02FallOnKnees": "Caer de rodillas",
-    "IdleDLC02MiraakDeath": "Miraak: morir",
-    "IdleDLC02MiraakDeathFinish": "Miraak: fin de su muerte",
+    "IdleDLC02MiraakDeath": "Morir despacio",
+    "IdleDLC02MiraakDeathFinish": "Terminar de morir despacio",
     "IdleBoundKneesEnterInstant": "De rodillas y maniatado",
     "OffsetBoundStandingStart": "Maniatado de pie",
     "OffsetBoundStandingPlayerInstant": "Maniatado de pie (al instante)",
     "BoundStandingCut": "Cortar las ataduras",
     "BoundStandingCutNPC": "Cortarle las ataduras a alguien",
     "IdlePrisonerBeat": "Apalear a un preso",
-    "IdleExecutionerChop": "Verdugo: decapitar",
-    "IdleExecutionerChop_Player": "Verdugo: decapitar al jugador",
+    "IdleExecutionerChop": "Decapitar con el hacha",
+    "IdleExecutionerChop_Player": "Decapitar al jugador",
     "IdleExecutionGuardIdle": "Guardia de la ejecución",
     "IdleExecutionGuardIdleEnterInstant": "Guardia de la ejecución (al instante)",
-    "IdleExecutionerAlduinReaction": "Reacción ante Alduin",
-    "IdleExecutionerAlduinReactionDeath": "Reacción ante Alduin: morir",
+    "IdleExecutionerAlduinReaction": "Reaccionar con espanto",
+    "IdleExecutionerAlduinReactionDeath": "Reaccionar con espanto y morir",
     "IdleFurnitureExitTriggered": "Salir del mueble (forzado)",
     "IdleCartExitInstant": "Bajarse del carro (al instante)",
     "IdleCartPrisonerAIdle": "Preso A: en el carro",
@@ -518,7 +518,7 @@ EXACTOS = {
     "IdleCraftingCookingPotTalkA": "Cocinar y hablar (A)",
     "IdleCraftingCookingPotTalkB": "Cocinar y hablar (B)",
     "IdleDLC02BoatRide": "Ir en barca",
-    "IdleTGFalmerStatueEnter": "Ante la estatua falmer",
+    "IdleTGFalmerStatueEnter": "Ante una estatua",
     "IdleTGStatueEnterInstant": "Ante la estatua falmer (al instante)",
     "IdleTG08_Phase1": "Ceremonia del Gremio: fase 1",
     "IdleTG08_Phase1_EnterInstant": "Ceremonia del Gremio: fase 1 (al instante)",
@@ -563,10 +563,10 @@ EXACTOS = {
     "shoutReleaseSlowTime": "Grito: Tiempo Lento",
     "pa_HugA": "Abrazar a alguien",
     "pa_WW_CutWrist": "Cortarse la muñeca",
-    "pa_ExtractWerewolfSpirit": "Extraer el espíritu del hombre lobo",
-    "pa_VampireFeedStanding_Front": "Vampiro: morder de frente",
-    "pa_VampireFeedStanding_Back": "Vampiro: morder por la espalda",
-    "pa_DLC1SeranaHoldsVyrthur": "Serana sujeta a Vyrthur",
+    "pa_ExtractWerewolfSpirit": "Extraer un espíritu",
+    "pa_VampireFeedStanding_Front": "Morder el cuello de frente",
+    "pa_VampireFeedStanding_Back": "Morder el cuello por la espalda",
+    "pa_DLC1SeranaHoldsVyrthur": "Sujetar a alguien",
     "Lever_PlayerPush": "Accionar una palanca",
     "IdleLockPickStart": "Forzar una cerradura",
 
@@ -608,7 +608,7 @@ EXACTOS = {
     "bowAttackStart": "Disparar el arco",
     "bowEnd": "Terminar con el arco",
     "crossbowAttackStart": "Disparar la ballesta",
-    "crossbowDwarvenAttackStart": "Disparar la ballesta dwemer",
+    "crossbowDwarvenAttackStart": "Disparar la ballesta mejorada",
     "reloadStart": "Recargar",
 
     # ------------------------------------------------------- combate: magia
@@ -663,14 +663,14 @@ EXACTOS = {
     "bleedOutStart": "Desangrarse",
     "bleedOutStop": "Dejar de desangrarse",
     "pa_KillingBlow": "Golpe de gracia",
-    "pa_OffsetBoundStandingCut": "Cortarle las ataduras a alguien",
+    "pa_OffsetBoundStandingCut": "Cortarle las ataduras a alguien (en pareja)",
 
     # -------------------------------------------------------- combate: gritos
     "shoutStart": "Empezar un Grito",
     "shoutStop": "Terminar el Grito",
     "shoutReleaseSlowTime": "Grito: Tiempo Lento",
     "MC_shoutStart": "Empezar un Grito (2)",
-    "NPCshoutStart": "PNJ: empezar un Grito",
+    "NPCshoutStart": "Empezar un Grito (3)",
     "ShoutSprintMediumStart": "Carrera del Torbellino, media",
     "ShoutSprintLongStart": "Carrera del Torbellino, larga",
     "ShoutSprintLongestStart": "Carrera del Torbellino, muy larga",
@@ -683,8 +683,8 @@ EXACTOS = {
     "turnLeft": "Girar a la izquierda",
     "turnRight": "Girar a la derecha",
     "turnStop": "Dejar de girar",
-    "NPC_TurnRight90": "PNJ: girar 90 grados a la derecha",
-    "NPC_TurnToWalkRight90": "PNJ: girar 90 grados y echar a andar",
+    "NPC_TurnRight90": "Girar 90 grados a la derecha",
+    "NPC_TurnToWalkRight90": "Girar 90 grados y echar a andar",
     "JumpStandingStart": "Saltar en el sitio",
     "JumpDirectionalStart": "Saltar hacia un lado",
     "JumpFall": "Caer",
@@ -712,8 +712,6 @@ REMATE_ARMA = [
     ("1HM", "con un arma de una mano"),
     ("2HM", "con un arma a dos manos"),
     ("2HW", "con un arma pesada"),
-    ("H2HCombo", "a puñetazos"),
-    ("H2HSlam", "a puñetazos"),
     ("H2H", "a puñetazos"),
     ("DW", "con dos armas"),
 ]
@@ -736,6 +734,8 @@ REMATE_OBJETIVO = [
 ]
 
 REMATE_GOLPE = [
+    ("H2HCombo", "combinación"),
+    ("H2HSlam", "derribo"),
     ("DecapBleedOut", "decapitar al desangrado"),
     ("DecapKnife", "degollar con el cuchillo"),
     ("Decap", "decapitar"),
@@ -769,18 +769,23 @@ def traducirRemate(evento):
 
     resto = evento.replace("pa_", "").replace("KillMove", "").replace("KillingBlow", "")
 
+    def porLargo(pares):
+        # De la clave mas larga a la mas corta: si no, "Slash" se lleva por
+        # delante a "RodeoSlash" y dos golpes distintos se llaman igual.
+        return sorted(pares, key=lambda par: -len(par[0]))
+
     arma = objetivo = golpe = ""
-    for clave, texto in REMATE_ARMA:
+    for clave, texto in porLargo(REMATE_ARMA):
         if clave in resto:
             arma = texto
             resto = resto.replace(clave, "", 1)
             break
-    for clave, texto in REMATE_OBJETIVO:
+    for clave, texto in porLargo(REMATE_OBJETIVO):
         if clave in resto:
             objetivo = texto
             resto = resto.replace(clave, "", 1)
             break
-    for clave, texto in REMATE_GOLPE:
+    for clave, texto in porLargo(REMATE_GOLPE):
         if clave in resto:
             golpe = texto
             resto = resto.replace(clave, "", 1)
@@ -791,18 +796,18 @@ def traducirRemate(evento):
     resto = resto.replace("Short", "")
     letra = resto.strip("_") if len(resto.strip("_")) <= 2 else ""
 
+    # El bicho NO entra en el nombre: los nombres son de la accion. Los que se
+    # queden igual se numeran solos despues (ver numerarRepetidos).
     partes = ["Remate"]
     if golpe:
         partes.append(": " + golpe)
     if arma:
         partes.append(" " + arma)
-    if objetivo:
-        partes.append(" contra " + objetivo)
     nombre = "".join(partes)
     if corto:
         nombre += " (corto)"
-    if letra:
-        nombre += " (" + letra + ")"
+    # La letra de variante (A, B, C...) no se pone: los que se llamen igual se
+    # numeran solos despues, y "(A) (1)" no le dice nada a nadie.
     return nombre
 
 

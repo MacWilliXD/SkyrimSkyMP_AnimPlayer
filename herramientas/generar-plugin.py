@@ -58,6 +58,10 @@ def compactar(catalogo):
             ficha["busqueda"] = a["busqueda"]
         if a.get("destacada"):
             ficha["destacada"] = True
+        if a.get("andando"):
+            ficha["andando"] = True
+        if a.get("sentado"):
+            ficha["sentado"] = True
         if a.get("sincroniza") is False:
             ficha["sincroniza"] = False
             if a.get("motivo"):

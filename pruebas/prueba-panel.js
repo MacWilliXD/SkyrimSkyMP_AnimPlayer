@@ -70,6 +70,7 @@ app.whenReady().then(async () => {
   const js = (src) => win.webContents.executeJavaScript(src);
   const jsMudo = (src) => win.webContents.executeJavaScript('(function(){' + src + '})(); true;');
   const captura = async (n) => {
+    await esperar(350);          // que le de tiempo a pintar lo ultimo
     fs.mkdirSync(SALIDA, { recursive: true });
     fs.writeFileSync(path.join(SALIDA, n + '.png'),
                      (await win.webContents.capturePage()).toPNG());
@@ -77,8 +78,82 @@ app.whenReady().then(async () => {
   /* Recoge lo que el panel ha mandado al juego y se lo pasa al plugin, tal cual
      lo haria SkyrimPlatform con el suceso browserMessage. Despues un "update",
      que es donde el plugin vacia su cola. */
+  /* Elegir desde la rueda cierra el panel, para devolverle el raton al juego.
+     Asi que antes de nada hay que asegurarse de que esta abierto: si no, las
+     pruebas siguientes estarian pulsando cosas escondidas. */
+  const asegurarAbierto = async () => {
+    const abierto = await win.webContents.executeJavaScript(
+      `!!(window.__animplayer && window.__animplayer.estaAbierto())`);
+    if (!abierto) {
+      await win.webContents.executeJavaScript(`window.__animplayer.abrir(); true;`);
+      await esperar(160);
+    }
+  };
+
+  /* El panel abre por la rueda; para lo de la lista hay que pedirla. */
+  const verLista = async () => {
+    await asegurarAbierto();
+    const enRueda = await win.webContents.executeJavaScript(
+      `document.getElementById('animplayer').classList.contains('ap-modo-rueda')`);
+    if (enRueda) {
+      await win.webContents.executeJavaScript(
+        `document.querySelector('#animplayer .ap-cambio').click(); true;`);
+      await esperar(140);
+    }
+  };
+  const verRueda = async () => {
+    await asegurarAbierto();
+    const enLista = await win.webContents.executeJavaScript(
+      `document.getElementById('animplayer').classList.contains('ap-modo-lista')`);
+    if (enLista) {
+      await win.webContents.executeJavaScript(
+        `document.querySelector('#animplayer .ap-volver').click(); true;`);
+      await esperar(160);
+    }
+  };
+
+  /* Deja los favoritos a cero. En la vista de lista sin filtros salen todos,
+     asi que basta con ir apagando la primera estrella encendida. */
+  const limpiarFavoritos = async (falso) => {
+    await verLista();
+    await win.webContents.executeJavaScript(
+      `(() => { const c = document.querySelector('#animplayer .ap-chip[data-cat=""]');
+                if (c) c.click();
+                const b = document.querySelector('#animplayer .ap-buscar');
+                b.value = ''; b.dispatchEvent(new Event('input', { bubbles: true })); })(); true;`);
+    await esperar(120);
+    for (let i = 0; i < 60; i++) {
+      const quedaba = await win.webContents.executeJavaScript(
+        `(() => { const e = document.querySelector('#animplayer .ap-estrella.ap-puesta');
+                  if (!e) return false;
+                  e.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+                  return true; })()`);
+      if (!quedaba) break;
+      await esperar(50);
+    }
+    await pasarMensajesAlPlugin(falso);
+  };
+
+  /* Pulsa un sector de la rueda. */
+  /* Pulsa un sitio de la rueda.
+
+     Se manda el suceso a mano y no con .click() porque los sectores son SVG, y
+     los elementos SVG no tienen .click() en Chromium: solo lo tienen los HTML.
+     Con el raton de verdad funciona igual. */
+  const pulsarSector = (evento) => win.webContents.executeJavaScript(
+    `(() => {
+       const s = [...document.querySelectorAll('#animplayer .ap-sitio')]
+         .find(x => x.dataset.evento === ${JSON.stringify(evento)});
+       if (!s) return { falta: true,
+                        hay: [...document.querySelectorAll('#animplayer .ap-sitio')]
+                               .map(x => x.dataset.evento) };
+       s.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+       return { ok: true };
+     })()`);
+
   /* Escribe en la barra y devuelve lo que queda en la lista. */
   const buscar = async (texto) => {
+    await verLista();
     await js(`(() => { const c = document.querySelector('#animplayer .ap-buscar');
       c.value = ${JSON.stringify(texto)};
       c.dispatchEvent(new Event('input', { bubbles: true })); })()`);
@@ -87,10 +162,34 @@ app.whenReady().then(async () => {
       .map(f => f.dataset.evento)`);
   };
 
+  /* Al cambiar de animacion, la nueva espera un segundo a que termine la
+     parada de la anterior. Se adelanta el reloj para no dormir de verdad. */
+  const dejarPasarLaEspera = (falso, ms = 1200) => {
+    const reloj = Date.now;
+    Date.now = () => reloj() + ms;
+    falso.tic();
+    Date.now = reloj;
+  };
+
+  /* El plugin le manda ordenes al panel por executeJavaScript. El falso solo
+     las apunta, asi que para probar de punta a punta hay que ejecutarlas. */
+  let ordenesVistas = 0;
+  const pasarOrdenesAlPanel = async (falso) => {
+    const todas = falso.registro.inyectado;
+    for (let i = ordenesVistas; i < todas.length; i++) {
+      if (todas[i].indexOf('if (window.__animplayer)') === 0) {
+        await jsMudo(todas[i]);
+      }
+    }
+    ordenesVistas = todas.length;
+    await esperar(80);
+  };
+
   const pasarMensajesAlPlugin = async (falso) => {
     const mensajes = await js('window.__mensajes.splice(0)');
     for (const m of mensajes) falso.disparar('browserMessage', { arguments: [m] });
     falso.tic();
+    dejarPasarLaEspera(falso);
     return mensajes;
   };
 
@@ -143,11 +242,16 @@ app.whenReady().then(async () => {
   comprobar(!(await panelVisible()), 'cerrado, el panel no se ve');
   comprobar(!(await js(`!!document.querySelector('#animplayer .ap-tirador')`)),
             'y no hay ninguna pestana que pulsar antes: la tecla lo abre y ya');
-  const tapa = await js(`(() => {
-    const r = document.getElementById('animplayer').getBoundingClientRect();
-    return r.width * r.height;
-  })()`);
-  comprobar(tapa === 0, 'cerrado no tapa un solo pixel del juego', tapa + ' px2');
+  /* La capa de AnimPlayer ocupa toda la pantalla, porque ahora hay dos cosas
+     en sitios distintos: la rueda en el centro y la ventana arriba a la
+     derecha. Lo que importa es que con el panel cerrado no se DIBUJE nada. */
+  const seVe = (sel) => js(
+    `(() => { const n = document.querySelector('#animplayer ' + ${JSON.stringify(sel)});
+              return !!(n && n.offsetParent !== null); })()`);
+  const tapan = await js(`[...document.querySelectorAll('#animplayer .ap-panel, #animplayer .ap-rueda')]
+    .filter(n => n.offsetParent !== null).length`);
+  comprobar(tapan === 0, 'cerrado no dibuja nada encima del juego',
+            tapan + ' cosas visibles');
 
   console.log('\n=== abierto sale arriba a la derecha, de una vez ===');
   await js('window.__animplayer.abrir()');
@@ -161,8 +265,10 @@ app.whenReady().then(async () => {
   comprobar(sitio.derecha > 18 && sitio.derecha < 30,
             'y a la derecha', 'a ' + sitio.derecha + 'px del borde');
   comprobar(sitio.alto > 200, 'con la lista ya desplegada', 'alto=' + Math.round(sitio.alto));
+  comprobar(await js(`document.getElementById('animplayer').classList.contains('ap-modo-lista')`),
+            'sin favoritos todavia, abre directo en la lista');
   comprobar(await js(`document.activeElement === document.querySelector('#animplayer .ap-buscar')`),
-            'y el cursor esta ya en la barra de busqueda: se puede escribir directo');
+            'con el cursor ya en la barra: se puede escribir directo');
   comprobar(await js(`/ANIMACIONES/i.test(document.querySelector('#animplayer .ap-titulo').textContent)`),
             'la cabecera dice de que va la ventana');
   await captura('2-abierto');
@@ -181,6 +287,7 @@ app.whenReady().then(async () => {
   await pasarMensajesAlPlugin(falso);
 
   console.log('\n=== de entrada solo las recomendadas ===');
+  await verLista();
   const dentro = await js(`(() => {
     const filas = document.querySelectorAll('#animplayer .ap-fila');
     const grupo = document.querySelector('#animplayer .ap-grupo');
@@ -191,6 +298,7 @@ app.whenReady().then(async () => {
   comprobar(/Recomendadas/.test(dentro.grupo) && /\d{3}/.test(dentro.grupo),
             'y dice como ver el resto', dentro.grupo.replace(/\s+/g, ' ').trim());
 
+  await verLista();
   comprobar(await js(`document.querySelector('#animplayer .ap-donde').textContent === 'Recomendadas'`),
             'y al lado pone que parte de la lista se esta viendo');
 
@@ -212,12 +320,35 @@ app.whenReady().then(async () => {
             todos.filter((n) => /[áéíóúñ]/.test(n)).slice(0, 3).join(' / '));
   comprobar(apCat.ficha('IdleLuteStart').nombre === 'Tocar el laúd',
             'IdleLuteStart es "Tocar el laúd"');
-  comprobar(apCat.ficha('pa_KillMove2HMFalmerA').nombre.indexOf('Remate') === 0,
-            'y los remates se montan solos',
-            apCat.ficha('pa_KillMove2HMFalmerA').nombre);
+  /* Los remates se montan con reglas y NO nombran a la criatura: los nombres
+     son de la accion. Los que quedan iguales se numeran solos. */
+  const unRemate = apCat.ficha('pa_KillMove2HMFalmerA');
+  comprobar(unRemate && unRemate.nombre.indexOf('Remate') === 0,
+            'los remates se montan solos', unRemate && unRemate.nombre);
+  comprobar(unRemate && !/falmer|oso|lobo|trol|dragón/i.test(unRemate.nombre),
+            'y no nombran a la criatura', unRemate && unRemate.nombre);
+  const todosLosNombres = apCat.lista().animaciones.map((a) => a.nombre);
+  comprobar(new Set(todosLosNombres).size === todosLosNombres.length,
+            'y ningun nombre se repite en todo el catalogo',
+            todosLosNombres.length + ' animaciones, ' +
+            new Set(todosLosNombres).size + ' nombres');
+  comprobar(todosLosNombres.some((n) => /^Remate con un arma de una mano \(\d+\)$/.test(n)),
+            'los que coincidirian se numeran',
+            todosLosNombres.filter((n) => /^Remate con un arma de una mano \(\d/.test(n))[0]);
+
+  console.log('  --- las que aguantan andando ---');
+  const andando = apCat.lista().animaciones.filter((a) => a.andando);
+  comprobar(andando.length > 15, 'hay unas cuantas marcadas', andando.length);
+  comprobar(andando.some((a) => a.evento === 'OffsetCarryBasketStart'),
+            'las de llevar un cesto y demas, que son las que Skyrim monta encima de andar');
+  comprobar(apCat.buscar('andando').length > 15,
+            'y se encuentran buscando "andando"',
+            apCat.buscar('andando').length + ' resultados');
 
   console.log('\n=== los favoritos ===');
+  await verLista();
   const estrellaDe = (e) => `document.querySelector('#animplayer .ap-fila[data-evento="${e}"] .ap-estrella')`;
+  await verLista();
   const hayEstrellas = await js(`document.querySelectorAll('#animplayer .ap-estrella').length`);
   const hayFilas = await js(`document.querySelectorAll('#animplayer .ap-fila').length`);
   comprobar(hayEstrellas === hayFilas,
@@ -239,6 +370,7 @@ app.whenReady().then(async () => {
   comprobar(guardado.slice(0, 2) === '//',
             'con el // delante, como hace SkyMP con sus datos');
 
+  await verLista();
   await captura('4-favorito');
   const chip = await js(`(() => { const c = document.querySelector('#animplayer .ap-chip[data-cat="favoritos"]');
     return c ? c.textContent.trim() : null; })()`);
@@ -256,7 +388,7 @@ app.whenReady().then(async () => {
   console.log('\n  --- sin la categoria puesta, salen los primeros ---');
   /* Se marca algo que en la lista de sentarse queda muy abajo, y se comprueba
      que al buscar aparece el primero de todos. */
-  await buscar('silla');
+  await buscar('sentarse');
   const antes = await js(`[...document.querySelectorAll('#animplayer .ap-fila')]
     .map(f => f.dataset.evento)`);
   const tardon = antes[antes.length - 1];
@@ -307,22 +439,285 @@ app.whenReady().then(async () => {
 
   await buscar('');
 
+  console.log('\n=== las dos superficies ===');
+  /* La rueda sale en el centro de la pantalla y sin marco: se ve el juego por
+     debajo. La lista entera, con su buscador y sus categorias, es la ventana
+     de siempre arriba a la derecha, y se llega con un boton. */
+  await verRueda();
+  comprobar(await seVe('.ap-rueda'), 'en la rueda se ve el corro');
+  comprobar(!(await seVe('.ap-panel')), 'y no la ventana de la lista');
+
+  const sitioRueda = await js(`(() => {
+    const c = document.querySelector('#animplayer .ap-corro-caja').getBoundingClientRect();
+    return { centroX: Math.round(c.left + c.width / 2), pantallaX: Math.round(innerWidth / 2),
+             centroY: Math.round(c.top + c.height / 2), pantallaY: Math.round(innerHeight / 2),
+             ancho: Math.round(c.width) };
+  })()`);
+  comprobar(Math.abs(sitioRueda.centroX - sitioRueda.pantallaX) < 3 &&
+            Math.abs(sitioRueda.centroY - sitioRueda.pantallaY) < 3,
+            'y sale en el centro de la pantalla',
+            sitioRueda.centroX + ',' + sitioRueda.centroY + ' de ' +
+            sitioRueda.pantallaX + ',' + sitioRueda.pantallaY);
+  comprobar(sitioRueda.ancho > 480, 'con tamano de sobra para leerla',
+            sitioRueda.ancho + 'px');
+
+  const fondoRueda = await js(
+    `getComputedStyle(document.querySelector('#animplayer .ap-rueda')).backgroundColor`);
+  comprobar(/rgba\(0, 0, 0, 0\)|transparent/.test(fondoRueda),
+            'sin fondo: solo se ve la rueda, no una caja', fondoRueda);
+
+  comprobar((await js(`document.querySelector('#animplayer .ap-cambio').textContent`)).indexOf('Ver todas') !== -1,
+            'el boton lleva a la lista',
+            await js(`document.querySelector('#animplayer .ap-cambio').textContent`));
+
+  await js(`document.querySelector('#animplayer .ap-cambio').click()`);
+  await esperar(150);
+  comprobar(await seVe('.ap-panel'), 'al pulsarlo sale la ventana de la lista');
+  comprobar(!(await seVe('.ap-rueda')), 'y se va la rueda');
+  comprobar((await js(`document.querySelector('#animplayer .ap-volver').textContent`)).indexOf('Volver') !== -1,
+            'y hay por donde volver a la rueda');
+  comprobar(await js(`document.activeElement === document.querySelector('#animplayer .ap-buscar')`),
+            'con el cursor puesto en el buscador, para escribir directo');
+
+  console.log('  --- la rueda se va al cerrar ---');
+  /* Esto lo encontro la prueba: al sacar la rueda de la ventana dejo de irse
+     con ella, y se quedaba en mitad de la pantalla con el panel cerrado. */
+  await verRueda();
+  await js(`window.__animplayer.cerrar()`);
+  await esperar(140);
+  await pasarMensajesAlPlugin(falso);
+  comprobar(!(await seVe('.ap-rueda')), 'cerrado no queda una rueda flotando');
+  await js(`window.__animplayer.abrir()`);
+  await esperar(150);
+  await pasarMensajesAlPlugin(falso);
+
+  console.log('  --- al abrir, siempre por la rueda ---');
+  await js(`window.__animplayer.cerrar()`);
+  await esperar(120);
+  await pasarMensajesAlPlugin(falso);
+  await js(`window.__animplayer.abrir()`);
+  await esperar(150);
+  await pasarMensajesAlPlugin(falso);
+  comprobar(await js(`document.getElementById('animplayer').classList.contains('ap-modo-rueda')`),
+            'aunque la ultima vez te quedaras en la lista');
+  await captura('9-rueda-sola');
+
+  console.log('\n=== la rueda de favoritos ===');
+  const marcar = async (evento) => {
+    await buscar(evento);
+    await js(`document.querySelector('#animplayer .ap-fila[data-evento="${evento}"] .ap-estrella').click()`);
+    await esperar(90);
+  };
+  const sectores = async () => {
+    await verRueda();
+    return js(`[...document.querySelectorAll('#animplayer .ap-sitio')]
+      .map(s => s.dataset.evento)`);
+  };
+
+  await limpiarFavoritos(falso);
+  comprobar(!(await js(`document.getElementById('animplayer').classList.contains('ap-conrueda')`)),
+            'sin favoritos no hay rueda: no seria un corro, seria un hueco');
+  comprobar(await js(`document.getElementById('animplayer').classList.contains('ap-modo-lista')`),
+            'y el panel se queda en la lista, que es lo unico que hay');
+  comprobar((await js(`document.querySelector('#animplayer .ap-volver').textContent`)).indexOf('estrella') !== -1,
+            'y el boton dice como conseguirla',
+            await js(`document.querySelector('#animplayer .ap-volver').textContent`));
+
+  const seis = ['IdleLuteStart', 'IdleWave', 'IdleSalute', 'IdlePray',
+                'IdleLaugh', 'IdleChairFrontEnter'];
+  for (const e of seis) await marcar(e);
+  await pasarMensajesAlPlugin(falso);
+  await buscar('');
+
+  comprobar(await js(`document.getElementById('animplayer').classList.contains('ap-conrueda')`),
+            'con favoritos aparece');
+  const conSeis = await sectores();
+  comprobar(conSeis.length === 6,
+            'con seis favoritos, seis sectores repartidos en todo el corro',
+            conSeis.length + ' sectores');
+  comprobar(seis.every((e) => conSeis.includes(e)), 'y estan los seis',
+            conSeis.join(', '));
+  comprobar(!(await js(`document.getElementById('animplayer').classList.contains('ap-girable')`)),
+            'y no hay nada que girar: caben todos');
+  await captura('5-rueda-seis');
+
+  console.log('  --- el centro dice cual estas mirando ---');
+  comprobar((await js(`document.querySelector('#animplayer .ap-centro').textContent`)).indexOf('Favoritos') !== -1,
+            'sin el raton encima, el numero de favoritos',
+            await js(`document.querySelector('#animplayer .ap-centro').textContent`));
+  /* Igual que el clic: se busca por dataset y se manda el suceso a mano. El
+     selector con corchetes sobre un <g> de SVG se porta de forma rara segun el
+     navegador, y aqui no hace falta arriesgarse. */
+  const alMirar = await js(`(() => {
+    const s = [...document.querySelectorAll('#animplayer .ap-sitio')]
+      .find(x => x.dataset.evento === 'IdleLuteStart');
+    if (!s) return { falta: true,
+                     hay: [...document.querySelectorAll('#animplayer .ap-sitio')]
+                            .map(x => x.dataset.evento) };
+    s.dispatchEvent(new MouseEvent('mousemove', { bubbles: true }));
+    return { ok: true };
+  })()`);
+  comprobar(alMirar.ok === true, 'el sitio responde al raton', JSON.stringify(alMirar));
+  await esperar(120);
+  comprobar((await js(`document.querySelector('#animplayer .ap-centro').textContent`)).indexOf('laúd') !== -1,
+            'y con el raton encima, el nombre entero',
+            await js(`document.querySelector('#animplayer .ap-centro b').textContent`));
+  const elSitio = `[...document.querySelectorAll('#animplayer .ap-sitio')]
+    .find(x => x.dataset.evento === 'IdleLuteStart')`;
+  comprobar(await js(elSitio + `.classList.contains('ap-mirando')`),
+            'y el sitio se marca');
+  comprobar(await js(`getComputedStyle(` + elSitio + `).transform !== 'none'`),
+            'y crece, para que se note cual es',
+            await js(`getComputedStyle(` + elSitio + `).transform`));
+
+  /* Y al crecer NO se sale del lienzo. Un SVG recorta por su borde, asi que
+     con el lienzo justo del tamano del corro el sector crecido se cortaba por
+     la mitad. El lienzo lleva margen de sobra a proposito. */
+  const cabe = await js(`(() => {
+    const s = ` + elSitio + `;
+    const svg = document.querySelector('#animplayer .ap-corro svg');
+    const a = s.getBoundingClientRect(), b = svg.getBoundingClientRect();
+    return { dentro: a.left >= b.left - 0.5 && a.right <= b.right + 0.5 &&
+                     a.top >= b.top - 0.5 && a.bottom <= b.bottom + 0.5,
+             sitio: [Math.round(a.left), Math.round(a.right)],
+             lienzo: [Math.round(b.left), Math.round(b.right)] };
+  })()`);
+  comprobar(cabe.dentro, 'y crecido sigue cabiendo en el lienzo, sin cortarse',
+            'sitio ' + cabe.sitio.join('-') + ' / lienzo ' + cabe.lienzo.join('-'));
+  await captura('6-rueda-mirando');
+
+  console.log('  --- pulsar un sector reproduce ---');
+  falso.registro.animaciones.length = 0;
+  const alPulsar = await pulsarSector('IdleLuteStart');
+  comprobar(alPulsar.ok === true, 'el sector responde al clic', JSON.stringify(alPulsar));
+  await esperar(140);
+  await pasarMensajesAlPlugin(falso);
+  comprobar(falso.registro.animaciones.some((a) => a.evento === 'IdleLuteStart'),
+            'se reproduce desde la rueda, sin tocar la lista',
+            JSON.stringify(falso.registro.animaciones));
+
+  console.log('  --- con mas de quince, la rueda gira ---');
+  /* En el corro caben quince. Con mas favoritos, los quince sitios son una
+     ventana sobre la lista: la rueda del raton la mueve de uno en uno y las
+     flechas pasan al grupo siguiente de golpe. */
+  for (const e of ['IdleDrink', 'IdleSurrender', 'IdleCowering',
+                   'IdleHandsBehindBack', 'IdleApplaud2', 'IdleStudy',
+                   'IdleHoe', 'IdleNoteRead', 'idleLooseSweepingStart',
+                   'IdleWipeBrow', 'IdleNervous', 'IdleNoteRead',
+                   'IdleBook_Read', 'IdleSleepNod']) await marcar(e);
+  await pasarMensajesAlPlugin(falso);
+  await buscar('');
+  comprobar(await js(`document.getElementById('animplayer').classList.contains('ap-girable')`),
+            'con mas de quince favoritos ya se puede girar');
+  const quince = await sectores();
+  comprobar(quince.length === 15, 'y en el corro caben quince',
+            quince.length + ' sitios');
+  await captura('7-rueda-llena');
+
+  console.log('  --- todos los sitios se ven igual ---');
+  const opacidades = await js(`[...document.querySelectorAll('#animplayer .ap-sitio')]
+    .map(s => Number(getComputedStyle(s).opacity))`);
+  comprobar(opacidades.every((v) => v === 1),
+            'ninguno esta desvanecido: todos iguales',
+            [...new Set(opacidades)].join(', '));
+
+  console.log('  --- la rueda del raton, de uno en uno ---');
+  const rodar = async (haciaDonde) => {
+    await js(`document.querySelector('#animplayer .ap-corro-caja')
+      .dispatchEvent(new WheelEvent('wheel', { deltaY: ${haciaDonde}, bubbles: true }))`);
+    await esperar(180);
+  };
+  await rodar(120);
+  const girada = await sectores();
+  comprobar(girada[0] === quince[1],
+            'avanza uno', quince[0] + ' -> ' + girada[0]);
+  comprobar(girada.filter((e) => !quince.includes(e)).length === 1,
+            'y entra uno nuevo');
+  await rodar(-120);
+  comprobar((await sectores())[0] === quince[0], 'y se puede girar al reves');
+
+  console.log('  --- las flechas, al grupo siguiente ---');
+  comprobar(await js(`!!document.querySelector('#animplayer .ap-gira-der')`),
+            'han vuelto las flechas');
+  await js(`document.querySelector('#animplayer .ap-gira-der').click()`);
+  await esperar(200);
+  const otroGrupo = await sectores();
+  comprobar(otroGrupo[0] !== quince[0] && otroGrupo[0] !== quince[1],
+            'la ventana salta un grupo entero, no un sitio',
+            quince[0] + ' -> ' + otroGrupo[0]);
+  comprobar(otroGrupo[0] === quince[15 % quince.length] ||
+            !quince.includes(otroGrupo[0]),
+            'y cae donde toca: en el que sigue al ultimo que se veia',
+            quince[quince.length - 1] + ' era el ultimo, ahora empieza en ' + otroGrupo[0]);
+  /* Sin el raton encima, que si no el centro ensena la que se esta mirando. */
+  await js(`document.querySelector('#animplayer .ap-corro')
+    .dispatchEvent(new MouseEvent('mouseleave', { bubbles: true }))`);
+  await esperar(120);
+  comprobar((await js(`document.querySelector('#animplayer .ap-centro small').textContent`))
+              .indexOf(' de ') !== -1,
+            'y el centro dice por donde vas',
+            await js(`document.querySelector('#animplayer .ap-centro small').textContent`));
+  await js(`document.querySelector('#animplayer .ap-gira-izq').click()`);
+  await esperar(200);
+  comprobar((await sectores())[0] === quince[0], 'y se vuelve con la otra flecha');
+  await captura('8-rueda-grupo');
+
+  console.log('  --- los mandos, dentro del hueco ---');
+  comprobar(await js(`!!document.querySelector('#animplayer .ap-centro .ap-parar')`),
+            'Parar esta en el centro, debajo del nombre');
+  comprobar(await js(`!!document.querySelector('#animplayer .ap-centro .ap-bucle')`),
+            'y la casilla del bucle tambien');
+  comprobar(await js(`document.querySelectorAll('#animplayer .ap-barra > *').length === 2`),
+            'y debajo del corro solo quedan ver todas y reiniciar');
+  falso.registro.animaciones.length = 0;
+  await js(`document.querySelector('#animplayer .ap-centro .ap-parar')
+    .dispatchEvent(new MouseEvent('click', { bubbles: true }))`);
+  await esperar(150);
+  await pasarMensajesAlPlugin(falso);
+  comprobar(falso.registro.animaciones.length === 3,
+            'y el Parar del centro para de verdad',
+            falso.registro.animaciones.map((a) => a.evento).join(' + '));
+
+  console.log('  --- quitar un favorito lo saca del corro ---');
+  await marcar('IdleLaugh');
+  await pasarMensajesAlPlugin(falso);
+  await buscar('');
+  comprobar(!(await sectores()).includes('IdleLaugh'),
+            'se va de la rueda al momento');
+
+  /* Se deja uno solo, para que lo de abajo empiece de algo conocido. */
+  await limpiarFavoritos(falso);
+  await marcar('IdleDrink');
+  await pasarMensajesAlPlugin(falso);
+  await buscar('');
+
   console.log('\n=== la busqueda ===');
 
-  const porNombre = await buscar('lute');
-  comprobar(porNombre.includes('IdleLuteStart'), 'por nombre en ingles: lute',
-            porNombre.slice(0, 3).join(', '));
+  const porNombre = await buscar('laud');
+  comprobar(porNombre.includes('IdleLuteStart'), 'por el nombre: laud',
+            porNombre.join(', '));
+  /* Esto era el fallo gordo: se buscaba por subcadena, y "laud" encontraba
+     Ap-LAUD-ir. Ahora se busca por principio de palabra. */
+  comprobar(!porNombre.includes('IdleApplaud2'),
+            'y NO encuentra "Aplaudir", que lleva laud dentro');
+  comprobar(porNombre.length <= 3, 'asi que salen pocas y buenas',
+            porNombre.length + ' resultados');
 
-  const porEvento = await buscar('IdleWave');
-  comprobar(porEvento.includes('IdleWave'), 'por nombre del evento');
+  const porId = await buscar('IdleWave');
+  comprobar(porId.includes('IdleWave'), 'por el id entero, pegado tal cual');
+
+  const porTrozoDeId = await buscar('chair');
+  comprobar(porTrozoDeId.length > 20 && porTrozoDeId.includes('IdleChairFrontEnter'),
+            'y por un trozo del id, que se parte por sus mayusculas',
+            porTrozoDeId.length + ' resultados');
 
   const porEspanol = await buscar('sentarse');
-  comprobar(porEspanol.length > 30 && porEspanol.includes('IdleChairFrontEnter'),
-            'por palabra en espanol: sentarse', porEspanol.length + ' resultados');
+  comprobar(porEspanol.length > 10 && porEspanol.includes('IdleChairFrontEnter'),
+            'por el nombre en espanol: sentarse',
+            porEspanol.length + ' resultados');
 
-  const conAcento = await buscar('música');
-  comprobar(conAcento.length > 10, 'con acentos y todo: musica',
-            conAcento.length + ' resultados');
+  const conAcento = await buscar('laúd');
+  comprobar(conAcento.includes('IdleLuteStart'), 'con acentos y todo: laúd');
 
   const dosPalabras = await buscar('chair front');
   comprobar(dosPalabras.length > 0 && dosPalabras.every((e) => /chair/i.test(e)),
@@ -335,6 +730,7 @@ app.whenReady().then(async () => {
             'con un mensaje, no una lista vacia');
 
   console.log('\n=== pulsar una fila reproduce ===');
+  await verLista();
   await buscar('wave');
   await js(`document.querySelector('#animplayer .ap-fila[data-evento="IdleWave"]').click()`);
   await esperar(160);
@@ -348,9 +744,10 @@ app.whenReady().then(async () => {
   comprobar(hechas[hechas.length - 1].actor === 'jugador', 'sobre el jugador');
   comprobar(falso.registro.terceraPersona > 0,
             'pasando a tercera persona, que en primera no se veria');
-  comprobar(await js(`document.querySelector('#animplayer .ap-ahora').textContent.length > 2`),
-            'y el pie dice cual esta en marcha',
-            await js(`document.querySelector('#animplayer .ap-ahora').textContent`));
+  comprobar(!(await js(`!!document.querySelector('#animplayer .ap-ahora')`)),
+            'y el panel NO dice cual esta en marcha: eso se quito');
+  comprobar(!(await js(`!!document.querySelector('#animplayer .ap-sitio.ap-sonando')`)),
+            'ni lo marca en la rueda');
 
   console.log('\n=== escribir y dar a Enter, sin raton ===');
   falso.registro.animaciones.length = 0;
@@ -377,17 +774,40 @@ app.whenReady().then(async () => {
     c.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true })); })()`);
   await esperar(160);
   await pasarMensajesAlPlugin(falso);
-  comprobar(falso.registro.animaciones.length === 1 &&
-            falso.registro.animaciones[0].evento === lista[1],
+  const ultimaMandada = falso.registro.animaciones[falso.registro.animaciones.length - 1];
+  comprobar(ultimaMandada && ultimaMandada.evento === lista[1],
             'y Enter reproduce la que esta marcada',
-            (falso.registro.animaciones[0] || {}).evento + ' = ' + lista[1]);
+            (ultimaMandada || {}).evento + ' = ' + lista[1]);
 
   console.log('\n=== las categorias ===');
+  await verLista();
   await buscar('');
   const chips = await js(`[...document.querySelectorAll('#animplayer .ap-chip')]
     .map(c => c.dataset.cat)`);
   comprobar(chips.length > 8, `hay una por categoria (${chips.length})`);
   comprobar(chips[0] === '', 'y la primera son las recomendadas');
+  comprobar(chips.includes('todas'), 'hay una de Todas, para rebuscar por el catalogo');
+
+  await js(`document.querySelector('#animplayer .ap-chip[data-cat="todas"]').click()`);
+  await esperar(200);
+  const todasLasFilas = await js(`document.querySelectorAll('#animplayer .ap-fila').length`);
+  /* El tope va holgado a proposito: el catalogo adelgaza cada vez que se
+     limpia (las "al instante", las de nino, los remates contra bichos), y la
+     prueba no tiene por que romperse por eso. Lo que importa es que salgan
+     todas y no solo las recomendadas. */
+  comprobar(todasLasFilas > 400, 'y al pulsarla sale el catalogo entero',
+            todasLasFilas + ' filas');
+  const buscandoEnTodas = await js(`(() => {
+    const c = document.querySelector('#animplayer .ap-buscar');
+    c.value = 'rezar'; c.dispatchEvent(new Event('input', { bubbles: true }));
+    return [...document.querySelectorAll('#animplayer .ap-fila')].map(f => f.dataset.evento);
+  })()`);
+  await esperar(150);
+  comprobar(buscandoEnTodas.includes('IdlePray'),
+            'y con ella puesta se busca en todas', buscandoEnTodas.join(', '));
+  await buscar('');
+  await js(`document.querySelector('#animplayer .ap-chip[data-cat=""]').click()`);
+  await esperar(150);
   await js(`document.querySelector('#animplayer .ap-chip[data-cat="musica"]').click()`);
   await esperar(180);
   const soloMusica = await js(`[...document.querySelectorAll('#animplayer .ap-fila')]
@@ -410,6 +830,348 @@ app.whenReady().then(async () => {
   comprobar(aviso && aviso.sinSinc, 'se marcan en la lista');
   comprobar(aviso && /no la veran/.test(aviso.titulo || ''),
             'y explican por que', aviso && aviso.titulo);
+
+  console.log('\n=== una detras de otra, nunca dos a la vez ===');
+  /* Se empieza sin nada sonando, que lo de antes ha dejado cosas en marcha. */
+  await js(`document.querySelector('#animplayer .ap-parar')
+    .dispatchEvent(new MouseEvent('click', { bubbles: true }))`);
+  await esperar(120);
+  await pasarMensajesAlPlugin(falso);
+
+  falso.registro.animaciones.length = 0;
+  await buscar('wave');
+  await js(`document.querySelector('#animplayer .ap-fila[data-evento="IdleWave"]').click()`);
+  await esperar(150);
+  await pasarMensajesAlPlugin(falso);
+  comprobar(falso.registro.animaciones.map((a) => a.evento).join(',') === 'IdleWave',
+            'la primera se manda y ya',
+            falso.registro.animaciones.map((a) => a.evento).join(', '));
+
+  /* Pedir otra distinta tiene que quitar antes la de ahora: si no, pedir
+     "Rezar" sentado en una silla te dejaba rezando y sentado. */
+  falso.registro.animaciones.length = 0;
+  await buscar('salute');
+  await js(`document.querySelector('#animplayer .ap-fila[data-evento="IdleSalute"]').click()`);
+  await esperar(150);
+  const mensajesRelevo = await js('window.__mensajes.splice(0)');
+  for (const m of mensajesRelevo) falso.disparar('browserMessage', { arguments: [m] });
+  falso.tic();
+  comprobar(falso.registro.animaciones.map((a) => a.evento).join(',') ===
+            'OffsetStop,IdleFurnitureExit,IdleForceDefaultState',
+            'al pedir otra, primero se para la de antes',
+            falso.registro.animaciones.map((a) => a.evento).join(' -> '));
+  /* Y la nueva NO va pegada: parar es a su vez una animacion —levantarse de
+     una silla tarda— y la nueva se la comia. */
+  falso.tic();
+  comprobar(!falso.registro.animaciones.some((a) => a.evento === 'IdleSalute'),
+            'y la nueva no va pegada al corte, que se la comeria');
+  dejarPasarLaEspera(falso);
+  const relevo = falso.registro.animaciones.map((a) => a.evento);
+  comprobar(relevo.join(',') === 'OffsetStop,IdleFurnitureExit,IdleForceDefaultState,IdleSalute',
+            'pasado el segundo, va la nueva', relevo.join(' -> '));
+
+  /* Y pedir la que ya esta sonando la para. */
+  falso.registro.animaciones.length = 0;
+  await js(`document.querySelector('#animplayer .ap-fila[data-evento="IdleSalute"]').click()`);
+  await esperar(150);
+  await pasarMensajesAlPlugin(falso);
+  const otraVez = falso.registro.animaciones.map((a) => a.evento);
+  comprobar(otraVez.join(',') === 'OffsetStop,IdleFurnitureExit,IdleForceDefaultState',
+            'pedir la misma otra vez la para, no la relanza',
+            otraVez.join(' -> '));
+
+  /* Desde la puerta de otros mods, igual. */
+  const relevos = falsoSp.cargarPlugin(PLUGIN, {});
+  relevos.tic();
+  const apR = relevos.sp.storage.AnimPlayer;
+  apR.reproducir('IdleWave');
+  relevos.tic();
+  relevos.registro.animaciones.length = 0;
+  apR.reproducir('IdleWave');        // la misma
+  relevos.tic();
+  comprobar(relevos.registro.animaciones.map((a) => a.evento).join(',') ===
+            'OffsetStop,IdleFurnitureExit,IdleForceDefaultState',
+            'y por la puerta de otros mods tambien para',
+            relevos.registro.animaciones.map((a) => a.evento).join(' -> '));
+
+  /* El bucle no cuenta: es la misma repitiendose, ni se para ni se releva. */
+  const enBucleR = falsoSp.cargarPlugin(PLUGIN, {});
+  enBucleR.tic();
+  const apB = enBucleR.sp.storage.AnimPlayer;
+  apB.reproducir('IdleLuteStart', { bucle: true });
+  enBucleR.tic();
+  enBucleR.registro.animaciones.length = 0;
+  const reloj4 = Date.now;
+  Date.now = () => reloj4() + 5000;
+  enBucleR.tic();
+  Date.now = reloj4;
+  comprobar(enBucleR.registro.animaciones.map((a) => a.evento).join(',') === 'IdleLuteStart',
+            'el bucle repite sin pararse a si mismo',
+            enBucleR.registro.animaciones.map((a) => a.evento).join(' -> '));
+
+  console.log('\n=== al parar, la pagina olvida la ultima pedida ===');
+  /* La pagina no dice lo que suena, pero se acuerda de la ultima que pidio:
+     es lo que la casilla de En bucle necesita para saber que repetir. Si no se
+     olvidara al parar, marcar En bucle despues reviviria una pose muerta. */
+  await verLista();
+  await buscar('wave');
+  await js(`document.querySelector('#animplayer .ap-fila[data-evento="IdleWave"]').click()`);
+  await esperar(150);
+  await pasarMensajesAlPlugin(falso);
+  ordenesVistas = falso.registro.inyectado.length;
+
+  falso.saltar();
+  falso.tic();
+  await pasarOrdenesAlPanel(falso);
+  falso.registro.animaciones.length = 0;
+  await js(`document.querySelector('#animplayer .ap-panel .ap-bucle')
+    .dispatchEvent(new MouseEvent('click', { bubbles: true }))`);
+  await esperar(150);
+  await pasarMensajesAlPlugin(falso);
+  comprobar(falso.sp.storage.AnimPlayer.enBucle() === null,
+            'tras el salto, marcar En bucle no revive nada',
+            String(falso.sp.storage.AnimPlayer.enBucle()));
+  await js(`document.querySelector('#animplayer .ap-panel .ap-bucle')
+    .dispatchEvent(new MouseEvent('click', { bubbles: true }))`);
+  await esperar(150);
+  await pasarMensajesAlPlugin(falso);
+
+  console.log('\n=== saltar corta la animacion ===');
+  /* Se engancha al evento de animacion del salto y no a la tecla, porque la
+     tecla se puede cambiar en las opciones del juego y el evento no. */
+  const saltando = falsoSp.cargarPlugin(PLUGIN, {});
+  saltando.tic();
+  const apSalto = saltando.sp.storage.AnimPlayer;
+
+  comprobar(saltando.registro.enganches.length === 1,
+            'se engancha al grafo de animacion, no a una tecla');
+
+  apSalto.reproducir('IdleWave');
+  saltando.tic();
+  dejarPasarLaEspera(saltando);
+  saltando.registro.animaciones.length = 0;
+
+  saltando.saltar();
+  saltando.tic();
+  const alSaltar = saltando.registro.animaciones.map((a) => a.evento);
+  comprobar(alSaltar.join(',') === 'OffsetStop,IdleFurnitureExit,IdleForceDefaultState',
+            'al saltar se corta, igual que pulsando Detener', alSaltar.join(' -> '));
+  comprobar(apSalto.enBucle() === null, 'y el bucle tambien se corta');
+
+  console.log('  --- pero sin nada puesto no hace nada ---');
+  saltando.registro.animaciones.length = 0;
+  saltando.saltar();
+  saltando.tic();
+  comprobar(saltando.registro.animaciones.length === 0,
+            'saltar sin animacion en marcha no manda nada',
+            saltando.registro.animaciones.map((a) => a.evento).join(', '));
+
+  const sinCortar = falsoSp.cargarPlugin(PLUGIN, { pararAlSaltar: false });
+  sinCortar.tic();
+  sinCortar.sp.storage.AnimPlayer.reproducir('IdleWave');
+  sinCortar.tic();
+  dejarPasarLaEspera(sinCortar);
+  sinCortar.registro.animaciones.length = 0;
+  sinCortar.saltar();
+  sinCortar.tic();
+  comprobar(sinCortar.registro.animaciones.length === 0,
+            'y se puede desactivar en los ajustes',
+            sinCortar.registro.animaciones.map((a) => a.evento).join(', '));
+
+  console.log('\n=== la pose no se queda puesta cuando ya no lo esta ===');
+  /* Skyrim no avisa de que una animacion ha terminado. Mientras el mod creyera
+     que seguia sonando pasaban dos cosas malas: los menus decian que si, y
+     volver a pulsar la misma la PARABA en vez de repetirla. */
+  const fin = falsoSp.cargarPlugin(PLUGIN, {});
+  fin.tic();
+  const apFin = fin.sp.storage.AnimPlayer;
+  const relojFin = Date.now;
+  let desfaseFin = 0;
+  Date.now = () => relojFin() + desfaseFin;
+  const adelantarFin = (ms) => { desfaseFin += ms; fin.tic(); };
+
+  apFin.reproducir('IdleWave');
+  fin.tic();
+  dejarPasarLaEspera(fin);
+  comprobar(apFin.enMarcha() === 'IdleWave', 'se pone lo que se pidio',
+            String(apFin.enMarcha()));
+
+  console.log('  --- lo que manda el propio mod no cuenta ---');
+  /* El enganche ve TODO lo que pasa por sendAnimationEvent, incluido lo
+     nuestro. Sin distinguirlo, la animacion se daria por terminada en el mismo
+     instante de lanzarla. */
+  adelantarFin(1500);
+  comprobar(apFin.enMarcha() === 'IdleWave',
+            'la pose sigue puesta despues de lanzarla', String(apFin.enMarcha()));
+
+  console.log('  --- pero si el jugador se pone a otra cosa, se acabo ---');
+  fin.registro.animaciones.length = 0;
+  fin.elJuegoHace('moveStart');
+  fin.tic();
+  comprobar(apFin.enMarcha() === null,
+            'andar da la pose por terminada', String(apFin.enMarcha()));
+  comprobar(fin.registro.animaciones.length === 0,
+            'y NO se le manda nada al juego: la pose ya no estaba',
+            fin.registro.animaciones.map((a) => a.evento).join(', '));
+
+  console.log('  --- y entonces volver a pulsarla la repite, no la para ---');
+  /* Esto es lo que se notaba de verdad: con el mod creyendo que seguia
+     sonando, la segunda pulsacion la paraba. */
+  apFin.reproducir('IdleWave');
+  fin.tic();
+  dejarPasarLaEspera(fin);
+  comprobar(fin.registro.animaciones.some((a) => a.evento === 'IdleWave'),
+            'la misma animacion se puede volver a poner',
+            fin.registro.animaciones.map((a) => a.evento).join(' -> '));
+
+  console.log('  --- recien lanzada no la limpia el movimiento que se corta ---');
+  /* Si venias andando, el juego manda cosas del movimiento justo despues de
+     pulsar. Sin margen, borrarian la pose que acaba de empezar. */
+  fin.elJuegoHace('moveStop');
+  fin.tic();
+  comprobar(apFin.enMarcha() === 'IdleWave',
+            'el ruido del primer momento no cuenta', String(apFin.enMarcha()));
+
+  console.log('  --- y si el jugador no hace nada, caduca ---');
+  adelantarFin(11000);
+  comprobar(apFin.enMarcha() === null,
+            'pasado el tiempo maximo se da por terminada', String(apFin.enMarcha()));
+
+  console.log('  --- con bucle no caduca nunca ---');
+  /* El bucle la vuelve a poner cada pocos segundos: esa si sigue viva. */
+  apFin.reproducir('IdleLuteStart', { bucle: true });
+  fin.tic();
+  dejarPasarLaEspera(fin);
+  adelantarFin(60000);
+  comprobar(apFin.enBucle() === 'IdleLuteStart',
+            'el bucle sigue', String(apFin.enBucle()));
+  fin.elJuegoHace('moveStart');
+  fin.tic();
+  comprobar(apFin.enBucle() === 'IdleLuteStart',
+            'y moverse tampoco lo tumba: el bucle la repone',
+            String(apFin.enBucle()));
+  apFin.parar();
+  fin.tic();
+
+  console.log('  --- avisa a quien escucha, igual que al parar a mano ---');
+  let avisosDeFin = 0;
+  apFin.alParar(() => { avisosDeFin++; });
+  apFin.reproducir('IdleWave');
+  fin.tic();
+  dejarPasarLaEspera(fin);
+  adelantarFin(11000);
+  comprobar(avisosDeFin === 1,
+            'acabarse sola avisa lo mismo que pararla', String(avisosDeFin));
+
+  console.log('  --- y se puede desactivar ---');
+  Date.now = relojFin;
+  const sinFin = falsoSp.cargarPlugin(PLUGIN, {
+    duracionMaxima: 0, limpiarAlMoverse: false
+  });
+  sinFin.tic();
+  sinFin.sp.storage.AnimPlayer.reproducir('IdleWave');
+  sinFin.tic();
+  const relojSinFin = Date.now;
+  Date.now = () => relojSinFin() + 120000;   // dos minutos despues
+  sinFin.elJuegoHace('moveStart');
+  sinFin.tic();
+  Date.now = relojSinFin;
+  comprobar(sinFin.sp.storage.AnimPlayer.enMarcha() === 'IdleWave',
+            'con los dos ajustes en cero la pose no se limpia sola',
+            String(sinFin.sp.storage.AnimPlayer.enMarcha()));
+
+  console.log('\n=== sentado: no te levanta ===');
+  /* Estar sentado no es una pose: es un ESTADO del que dependen otras
+     animaciones. Si el mod te levanta antes de mandarlas, lo que queda es un
+     personaje de pie haciendo como que lee un libro que no tiene. */
+  const sentado = falsoSp.cargarPlugin(PLUGIN, {});
+  sentado.tic();
+  const apS = sentado.sp.storage.AnimPlayer;
+
+  comprobar(apS.ficha('ChairReadingStart').sentado === true,
+            'las que se hacen sentado estan marcadas');
+  comprobar(apS.ficha('IdleWave').sentado !== true,
+            'y las demas no');
+
+  sentado.registro.sentado = true;          // metido en una silla
+  apS.reproducir('IdleWave');               // algo cualquiera, para que haya una en marcha
+  sentado.tic();
+  dejarPasarLaEspera(sentado);
+  sentado.registro.animaciones.length = 0;
+
+  apS.reproducir('ChairReadingStart');
+  sentado.tic();
+  const enSilla = sentado.registro.animaciones.map((a) => a.evento);
+  comprobar(enSilla.indexOf('IdleFurnitureExit') === -1,
+            'pedir una de sentado NO manda el levantarse',
+            enSilla.join(' -> '));
+  comprobar(enSilla.join(',') === 'ChairReadingStart',
+            'va directa y sin espera', enSilla.join(' -> '));
+
+  console.log('  --- pero de pie se comporta como siempre ---');
+  sentado.registro.sentado = false;
+  apS.reproducir('IdleSalute');
+  sentado.tic();
+  dejarPasarLaEspera(sentado);
+  sentado.registro.animaciones.length = 0;
+  apS.reproducir('ChairReadingStart');
+  sentado.tic();
+  comprobar(sentado.registro.animaciones.some((a) => a.evento === 'IdleFurnitureExit'),
+            'de pie si para la anterior antes',
+            sentado.registro.animaciones.map((a) => a.evento).join(' -> '));
+
+  console.log('  --- y abrir el panel sentado no te levanta ---');
+  const abriendo = falsoSp.cargarPlugin(PLUGIN, {});
+  abriendo.tic();
+  abriendo.registro.sentado = true;
+  abriendo.registro.movimientoQuitado = 0;
+  abriendo.sp.storage.AnimPlayer.abrirPanel();
+  abriendo.tic();
+  comprobar(abriendo.registro.movimientoQuitado === 0,
+            'sentado no se toca el movimiento: hacerlo rompe el estado de mueble');
+  comprobar(abriendo.registro.enfocado === true, 'pero el panel se abre igual');
+
+  abriendo.sp.storage.AnimPlayer.cerrarPanel();
+  abriendo.tic();
+  abriendo.registro.sentado = false;
+  abriendo.sp.storage.AnimPlayer.abrirPanel();
+  abriendo.tic();
+  comprobar(abriendo.registro.movimientoQuitado === 1,
+            'y de pie se quita como siempre, para que escribir no te haga andar');
+
+  console.log('\n=== una pose no toca el arma ===');
+  /* Hubo una version que envainaba antes de cada pose, con su espera y todo.
+     Se quito: el mod no manda sobre el arma del jugador. Lo unico que se sigue
+     haciendo es SOLTAR el bloqueo al parar, por si otra cosa lo dejo puesto
+     —SkyMP lo usa para pintar a los demas jugadores— y te quedaste sin poder
+     desenfundar. */
+  const conArma = falsoSp.cargarPlugin(PLUGIN, {});
+  conArma.tic();
+  const apArma = conArma.sp.storage.AnimPlayer;
+
+  conArma.registro.armaFuera = true;
+  conArma.registro.modosDelArma.length = 0;
+  conArma.registro.envainadas = 0;
+  apArma.reproducir('IdleWave');
+  conArma.tic();
+  comprobar(conArma.registro.envainadas === 0,
+            'con el arma fuera, la pose va y el arma se queda como este',
+            conArma.registro.envainadas + ' envainadas');
+  comprobar(conArma.registro.animaciones.some((a) => a.evento === 'IdleWave'),
+            'y sin esperar a nada: la pose sale en el acto',
+            conArma.registro.animaciones.map((a) => a.evento).join(', '));
+  comprobar(conArma.registro.modosDelArma.indexOf(0) === -1,
+            'no se fuerza el arma envainada',
+            JSON.stringify(conArma.registro.modosDelArma));
+
+  const trasParar2 = falsoSp.cargarPlugin(PLUGIN, {});
+  trasParar2.tic();
+  trasParar2.registro.modosDelArma.length = 0;
+  trasParar2.sp.storage.AnimPlayer.parar();
+  trasParar2.tic();
+  comprobar(trasParar2.registro.modosDelArma.indexOf(-1) !== -1,
+            'pero al parar se suelta el bloqueo, por si lo dejo otra cosa',
+            JSON.stringify(trasParar2.registro.modosDelArma));
 
   console.log('\n=== el bucle ===');
   falso.registro.animaciones.length = 0;
@@ -436,9 +1198,6 @@ app.whenReady().then(async () => {
   comprobar(await js('window.__animplayer.enBucle()'), 'la casilla se marca');
   comprobar(await js(`document.querySelector('#animplayer .ap-bucle').classList.contains('ap-puesto')`),
             'y se ve marcada');
-  comprobar(await js(`/en bucle/.test(document.querySelector('#animplayer .ap-ahora').textContent)`),
-            'y el pie lo dice',
-            await js(`document.querySelector('#animplayer .ap-ahora').textContent`));
   await pasarMensajesAlPlugin(falso);
 
   falso.registro.animaciones.length = 0;
@@ -478,8 +1237,8 @@ app.whenReady().then(async () => {
   Date.now = reloj;
   comprobar(falso.registro.animaciones.length === 0,
             'al quitar la casilla deja de repetirse');
-  comprobar(!(await js(`/en bucle/.test(document.querySelector('#animplayer .ap-ahora').textContent)`)),
-            'y el pie deja de decirlo');
+  comprobar(!(await js(`document.querySelector('#animplayer .ap-bucle').classList.contains('ap-puesto')`)),
+            'y la casilla se ve sin marcar');
 
   console.log('\n=== el boton de parar ===');
   falso.registro.animaciones.length = 0;
@@ -487,12 +1246,10 @@ app.whenReady().then(async () => {
   await esperar(160);
   await pasarMensajesAlPlugin(falso);
   const paradas = falso.registro.animaciones.map((a) => a.evento);
-  comprobar(paradas.length === 2 && paradas[0] === 'IdleFurnitureExit' &&
-            paradas[1] === 'IdleForceDefaultState',
-            'levanta del mueble y luego vuelve a la postura normal, en ese orden',
+  comprobar(paradas.join(' + ') ===
+            'OffsetStop + IdleFurnitureExit + IdleForceDefaultState',
+            'suelta lo que lleve, levanta del mueble y endereza, en ese orden',
             paradas.join(' + '));
-  comprobar(await js(`/Nada en marcha/.test(document.querySelector('#animplayer .ap-ahora').textContent)`),
-            'y el pie se limpia');
 
   falso.registro.animaciones.length = 0;
   await buscar('wave');
@@ -513,6 +1270,83 @@ app.whenReady().then(async () => {
   await js(`document.querySelector('#animplayer .ap-bucle').click()`);   // se deja como estaba
   await esperar(120);
   await pasarMensajesAlPlugin(falso);
+
+  console.log('\n=== reiniciar, para cuando algo se queda colgado ===');
+  /* "Detener" manda los dos eventos de siempre. Esto es para cuando eso no
+     basta: te quedas clavado, sin controles, o atravesando las paredes porque
+     SkyMP te quito la colision al sentarte y no llego a devolvertela. */
+  await verRueda();
+  comprobar(await js(`!!document.querySelector('#animplayer .ap-rueda .ap-reiniciar')`),
+            'esta debajo de "Ver todas", en la rueda');
+  await verLista();
+  comprobar(await js(`!!document.querySelector('#animplayer .ap-panel .ap-reiniciar')`),
+            'y tambien en la ventana de la lista');
+
+  falso.registro.animaciones.length = 0;
+  falso.registro.colision = null;
+  falso.registro.dontMove = null;
+  falso.registro.recargado = 0;
+  falso.registro.controlesDevueltosTodos = 0;
+  await js(`document.querySelector('#animplayer .ap-panel .ap-reiniciar')
+    .dispatchEvent(new MouseEvent('click', { bubbles: true }))`);
+  await esperar(160);
+  await pasarMensajesAlPlugin(falso);
+
+  const pasos = falso.registro.animaciones.map((a) => a.evento);
+  comprobar(pasos.join(',') ===
+            'OffsetStop,IdleFurnitureExit,IdleForceDefaultState,IdleStopInstant',
+            'suelta lo que lleve, saca del mueble y corta la pose',
+            pasos.join(' -> '));
+  comprobar(falso.registro.colision === true,
+            'devuelve la colision, que es la que deja atravesando paredes',
+            String(falso.registro.colision));
+  comprobar(falso.registro.dontMove === false, 'y el movimiento');
+  comprobar(falso.registro.controlesDevueltosTodos > 0,
+            'devuelve TODOS los controles, no solo los que quitamos nosotros');
+  comprobar(falso.registro.recargado === 1,
+            'y recarga el personaje moviendolo a si mismo');
+
+  console.log('  --- corta el bucle y limpia la interfaz ---');
+  await buscar('wave');
+  await js(`(() => {
+    document.querySelector('#animplayer .ap-panel .ap-bucle')
+      .dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    document.querySelector('#animplayer .ap-fila[data-evento="IdleWave"]').click();
+  })()`);
+  await esperar(160);
+  await pasarMensajesAlPlugin(falso);
+  comprobar(falso.sp.storage.AnimPlayer.enBucle() === 'IdleWave',
+            'con algo en bucle...', String(falso.sp.storage.AnimPlayer.enBucle()));
+  await js(`document.querySelector('#animplayer .ap-panel .ap-reiniciar')
+    .dispatchEvent(new MouseEvent('click', { bubbles: true }))`);
+  await esperar(160);
+  await pasarMensajesAlPlugin(falso);
+  comprobar(falso.sp.storage.AnimPlayer.enBucle() === null, '...el bucle se corta');
+  comprobar(!(await js(`window.__animplayer.enBucle()`)),
+            'y la casilla se queda sin marcar');
+
+  console.log('  --- se puede quitar la recarga en los ajustes ---');
+  const sinRecarga = falsoSp.cargarPlugin(PLUGIN, { recargarAlReiniciar: false });
+  sinRecarga.tic();
+  sinRecarga.sp.storage.AnimPlayer.reiniciar();
+  sinRecarga.tic();
+  comprobar(sinRecarga.registro.recargado === 0,
+            'con recargarAlReiniciar en false no se mueve al personaje');
+  comprobar(sinRecarga.registro.colision === true,
+            'pero lo demas se hace igual');
+
+  console.log('  --- y aunque el juego se queje de un paso ---');
+  /* Cada paso va en su propio try: si uno falla, los demas tienen que hacerse
+     igual. Se rompe setCollision a proposito. */
+  const roto2 = falsoSp.cargarPlugin(PLUGIN, {});
+  roto2.tic();
+  roto2.sp.setCollision = function () { throw new Error('no se puede'); };
+  roto2.sp.storage.AnimPlayer.reiniciar();
+  roto2.tic();
+  comprobar(roto2.registro.recargado === 1,
+            'los pasos de despues se hacen igual');
+  comprobar(roto2.registro.consola.some((l) => /reinicio, colision/.test(l)),
+            'y el que fallo queda apuntado');
 
   console.log('\n=== cerrar devuelve el control al juego ===');
   const movimientoAntes = falso.registro.movimientoDevuelto;
@@ -747,8 +1581,11 @@ app.whenReady().then(async () => {
   otroMod.registro.animaciones.length = 0;
   ap.reproducir({ evento: 'IdleWave', origen: 'bardo' });
   otroMod.tic();
-  comprobar(otroMod.registro.animaciones[0].evento === 'IdleWave',
-            'con un objeto entero');
+  dejarPasarLaEspera(otroMod);      // relevo: la nueva espera a la parada
+  comprobar(otroMod.registro.animaciones
+              .some((a) => a.evento === 'IdleWave'),
+            'con un objeto entero',
+            otroMod.registro.animaciones.map((a) => a.evento).join(', '));
   comprobar(otroMod.registro.consola.some((l) => /IdleWave \(bardo\)/.test(l)),
             'y el origen queda apuntado, para saber quien la pidio');
 
@@ -764,16 +1601,17 @@ app.whenReady().then(async () => {
   Date.now = () => relojPuerta() + 5000;
   otroMod.tic();
   Date.now = relojPuerta;
-  comprobar(otroMod.registro.animaciones.length === 2,
+  comprobar(otroMod.registro.animaciones.filter((a) => a.evento === 'IdleLuteStart').length === 2,
             'y se repite solo', otroMod.registro.animaciones.map((a) => a.evento).join(', '));
 
   ap.parar();
   otroMod.tic();
   comprobar(ap.enBucle() === null, 'parar corta el bucle');
   const trasParar = otroMod.registro.animaciones.map((a) => a.evento);
-  comprobar(trasParar.slice(-2).join(' + ') === 'IdleFurnitureExit + IdleForceDefaultState',
-            'y levanta del mueble antes de volver a la postura normal',
-            trasParar.slice(-2).join(' + '));
+  comprobar(trasParar.slice(-3).join(' + ') ===
+            'OffsetStop + IdleFurnitureExit + IdleForceDefaultState',
+            'y suelta, levanta y endereza, en ese orden',
+            trasParar.slice(-3).join(' + '));
 
   console.log('\n  --- consultar el catalogo ---');
   comprobar(ap.existe('IdleLuteStart'), 'se puede preguntar si un evento esta');
@@ -790,7 +1628,8 @@ app.whenReady().then(async () => {
             halla[0].sincroniza !== undefined,
             'y devuelve lo que hace falta para pintarlo');
   comprobar(ap.buscar('chair', 3).length === 3, 'se le puede poner tope');
-  comprobar(ap.lista().animaciones.length > 600, 'y se puede pedir el catalogo entero');
+  comprobar(ap.lista().animaciones.length > 400, 'y se puede pedir el catalogo entero',
+            ap.lista().animaciones.length + ' animaciones');
 
   console.log('\n  --- un mod trae sus propias animaciones ---');
   const cuantasAntes = ap.lista().animaciones.length;
@@ -829,24 +1668,28 @@ app.whenReady().then(async () => {
 
   ap.reproducir('IdleWave', { origen: 'bardo' });
   otroMod.tic();
-  comprobar(visto.length === 1 && visto[0] === 'IdleWave:bardo',
+  dejarPasarLaEspera(otroMod);
+  comprobar(visto.some((v) => v === 'IdleWave:bardo'),
             'avisa de lo que se reproduce, y de quien lo pidio', visto.join(', '));
 
   ap.parar();
   otroMod.tic();
   comprobar(parados.length === 1, 'y de cuando se para');
 
+  const cuantosVistos = visto.length;
   dejarDeVer();
-  ap.reproducir('IdleWave');
+  ap.reproducir('IdleSalute');
   otroMod.tic();
-  comprobar(visto.length === 1, 'y se puede dejar de escuchar');
+  comprobar(visto.length === cuantosVistos, 'y se puede dejar de escuchar');
 
   const roto = ap.alReproducir(() => { throw new Error('observador roto'); });
   otroMod.registro.animaciones.length = 0;
-  ap.reproducir('IdleSalute');
+  ap.reproducir('IdleCowering');
   otroMod.tic();
-  comprobar(otroMod.registro.animaciones.length === 1,
-            'un observador que revienta no deja sin animacion al que la pidio');
+  dejarPasarLaEspera(otroMod);
+  comprobar(otroMod.registro.animaciones.some((a) => a.evento === 'IdleCowering'),
+            'un observador que revienta no deja sin animacion al que la pidio',
+            otroMod.registro.animaciones.map((a) => a.evento).join(', '));
   comprobar(otroMod.registro.consola.some((l) => /observador ha fallado/.test(l)),
             'aunque si queda apuntado');
   roto();

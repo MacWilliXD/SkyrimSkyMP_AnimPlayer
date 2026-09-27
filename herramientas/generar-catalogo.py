@@ -197,6 +197,165 @@ DESTACADAS = [
 ]
 
 
+# ---------------------------------------------------------------------------
+# Las que las reglas colocan mal. Las reglas aciertan con casi todas, pero unas
+# cuantas caen donde no toca porque su nombre no dice de que van: una ceremonia
+# del Gremio no lleva "ritual" en el evento, y la telarana estaba en "dormir"
+# por eso de estar tumbado.
+#
+# Esto se mira DESPUES de las reglas y manda sobre ellas.
+# ---------------------------------------------------------------------------
+RECOLOCAR = {
+    # leer un pergamino es leer, por magico que sea el pergamino
+    "IdleReadElderScroll": "leer",
+    "IdleReadElderScroll3rdP": "leer",
+    "IdleReadElderScrollLonger": "leer",
+    "IdleReadElderScrollEnd": "leer",
+    "IdleMQ206FelldirShowScroll": "leer",
+    # y sentarse es sentarse, aunque la animacion sea de crio
+    "IdleChildLegsOutStart": "sentarse",
+    "IdleChildSitOnKnees": "sentarse",
+    # leer un pergamino es leer, por magico que sea el pergamino
+    "IdleReadElderScroll": "leer",
+    "IdleReadElderScroll3rdP": "leer",
+    "IdleReadElderScrollLonger": "leer",
+    "IdleReadElderScrollEnd": "leer",
+    "IdleMQ206FelldirShowScroll": "leer",
+    # y sentarse es sentarse, aunque la animacion sea de crio
+    "IdleChildLegsOutStart": "sentarse",
+    "IdleChildSitOnKnees": "sentarse",
+    "ChairDrinkingStart": "comer",
+    "ChairEatingStart": "comer",
+    "ChairEatingSoupStart": "comer",
+    "ChairEatingStart_VampireMeat": "comer",
+    "ChairVampireEatingStart": "comer",
+    "IdleTableDrinkEnter": "comer",
+    "IdleTableMugEnter": "comer",
+    "IdleTableDrinkAndMugEnter": "comer",
+    "IdleTablePassOutEnter": "comer",
+    "VampireFeedingBedLeft": "comer",
+    "VampireFeedingBedRight": "comer",
+    "VampireFeedingBedRollLeft": "comer",
+    "VampireFeedingBedRollRight": "comer",
+    "pa_VampireFeedStanding_Front": "comer",
+    "pa_VampireFeedStanding_Back": "comer",
+    "ChairReadingStart": "leer",
+    "ChairReadingIdles": "leer",
+    "IdleChairWrite": "oficios",
+    "IdleWriteTableChairLeftEnter": "oficios",
+    "IdleWriteTableChairRightEnter": "oficios",
+    "IdleWriteTableChairLeftExit": "oficios",
+    "IdleWriteTableChairRightExit": "oficios",
+    "IdleBarCounterWipe": "oficios",
+    "IdleCounterStart": "oficios",
+    "Lever_PlayerPush": "oficios",
+    "IdleAltarEnter": "magia",
+    "IdleSnowElfPrinceFireAndForget": "magia",
+    "pa_WW_CutWrist": "magia",
+    "pa_ExtractWerewolfSpirit": "magia",
+    "IdleSnowElfPrinceChairDialogue": "dialogo",
+    "IdleWallCornerPeekLEnter": "gestos",
+    "IdleWallCornerPeekREnter": "gestos",
+    "IdleHideREnter": "gestos",
+    "pa_HugA": "gestos",
+    "IdleWarmHands": "gestos",
+    "IdleWarmHandsStanding": "gestos",
+    "IdleWarmHandsCrouched": "gestos",
+    "IdleWarmArms": "gestos",
+    "IdleVampireFeastVictim": "herido",
+    "Ragdoll": "herido",
+    "IdleCraftingCookingPotAddIngredient": "oficios",
+    "IdleCraftingCookingPotTalkA": "oficios",
+    "IdleCraftingCookingPotTalkB": "oficios",
+    "IdleDLC02BoatRide": "oficios",
+    "IdleActivateCoffinPuzzle": "oficios",
+    "IdleTG08_Phase1": "magia",
+    "IdleTG08_Phase2": "magia",
+    "IdleTG08_Phase3": "magia",
+    "IdleTG08_Phase4": "magia",
+    "IdleTG08_Phase5": "magia",
+    "IdleTGFalmerStatueEnter": "magia",
+    "WardBreak": "combate",
+    "IdleWebEnterInstant": "herido",
+    "IdleWebExit": "herido",
+    "IdleWebExitQuickTurn": "herido",
+    "IdleWebThrashShort": "herido",
+    "IdleWebThrashShort2": "herido",
+    "MS12BedDeath": "herido",
+    "IdleCannibalFeedStanding": "comer",
+    "IdleCannibalFeedCrouching": "comer",
+    "IdleNocturnal_LookLeft": "gestos",
+    "IdleNocturnal_LookRight": "gestos",
+    "IdleCiceroHappy": "gestos",
+    "IdleCiceroAgitated": "gestos",
+}
+
+# Estas se quitan de la lista. Son la misma pose que su version de adulto, y al
+# quitarles el "Nino:" del nombre se llamarian igual que ellas.
+FUERA = ["IdleChairCHILDFrontEnter", "IdleChairCHILDLeftEnter", "IdleChairCHILDRightEnter", "IdleChairCHILDFrontExit", "IdleChairCHILDLeftExit", "IdleChairCHILDRightExit"]
+
+
+# ---------------------------------------------------------------------------
+# Las que siguen puestas aunque camines.
+#
+# Una pose normal anima el esqueleto entero: das un paso y se va, porque la
+# animacion de andar gana. Estas no: son de las dos familias que Skyrim monta
+# ENCIMA de lo que hagas con las piernas —las Offset (llevar un cesto, los
+# brazos cruzados) y las de hablar en movimiento—, asi que se quedan puestas.
+#
+# Para que una pose cualquiera hiciera esto harian falta ficheros de animacion
+# nuevos, y eso no se puede desde aqui.
+# ---------------------------------------------------------------------------
+ANDANDO = [
+    "OffsetCarryBasketStart",
+    "OffsetCarryPotStart",
+    "OffsetFlowerBasketStart",
+    "OffsetCarryFlowerBasketPickStart",
+    "OffsetCarryMQ201DrinkTray",
+    "OffsetCarryMQ201DrinkR",
+    "IdleOffsetCarryPotServe",
+    "OffsetArmsCrossedStart",
+    "OffsetBoundStandingStart",
+    "MotionDrivenDialogueGeneric",
+    "MotionDrivenDialogueAngry",
+    "MotionDrivenDialogueNextClip",
+    "IdleDialogueMovingTalkA",
+    "IdleDialogueMovingTalkB",
+    "IdleDialogueMovingTalkC",
+    "IdleDialogueMovingTalkD",
+    "IdleCartDriverIdle",
+    "IdleCartDriverSway",
+    "IdleValericaWalkForward",
+]
+
+
+# ---------------------------------------------------------------------------
+# Las que solo tienen sentido si YA estas sentado.
+#
+# No te sientan ellas: se montan sobre el estado de estar en una silla. Si el
+# mod te levanta antes de mandarlas —como hacia al cambiar de animacion— lo que
+# queda es un personaje de pie haciendo como que lee un libro que no tiene.
+# ---------------------------------------------------------------------------
+SENTADO = [
+    "idleChairArmsCrossedVar1",
+    "idleChairArmsCrossedVar2",
+    "idleChairLookDown",
+    "idleChairShoulderFlex",
+    "IdleChairVar1",
+    "idleChairVar2",
+    "IdleChairWrite",
+    "ChairReadingStart",
+    "ChairReadingIdles",
+    "ChairDrinkingStart",
+    "ChairEatingStart",
+    "ChairEatingSoupStart",
+    "ChairEatingStart_VampireMeat",
+    "ChairVampireEatingStart",
+    "IdleEatSoup",
+    "IdleSnowElfPrinceChairDialogue",
+]
+
+
 def bonito(edid, enam):
     """Convierte IdleWarmHandsStanding en "Warm Hands Standing".
 
@@ -259,22 +418,43 @@ def generar(data):
     for enam, (edid, dnam) in porEvento.items():
         if enam == "00NextClip":
             continue                    # pegamento interno, no es una pose
-        clave = categoria(enam, edid)
+        if enam in FUERA:
+            continue
+        clave = RECOLOCAR.get(enam) or categoria(enam, edid)
         ingles = bonito(edid, enam)
         ficha = {
             "evento": enam,
             "nombre": traducciones.traducir(enam, ingles),
             "categoria": clave,
-            # El nombre original entra en las palabras de busqueda: asi
-            # buscar "chair" sigue encontrando las sillas aunque en la lista
-            # pongan "Sentarse de frente".
-            "busqueda": ingles,
-            "categoria_busqueda": porClave.get(clave, (0, 0, "", 0))[2],
+            # Sin palabras extra: se busca por el nombre y por el id, y el id
+            # ya trae el ingles dentro (IdleChairFrontEnter da chair, front,
+            # enter al partirlo por sus mayusculas). Meter ademas el EDID solo
+            # anadia ruido, y alguno miente: el de blockStart dice BowZoom.
+            "busqueda": "",
             "origen": "vanilla",
         }
         if enam in CONTROL:
-            ficha["busqueda"] = ingles + " " + CONTROL[enam][1]
+            # Las de control si llevan palabras extra: "detener", "cancelar"...
+            # no salen ni de su nombre ni de su id.
+            ficha["busqueda"] = CONTROL[enam][1]
             ficha["categoria"] = "control"
+        # Fuera las "(al instante)". Son la misma pose que su version normal,
+        # pero saltandose la animacion de entrada: el juego las usa para
+        # colocar a un PNJ ya sentado al aparecer. En una lista para elegir a
+        # mano solo son la mitad de las entradas duplicadas.
+        #
+        # Se miran por el NOMBRE y no por el evento: hay tres que acaban en
+        # Instant y no son duplicados de nada (meterse en la telarana, Serana
+        # en su ataud, de rodillas y maniatado), y esas se quedan.
+        if "al instante" in ficha["nombre"].lower():
+            continue
+
+        if enam in ANDANDO:
+            ficha["andando"] = True
+
+        if enam in SENTADO:
+            ficha["sentado"] = True
+
         if enam in DESTACADAS:
             ficha["destacada"] = True
         motivo = porQueNoSincroniza(enam)
@@ -283,8 +463,29 @@ def generar(data):
             ficha["motivo"] = motivo
         animaciones.append(ficha)
 
+    numerarRepetidos(animaciones)
     animaciones.sort(key=lambda a: (a["categoria"], a["nombre"].lower()))
     return animaciones
+
+
+def numerarRepetidos(animaciones):
+    """Numera las que acaban llamandose igual: "Remate (1)", "Remate (2)"...
+
+    Pasa sobre todo con los remates, que ya no nombran al bicho contra el que
+    son, pero tambien cada vez que se limpia un nombre. Antes habia que ir
+    cazando los choques a mano; asi se numeran solos y en el orden del juego.
+    """
+    cuantas = {}
+    for a in animaciones:
+        cuantas[a["nombre"]] = cuantas.get(a["nombre"], 0) + 1
+
+    vistas = {}
+    for a in animaciones:
+        if cuantas[a["nombre"]] < 2:
+            continue
+        base = a["nombre"]
+        vistas[base] = vistas.get(base, 0) + 1
+        a["nombre"] = "%s (%d)" % (base, vistas[base])
 
 
 if __name__ == "__main__":
