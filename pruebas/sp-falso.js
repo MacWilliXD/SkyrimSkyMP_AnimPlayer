@@ -33,6 +33,7 @@ function crear(ajustes, archivosDePartida) {
     movimientoDevuelto: 0,
     terceraPersona: 0,
     peticionesHttp: [],
+    teclas: {},             // codigo -> pulsada, lo que ve Input
     archivos: archivosDePartida || {}    // lo que writePlugin deja en disco
   };
 
@@ -86,6 +87,17 @@ function crear(ajustes, archivosDePartida) {
 
     Ui: { isMenuOpen: function () { return false; } },
 
+    /* El teclado, como lo lee SkyMP: preguntando si la tecla esta pulsada.
+       La prueba lo maneja con falso.tecla(codigo, true/false). */
+    Input: {
+      isKeyPressed: function (codigo) { return !!registro.teclas[codigo]; },
+      getNumKeysPressed: function () {
+        var n = 0;
+        for (var k in registro.teclas) if (registro.teclas[k]) n++;
+        return n;
+      }
+    },
+
     /* Los dos que SkyrimPlatform da para guardar datos en disco. Aqui son un
        objeto en memoria, pero con la misma forma: asi la prueba puede mirar
        que se escribe, y volver a cargar el plugin con lo que quedo escrito. */
@@ -121,6 +133,8 @@ function crear(ajustes, archivosDePartida) {
     },
     /** Un "update", que es donde el plugin vacia su cola de acciones. */
     tic: function () { disparar('update'); },
+    /** Pulsar o soltar una tecla, como lo veria el sondeo del plugin. */
+    tecla: function (codigo, pulsada) { registro.teclas[codigo] = !!pulsada; },
     /** El codigo que el plugin ha mandado a la pagina, del mas reciente atras. */
     ultimaInyeccion: function (contiene) {
       for (var i = registro.inyectado.length - 1; i >= 0; i--) {

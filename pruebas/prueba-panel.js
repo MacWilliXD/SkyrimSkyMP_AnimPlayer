@@ -534,43 +534,128 @@ app.whenReady().then(async () => {
   await pasarMensajesAlPlugin(falso);
 
   // =====================================================================
-  console.log('\n=== la tecla: abre, y no antes de tiempo ===');
+  console.log('\n=== la tecla ===');
+  /* Aqui hubo un fallo de verdad: a veces habia que pulsar F3 dos o tres veces
+     para que el panel saliera. Estas pruebas cubren las tres causas que se
+     encontraron, para que no vuelva ninguna. */
   const nuevo = falsoSp.cargarPlugin(PLUGIN, { tecla: 61, margenTrasPantallaDeCarga: 15000 });
   nuevo.tic();
   nuevo.registro.inyectado.length = 0;
-  nuevo.disparar('buttonEvent', { code: 61, isDown: true, isRepeating: false });
-  nuevo.tic();
-  comprobar(nuevo.registro.consola.some((l) => /todavia se esta cargando/.test(l)),
-            'nada mas arrancar la ignora, que abrir paneles ahi cuelga el juego');
-  comprobar(nuevo.registro.enfocado === null, 'y no toca el navegador');
 
-  // Se simula que ya paso el margen: la pantalla de carga se cerro hace rato.
+  /* Pulsar y soltar la tecla como lo ve el sondeo: pulsada en una vuelta,
+     suelta en la siguiente. */
+  const pulsar = (falso, codigo) => {
+    falso.tecla(codigo, true);
+    falso.tic();
+    falso.tecla(codigo, false);
+    falso.tic();
+  };
+
+  console.log('  --- se lee sondeando, no solo con buttonEvent ---');
+  /* SkyMP no usa buttonEvent para teclas en ningun sitio: sondea. El nuestro
+     hace lo mismo, asi que tiene que funcionar SIN que llegue un buttonEvent. */
+  /* El reloj de la prueba. Tiene que AVANZAR, no saltar y volver: el plugin
+     descarta dos senales de la misma tecla si llegan en menos de 250 ms, asi
+     que si cada salto volviera al mismo instante, la segunda pulsacion se
+     descartaria y pareceria un fallo del plugin cuando es de la prueba. */
+  const relojReal = Date.now;
+  let desfase = 0;
+  Date.now = () => relojReal() + desfase;
+  const adelantar = (ms, f) => { desfase += ms; f(); };
+
   nuevo.disparar('menuOpen', { name: 'Loading Menu' });
   nuevo.disparar('menuClose', { name: 'Loading Menu' });
-  await esperar(50);
-  const falsoAhora = Date.now;
-  Date.now = () => falsoAhora() + 20000;      // 20 s despues
-  nuevo.disparar('buttonEvent', { code: 61, isDown: true, isRepeating: false });
-  nuevo.tic();
-  Date.now = falsoAhora;
-  comprobar(nuevo.registro.enfocado === true, 'pasado el margen, abre');
+  adelantar(20000, () => pulsar(nuevo, 61));
+  comprobar(nuevo.registro.enfocado === true,
+            'abre sin que llegue ningun buttonEvent');
   comprobar(nuevo.registro.movimientoQuitado === 1,
             'y quita el movimiento mientras escribes');
   comprobar(nuevo.ultimaInyeccion('__animplayer.abrir') !== null,
             'y le dice al panel que salga');
 
-  nuevo.disparar('buttonEvent', { code: 61, isDown: true, isRepeating: false });
-  nuevo.tic();
+  adelantar(20000, () => pulsar(nuevo, 61));
   comprobar(nuevo.registro.enfocado === false && nuevo.registro.movimientoDevuelto === 1,
             'la misma tecla lo cierra');
 
+  console.log('  --- los dos caminos no la cuentan dos veces ---');
+  /* Con el sondeo Y buttonEvent funcionando a la vez, una sola pulsacion
+     llegaria por partida doble: la ventana se abriria y se cerraria al
+     instante, y pareceria que la tecla no hace nada. */
+  adelantar(20000, () => {
+    nuevo.tecla(61, true);
+    nuevo.disparar('buttonEvent', { code: 61, isDown: true, isRepeating: false });
+    nuevo.tic();
+    nuevo.tecla(61, false);
+    nuevo.tic();
+  });
+  comprobar(nuevo.registro.enfocado === true,
+            'una pulsacion es una pulsacion, lleguen una o dos senales');
+
+  adelantar(20000, () => pulsar(nuevo, 61));       // se deja cerrado
+  comprobar(nuevo.registro.enfocado === false, 'y se puede cerrar despues');
+
+  console.log('  --- dejarla pulsada no la repite ---');
+  adelantar(20000, () => {
+    nuevo.tecla(61, true);
+    nuevo.tic(); nuevo.tic(); nuevo.tic(); nuevo.tic();   // sigue pulsada
+  });
+  comprobar(nuevo.registro.enfocado === true, 'se abre una vez');
+  nuevo.tecla(61, false);
+  nuevo.tic();
+  comprobar(nuevo.registro.enfocado === true, 'y no se cierra sola al soltarla');
+  adelantar(20000, () => pulsar(nuevo, 61));
+
   nuevo.registro.enfocado = null;
-  nuevo.disparar('buttonEvent', { code: 62, isDown: true, isRepeating: false });
-  nuevo.tic();
+  adelantar(20000, () => pulsar(nuevo, 62));
   comprobar(nuevo.registro.enfocado === null, 'otra tecla no hace nada');
-  nuevo.disparar('buttonEvent', { code: 61, isDown: true, isRepeating: true });
-  nuevo.tic();
-  comprobar(nuevo.registro.enfocado === null, 'y dejarla pulsada no la repite');
+
+  console.log('  --- pulsada durante la carga, se abre en cuanto se puede ---');
+  /* Antes la pulsacion se tiraba a la basura en silencio: pulsabas nada mas
+     aparecer en el mundo y no pasaba nada, sin decir por que. De ahi lo de
+     "tengo que darle varias veces". */
+  const cargando = falsoSp.cargarPlugin(PLUGIN, { tecla: 61 });
+  cargando.tic();
+  pulsar(cargando, 61);
+  comprobar(cargando.registro.enfocado === null,
+            'durante la carga no abre, que ahi el juego se cuelga');
+  comprobar(cargando.registro.consola.some((l) => /se abrira en cuanto se pueda/.test(l)),
+            'pero se apunta la pulsacion en vez de tirarla');
+  cargando.disparar('menuOpen', { name: 'Loading Menu' });
+  cargando.disparar('menuClose', { name: 'Loading Menu' });
+  adelantar(20000, () => cargando.tic());
+  comprobar(cargando.registro.enfocado === true,
+            'y en cuanto el mundo esta listo, se abre solo');
+
+  Date.now = relojReal;      // el reloj vuelve a su sitio
+
+  console.log('  --- si la pagina se recarga, el panel se vuelve a poner ---');
+  /* La pagina del navegador es la de SkyMP y se puede recargar al conectar o
+     al reconectar. Cuando pasaba, el panel desaparecia y el plugin seguia
+     creyendo que estaba puesto: la tecla dejaba de hacer nada para siempre. */
+  const recarga = falsoSp.cargarPlugin(PLUGIN, { tecla: 61 });
+  recarga.tic();
+  const puestoUna = recarga.registro.inyectado.filter((t) => t.indexOf('__animplayer =') !== -1).length;
+  comprobar(puestoUna === 1, 'se pone una vez al arrancar');
+
+  // La interfaz de SkyMP avisa con esto cuando su pagina termina de cargar.
+  recarga.disparar('browserMessage', { arguments: ['front-loaded'] });
+  recarga.tic();
+  const puestoDos = recarga.registro.inyectado.filter((t) => t.indexOf('__animplayer =') !== -1).length;
+  comprobar(puestoDos === 2,
+            'y se vuelve a poner cuando la pagina dice que ha cargado',
+            puestoUna + ' -> ' + puestoDos);
+
+  // Y si al pedirle algo el panel no esta, la pagina lo dice y se repone.
+  recarga.disparar('browserMessage', {
+    arguments: [JSON.stringify({ type: 'animplayer:falta', data: { querian: 'abrir' } })]
+  });
+  recarga.tic();
+  comprobar(recarga.registro.consola.some((l) => /se vuelve a poner/.test(l)),
+            'si la pagina contesta que falta, tambien');
+  comprobar(recarga.ultimaInyeccion('__animplayer.abrir') !== null,
+            'y se le repite lo que se le estaba pidiendo');
+  comprobar(recarga.ultimaInyeccion('animplayer:falta') !== null,
+            'porque al pedirselo se pregunta si esta');
 
   // =====================================================================
   console.log('\n=== animaciones de otros mods, desde los ajustes ===');

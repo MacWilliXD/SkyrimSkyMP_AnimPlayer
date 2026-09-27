@@ -74,6 +74,12 @@ barra no te haga caminar. La cámara, el combate y los menús siguen funcionando
 Al reproducir se pasa a tercera persona: en primera no se ve el cuerpo y
 parecería que la animación no va.
 
+Si pulsas F3 justo al aparecer en el mundo, el panel no se abre en el momento:
+se espera a que el mundo termine de asentarse (unos 15 segundos desde que se
+cierra la pantalla de carga) y se abre solo. Abrir paneles antes cuelga el
+juego, y es algo que el mod de inventario del servidor ya documenta en su
+código.
+
 ### Por qué F3
 
 Es la única tecla de función libre en este servidor:

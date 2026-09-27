@@ -207,14 +207,64 @@ No es una teoría: el mod de inventario de este mismo servidor lo documenta en s
 propio código y resuelve igual. Las acciones se apuntan en `pendientes` y se
 ejecutan en el siguiente `update`, que sí es un contexto válido.
 
+### La tecla se lee sondeando, no con `buttonEvent`
+
+Lo evidente es `sp.on('buttonEvent')`. Y falla: a veces hay que pulsar la tecla
+dos o tres veces para que el panel salga.
+
+La pista está en el cliente de SkyMP de este servidor: en todo el archivo hay
+**una sola** llamada a `buttonEvent`, y no la usa para teclas. Todo su manejo de
+teclado —el inventario con F2 incluido— pasa por un `KeyboardEventsService` que
+**sondea**: mira en cada vuelta si la tecla está pulsada, con
+`Input.isKeyPressed`. Si quienes hicieron el cliente prefirieron sondear, por
+algo será.
+
+Aquí se hace lo mismo, y además se deja `buttonEvent` puesto como refuerzo: si
+uno de los dos no llega, el otro sí. Para que no cuenten la misma pulsación dos
+veces hay una ventana de descarte de 250 ms; sin ella, con los dos caminos
+funcionando, la ventana se abriría y se cerraría al instante y parecería que la
+tecla no hace nada.
+
+Cuesta una llamada nativa por cuadro, que no es nada. SkyMP se ahorra hasta eso
+mirando antes `getNumKeysPressed()`, pero ellos tienen muchas teclas atadas y
+aquí hay una: no compensa perder fiabilidad en el caso de soltar una tecla y
+pulsar la nuestra en el mismo cuadro.
+
+**Ojo con lo que no se puede usar**: `Input.releaseKey` / `holdKey` / `tapKey`.
+El mod de inventario documenta cuelgues reales del juego
+(`EXCEPTION_ACCESS_VIOLATION`, confirmado con CrashLogger) por usarlas.
+`isKeyPressed` solo lee, y es seguro.
+
+### La página no es nuestra, y se recarga
+
+El panel se mete en la página del navegador de SkyMP, que se puede recargar al
+conectar, al reconectar o si el servidor la cambia. Cuando pasaba, el panel
+desaparecía pero el plugin seguía creyendo que estaba puesto: la tecla dejaba de
+hacer nada **para siempre**, no «a veces».
+
+Dos redes:
+
+- Cuando la interfaz de SkyMP termina de cargar, manda `front-loaded` por
+  `sendMessage`. Ese mensaje nos llega también, aunque no sea nuestro, y es
+  exactamente la señal que hace falta: la página es nueva, así que se vuelve a
+  poner el panel.
+- Y cada vez que se le pide algo al panel se pregunta de paso si está. Si no,
+  la propia página contesta `animplayer:falta` y se repone, repitiendo lo que se
+  le estaba pidiendo.
+
 ### El margen tras la pantalla de carga
 
-La tecla se ignora mientras hay pantalla de carga y durante 15 segundos después.
-El inventario del servidor documenta un cuelgue real al abrir su panel mientras
-el mundo se estaba asentando, y que un margen fijo desde el arranque no bastaba
-con cargas lentas. Lo que les funcionó, y se copia aquí, es mirar la pantalla de
-carga de verdad (`menuOpen` / `menuClose` con `Loading Menu`) y esperar un rato
-más después de que se cierre.
+La tecla no abre el panel mientras hay pantalla de carga ni durante 15 segundos
+después. El inventario del servidor documenta un cuelgue real al abrir su panel
+mientras el mundo se estaba asentando, y que un margen fijo desde el arranque no
+bastaba con cargas lentas. Lo que les funcionó, y se copia aquí, es mirar la
+pantalla de carga de verdad (`menuOpen` / `menuClose` con `Loading Menu`) y
+esperar un rato más después de que se cierre.
+
+Lo que sí cambió: antes la pulsación se tiraba a la basura en silencio. Pulsabas
+nada más aparecer en el mundo, no pasaba nada, y no había forma de saber por
+qué — de ahí buena parte de los «tengo que darle varias veces». Ahora se apunta
+y el panel se abre solo en cuanto el mundo está listo.
 
 ### El estado se cambia ya; el efecto se encola
 

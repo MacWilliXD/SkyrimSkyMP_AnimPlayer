@@ -1818,8 +1818,16 @@
         try { ahora[i](); } catch (e) { apuntar('accion fallida: ' + e); }
       }
     }
-    // El update es un contexto nativo valido, que es justo lo que el bucle
-    // necesita para volver a mandar la animacion.
+    /* El update es un contexto nativo valido, que es justo lo que hace falta
+       para leer el teclado y para volver a mandar la animacion del bucle. */
+    mirarLaTecla();
+
+    if (abrirCuandoSePueda && sePuedeAbrir()) {
+      abrirCuandoSePueda = false;
+      apuntar('el mundo ya esta listo: abriendo');
+      abrir();
+    }
+
     Bucle.latido();
   });
 
@@ -1844,11 +1852,27 @@
     }
   }
 
+  /**
+   * Le pide algo al panel, y se entera si el panel ya no esta.
+   *
+   * La pagina del navegador no es nuestra: es la de SkyMP, y se puede recargar
+   * (al conectar, al reconectar, si el servidor la cambia). Cuando eso pasa,
+   * el panel que habiamos metido desaparece, pero aqui seguiamos creyendo que
+   * estaba puesto, asi que pulsar la tecla no hacia nada. Para siempre, no
+   * "a veces".
+   *
+   * Ahora, si al pedirle algo no esta, la propia pagina lo dice y lo volvemos
+   * a poner. Se pregunta en el mismo mensaje en el que se le pide la cosa, que
+   * no cuesta nada.
+   */
   function decirAlPanel(metodo) {
     try {
       sp.browser.executeJavaScript(
-        'if (window.__animplayer) window.__animplayer.' + metodo + '();');
-    } catch (e) { /* si la pagina no esta, no hay nada que decir */ }
+        'if (window.__animplayer) { window.__animplayer.' + metodo + '(); }' +
+        ' else if (window.skyrimPlatform && window.skyrimPlatform.sendMessage) {' +
+        '   window.skyrimPlatform.sendMessage(JSON.stringify(' +
+        '     { type: "animplayer:falta", data: { querian: "' + metodo + '" } })); }');
+    } catch (e) { /* si no hay navegador, no hay nada que decir */ }
   }
 
   /* ------------------------------------------------------------ abrir y cerrar */
@@ -1935,15 +1959,65 @@
     return true;
   }
 
+  /* ---------------------------------------------------------------------
+   * COMO SE LEE LA TECLA, Y POR QUE ASI
+   *
+   * Durante un tiempo esto era solo sp.on('buttonEvent'), que es lo evidente.
+   * Y fallaba: a veces habia que pulsar F3 dos o tres veces para que el panel
+   * saliera.
+   *
+   * El cliente de SkyMP de este servidor da la pista: en todo el archivo hay
+   * UNA sola llamada a buttonEvent, y no la usa para teclas. Todo su manejo de
+   * teclado —el inventario con F2 incluido— pasa por un servicio que SONDEA:
+   * mira en cada vuelta si la tecla esta pulsada. Si los que hicieron el
+   * cliente prefirieron sondear, por algo sera.
+   *
+   * Asi que aqui se hace lo mismo, y ademas se deja buttonEvent puesto como
+   * refuerzo: si alguno de los dos no llega, el otro si. Para que no cuenten
+   * la misma pulsacion dos veces hay una ventana de descarte; sin ella, con
+   * los dos caminos funcionando, la ventana se abriria y se cerraria al
+   * instante y pareceria que la tecla no hace nada.
+   * --------------------------------------------------------------------- */
+  var teclaPulsadaAntes = false;
+  var ultimaPulsacion = 0;
+  var abrirCuandoSePueda = false;
+  var DESCARTE = 250;          // ms en los que una segunda senal es la misma
+
+  function pulsacionDeTecla() {
+    var ahora = Date.now();
+    if (ahora - ultimaPulsacion < DESCARTE) return;   // ya la hemos atendido
+    ultimaPulsacion = ahora;
+
+    if (abierto) { cerrar(); return; }
+
+    if (!sePuedeAbrir()) {
+      /* Antes esto se tragaba la pulsacion y no pasaba nada: pulsabas y el
+         juego no respondia, sin decir por que. Ahora se apunta y se abre en
+         cuanto el mundo esta listo, que es lo que la persona queria. */
+      abrirCuandoSePueda = true;
+      apuntar('todavia se esta cargando el mundo: se abrira en cuanto se pueda');
+      return;
+    }
+    abrir();
+  }
+
+  /** El sondeo. Una llamada nativa por cuadro, que no es nada. */
+  function mirarLaTecla() {
+    var pulsada = false;
+    try {
+      pulsada = !!sp.Input.isKeyPressed(TECLA);
+    } catch (e) {
+      return;                  // no hay Input: queda buttonEvent
+    }
+    if (pulsada && !teclaPulsadaAntes) pulsacionDeTecla();
+    teclaPulsadaAntes = pulsada;
+  }
+
+  // El refuerzo. Si el sondeo funciona, la ventana de descarte lo ignora.
   sp.on('buttonEvent', function (e) {
     if (!e || !e.isDown || e.isRepeating) return;
     if (e.code !== TECLA) return;
-    if (!abierto && !sePuedeAbrir()) {
-      apuntar('tecla ignorada: el mundo todavia se esta cargando');
-      return;
-    }
-    // Abrir toca el juego (quitar el movimiento), asi que va por la cola.
-    encolar(alternar);
+    encolar(pulsacionDeTecla);
   });
 
   sp.on('menuOpen', function (e) {
@@ -1964,7 +2038,22 @@
 
   sp.on('browserMessage', function (e) {
     var crudo = e && e.arguments && e.arguments[0];
-    if (typeof crudo !== 'string' || crudo.indexOf('animplayer:') === -1) return;
+    if (typeof crudo !== 'string') return;
+
+    /* La interfaz de SkyMP avisa con esto cuando su pagina termina de cargar.
+       No es un mensaje nuestro, pero nos llega igual, y es exactamente la
+       senal que hace falta: la pagina es nueva, o sea que el panel que
+       habiamos metido ya no esta. Se vuelve a poner. */
+    if (crudo === 'front-loaded') {
+      puesto = false;
+      encolar(function () {
+        inyectar();
+        if (abierto) decirAlPanel('abrir');
+      });
+      return;
+    }
+
+    if (crudo.indexOf('animplayer:') === -1) return;
 
     var mensaje;
     try { mensaje = JSON.parse(crudo); } catch (err) { return; }
@@ -2026,6 +2115,18 @@
         // el movimiento al personaje y apuntar que esta abierto. No se le
         // vuelve a decir al panel que se abra, que ya lo esta.
         if (!abierto) { abierto = true; encolar(aplicarAbierto); }
+        break;
+
+      case 'animplayer:falta':
+        // La pagina ha contestado que el panel no esta. Se vuelve a poner y se
+        // le repite lo que se le estaba pidiendo.
+        apuntar('el panel no estaba en la pagina: se vuelve a poner');
+        puesto = false;
+        encolar(function () {
+          inyectar();
+          var querian = (mensaje.data && mensaje.data.querian) || 'abrir';
+          decirAlPanel(querian);
+        });
         break;
 
       case 'animplayer:listo':
