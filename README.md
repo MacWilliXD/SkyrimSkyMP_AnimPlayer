@@ -10,7 +10,10 @@ no hay nada encima del juego.
 
 ![el panel abierto](docs/panel.png)
 
-- **674 animaciones**, sacadas del propio Skyrim instalado, no escritas a mano.
+- **611 animaciones**, sacadas del propio Skyrim instalado, no escritas a mano.
+- **Un icono por tipo de acción**: espada, mandoble, escudo, silla, cama, copa,
+  cubiertos, libro… Dieciocho dibujos para las 611, y ninguno etiqueta menos
+  de diez animaciones.
 - **Todas con nombre en español**: «Tocar el laúd», no `IdleLuteStart`.
 - **Favoritos**: una estrella en cada fila. Lo que marques se guarda en disco,
   sale en su propia categoría y aparece siempre el primero al buscar.

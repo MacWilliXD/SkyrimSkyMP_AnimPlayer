@@ -2032,6 +2032,115 @@ app.whenReady().then(async () => {
             'y el plugin quedo sabiendo que estaba cerrado, no abierto',
             seguidos.registro.movimientoQuitado + ' quitado');
 
+  console.log('\n=== los iconos ===');
+  /* Un dibujo por tipo de accion, no por categoria: sentarse y tumbarse no son
+     lo mismo, ni una espada y un escudo. El reparto lo hace
+     herramientas/iconos.py y el dibujo herramientas/dibujos.py; los dos entran
+     en el plugin generados, como el catalogo. */
+  await asegurarAbierto();
+  await verLista();
+
+  /* El catalogo se mira del lado del PLUGIN, que es quien lo tiene: la pagina
+     solo recibe las fichas para pintarlas y no expone lista(). */
+  const todasLas = falso.sp.storage.AnimPlayer.lista().animaciones;
+  const conIcono = {
+    total: todasLas.length,
+    sin: todasLas.filter((a) => !a.icono).length,
+    cuantos: new Set(todasLas.map((a) => a.icono)).size
+  };
+  comprobar(conIcono.sin === 0, 'todas las animaciones llevan icono',
+            conIcono.sin + ' sin icono de ' + conIcono.total);
+  comprobar(conIcono.cuantos >= 8 && conIcono.cuantos <= 40,
+            'y son unos cuantos iconos distintos, no uno por animacion',
+            String(conIcono.cuantos));
+
+  await buscar('wave');
+  comprobar(await js(`!!document.querySelector(
+    '#animplayer .ap-fila[data-evento="IdleWave"] svg.ap-icono path')`),
+            'la fila de la lista pinta su icono');
+  comprobar(await js(`(document.querySelector(
+    '#animplayer .ap-fila[data-evento="IdleWave"] svg.ap-icono path')
+      .getAttribute('d') || '').length > 20`),
+            'y el dibujo tiene contenido, no es un hueco');
+
+  console.log('  --- y tambien en la rueda ---');
+  await limpiarFavoritos(falso);
+  await js(`document.querySelector(
+    '#animplayer .ap-fila[data-evento="IdleWave"] .ap-estrella').click()`);
+  await esperar(150);
+  await verRueda();
+  comprobar(await js(`!!document.querySelector(
+    '#animplayer .ap-sitio[data-evento="IdleWave"] svg.ap-simbolo path')`),
+            'el sector de la rueda pinta su icono');
+
+  console.log('\n=== esconder animaciones ===');
+  /* Para que el servidor pueda repartirlas por jugador: unas las ve todo el
+     mundo y otras solo quien deba. Por ahora no esconde nada nadie. */
+  const oculto = falsoSp.cargarPlugin(PLUGIN, {});
+  oculto.tic();
+  const apOculto = oculto.sp.storage.AnimPlayer;
+
+  comprobar(apOculto.ocultas().length === 0, 'de entrada no hay ninguna escondida',
+            String(apOculto.ocultas().length));
+  comprobar(apOculto.visible('IdleWave') === true, 'y todas se ven');
+
+  comprobar(apOculto.ocultar('IdleWave') === 1, 'esconder una devuelve cuantas toco');
+  comprobar(apOculto.visible('IdleWave') === false, 'y deja de verse');
+  comprobar(apOculto.ocultas().join(',') === 'IdleWave',
+            'y sale en la lista de escondidas', apOculto.ocultas().join(','));
+
+  comprobar(apOculto.ocultar('IdleWave') === 0,
+            'esconder la misma otra vez no cuenta');
+  comprobar(apOculto.ocultar('NoExisteEstaAnimacion') === 0,
+            'ni esconder una que no existe');
+  comprobar(apOculto.visible('NoExisteEstaAnimacion') === false,
+            'una que no existe no se ve, por definicion');
+
+  console.log('  --- escondida NO impide reproducirla desde la puerta ---');
+  /* A proposito: el servidor puede querer lanzarte una animacion que tu no
+     tienes en el menu. Lo que se quita es su sitio en la lista, no la orden. */
+  oculto.registro.animaciones.length = 0;
+  apOculto.reproducir('IdleWave');
+  oculto.tic();
+  comprobar(oculto.registro.animaciones.some((a) => a.evento === 'IdleWave'),
+            'una escondida se sigue pudiendo reproducir',
+            oculto.registro.animaciones.map((a) => a.evento).join(', '));
+
+  comprobar(apOculto.mostrar(['IdleWave']) === 1, 'mostrar la devuelve');
+  comprobar(apOculto.visible('IdleWave') === true, 'y vuelve a verse');
+  comprobar(apOculto.ocultas().length === 0, 'y la lista de escondidas se vacia');
+
+  console.log('  --- y el panel se entera, sin reiniciar nada ---');
+  await verLista();
+  await buscar('wave');
+  comprobar(await js(`!!document.querySelector(
+    '#animplayer .ap-fila[data-evento="IdleWave"]')`),
+            'la animacion esta en la lista');
+  /* Esconder rehace el catalogo del panel: el plugin vuelve a inyectarlo
+     entero, igual que cuando un mod anade animaciones. Eso no llega por el
+     camino de las ordenes cortas, asi que se entrega a mano, que es justo lo
+     que hace SkyrimPlatform con ese executeJavaScript. */
+  const entregarLaInyeccion = async (f) => {
+    const codigo = f.ultimaInyeccion('panelEnLaPagina');
+    if (codigo) await jsMudo(codigo);
+    await esperar(150);
+  };
+
+  falso.sp.storage.AnimPlayer.ocultar('IdleWave');
+  falso.tic();
+  await entregarLaInyeccion(falso);
+  await buscar('wave');
+  comprobar(!(await js(`!!document.querySelector(
+    '#animplayer .ap-fila[data-evento="IdleWave"]')`)),
+            'y al esconderla desaparece de la lista');
+  falso.sp.storage.AnimPlayer.mostrar('IdleWave');
+  falso.tic();
+  await entregarLaInyeccion(falso);
+  await buscar('wave');
+  comprobar(await js(`!!document.querySelector(
+    '#animplayer .ap-fila[data-evento="IdleWave"]')`),
+            'y al mostrarla vuelve');
+
   console.log('\n=== lo que no debe pasar ===');
   const raro = falsoSp.cargarPlugin(PLUGIN, {});
   raro.tic();

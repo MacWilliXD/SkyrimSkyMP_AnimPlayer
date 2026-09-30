@@ -35,6 +35,10 @@ import json
 import io
 import os
 import re
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import dibujos
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.dirname(AQUI)
@@ -44,6 +48,8 @@ DESTINO = os.path.join(RAIZ, "plugin", "animplayer.js")
 
 MARCA_ABRE = "// >>> CATALOGO GENERADO"
 MARCA_CIERRA = "// <<< CATALOGO GENERADO <<<"
+MARCA_ABRE_DIBUJOS = "// >>> DIBUJOS GENERADOS"
+MARCA_CIERRA_DIBUJOS = "// <<< DIBUJOS GENERADOS <<<"
 
 
 def compactar(catalogo):
@@ -62,6 +68,8 @@ def compactar(catalogo):
             ficha["andando"] = True
         if a.get("sentado"):
             ficha["sentado"] = True
+        if a.get("icono"):
+            ficha["icono"] = a["icono"]
         if a.get("sincroniza") is False:
             ficha["sincroniza"] = False
             if a.get("motivo"):
@@ -70,6 +78,18 @@ def compactar(catalogo):
     return {"version": catalogo.get("version", 1),
             "categorias": catalogo["categorias"],
             "animaciones": fuera}
+
+
+def dibujosComoJs():
+    """Los dibujos de los iconos, uno por linea, para que el diff se lea."""
+    lineas = ["  var DIBUJOS = {"]
+    claves = sorted(dibujos.DIBUJOS)
+    for i, k in enumerate(claves):
+        coma = "," if i < len(claves) - 1 else ""
+        lineas.append('    %s: %s%s' % (json.dumps(k),
+                                        json.dumps(dibujos.DIBUJOS[k]), coma))
+    lineas.append("  };")
+    return "\n".join(lineas)
 
 
 def comoJs(catalogo):
@@ -104,7 +124,18 @@ if __name__ == "__main__":
     nuevo = fuente[:trasMarca] + comoJs(catalogo) + "\n" + fuente[fin:]
     io.open(DESTINO, "w", encoding="utf-8").write(nuevo)
 
+    # Y los dibujos de los iconos, en su propio bloque.
+    fuente = io.open(DESTINO, encoding="utf-8").read()
+    inicioD = fuente.find(MARCA_ABRE_DIBUJOS)
+    finD = fuente.find(MARCA_CIERRA_DIBUJOS)
+    if inicioD == -1 or finD == -1:
+        raise SystemExit("no encuentro las marcas de los dibujos en " + DESTINO)
+    trasMarcaD = fuente.index("\n", inicioD) + 1
+    nuevo = fuente[:trasMarcaD] + dibujosComoJs() + "\n  " + fuente[finD:]
+    io.open(DESTINO, "w", encoding="utf-8").write(nuevo)
+
     print("catalogo metido en", DESTINO)
+    print("  %d dibujos de iconos" % len(dibujos.DIBUJOS))
     print("  %d animaciones, %d categorias" %
           (len(catalogo["animaciones"]), len(catalogo["categorias"])))
     print("  el plugin ocupa ahora %.0f KB" % (len(nuevo) / 1024.0))

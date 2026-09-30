@@ -125,6 +125,31 @@ puede estar sin que el juego lo cuente.
 Los observadores de `alParar()` se enteran igual en los dos casos: para quien
 escucha, que la pose se corte o que se acabe sola es lo mismo, ya no está.
 
+### Esconder animaciones
+
+```js
+ap.ocultar('IdleWave')             // una
+ap.ocultar(['IdleWave', 'IdleSalute'])
+ap.mostrar('IdleWave')             // deshacer
+ap.visible('IdleWave')             // → true / false
+ap.ocultas()                       // → los eventos escondidos
+```
+
+Para repartir animaciones por jugador: unas las ve todo el mundo y otras solo
+quien deba. De entrada **no hay ninguna escondida**.
+
+`ocultar` y `mostrar` devuelven cuántas fichas tocaron de verdad, así que
+esconder dos veces la misma devuelve `0`.
+
+Tres cosas que conviene saber:
+
+- **Esconder no impide reproducirla.** El servidor puede querer lanzarte una
+  animación que tú no tienes en el menú. Lo que se quita es su sitio en la
+  lista, en la rueda y en el buscador.
+- **No se guarda en disco.** Es estado de la sesión: quien manda es el
+  servidor, y lo vuelve a decir cada vez que entras.
+- **El panel se entera solo**, sin reiniciar nada.
+
 ### El bucle
 
 ```js

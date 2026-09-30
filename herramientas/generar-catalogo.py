@@ -42,6 +42,7 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.dirname(AQUI)
 sys.path.insert(0, AQUI)
 import idles
+import iconos
 import traducciones
 
 RUTA_POR_DEFECTO = ("C:/Program Files (x86)/Steam/steamapps/common/"
@@ -464,6 +465,24 @@ def generar(data):
         animaciones.append(ficha)
 
     numerarRepetidos(animaciones)
+
+    # El icono se pone AL FINAL, cuando los nombres ya estan numerados: las
+    # reglas miran el nombre, y "Remate (3)" tiene que mirarse igual que
+    # "Remate". Ver herramientas/iconos.py.
+    for a in animaciones:
+        a["icono"] = iconos.icono(a["nombre"], a["evento"], a["categoria"])
+
+    # Y se comprueba el minimo: un dibujo que solo etiqueta tres animaciones no
+    # se aprende ni se reconoce, solo mete ruido. Si alguno baja del minimo hay
+    # que fundirlo en otro (FUSIONES) o darle mas casos.
+    cuenta = collections.Counter(a["icono"] for a in animaciones)
+    flojos = sorted((i, n) for i, n in cuenta.items() if n < iconos.MINIMO)
+    if flojos:
+        raise SystemExit(
+            "iconos por debajo del minimo de %d: %s\n"
+            "Fundelos en otro con FUSIONES, en herramientas/iconos.py."
+            % (iconos.MINIMO, ", ".join("%s(%d)" % f for f in flojos)))
+
     animaciones.sort(key=lambda a: (a["categoria"], a["nombre"].lower()))
     return animaciones
 
