@@ -38,6 +38,8 @@ function crear(ajustes, archivosDePartida) {
     armaFuera: false,           // lo que responde isWeaponDrawn
     envainadoLento: false,      // si guardar el arma tarda, como en el juego
     sentado: false,             // si el personaje esta metido en un mueble
+    mueblesActivados: [],       // cada vez que se vuelve a sentar al personaje
+    desenvainadas: 0,           // cada drawWeapon que se pide
     modosDelArma: [],           // cada setWeaponDrawnMode que se hace
     envainadas: 0,              // cada vez que se guarda el arma
     enganches: [],              // los hooks del grafo de animacion
@@ -90,8 +92,9 @@ function crear(ajustes, archivosDePartida) {
             if (!registro.envainadoLento) registro.armaFuera = false;
           },
           getFurnitureReference: function () {
-            return registro.sentado ? { __mueble: 'silla' } : null;
+            return registro.sentado ? elMueble : null;
           },
+          drawWeapon: function () { registro.desenvainadas++; registro.armaFuera = true; },
           moveTo: function () { registro.recargado++; }
         };
       },
@@ -115,11 +118,12 @@ function crear(ajustes, archivosDePartida) {
     /* La via que usa el propio SkyMP para envainar: 0 envaina y fuerza,
        -1 suelta el bloqueo. */
     TESModPlatform: {
-      /* Fuerza la postura del arma: 0 la guarda, -1 deja de forzar. Es la via
-         que usa el propio SkyMP, y la que funciona en el juego. */
+      /* Fuerza la postura del arma: 0 la guarda, 1 la saca, -1 deja de forzar.
+         Es la via que usa el propio SkyMP, y la que funciona en el juego. */
       setWeaponDrawnMode: function (actor, modo) {
         registro.modosDelArma.push(modo);
         if (modo === 0) { registro.envainadas++; registro.armaFuera = false; }
+        if (modo === 1) { registro.armaFuera = true; }
       }
     },
 
@@ -175,6 +179,16 @@ function crear(ajustes, archivosDePartida) {
       this.post = function (camino, opciones) {
         registro.peticionesHttp.push({ origen: origen, camino: camino, opciones: opciones });
       };
+    }
+  };
+
+  /* La silla. Activarla es como sentarse en el juego, y el falso lo apunta
+     para que la prueba pueda ver si el mod te volvio a sentar. */
+  var elMueble = {
+    __mueble: 'silla',
+    activate: function (actor, soloProceso) {
+      registro.mueblesActivados.push({ soloProceso: soloProceso });
+      registro.sentado = true;
     }
   };
 

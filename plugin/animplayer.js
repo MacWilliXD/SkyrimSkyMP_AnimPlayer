@@ -118,6 +118,10 @@
   var DURACION_MAXIMA = opcion('duracionMaxima', 10000);
   var LIMPIAR_AL_MOVERSE = opcion('limpiarAlMoverse', true);
   var GRACIA_TRAS_LANZAR = opcion('graciaTrasLanzar', 1000);
+  var RECORDAR_EL_ESTADO = opcion('recordarElEstado', true);
+  var VOLVER_A_SENTARSE = opcion('volverASentarse', true);
+  var ESPERA_AL_REPONER = opcion('esperaAlReponer', 333);
+  var EVENTO_DE_PARADA = opcion('eventoDeParada', 'IdleStop');
   var TERCERA_PERSONA = opcion('forzarTerceraPersona', true);
   var QUITAR_MOVIMIENTO = opcion('quitarMovimiento', true);
   var TRANSPORTE = opcion('transporte', 'local');
@@ -988,6 +992,15 @@
   var mandandoNosotros = false;
   var mandadoHaceNada = [];
 
+  /* Si tenemos la postura del arma forzada con setWeaponDrawnMode.
+   *
+   * Hace falta llevar la cuenta porque el forzado es para el corte y SOLO para
+   * el corte: una pose reproducida con la postura forzada sale a medias —el
+   * personaje baja las manos con el arma en ellas—, y soltar el forzado en
+   * mitad de una pose la rompe. Asi que se suelta antes de lanzar cualquier
+   * cosa, y para eso hay que saber si estaba puesto. */
+  var armaForzada = false;
+
   function enviarAlGrafo(actor, evento) {
     mandadoHaceNada.push({ evento: evento, cuando: Date.now() });
     if (mandadoHaceNada.length > 12) mandadoHaceNada.shift();
@@ -1073,16 +1086,65 @@
      * El orden importa: primero suelta, luego levanta, luego endereza. Con
      * solo el ultimo te quedas de pie dentro de la silla y con el puchero.
      */
-    parar: function (peticion) {
+    /**
+     * Corta la pose. Con la memoria del estado, si la hay, respeta lo que ya
+     * tenias: ver mirarElEstado.
+     */
+    parar: function (peticion, memoria) {
       var actor = Reproductor.actorDe(peticion);
       if (!actor) return false;
-      // Por si el bloqueo del arma se quedo puesto: soltarlo no cuesta nada.
-      Reproductor.soltarElArma(actor);
+
+      /* EL CORTE, Y POR QUE NO ES IdleForceDefaultState.
+       *
+       * En los registros del propio juego, el IDLE cuyo evento es
+       * IdleForceDefaultState tiene por editorId "ResetRoot". No para la
+       * animacion: devuelve la raiz del grafo a su estado por defecto, que es
+       * de pie, con las manos vacias y fuera de cualquier mueble. Por eso se
+       * llevaba por delante todo lo que la pose tenia debajo —la guardia, la
+       * silla—: es literalmente lo que ese evento hace.
+       *
+       * IdleStop si para una animacion sin tocar el resto, y existe de verdad
+       * (20 registros en los ESM). Es el que se manda ahora.
+       *
+       * OJO con el consejo que circula por los foros: PlayIdle(IdleStop_Loose).
+       * IdleStop_Loose no es un evento, es el editorId de un registro cuyo
+       * EVENTO se llama IdleStop. PlayIdle recibe el registro y
+       * sendAnimationEvent el nombre del evento, asi que mandar
+       * "IdleStop_Loose" por aqui no haria nada. Y sin dar error, que es lo
+       * peor que puede pasar con un evento de animacion. */
+      var reseteaLaRaiz = (EVENTO_DE_PARADA === 'IdleForceDefaultState');
+
+      /* El forzado del arma va atado al reseteo, que es el unico corte que la
+         baja. Con IdleStop no hace falta, y mejor: era la causa de que la pose
+         siguiente saliera con la postura forzada. */
+      if (reseteaLaRaiz && memoria && memoria.armaFuera) {
+        Reproductor.mantenerElArmaFuera(actor);
+      } else {
+        // Por si el bloqueo del arma se quedo puesto: soltarlo no cuesta nada.
+        Reproductor.soltarElArma(actor);
+      }
+
+      /* SI ESTAS EN UN MUEBLE, NO SE MANDA EL LEVANTARSE. Punto.
+
+         Lo decide el estado de ahora —getFurnitureReference— y no la memoria ni
+         una lista de animaciones. Estando sentado, levantarte nunca es lo que
+         querias al pulsar algo; y si de verdad hay que salir de ahi, para eso
+         esta Reiniciar.
+
+         Se mira el estado y no el recuerdo porque las dos cosas se despegan: si
+         la pose te saco de la silla, creerse el recuerdo dejaba el corte a
+         medias sin razon. Estando ya de pie, mandar el levantarse no hace daño
+         —no te levanta de la nada— y el corte sale entero; despues, si se
+         recordaba un mueble, el plan B te vuelve a sentar. */
+      var enUnMueble = Reproductor.enUnMueble(peticion);
+
       try {
         enviarAlGrafo(actor, 'OffsetStop');
-        enviarAlGrafo(actor, 'IdleFurnitureExit');
-        enviarAlGrafo(actor, 'IdleForceDefaultState');
-        apuntar('animacion parada');
+        if (!enUnMueble) {
+          enviarAlGrafo(actor, 'IdleFurnitureExit');
+        }
+        enviarAlGrafo(actor, EVENTO_DE_PARADA);
+        apuntar('animacion parada con ' + EVENTO_DE_PARADA);
         return true;
       } catch (e) {
         apuntar('fallo al parar: ' + e);
@@ -1153,10 +1215,23 @@
       return true;
     },
 
-    /** Manda el evento al juego y ya. Sin preparativos de ningun tipo. */
+    /** Manda el evento al juego. Lo unico que hace antes es soltar el arma. */
     mandar: function (peticion) {
       var actor = Reproductor.actorDe(peticion);
       if (!actor) return false;
+
+      /* NINGUNA POSE SE REPRODUCE CON LA POSTURA DEL ARMA FORZADA.
+       *
+       * El forzado lo pone el corte, para que no te baje el arma (ver parar).
+       * Si la pose siguiente llega antes de que se suelte, sale a medias: el
+       * personaje baja las manos con el arma en ellas. Aqui es el unico sitio
+       * por el que pasan todas —el bucle, el relevo y la puerta de otros mods
+       * incluidos—, asi que aqui no hay forma de colarse. */
+      if (armaForzada) {
+        Reproductor.soltarElArma(actor);
+        apuntar('soltado el forzado del arma antes de la pose');
+      }
+
       try {
         enviarAlGrafo(actor, peticion.evento);
         if (peticion.origen !== 'bucle') {
@@ -1181,6 +1256,7 @@
       try {
         sp.TESModPlatform.setWeaponDrawnMode(actor, -1);
       } catch (e) { /* si no hay TESModPlatform, no habia nada que soltar */ }
+      armaForzada = false;
     },
 
     /**
@@ -1194,6 +1270,93 @@
         var actor = Reproductor.actorDe(peticion);
         return !!(actor && actor.getFurnitureReference());
       } catch (e) {
+        return false;
+      }
+    },
+
+    /**
+     * Suelta lo que el personaje lleve en las manos, y nada mas.
+     *
+     * Es el primer evento del corte, suelto: hay animaciones que sacan ollas,
+     * jarras, libros o espadas de utileria, y si no se manda esto se quedan
+     * puestas sobre la pose siguiente. Vale por si solo cuando NO se quiere
+     * cortar nada mas —estando sentado, por ejemplo—.
+     */
+    soltarLasManos: function (peticion) {
+      try {
+        var actor = Reproductor.actorDe(peticion);
+        if (!actor) return false;
+        enviarAlGrafo(actor, 'OffsetStop');
+        return true;
+      } catch (e) {
+        apuntar('no pude soltar las manos: ' + e);
+        return false;
+      }
+    },
+
+    /**
+     * La foto del estado del que dependen las poses, antes de tocar nada.
+     *
+     * Dos cosas, que son las que el corte rompe:
+     *
+     *   armaFuera  si estabas en guardia. Hay poses que solo tienen sentido
+     *              asi, y el corte las devolvia a manos vacias.
+     *   mueble     la silla, banco o cama en la que estabas. Se guarda la
+     *              REFERENCIA y no un si/no, porque con ella se puede volver a
+     *              sentar si hiciera falta.
+     */
+    mirarElEstado: function (peticion) {
+      var foto = { armaFuera: false, mueble: null };
+      try {
+        var actor = Reproductor.actorDe(peticion);
+        if (!actor) return foto;
+        foto.armaFuera = !!actor.isWeaponDrawn();
+        foto.mueble = actor.getFurnitureReference() || null;
+      } catch (e) {
+        apuntar('no pude mirar el estado: ' + e);
+      }
+      return foto;
+    },
+
+    /**
+     * Fuerza el arma fuera, para que el corte no la baje.
+     *
+     * Es la misma funcion que envainaba —setWeaponDrawnMode— con el otro modo.
+     * Se eligio esa y no Actor.drawWeapon() por lo que ya se aprendio con el
+     * envainado: de esa familia, sheatheWeapon() no hacia nada util en el juego
+     * y setWeaponDrawnMode(0) si. Si en el juego resulta que la otra va mejor,
+     * se cambia aqui y en ningun otro sitio.
+     *
+     * OJO: forzado no podrias envainar tu. El forzado se suelta poco despues,
+     * con soltarElArma (ver pedirParar).
+     */
+    mantenerElArmaFuera: function (actor) {
+      try {
+        sp.TESModPlatform.setWeaponDrawnMode(actor, 1);
+        armaForzada = true;
+        return true;
+      } catch (e) {
+        apuntar('no pude mantener el arma fuera: ' + e);
+        return false;
+      }
+    },
+
+    /**
+     * Plan B del mueble: si el corte te levanto igual, vuelve a sentarte.
+     *
+     * Activar la silla es lo que hace el juego cuando te sientas tu. Solo se
+     * hace si NO estas ya metido en un mueble: activarla estando sentado te
+     * levantaria, que es lo contrario de lo que se quiere.
+     */
+    volverAlMueble: function (actor, mueble) {
+      try {
+        if (!mueble) return false;
+        if (actor.getFurnitureReference()) return false;   // ya estas sentado
+        mueble.activate(actor, false);
+        apuntar('vuelto al mueble');
+        return true;
+      } catch (e) {
+        apuntar('no pude volver al mueble: ' + e);
         return false;
       }
     },
@@ -1324,6 +1487,53 @@
     lanzar(espera.peticion);
   }
 
+  /* El estado en el que estabas antes de la primera pose, o null.
+     Se toma al pasar de nada a algo, se consume al detener, y se tira al
+     reiniciar o cuando la pose se da por terminada sola. */
+  var memoriaDelEstado = null;
+
+  /* Lo que queda por reponer cuando pase su momento, o null. Reponer no puede
+     ser en el mismo cuadro que el corte: el corte es a su vez una transicion de
+     animacion y se lleva por delante lo que le llegue encima. */
+  var esperandoReponer = null;
+
+  /**
+   * Termina de devolverte al estado de antes, pasado el momento del corte.
+   *
+   * Dos cosas, y las dos pueden no hacer nada:
+   *
+   *   - soltar el forzado del arma. Se forzo antes del corte para que no te la
+   *     bajara; dejarlo forzado te impediria envainar tu.
+   *   - volver al mueble, solo si el corte te levanto de todas formas.
+   */
+  function vigilarLaReposicion() {
+    if (!esperandoReponer) return;
+    if (Date.now() < esperandoReponer.cuando) return;
+    rematarLaReposicion(true);
+  }
+
+  /**
+   * Hace ya lo que quedaba por reponer.
+   *
+   * conMueble dice si se vuelve a sentar. Cuando esto se remata porque llega una
+   * pose nueva, NO: la pose manda, y sentarte en ese momento se pelearia con
+   * ella. Soltar el arma si, siempre: el forzado dejado puesto no se va solo y
+   * te quedarias sin poder envainar.
+   */
+  function rematarLaReposicion(conMueble) {
+    if (!esperandoReponer) return;
+    var lo = esperandoReponer;
+    esperandoReponer = null;
+
+    var actor = Reproductor.actorDe(lo.peticion);
+    if (!actor) return;
+
+    if (lo.memoria.armaFuera) Reproductor.soltarElArma(actor);
+    if (conMueble && VOLVER_A_SENTARSE && lo.memoria.mueble) {
+      Reproductor.volverAlMueble(actor, lo.memoria.mueble);
+    }
+  }
+
   /* Lo que se esta reproduciendo ahora mismo, o null. Hace falta para dos
      cosas: para quitar la de antes al pedir otra, y para que pedir la misma la
      pare. */
@@ -1369,17 +1579,47 @@
     };
     if (!limpia.evento) return false;
 
+    /* Si quedaba algo por reponer del corte anterior, se remata AHORA y no
+       cuando le tocaba: dejarlo programado lo hacia caer en mitad de la pose
+       que se esta pidiendo, y soltar el forzado del arma ahi la rompe. Sin el
+       mueble, que de eso ya se encarga la pose nueva. */
+    if (limpia.origen !== 'bucle') rematarLaReposicion(false);
+
+    /* La foto del estado, al pasar de NADA a algo.
+     *
+     * No en cada relevo: si se refrescara al cambiar de animacion, guardaria el
+     * estado que dejo la pose anterior en vez del tuyo, que es el problema que
+     * esto viene a arreglar. Por eso las cuatro condiciones: nada puesto, nada
+     * en bucle, nada esperando turno, y nada guardado ya. */
+    if (RECORDAR_EL_ESTADO && limpia.origen !== 'bucle' && !memoriaDelEstado &&
+        !enMarcha && !Bucle.activo() && !esperandoParaCambiar) {
+      memoriaDelEstado = Reproductor.mirarElEstado(limpia);
+      apuntar('estado guardado: arma ' + (memoriaDelEstado.armaFuera ? 'fuera' : 'guardada') +
+              (memoriaDelEstado.mueble ? ', sentado' : ''));
+    }
+
     if (limpia.origen !== 'bucle') {
       if (enMarcha === limpia.evento) {
         pedirParar(limpia.origen);
         return true;
       }
-      /* Si lo que se pide es una pose de las que se hacen SENTADO y ya estas
-         sentado, no se para nada: pararlo mandaria IdleFurnitureExit y te
-         levantaria, y entonces la pose ya no tendria sobre que montarse. Va
-         directa y sin espera. */
-      var ficha = porEvento[limpia.evento];
-      if (ficha && ficha.sentado && Reproductor.enUnMueble(limpia)) {
+      /* ESTANDO EN UN MUEBLE, EL RELEVO ES SUAVE.
+       *
+       * Se suelta lo que lleves en las manos y se lanza la nueva directa: sin
+       * el levantarse, sin el corte al estado por defecto y sin la espera. El
+       * mueble es lo que sostiene la pose, asi que tirarlo la deja sin nada
+       * debajo.
+       *
+       * Lo decide el ESTADO, no la ficha de la animacion. Antes se miraba si la
+       * animacion estaba en la lista SENTADO —dieciseis entradas, a mano—, y
+       * cualquier pose de silla que no estuviera en ella se iba por el camino
+       * normal y te ponia de pie. Pediste algo estando sentado: lo que no
+       * quieres es acabar de pie, sea la pose que sea.
+       *
+       * El OffsetStop si hace falta: sin el, la jarra o el libro de la pose
+       * anterior se quedaban en la mano sobre la nueva. */
+      if (Reproductor.enUnMueble(limpia)) {
+        Reproductor.soltarLasManos(limpia);
         esperandoParaCambiar = null;
         return lanzar(limpia);
       }
@@ -1404,7 +1644,10 @@
        * bastante corto para que al pulsar responda en el acto. Con un
        * segundo entero funcionaba, pero parecia que se habia quedado
        * colgado. Se ajusta con esperaAlCambiar. */
-      Reproductor.parar({ quien: limpia.quien, origen: limpia.origen });
+      /* El corte del relevo tambien respeta el estado: cambiar de animacion
+         estando sentado no tiene por que levantarte. No se repone nada aqui
+         —la cadena sigue—, solo se evita romperlo. */
+      Reproductor.parar({ quien: limpia.quien, origen: limpia.origen }, memoriaDelEstado);
       enMarcha = null;
       esperandoParaCambiar = {
         peticion: limpia,
@@ -1435,6 +1678,11 @@
     apuntar('se da por terminada la animacion (' + motivo + ')');
     var peticion = { quien: FORMID_JUGADOR, evento: enMarcha, origen: 'fin' };
     enMarcha = null;
+    /* La memoria se tira sin reponer nada. La pose no se ha cortado: se ha
+       acabado porque te has puesto a andar o a pelear, asi que el estado de
+       ahora es el que TU has hecho y devolverte al de antes seria pelearse
+       contigo. */
+    memoriaDelEstado = null;
     /* Se avisa igual que al parar a mano: para quien escucha, que la pose se
        acabe sola o que la cortes es lo mismo, ya no esta. */
     avisarA(observadoresParar, peticion);
@@ -1469,6 +1717,12 @@
     Bucle.quitar();
     esperandoParaCambiar = null;
     enMarcha = null;
+    /* Reiniciar es borron y cuenta nueva: no se respeta ni se repone nada. Para
+       eso esta este boton, y es lo que hace falta cuando lo que hay que
+       deshacer es precisamente el estado (te quedaste pegado a una silla, con
+       una olla en la mano, mirando al norte). */
+    esperandoReponer = null;
+    memoriaDelEstado = null;
     var peticion = { quien: quien || FORMID_JUGADOR, origen: origen || 'desconocido' };
     var hecho = Reproductor.reiniciar(peticion);
     if (hecho) avisarA(observadoresParar, peticion);
@@ -1481,7 +1735,20 @@
     esperandoParaCambiar = null;  // y si habia una esperando su turno, tambien
     enMarcha = null;
     var peticion = { quien: quien || FORMID_JUGADOR, origen: origen || 'desconocido' };
-    var hecho = Reproductor.parar(peticion);
+
+    /* Se consume la memoria: el corte la respeta, y lo que haga falta reponer
+       se hace un momento despues, cuando el corte ya ha pasado. */
+    var memoria = memoriaDelEstado;
+    memoriaDelEstado = null;
+
+    var hecho = Reproductor.parar(peticion, memoria);
+    if (hecho && memoria && (memoria.armaFuera || memoria.mueble)) {
+      esperandoReponer = {
+        peticion: peticion,
+        memoria: memoria,
+        cuando: Date.now() + ESPERA_AL_REPONER
+      };
+    }
     if (hecho) avisarA(observadoresParar, peticion);
     /* Que el panel se entere de que ya no hay nada puesto. No pinta nada —no
        dice lo que suena—, pero olvida la ultima pedida, y sin eso marcar En
@@ -2600,6 +2867,7 @@
        para leer el teclado y para volver a mandar la animacion del bucle. */
     vigilarElSalto();
     vigilarElFin();
+    vigilarLaReposicion();
     vigilarElCambio();
     mirarLaTecla();
 
@@ -3092,7 +3360,11 @@
       return true;
     },
 
-    /** Corta la animacion, el bucle incluido, y levanta de la silla o la cama. */
+    /** Corta la animacion y el bucle, y te devuelve al estado de antes.
+     *
+     *  Si llegaste en guardia sigues en guardia, y si estas sentado te quedas
+     *  sentado: ver mirarElEstado. Para salir del mueble y quedar como recien
+     *  llegado esta reiniciar(). */
     parar: function (quien) {
       encolar(function () { pedirParar('otro mod', quien); });
       return true;

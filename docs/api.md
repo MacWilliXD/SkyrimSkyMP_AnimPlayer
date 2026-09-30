@@ -104,7 +104,7 @@ evento.
 ### Parar
 
 ```js
-ap.parar()          // corta la animación y el bucle, y levanta de la silla
+ap.parar()          // corta la animación y el bucle, y te devuelve al estado de antes
 ap.parar(0x14)      // sobre un actor concreto
 ```
 

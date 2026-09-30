@@ -857,7 +857,7 @@ app.whenReady().then(async () => {
   for (const m of mensajesRelevo) falso.disparar('browserMessage', { arguments: [m] });
   falso.tic();
   comprobar(falso.registro.animaciones.map((a) => a.evento).join(',') ===
-            'OffsetStop,IdleFurnitureExit,IdleForceDefaultState',
+            'OffsetStop,IdleFurnitureExit,IdleStop',
             'al pedir otra, primero se para la de antes',
             falso.registro.animaciones.map((a) => a.evento).join(' -> '));
   /* Y la nueva NO va pegada: parar es a su vez una animacion —levantarse de
@@ -867,7 +867,7 @@ app.whenReady().then(async () => {
             'y la nueva no va pegada al corte, que se la comeria');
   dejarPasarLaEspera(falso);
   const relevo = falso.registro.animaciones.map((a) => a.evento);
-  comprobar(relevo.join(',') === 'OffsetStop,IdleFurnitureExit,IdleForceDefaultState,IdleSalute',
+  comprobar(relevo.join(',') === 'OffsetStop,IdleFurnitureExit,IdleStop,IdleSalute',
             'pasado el segundo, va la nueva', relevo.join(' -> '));
 
   /* Y pedir la que ya esta sonando la para. */
@@ -876,7 +876,7 @@ app.whenReady().then(async () => {
   await esperar(150);
   await pasarMensajesAlPlugin(falso);
   const otraVez = falso.registro.animaciones.map((a) => a.evento);
-  comprobar(otraVez.join(',') === 'OffsetStop,IdleFurnitureExit,IdleForceDefaultState',
+  comprobar(otraVez.join(',') === 'OffsetStop,IdleFurnitureExit,IdleStop',
             'pedir la misma otra vez la para, no la relanza',
             otraVez.join(' -> '));
 
@@ -890,7 +890,7 @@ app.whenReady().then(async () => {
   apR.reproducir('IdleWave');        // la misma
   relevos.tic();
   comprobar(relevos.registro.animaciones.map((a) => a.evento).join(',') ===
-            'OffsetStop,IdleFurnitureExit,IdleForceDefaultState',
+            'OffsetStop,IdleFurnitureExit,IdleStop',
             'y por la puerta de otros mods tambien para',
             relevos.registro.animaciones.map((a) => a.evento).join(' -> '));
 
@@ -954,7 +954,7 @@ app.whenReady().then(async () => {
   saltando.saltar();
   saltando.tic();
   const alSaltar = saltando.registro.animaciones.map((a) => a.evento);
-  comprobar(alSaltar.join(',') === 'OffsetStop,IdleFurnitureExit,IdleForceDefaultState',
+  comprobar(alSaltar.join(',') === 'OffsetStop,IdleFurnitureExit,IdleStop',
             'al saltar se corta, igual que pulsando Detener', alSaltar.join(' -> '));
   comprobar(apSalto.enBucle() === null, 'y el bucle tambien se corta');
 
@@ -1105,8 +1105,34 @@ app.whenReady().then(async () => {
   comprobar(enSilla.indexOf('IdleFurnitureExit') === -1,
             'pedir una de sentado NO manda el levantarse',
             enSilla.join(' -> '));
-  comprobar(enSilla.join(',') === 'ChairReadingStart',
-            'va directa y sin espera', enSilla.join(' -> '));
+  comprobar(enSilla.join(',') === 'OffsetStop,ChairReadingStart',
+            'suelta lo que lleve en las manos y va directa, sin espera',
+            enSilla.join(' -> '));
+
+  console.log('  --- y de una de sentado a otra, tampoco te levanta ---');
+  /* Este era el caso que se colaba: el atajo se decidia mirando si la animacion
+     estaba en la lista SENTADO, que es a mano y corta. Una pose de silla que no
+     estuviera en ella se iba por el camino normal y te ponia de pie. Ahora lo
+     decide el estado: si estas en un mueble, no se manda el levantarse. */
+  sentado.registro.sentado = true;
+  sentado.registro.animaciones.length = 0;
+  apS.reproducir('ChairDrinkingStart');       // otra de silla, encima de la de leer
+  sentado.tic();
+  const sillaASilla = sentado.registro.animaciones.map((a) => a.evento);
+  comprobar(sillaASilla.indexOf('IdleFurnitureExit') === -1,
+            'de una pose de silla a otra NO te levanta', sillaASilla.join(' -> '));
+  comprobar(sillaASilla.indexOf('ChairDrinkingStart') !== -1,
+            'y la nueva se manda', sillaASilla.join(' -> '));
+
+  console.log('  --- ni una que no sea de silla, si estas sentado ---');
+  /* Ni siquiera hace falta que la pose sea "de sentado": pediste algo estando
+     sentado, asi que lo que no quieres es acabar de pie. */
+  sentado.registro.animaciones.length = 0;
+  apS.reproducir('IdleWave');                 // esta NO esta marcada sentado
+  sentado.tic();
+  const cualquiera = sentado.registro.animaciones.map((a) => a.evento);
+  comprobar(cualquiera.indexOf('IdleFurnitureExit') === -1,
+            'cualquier pose pedida sentado respeta la silla', cualquiera.join(' -> '));
 
   console.log('  --- pero de pie se comporta como siempre ---');
   sentado.registro.sentado = false;
@@ -1172,6 +1198,277 @@ app.whenReady().then(async () => {
   comprobar(trasParar2.registro.modosDelArma.indexOf(-1) !== -1,
             'pero al parar se suelta el bloqueo, por si lo dejo otra cosa',
             JSON.stringify(trasParar2.registro.modosDelArma));
+
+  console.log('\n=== detener devuelve al estado de antes, no a cero ===');
+  /* Hay poses que solo tienen sentido sobre un estado que ya tenias: en guardia
+     con el arma fuera, o sentado en una silla. El corte mandaba sus tres
+     eventos a ciegas y se llevaba por delante ese estado, que no era suyo. */
+
+  console.log('  --- el arma: el corte suave no la baja, asi que no hay que reponerla ---');
+  /* Aqui esta la causa de raiz. Antes el corte mandaba IdleForceDefaultState, y
+     en los registros del propio juego ese evento pertenece a un IDLE llamado
+     ResetRoot: no para la animacion, devuelve la raiz del grafo a su estado por
+     defecto —de pie, manos vacias, fuera del mueble—. Por eso se llevaba la
+     guardia por delante.
+
+     Con IdleStop no hay nada que reponer, y por tanto nada que forzar. Que es
+     lo mejor que podia pasar, porque el forzado era a su vez la causa de que la
+     pose siguiente saliera con las manos bajadas. */
+  const mem = falsoSp.cargarPlugin(PLUGIN, {});
+  mem.tic();
+  const apMem = mem.sp.storage.AnimPlayer;
+  const pasarLaReposicion = (falso) => {
+    const reloj = Date.now;
+    Date.now = () => reloj() + 400;      // esperaAlReponer son 333
+    falso.tic();
+    Date.now = reloj;
+  };
+
+  mem.registro.armaFuera = true;               // en guardia
+  apMem.reproducir('IdleWave');
+  mem.tic();
+  dejarPasarLaEspera(mem);
+  comprobar(mem.registro.armaFuera === true,
+            'lanzar una pose no te baja el arma');
+
+  mem.registro.animaciones.length = 0;
+  mem.registro.modosDelArma.length = 0;
+  apMem.parar();
+  mem.tic();
+  comprobar(mem.registro.animaciones.map((a) => a.evento).indexOf('IdleStop') !== -1,
+            'el corte es IdleStop, no el reseteo de la raiz',
+            mem.registro.animaciones.map((a) => a.evento).join(' -> '));
+  comprobar(mem.registro.animaciones.map((a) => a.evento)
+              .indexOf('IdleForceDefaultState') === -1,
+            'y NO se manda ResetRoot: es lo que rompia el estado de debajo',
+            mem.registro.animaciones.map((a) => a.evento).join(' -> '));
+  comprobar(mem.registro.modosDelArma.indexOf(1) === -1,
+            'no se fuerza el arma: con el corte suave no hace falta',
+            JSON.stringify(mem.registro.modosDelArma));
+  comprobar(mem.registro.armaFuera === true, 'y sigues en guardia');
+
+  console.log('  --- y pedir otra pose enseguida sale limpia ---');
+  /* Este era el fallo que se veia en el juego: bajaba las manos con el arma en
+     ellas. La causa era el forzado del arma colandose en la pose siguiente. Sin
+     forzado no hay nada que se cuele. */
+  mem.registro.modosDelArma.length = 0;
+  mem.registro.animaciones.length = 0;
+  apMem.reproducir('IdleSalute');
+  mem.tic();
+  comprobar(mem.registro.modosDelArma.indexOf(1) === -1,
+            'la pose siguiente no sale con la postura forzada',
+            JSON.stringify(mem.registro.modosDelArma));
+  comprobar(mem.registro.animaciones.some((a) => a.evento === 'IdleSalute'),
+            'y la pose se manda',
+            mem.registro.animaciones.map((a) => a.evento).join(' -> '));
+  comprobar(mem.registro.armaFuera === true, 'con el arma todavia fuera');
+
+  console.log('  --- con el corte duro en los ajustes, el forzado vuelve ---');
+  /* eventoDeParada se puede volver a poner en IdleForceDefaultState por si
+     alguna pose se resiste a IdleStop. Ese corte SI baja el arma, asi que ahi el
+     forzado hace falta, y hay que comprobar que no se cuela en la pose
+     siguiente: que es el fallo que costo una version. */
+  const duro = falsoSp.cargarPlugin(PLUGIN,
+    { eventoDeParada: 'IdleForceDefaultState' });
+  duro.tic();
+  const apDuro = duro.sp.storage.AnimPlayer;
+  duro.registro.armaFuera = true;
+  apDuro.reproducir('IdleWave');
+  duro.tic();
+  dejarPasarLaEspera(duro);
+
+  duro.registro.modosDelArma.length = 0;
+  apDuro.parar();
+  duro.tic();
+  comprobar(duro.registro.modosDelArma.indexOf(1) !== -1,
+            'con el corte duro se fuerza el arma fuera',
+            JSON.stringify(duro.registro.modosDelArma));
+  comprobar(duro.registro.modosDelArma.indexOf(-1) === -1,
+            'y no se suelta en el mismo cuadro: se lo comeria el corte',
+            JSON.stringify(duro.registro.modosDelArma));
+
+  duro.registro.modosDelArma.length = 0;
+  apDuro.reproducir('IdleSalute');            // sin esperar los 333 ms
+  duro.tic();
+  comprobar(duro.registro.modosDelArma.indexOf(-1) !== -1,
+            'al pedir otra se suelta el forzado en el acto, sin esperar',
+            JSON.stringify(duro.registro.modosDelArma));
+  comprobar(duro.registro.animaciones.some((a) => a.evento === 'IdleSalute'),
+            'y la pose se manda igual');
+
+  console.log('  --- ni el bucle puede colarse con el arma forzada ---');
+  /* La regla vive en Reproductor.mandar, que es el unico sitio por el que pasan
+     todas las poses: el bucle y la puerta de otros mods incluidos. */
+  const conBucle = falsoSp.cargarPlugin(PLUGIN,
+    { eventoDeParada: 'IdleForceDefaultState' });
+  conBucle.tic();
+  conBucle.registro.armaFuera = true;
+  conBucle.sp.storage.AnimPlayer.reproducir('IdleLuteStart', { bucle: true });
+  conBucle.tic();
+  dejarPasarLaEspera(conBucle);
+  conBucle.sp.storage.AnimPlayer.parar();       // fuerza el arma
+  conBucle.tic();
+  conBucle.registro.modosDelArma.length = 0;
+  conBucle.sp.storage.AnimPlayer.reproducir('IdleWave', { bucle: true });
+  conBucle.tic();
+  const relojB = Date.now;
+  Date.now = () => relojB() + 5000;             // que lata el bucle
+  conBucle.tic();
+  Date.now = relojB;
+  comprobar(conBucle.registro.modosDelArma.indexOf(1) === -1,
+            'el bucle no repite con la postura forzada',
+            JSON.stringify(conBucle.registro.modosDelArma));
+
+  console.log('  --- y con el arma guardada no se toca nunca ---');
+  const sinArma = falsoSp.cargarPlugin(PLUGIN, {});
+  sinArma.tic();
+  sinArma.registro.armaFuera = false;
+  sinArma.sp.storage.AnimPlayer.reproducir('IdleWave');
+  sinArma.tic();
+  dejarPasarLaEspera(sinArma);
+  sinArma.registro.modosDelArma.length = 0;
+  sinArma.sp.storage.AnimPlayer.parar();
+  sinArma.tic();
+  pasarLaReposicion(sinArma);
+  comprobar(sinArma.registro.modosDelArma.indexOf(1) === -1,
+            'no se saca un arma que no estaba fuera',
+            JSON.stringify(sinArma.registro.modosDelArma));
+  comprobar(sinArma.registro.armaFuera === false, 'y sigue guardada');
+
+  console.log('  --- la silla: si llegaste sentado, sigues sentado ---');
+  const enSillaM = falsoSp.cargarPlugin(PLUGIN, {});
+  enSillaM.tic();
+  const apSilla = enSillaM.sp.storage.AnimPlayer;
+
+  enSillaM.registro.sentado = true;
+  apSilla.reproducir('IdleWave');
+  enSillaM.tic();
+  dejarPasarLaEspera(enSillaM);
+  enSillaM.registro.animaciones.length = 0;
+  apSilla.parar();
+  enSillaM.tic();
+  const cortesSentado = enSillaM.registro.animaciones.map((a) => a.evento);
+  comprobar(cortesSentado.indexOf('IdleFurnitureExit') === -1,
+            'detener sentado NO manda el levantarse', cortesSentado.join(' -> '));
+  comprobar(cortesSentado.indexOf('IdleStop') !== -1,
+            'pero si corta la pose', cortesSentado.join(' -> '));
+  comprobar(enSillaM.registro.sentado === true, 'y te quedas en la silla');
+
+  console.log('  --- y si la pose te saco de la silla, te vuelve a sentar ---');
+  /* El plan B. Se manda el levantarse igual —no te puede levantar de un sitio
+     donde no estas— y el corte sale entero; luego se vuelve a activar la
+     silla, que es como te sientas en el juego. */
+  const sacado = falsoSp.cargarPlugin(PLUGIN, {});
+  sacado.tic();
+  sacado.registro.sentado = true;
+  sacado.sp.storage.AnimPlayer.reproducir('IdleWave');
+  sacado.tic();
+  dejarPasarLaEspera(sacado);
+  sacado.registro.sentado = false;               // la pose te levanto
+  sacado.registro.animaciones.length = 0;
+  sacado.sp.storage.AnimPlayer.parar();
+  sacado.tic();
+  comprobar(sacado.registro.animaciones.some((a) => a.evento === 'IdleFurnitureExit'),
+            'de pie el corte sale entero',
+            sacado.registro.animaciones.map((a) => a.evento).join(' -> '));
+  pasarLaReposicion(sacado);
+  comprobar(sacado.registro.mueblesActivados.length === 1,
+            'y se vuelve a activar la silla', String(sacado.registro.mueblesActivados.length));
+  comprobar(sacado.registro.sentado === true, 'con lo que acabas sentado otra vez');
+
+  console.log('  --- la foto es del estado tuyo, no del que deja cada pose ---');
+  /* Si se refrescara en cada relevo, una cadena guardaria el estado que dejo la
+     pose anterior y volveriamos al problema del principio. Se prueba con el
+     corte duro, que es el unico que usa la parte del arma de la memoria. */
+  const cadena = falsoSp.cargarPlugin(PLUGIN,
+    { eventoDeParada: 'IdleForceDefaultState' });
+  cadena.tic();
+  const apCadena = cadena.sp.storage.AnimPlayer;
+  cadena.registro.armaFuera = true;
+  apCadena.reproducir('IdleWave');
+  cadena.tic();
+  dejarPasarLaEspera(cadena);
+  cadena.registro.armaFuera = false;             // como si la pose la hubiera bajado
+  apCadena.reproducir('IdleSalute');             // se releva
+  cadena.tic();
+  dejarPasarLaEspera(cadena);
+  cadena.registro.modosDelArma.length = 0;
+  apCadena.parar();
+  cadena.tic();
+  comprobar(cadena.registro.modosDelArma.indexOf(1) !== -1,
+            'tras dos animaciones sigue recordando que llegaste en guardia',
+            JSON.stringify(cadena.registro.modosDelArma));
+
+  console.log('  --- reiniciar no repone nada: para eso esta ---');
+  const nuclear = falsoSp.cargarPlugin(PLUGIN, {});
+  nuclear.tic();
+  nuclear.registro.armaFuera = true;
+  nuclear.registro.sentado = true;
+  nuclear.sp.storage.AnimPlayer.reproducir('IdleWave');
+  nuclear.tic();
+  dejarPasarLaEspera(nuclear);
+  nuclear.registro.animaciones.length = 0;
+  nuclear.registro.mueblesActivados.length = 0;
+  nuclear.sp.storage.AnimPlayer.reiniciar();
+  nuclear.tic();
+  comprobar(nuclear.registro.animaciones.some((a) => a.evento === 'IdleFurnitureExit'),
+            'reiniciar SI te saca del mueble, aunque llegaras sentado',
+            nuclear.registro.animaciones.map((a) => a.evento).join(' -> '));
+  pasarLaReposicion(nuclear);
+  comprobar(nuclear.registro.mueblesActivados.length === 0,
+            'y no te vuelve a sentar: es borron y cuenta nueva');
+
+  console.log('  --- acabarse sola no repone: el estado ya es el tuyo ---');
+  /* Si la pose termino porque te pusiste a andar, devolverte al estado de antes
+     seria pelearse contigo. */
+  const solaM = falsoSp.cargarPlugin(PLUGIN, {});
+  solaM.tic();
+  solaM.registro.sentado = true;
+  solaM.sp.storage.AnimPlayer.reproducir('IdleWave');
+  solaM.tic();
+  dejarPasarLaEspera(solaM);
+  const relojSola = Date.now;
+  Date.now = () => relojSola() + 2000;
+  solaM.elJuegoHace('moveStart');
+  solaM.tic();
+  Date.now = relojSola;
+  solaM.registro.mueblesActivados.length = 0;
+  pasarLaReposicion(solaM);
+  comprobar(solaM.sp.storage.AnimPlayer.enMarcha() === null,
+            'la pose se da por terminada');
+  comprobar(solaM.registro.mueblesActivados.length === 0,
+            'y no se repone nada', String(solaM.registro.mueblesActivados.length));
+
+  console.log('  --- se puede desactivar la memoria, pero no el respeto a la silla ---');
+  /* Respetar el mueble no es memoria: es no echar de la silla a quien esta
+     sentado, y eso no se apaga. Lo que recordarElEstado apaga es la parte del
+     arma y el volver a sentarte. */
+  const sinMemoria = falsoSp.cargarPlugin(PLUGIN, { recordarElEstado: false });
+  sinMemoria.tic();
+  sinMemoria.registro.armaFuera = true;
+  sinMemoria.sp.storage.AnimPlayer.reproducir('IdleWave');   // de pie
+  sinMemoria.tic();
+  dejarPasarLaEspera(sinMemoria);
+  sinMemoria.registro.animaciones.length = 0;
+  sinMemoria.registro.modosDelArma.length = 0;
+  sinMemoria.sp.storage.AnimPlayer.parar();
+  sinMemoria.tic();
+  pasarLaReposicion(sinMemoria);
+  comprobar(sinMemoria.registro.animaciones.some((a) => a.evento === 'IdleFurnitureExit'),
+            'sin memoria, de pie el corte es el de siempre',
+            sinMemoria.registro.animaciones.map((a) => a.evento).join(' -> '));
+  comprobar(sinMemoria.registro.modosDelArma.indexOf(1) === -1,
+            'y no se repone el arma', JSON.stringify(sinMemoria.registro.modosDelArma));
+
+  sinMemoria.registro.sentado = true;
+  sinMemoria.sp.storage.AnimPlayer.reproducir('IdleWave');
+  sinMemoria.tic();
+  sinMemoria.registro.animaciones.length = 0;
+  sinMemoria.sp.storage.AnimPlayer.parar();
+  sinMemoria.tic();
+  comprobar(!sinMemoria.registro.animaciones.some((a) => a.evento === 'IdleFurnitureExit'),
+            'pero sentado sigue sin levantarte: eso no es memoria',
+            sinMemoria.registro.animaciones.map((a) => a.evento).join(' -> '));
 
   console.log('\n=== el bucle ===');
   falso.registro.animaciones.length = 0;
@@ -1247,8 +1544,8 @@ app.whenReady().then(async () => {
   await pasarMensajesAlPlugin(falso);
   const paradas = falso.registro.animaciones.map((a) => a.evento);
   comprobar(paradas.join(' + ') ===
-            'OffsetStop + IdleFurnitureExit + IdleForceDefaultState',
-            'suelta lo que lleve, levanta del mueble y endereza, en ese orden',
+            'OffsetStop + IdleFurnitureExit + IdleStop',
+            'suelta lo que lleve, levanta del mueble y para la pose, en ese orden',
             paradas.join(' + '));
 
   falso.registro.animaciones.length = 0;
@@ -1295,7 +1592,7 @@ app.whenReady().then(async () => {
   const pasos = falso.registro.animaciones.map((a) => a.evento);
   comprobar(pasos.join(',') ===
             'OffsetStop,IdleFurnitureExit,IdleForceDefaultState,IdleStopInstant',
-            'suelta lo que lleve, saca del mueble y corta la pose',
+            'reiniciar SI resetea la raiz: suelta, saca del mueble y endereza',
             pasos.join(' -> '));
   comprobar(falso.registro.colision === true,
             'devuelve la colision, que es la que deja atravesando paredes',
@@ -1609,8 +1906,8 @@ app.whenReady().then(async () => {
   comprobar(ap.enBucle() === null, 'parar corta el bucle');
   const trasParar = otroMod.registro.animaciones.map((a) => a.evento);
   comprobar(trasParar.slice(-3).join(' + ') ===
-            'OffsetStop + IdleFurnitureExit + IdleForceDefaultState',
-            'y suelta, levanta y endereza, en ese orden',
+            'OffsetStop + IdleFurnitureExit + IdleStop',
+            'y suelta, levanta y para, en ese orden',
             trasParar.slice(-3).join(' + '));
 
   console.log('\n  --- consultar el catalogo ---');

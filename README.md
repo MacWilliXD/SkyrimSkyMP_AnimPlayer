@@ -65,7 +65,7 @@ lanzadores y lo que pongas ahí te lo pueden borrar.
 | **Clic en una fila** | la reproduce |
 | **En bucle** | la repite hasta que pulses Parar |
 | **★ La estrella** | guarda en favoritos. Se enciende en dorado |
-| **Parar** | corta la animación y levanta de la silla o la cama |
+| **Detener** | corta la animación y te devuelve al estado en el que estabas |
 | **Esc** | cierra el panel |
 
 Mientras el panel está abierto el personaje no se mueve, para que escribir en la
