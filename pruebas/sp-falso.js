@@ -36,10 +36,8 @@ function crear(ajustes, archivosDePartida) {
     dontMove: null,
     recargado: 0,
     armaFuera: false,           // lo que responde isWeaponDrawn
-    envainadoLento: false,      // si guardar el arma tarda, como en el juego
     sentado: false,             // si el personaje esta metido en un mueble
     mueblesActivados: [],       // cada vez que se vuelve a sentar al personaje
-    desenvainadas: 0,           // cada drawWeapon que se pide
     modosDelArma: [],           // cada setWeaponDrawnMode que se hace
     envainadas: 0,              // cada vez que se guarda el arma
     enganches: [],              // los hooks del grafo de animacion
@@ -84,17 +82,9 @@ function crear(ajustes, archivosDePartida) {
           getFormID: function () { return 0x14; },
           setDontMove: function (v) { registro.dontMove = v; },
           isWeaponDrawn: function () { return !!registro.armaFuera; },
-          sheatheWeapon: function () {
-            registro.envainadas++;
-            /* En el juego guardar el arma tarda lo que dura su animacion. Con
-               envainadoLento puesto, la prueba decide cuando termina: es lo
-               que permite comprobar que la pose ESPERA. */
-            if (!registro.envainadoLento) registro.armaFuera = false;
-          },
           getFurnitureReference: function () {
             return registro.sentado ? elMueble : null;
           },
-          drawWeapon: function () { registro.desenvainadas++; registro.armaFuera = true; },
           moveTo: function () { registro.recargado++; }
         };
       },
