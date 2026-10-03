@@ -122,6 +122,9 @@
   var VOLVER_A_SENTARSE = opcion('volverASentarse', true);
   var ESPERA_AL_REPONER = opcion('esperaAlReponer', 333);
   var EVENTO_DE_PARADA = opcion('eventoDeParada', 'IdleStop');
+  /* Cuanto dura la ventana para que un segundo Detener cuente como insistir y
+     el corte vaya a por todas. Ver pedirParar. */
+  var INSISTIR_EN = opcion('insistirEn', 3000);
   var TERCERA_PERSONA = opcion('forzarTerceraPersona', true);
   var QUITAR_MOVIMIENTO = opcion('quitarMovimiento', true);
   var TRANSPORTE = opcion('transporte', 'local');
@@ -1275,12 +1278,45 @@
          recordaba un mueble, el plan B te vuelve a sentar. */
       var enUnMueble = Reproductor.enUnMueble(peticion);
 
+      /* LOS CINCO EVENTOS DEL CORTE.
+       *
+       * Salen de leer el grafo del personaje y quedarse con los genericos de
+       * parar, los que no van atados a una animacion concreta. Antes se
+       * mandaban tres y faltaban dos, y por eso habia poses que no se
+       * detenian:
+       *
+       *   OffsetStop       la pose que va encima de la postura
+       *   IdleOffsetStop   su variante para los idles de tipo offset
+       *   AnimObjectStop   lo que el juego te engancha a la mano: la copa del
+       *                    brindis, la jarra, el libro. Sin esto el objeto se
+       *                    queda puesto y con el la animacion que lo sostiene.
+       *   IdleStop         y el idle en si
+       *
+       * Los que no vienen al caso no hacen nada: el grafo ignora lo que no
+       * puede atender desde donde esta. */
       try {
         enviarAlGrafo(actor, 'OffsetStop');
+        enviarAlGrafo(actor, 'IdleOffsetStop');
+        enviarAlGrafo(actor, 'AnimObjectStop');
         if (!enUnMueble) {
           enviarAlGrafo(actor, 'IdleFurnitureExit');
         }
         enviarAlGrafo(actor, EVENTO_DE_PARADA);
+
+        /* A POR TODAS, si es la segunda vez seguida que pulsas Detener.
+         *
+         * Quedan animaciones que solo se sueltan reseteando la raiz, porque
+         * meten al personaje en un sub-grafo sin salida propia. Eso es brusco
+         * —te pone de pie, con las manos vacias y fuera del mueble— y no puede
+         * ser lo que pase al pulsar una vez. Pero si acabas de pulsar y
+         * vuelves a pulsar, lo que estas diciendo es que lo de antes no
+         * funciono. */
+        if (peticion && peticion.insistiendo) {
+          enviarAlGrafo(actor, 'IdleStopInstant');
+          enviarAlGrafo(actor, 'IdleForceDefaultState');
+          apuntar('insistiendo: corte a por todas');
+        }
+
         apuntar('animacion parada con ' + EVENTO_DE_PARADA);
         return true;
       } catch (e) {
@@ -1904,11 +1940,25 @@
     return hecho;
   }
 
+  /* Cuando se pulso Detener por ultima vez. Dos pulsaciones seguidas
+     significan que la primera no sirvio, y entonces el corte va a por todas.
+     Ver Reproductor.parar. */
+  var ultimoParar = 0;
+
   function pedirParar(origen, quien) {
+    /* El margen de abajo es para que un doble clic sin querer no cuente como
+       insistir: levantarse de la silla por un resbalon del raton seria peor
+       que no pararse. El de arriba, porque pasados tres segundos ya no estas
+       insistiendo, estas pulsando otra vez. */
+    var desdeElUltimo = Date.now() - ultimoParar;
+    var insistiendo = desdeElUltimo >= 250 && desdeElUltimo <= INSISTIR_EN;
+    ultimoParar = Date.now();
+
     Bucle.quitar();          // parar es parar: si habia bucle, se acaba
     esperandoParaCambiar = null;  // y si habia una esperando su turno, tambien
     enMarcha = null;
-    var peticion = { quien: quien || FORMID_JUGADOR, origen: origen || 'desconocido' };
+    var peticion = { quien: quien || FORMID_JUGADOR, origen: origen || 'desconocido',
+                     insistiendo: insistiendo };
 
     /* Se consume la memoria: el corte la respeta, y lo que haga falta reponer
        se hace un momento despues, cuando el corte ya ha pasado. */
@@ -2113,12 +2163,13 @@
 
       /* El de reiniciar va mas discreto que los demas: hace falta tenerlo a
          mano, pero no es algo que se pulse a diario. */
+      /* Con la misma pastilla que "Ver todas las animaciones": este cae
+         encima del juego igual que aquel, y a pelo se perdia sobre nieve. */
       '#' + ID + ' .ap-reiniciar{cursor:pointer;font-size:13.5px;color:#fff;',
-      '  text-shadow:0 1px 4px #000,0 0 10px #000;padding:7px 14px;',
-      '  padding:4px 10px;border:1px solid transparent;border-radius:8px;',
-      '  white-space:nowrap}',
-      '#' + ID + ' .ap-reiniciar:hover{color:var(--ap-acento);',
-      '  border-color:var(--ap-linea);background:rgba(0,0,0,.28)}',
+      '  text-shadow:0 1px 3px #000;padding:7px 16px;margin-top:2px;',
+      '  border:none;border-radius:var(--ap-boton-radio);',
+      '  background:rgba(5,6,8,.6);white-space:nowrap}',
+      '#' + ID + ' .ap-reiniciar:hover{color:var(--ap-acento2)}',
 
       /* La rueda no lleva marco ni fondo: se ve el juego por debajo y solo
          destaca el corro. Es lo que sale al pulsar la tecla, asi que tiene que
@@ -2151,16 +2202,18 @@
          Un radial-gradient dibuja un circulo, pero la caja lo recorta: en una
          caja mas ancha que alta se ve el circulo con el arriba y el abajo
          cortados, o sea un rectangulo. Aqui sale redondo entero.
-         El hueco tiene un radio del 24% de esta caja. El oscuro aguanta
-         hasta el 22% —o sea, casi todo el hueco— y no se ha ido del todo
-         hasta el 44%, ya bien metido en el anillo, donde se junta con el
-         oscuro que los sectores llevan en su borde de dentro. Es a proposito
-         que sobre tanto: cuanto mas largo el desvanecido, menos se nota donde
-         acaba. */
+         Es un disco liso, no un desvanecido. El hueco del anillo tiene un
+         radio del 24% de esta caja y el disco mide el 44%, o sea un radio del
+         22%: quedan dos puntos de aire entre el disco y el primer sector, que
+         es lo que hace que se vean como dos cosas y no como una pegada a la
+         otra.
+         Va colgado de ESTA caja y no de la del texto porque esta es cuadrada,
+         y un circulo dentro de una caja mas ancha que alta sale recortado por
+         arriba y por abajo: un rectangulo. */
       '#' + ID + ' .ap-corro-caja::before{content:"";position:absolute;',
-      '  inset:0;z-index:-1;pointer-events:none;',
-      '  background:radial-gradient(circle,rgba(5,6,8,.92) 0%,',
-      '    rgba(5,6,8,.88) 22%,rgba(5,6,8,.5) 33%,transparent 44%)}',
+      '  left:50%;top:50%;width:44%;height:44%;',
+      '  transform:translate(-50%,-50%);border-radius:50%;',
+      '  z-index:-1;pointer-events:none;background:rgba(5,6,8,.88)}',
       '#' + ID + ' .ap-rueda svg{display:block;width:100%;height:100%}',
 
       /* El relleno de los huecos del inventario: apenas un tinte y un borde
@@ -2463,7 +2516,8 @@
       '  <div class="ap-pie">' +
       '    <div class="ap-bucle" title="Repetirla hasta que pulses Detener">' +
       '      <span class="ap-casilla"></span><span>En bucle</span></div>' +
-      '    <div class="ap-boton ap-parar">Detener</div></div>' +
+      '    <div class="ap-boton ap-parar" title="Detener la animación. Si ' +
+      'alguna no se detiene, púlsalo otra vez y se fuerza">Detener</div></div>' +
       '</div>';
     document.body.appendChild(raiz);
 
@@ -2773,7 +2827,9 @@
        vez desde refrescarBucle. */
     function mandosDelCentro() {
       return '<div class="ap-mandos">' +
-             '<div class="ap-boton ap-parar">Detener</div>' +
+             '<div class="ap-boton ap-parar" title="Detener la animación. ' +
+             'Si alguna no se detiene, púlsalo otra vez y se fuerza">' +
+             'Detener</div>' +
              '<div class="ap-bucle" title="Repetirla hasta que pulses Detener">' +
              '<span class="ap-casilla"></span><span>En bucle</span></div>' +
              '</div>';

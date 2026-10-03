@@ -36,6 +36,18 @@ const RAIZ = path.resolve(__dirname, '..');
 const PLUGIN = path.join(RAIZ, 'plugin', 'animplayer.js');
 const SALIDA = path.join(__dirname, 'salida');
 
+/* El corte que manda Detener, en orden. Son los eventos genericos de parada
+   que acepta el grafo del personaje:
+     OffsetStop         la pose que va encima de la postura
+     IdleOffsetStop     su variante para los idles de tipo offset
+     AnimObjectStop     lo que el juego te engancha a la mano: la copa, la
+                        jarra, el libro
+     IdleFurnitureExit  solo si NO estas en un mueble
+     IdleStop           y el idle en si
+   Va aqui y no escrito a mano en cada prueba para que anadir uno manana sea
+   tocar una linea. */
+const CORTE = 'OffsetStop,IdleOffsetStop,AnimObjectStop,IdleFurnitureExit,IdleStop';
+
 const falsoSp = require('./sp-falso');
 
 const esperar = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -808,7 +820,7 @@ app.whenReady().then(async () => {
     .dispatchEvent(new MouseEvent('click', { bubbles: true }))`);
   await esperar(150);
   await pasarMensajesAlPlugin(falso);
-  comprobar(falso.registro.animaciones.length === 3,
+  comprobar(falso.registro.animaciones.map((a) => a.evento).join(',') === CORTE,
             'y el Parar del centro para de verdad',
             falso.registro.animaciones.map((a) => a.evento).join(' + '));
 
@@ -999,7 +1011,7 @@ app.whenReady().then(async () => {
   for (const m of mensajesRelevo) falso.disparar('browserMessage', { arguments: [m] });
   falso.tic();
   comprobar(falso.registro.animaciones.map((a) => a.evento).join(',') ===
-            'OffsetStop,IdleFurnitureExit,IdleStop',
+            CORTE,
             'al pedir otra, primero se para la de antes',
             falso.registro.animaciones.map((a) => a.evento).join(' -> '));
   /* Y la nueva NO va pegada: parar es a su vez una animacion —levantarse de
@@ -1009,7 +1021,7 @@ app.whenReady().then(async () => {
             'y la nueva no va pegada al corte, que se la comeria');
   dejarPasarLaEspera(falso);
   const relevo = falso.registro.animaciones.map((a) => a.evento);
-  comprobar(relevo.join(',') === 'OffsetStop,IdleFurnitureExit,IdleStop,IdleSalute',
+  comprobar(relevo.join(',') === CORTE + ',IdleSalute',
             'pasado el segundo, va la nueva', relevo.join(' -> '));
 
   /* Y pedir la que ya esta sonando la RELANZA.
@@ -1040,7 +1052,7 @@ app.whenReady().then(async () => {
   apR.reproducir('IdleWave');        // la misma
   relevos.tic();
   comprobar(relevos.registro.animaciones.map((a) => a.evento).join(',') ===
-            'OffsetStop,IdleFurnitureExit,IdleStop',
+            CORTE,
             'y por la puerta de otros mods tambien para',
             relevos.registro.animaciones.map((a) => a.evento).join(' -> '));
 
@@ -1104,7 +1116,7 @@ app.whenReady().then(async () => {
   saltando.saltar();
   saltando.tic();
   const alSaltar = saltando.registro.animaciones.map((a) => a.evento);
-  comprobar(alSaltar.join(',') === 'OffsetStop,IdleFurnitureExit,IdleStop',
+  comprobar(alSaltar.join(',') === CORTE,
             'al saltar se corta, igual que pulsando Detener', alSaltar.join(' -> '));
   comprobar(apSalto.enBucle() === null, 'y el bucle tambien se corta');
 
@@ -1688,15 +1700,38 @@ app.whenReady().then(async () => {
             'y la casilla se ve sin marcar');
 
   console.log('\n=== el boton de parar ===');
+  /* Con un rato de por medio: dos Detener seguidos son "insistir" y el corte
+     va a por todas, que es la prueba de despues. Aqui se mira el normal. */
+  const relojParar = Date.now;
+  Date.now = () => relojParar() + 60000;
   falso.registro.animaciones.length = 0;
   await js(`document.querySelector('#animplayer .ap-parar').click()`);
   await esperar(160);
   await pasarMensajesAlPlugin(falso);
   const paradas = falso.registro.animaciones.map((a) => a.evento);
-  comprobar(paradas.join(' + ') ===
-            'OffsetStop + IdleFurnitureExit + IdleStop',
+  comprobar(paradas.join(',') === CORTE,
             'suelta lo que lleve, levanta del mueble y para la pose, en ese orden',
             paradas.join(' + '));
+
+  /* Y si vuelves a pulsar, el corte va a por todas.
+     Quedan animaciones que solo se sueltan reseteando la raiz: meten al
+     personaje en un sub-grafo sin salida propia. Eso es brusco —te pone de
+     pie, con las manos vacias— y no puede ser lo que pase al pulsar una vez,
+     asi que se escalona. */
+  falso.registro.animaciones.length = 0;
+  await js(`document.querySelector('#animplayer .ap-parar').click()`);
+  /* Mas de 250 ms: por debajo de eso el mod lo toma por un doble clic sin
+     querer y no escala, que es justo lo que tiene que hacer. */
+  await esperar(400);
+  await pasarMensajesAlPlugin(falso);
+  const insistiendo = falso.registro.animaciones.map((a) => a.evento);
+  comprobar(insistiendo.join(',') === CORTE + ',IdleStopInstant,IdleForceDefaultState',
+            'y al segundo Detener seguido, el corte va a por todas',
+            insistiendo.join(' + '));
+  /* El reloj se devuelve AQUI y no antes: el mod apunto la hora del primer
+     Detener con el reloj adelantado, y devolverlo en medio dejaba la resta en
+     negativo, asi que el segundo no contaba como insistir. */
+  Date.now = relojParar;
 
   falso.registro.animaciones.length = 0;
   await buscar('wave');
@@ -2055,10 +2090,9 @@ app.whenReady().then(async () => {
   otroMod.tic();
   comprobar(ap.enBucle() === null, 'parar corta el bucle');
   const trasParar = otroMod.registro.animaciones.map((a) => a.evento);
-  comprobar(trasParar.slice(-3).join(' + ') ===
-            'OffsetStop + IdleFurnitureExit + IdleStop',
+  comprobar(trasParar.slice(-5).join(',') === CORTE,
             'y suelta, levanta y para, en ese orden',
-            trasParar.slice(-3).join(' + '));
+            trasParar.slice(-5).join(' + '));
 
   console.log('\n  --- consultar el catalogo ---');
   comprobar(ap.existe('IdleLuteStart'), 'se puede preguntar si un evento esta');
@@ -2203,7 +2237,7 @@ app.whenReady().then(async () => {
   apDos.parar();
   dosPiezas.tic();
   const alSoltar = dosPiezas.registro.animaciones.map((a) => a.evento);
-  comprobar(alSoltar.join(',') === 'OffsetStop,IdleFurnitureExit,IdleStop',
+  comprobar(alSoltar.join(',') === CORTE,
             'y al detener va el corte de siempre, sin nada delante',
             alSoltar.join(' -> '));
 
