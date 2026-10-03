@@ -64,10 +64,6 @@ def compactar(catalogo):
             ficha["sentado"] = True
         if a.get("confirmado") is False:
             ficha["confirmado"] = False
-        if a.get("salida"):
-            ficha["salida"] = a["salida"]
-        if a.get("esSalida"):
-            ficha["esSalida"] = True
         if a.get("descripcion"):
             ficha["descripcion"] = a["descripcion"]
         if a.get("visible") is False:

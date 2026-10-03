@@ -1012,14 +1012,22 @@ app.whenReady().then(async () => {
   comprobar(relevo.join(',') === 'OffsetStop,IdleFurnitureExit,IdleStop,IdleSalute',
             'pasado el segundo, va la nueva', relevo.join(' -> '));
 
-  /* Y pedir la que ya esta sonando la para. */
+  /* Y pedir la que ya esta sonando la RELANZA.
+   *
+   * Antes la paraba, y eso daba un fallo que parecia otra cosa: el mod no sabe
+   * cuando termina una pose —Skyrim no avisa— asi que durante diez segundos
+   * sigue creyendo que una animacion de dos segundos esta puesta. Pulsarla
+   * otra vez la paraba, para el jugador no pasaba nada porque ya se habia
+   * acabado sola, y hacia falta una segunda pulsacion para verla. */
   falso.registro.animaciones.length = 0;
   await js(`document.querySelector('#animplayer .ap-fila[data-evento="IdleSalute"]').click()`);
   await esperar(150);
   await pasarMensajesAlPlugin(falso);
+  falso.tic();
+  dejarPasarLaEspera(falso);
   const otraVez = falso.registro.animaciones.map((a) => a.evento);
-  comprobar(otraVez.join(',') === 'OffsetStop,IdleFurnitureExit,IdleStop',
-            'pedir la misma otra vez la para, no la relanza',
+  comprobar(otraVez[otraVez.length - 1] === 'IdleSalute',
+            'pedir la misma otra vez la relanza, no la para',
             otraVez.join(' -> '));
 
   /* Desde la puerta de otros mods, igual. */
@@ -2174,17 +2182,19 @@ app.whenReady().then(async () => {
             'y el plugin quedo sabiendo que estaba cerrado, no abierto',
             seguidos.registro.movimientoQuitado + ' quitado');
 
-  console.log('\n=== las poses de dos piezas ===');
-  /* Recoger una piedra y soltarla son dos animaciones. Detener tiene que
-     mandar la de soltar, que si no la piedra se desvanece de la mano. */
+  console.log('\n=== ya no hay emparejado de entrada y salida ===');
+  /* El catalogo emparejaba animaciones —recoger una piedra con soltarla— y al
+     detener mandaba la de soltar. Se quito entero: pulsar lanza, Detener
+     corta, y nada mas. Esto vigila que no vuelva por la puerta de atras. */
   const dosPiezas = falsoSp.cargarPlugin(PLUGIN, {});
   dosPiezas.tic();
   const apDos = dosPiezas.sp.storage.AnimPlayer;
 
-  const fichaPiedra = apDos.ficha('IdleStonePickUpEnter');
-  comprobar(fichaPiedra && fichaPiedra.salida === 'IdleStonePutDownEnter',
-            'recoger una piedra sabe cual es su salida',
-            fichaPiedra && fichaPiedra.salida);
+  const sinParejas = apDos.lista().animaciones
+    .filter((a) => a.salida || a.esSalida);
+  comprobar(sinParejas.length === 0,
+            'ninguna animacion trae pareja en el catalogo',
+            sinParejas.length + ' con pareja');
 
   apDos.reproducir('IdleStonePickUpEnter');
   dosPiezas.tic();
@@ -2193,35 +2203,19 @@ app.whenReady().then(async () => {
   apDos.parar();
   dosPiezas.tic();
   const alSoltar = dosPiezas.registro.animaciones.map((a) => a.evento);
-  comprobar(alSoltar[0] === 'IdleStonePutDownEnter',
-            'al detener se manda PRIMERO la salida', alSoltar.join(' -> '));
-  comprobar(alSoltar.indexOf('IdleStop') !== -1,
-            'y detras el corte, por si la salida no basta',
+  comprobar(alSoltar.join(',') === 'OffsetStop,IdleFurnitureExit,IdleStop',
+            'y al detener va el corte de siempre, sin nada delante',
             alSoltar.join(' -> '));
 
-  console.log('  --- y una sin salida se corta como siempre ---');
-  apDos.reproducir('IdleWave');
-  dosPiezas.tic();
-  dejarPasarLaEspera(dosPiezas);
-  dosPiezas.registro.animaciones.length = 0;
-  apDos.parar();
-  dosPiezas.tic();
-  comprobar(dosPiezas.registro.animaciones[0].evento === 'OffsetStop',
-            'sin salida, el corte de siempre',
-            dosPiezas.registro.animaciones.map((a) => a.evento).join(' -> '));
-
-  console.log('  --- las salidas no salen en la lista ---');
+  /* Las que antes eran "de salida" son animaciones como cualquier otra: salen
+     en la lista y se pueden lanzar a mano. */
   await verLista();
   await buscar('piedra');
   const conPiedra = await js(`[...document.querySelectorAll(
     '#animplayer .ap-fila')].map((f) => f.getAttribute('data-evento'))`);
-  comprobar(conPiedra.indexOf('IdleStonePickUpEnter') !== -1,
-            'recoger una piedra si esta en la lista', conPiedra.join(', '));
-  /* Soltarla TAMBIEN sale en la lista: se decidio dejarlas a la vista. Lo que
-     hace el mod es lanzarla sola al detener, que es lo util; esconderla no
-     aportaba nada y quitaba la opcion de lanzarla a mano. */
-  comprobar(conPiedra.indexOf('IdleStonePutDownEnter') !== -1,
-            'y soltarla tambien: las salidas se dejan a la vista',
+  comprobar(conPiedra.indexOf('IdleStonePickUpEnter') !== -1 &&
+            conPiedra.indexOf('IdleStonePutDownEnter') !== -1,
+            'recoger y soltar son dos animaciones normales de la lista',
             conPiedra.join(', '));
 
   console.log('\n=== esconder animaciones ===');

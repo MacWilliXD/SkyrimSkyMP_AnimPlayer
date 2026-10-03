@@ -94,8 +94,7 @@
    "sincroniza": false,
    "motivo": "SkyMP lo usa para su propio sincronizado de agacharse",
    "descripcion": "Animación básica del jugador para agacharse (usada al usar el cntrl)",
-   "visible": false,
-   "salida": "SneakStop"
+   "visible": false
   },
   {
    "edid": "CastRightFireForgetTargetActor",
@@ -125,8 +124,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Ataca con el arma equipada (Mano derecha)",
-   "visible": false,
-   "salida": "attackStop"
+   "visible": false
   },
   {
    "edid": "AttackRightForwardSprinting_2hand",
@@ -415,8 +413,7 @@
    "categoria": "combate",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Cae al suelo tocandose el estomago y en 4 patas derrotado",
-   "salida": "bleedOutStop"
+   "descripcion": "Cae al suelo tocandose el estomago y en 4 patas derrotado"
   },
   {
    "edid": "BleedoutStop",
@@ -425,8 +422,7 @@
    "categoria": "combate",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Fade-out animación de bleedOutStart (Se levanta de estar abatido)",
-   "esSalida": true
+   "descripcion": "Fade-out animación de bleedOutStart (Se levanta de estar abatido)"
   },
   {
    "edid": "WerewolfFallDirectional",
@@ -523,8 +519,7 @@
    "sincroniza": false,
    "motivo": "esta en la lista de eventos que SkyMP ignora",
    "descripcion": "Fade-outanimación de cuando caminas",
-   "visible": false,
-   "esSalida": true
+   "visible": false
   },
   {
    "edid": "PlayerCancelBowAttack",
@@ -534,8 +529,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Dejar de apuntar con el arco. Forma parte del combate normal del juego.",
-   "visible": false,
-   "esSalida": true
+   "visible": false
   },
   {
    "edid": "FalmerBlockStop",
@@ -545,8 +539,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Fade-out animación de bloquear",
-   "visible": false,
-   "esSalida": true
+   "visible": false
   },
   {
    "edid": "SprintRootStop",
@@ -556,8 +549,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Fade-out animación de correr",
-   "visible": false,
-   "esSalida": true
+   "visible": false
   },
   {
    "edid": "CharacterTurnStop",
@@ -579,8 +571,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Fade-out animación de nadar",
-   "visible": false,
-   "esSalida": true
+   "visible": false
   },
   {
    "edid": "DefaultDrawWeapon",
@@ -648,8 +639,7 @@
    "sincroniza": false,
    "motivo": "esta en la lista de eventos que SkyMP ignora",
    "descripcion": "Comienza la animación de caminar (varia la velocidad de la animación)",
-   "visible": false,
-   "salida": "moveStop"
+   "visible": false
   },
   {
    "edid": "SprintStart",
@@ -659,8 +649,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Comienza la animación de correr",
-   "visible": false,
-   "salida": "SprintStop"
+   "visible": false
   },
   {
    "edid": "VoiceStart",
@@ -670,8 +659,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Inicia grito (bucle)",
-   "visible": false,
-   "salida": "shoutStop"
+   "visible": false
   },
   {
    "edid": "NPCVoiceStart",
@@ -1073,8 +1061,7 @@
    "sincroniza": false,
    "motivo": "SkyMP lo usa para su propio sincronizado de agacharse",
    "descripcion": "Animación básica del jugador para salir de agacharse (usada al usar el cntrl)",
-   "visible": false,
-   "esSalida": true
+   "visible": false
   },
   {
    "edid": "BleedOutCastRightConcentrationAimed",
@@ -1160,8 +1147,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Comenzar animación de bloquear",
-   "visible": false,
-   "salida": "blockStop"
+   "visible": false
   },
   {
    "edid": "JumpLandSwimming",
@@ -1171,8 +1157,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Comenzar animación de nadar",
-   "visible": false,
-   "salida": "SwimStop"
+   "visible": false
   },
   {
    "edid": "McrabMeleeAttack",
@@ -1182,8 +1167,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Ponerse en guardia. Forma parte del combate normal del juego.",
-   "visible": false,
-   "salida": "combatStanceStop"
+   "visible": false
   },
   {
    "edid": "CombatIdleStagger_Regular",
@@ -1478,8 +1462,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Salir de la guardia. Forma parte del combate normal del juego.",
-   "visible": false,
-   "esSalida": true
+   "visible": false
   },
   {
    "edid": "JumpStandingStart",
@@ -1624,8 +1607,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Terminar de gritar",
-   "visible": false,
-   "esSalida": true
+   "visible": false
   },
   {
    "edid": "IdleVampireBedrollRight",
@@ -1795,8 +1777,7 @@
    "categoria": "comer",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Dejar de tambalearse. Necesita: haber ejecutado antes: Ponerse a tambalearse.",
-   "esSalida": true
+   "descripcion": "Dejar de tambalearse. Necesita: haber ejecutado antes: Ponerse a tambalearse."
   },
   {
    "edid": "IdleTablePassOutEnterLoose",
@@ -1851,8 +1832,7 @@
    "categoria": "comer",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ponerse a tambalearse. Necesita: termina con: Dejar de tambalearse.",
-   "salida": "DrunkStop"
+   "descripcion": "Ponerse a tambalearse. Necesita: termina con: Dejar de tambalearse."
   },
   {
    "edid": "IdleTableDrinkEnterLoose",
@@ -1930,8 +1910,7 @@
    "busqueda": "levantarse salir silla cama mueble",
    "origen": "vanilla",
    "descripcion": "Levantarse del mueble. Necesita: haber ejecutado antes: Acostarse (Ataúd), Acostarse en el suelo, Apoyarse en el mostrador.",
-   "visible": false,
-   "esSalida": true
+   "visible": false
   },
   {
    "edid": "IdleStop_Loose",
@@ -1959,8 +1938,7 @@
    "categoria": "control",
    "busqueda": "soltar dejar manos",
    "origen": "vanilla",
-   "descripcion": "Soltar lo que lleva en las manos. Necesita: haber ejecutado antes: Llevar un cesto, Llevar una olla, Recoger flores en el cesto.",
-   "esSalida": true
+   "descripcion": "Soltar lo que lleva en las manos. Necesita: haber ejecutado antes: Llevar un cesto, Llevar una olla, Recoger flores en el cesto."
   },
   {
    "edid": "Caring",
@@ -2457,8 +2435,7 @@
    "categoria": "dormir",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Se acuesta con manos en el abdomen y cerrando los ojos",
-   "salida": "IdleFurnitureExit"
+   "descripcion": "Se acuesta con manos en el abdomen y cerrando los ojos"
   },
   {
    "edid": "FrontBedRollEnter",
@@ -2467,8 +2444,7 @@
    "categoria": "dormir",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Se acuesta en un saco de dormir",
-   "salida": "IdleBedExitStart"
+   "descripcion": "Se acuesta en un saco de dormir"
   },
   {
    "edid": "DLC1IdleCoffinHorzEnter",
@@ -2486,8 +2462,7 @@
    "categoria": "dormir",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Acostarse en el suelo. Necesita: termina con: Levantarse del mueble.",
-   "salida": "IdleFurnitureExit"
+   "descripcion": "Acostarse en el suelo. Necesita: termina con: Levantarse del mueble."
   },
   {
    "edid": "RightBedEnter",
@@ -2497,8 +2472,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Acostarse en una cama por la derecha",
-   "visible": false,
-   "salida": "IdleBedExitStart"
+   "visible": false
   },
   {
    "edid": "RightBedRollEnter",
@@ -2507,8 +2481,7 @@
    "categoria": "dormir",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Se acuesta en un saco de dormir por la derecha",
-   "salida": "IdleBedExitStart"
+   "descripcion": "Se acuesta en un saco de dormir por la derecha"
   },
   {
    "edid": "LeftBedEnter",
@@ -2519,8 +2492,7 @@
    "origen": "vanilla",
    "destacada": true,
    "descripcion": "Acostarse en una cama por la izquierda",
-   "visible": false,
-   "salida": "IdleBedExitStart"
+   "visible": false
   },
   {
    "edid": "LeftBedRollEnter",
@@ -2529,8 +2501,7 @@
    "categoria": "dormir",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Se acuesta en un saco de dormir por la izquierda",
-   "salida": "IdleBedExitStart"
+   "descripcion": "Se acuesta en un saco de dormir por la izquierda"
   },
   {
    "edid": "DLC1SeranaCoffinEnterInstant",
@@ -2567,8 +2538,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Levantarse de una cama",
-   "visible": false,
-   "esSalida": true
+   "visible": false
   },
   {
    "edid": "Idle_1stPersonWoozyGetUpFromBed",
@@ -2791,8 +2761,7 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Dejar de llorar. Necesita: haber ejecutado antes: Llorar.",
-   "esSalida": true
+   "descripcion": "Dejar de llorar. Necesita: haber ejecutado antes: Llorar."
   },
   {
    "edid": "IdleCower",
@@ -2856,8 +2825,7 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Fin del paseo de cámara. Necesita: haber ejecutado antes: Paseo de cámara.",
-   "esSalida": true
+   "descripcion": "Fin del paseo de cámara. Necesita: haber ejecutado antes: Paseo de cámara."
   },
   {
    "edid": "IdleCiceroAgitated",
@@ -2941,8 +2909,7 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Mostrar incredulidad. Necesita: termina con: Salir de la incredulidad.",
-   "salida": "idleDisbelief01Exit"
+   "descripcion": "Mostrar incredulidad. Necesita: termina con: Salir de la incredulidad."
   },
   {
    "edid": "DLC2StornReaction2Start",
@@ -2951,8 +2918,7 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Mostrar incredulidad (2). Necesita: termina con: Salir de la incredulidad (2).",
-   "salida": "idleDisbelief02Exit"
+   "descripcion": "Mostrar incredulidad (2). Necesita: termina con: Salir de la incredulidad (2)."
   },
   {
    "edid": "DLC2FreaDisbeliefStart",
@@ -3024,8 +2990,7 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Llorar. Necesita: termina con: Dejar de llorar.",
-   "salida": "IdleChildCryingEnd"
+   "descripcion": "Llorar. Necesita: termina con: Dejar de llorar."
   },
   {
    "edid": "IdleHandsBehindBack",
@@ -3081,8 +3046,7 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Paseo de cámara. Necesita: termina con: Fin del paseo de cámara.",
-   "salida": "IdleWalkingCameraEnd"
+   "descripcion": "Paseo de cámara. Necesita: termina con: Fin del paseo de cámara."
   },
   {
    "edid": "IdleChildApologize",
@@ -3100,8 +3064,7 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Pena. Necesita: termina con: Salir de la pena.",
-   "salida": "idleFreaSorrowExit"
+   "descripcion": "Pena. Necesita: termina con: Salir de la pena."
   },
   {
    "edid": "IdleSnapToAttention",
@@ -3221,8 +3184,7 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Salir de la incredulidad. Necesita: haber ejecutado antes: Incredulidad.",
-   "esSalida": true
+   "descripcion": "Salir de la incredulidad. Necesita: haber ejecutado antes: Incredulidad."
   },
   {
    "edid": "DLC2StornReaction2Stop",
@@ -3231,8 +3193,7 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Salir de la incredulidad (2). Necesita: haber ejecutado antes: Incredulidad (2).",
-   "esSalida": true
+   "descripcion": "Salir de la incredulidad (2). Necesita: haber ejecutado antes: Incredulidad (2)."
   },
   {
    "edid": "DLC2FreaReactionStop",
@@ -3259,8 +3220,7 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Salir de la pena. Necesita: haber ejecutado antes: Pena.",
-   "esSalida": true
+   "descripcion": "Salir de la pena. Necesita: haber ejecutado antes: Pena."
   },
   {
    "edid": "IdleWave",
@@ -3645,8 +3605,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Preso A: bajarse del carro. Necesita: haber ejecutado antes: Subirse al carro.",
-   "visible": false,
-   "esSalida": true
+   "visible": false
   },
   {
    "edid": "IdleCartPrisonerAIdle",
@@ -4043,8 +4002,7 @@
    "categoria": "magia",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Aparecer. Forma parte de lanzar hechizos.",
-   "salida": "IdleNocturnal_Exit"
+   "descripcion": "Aparecer. Forma parte de lanzar hechizos."
   },
   {
    "edid": "IdleBlessingKneelEnter",
@@ -4218,8 +4176,7 @@
    "categoria": "magia",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Desaparecer. Forma parte de lanzar hechizos.",
-   "esSalida": true
+   "descripcion": "Desaparecer. Forma parte de lanzar hechizos."
   },
   {
    "edid": "IdleTelvanniTowerFloatDownEnter",
@@ -4291,8 +4248,7 @@
    "categoria": "magia",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Grabar la Palabra (terminar). Forma parte de lanzar hechizos.",
-   "esSalida": true
+   "descripcion": "Grabar la Palabra (terminar). Forma parte de lanzar hechizos."
   },
   {
    "edid": "IdleDLC02TentacleWordBurnStart",
@@ -4301,8 +4257,7 @@
    "categoria": "magia",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Grabar la Palabra en la piedra negra. Forma parte de lanzar hechizos.",
-   "salida": "IdleDLC02TentacleWordBurnEnd"
+   "descripcion": "Grabar la Palabra en la piedra negra. Forma parte de lanzar hechizos."
   },
   {
    "edid": "IdleSnowElfPrinceBigSpell",
@@ -4534,8 +4489,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Animación de bajarse de dragón",
-   "visible": false,
-   "esSalida": true
+   "visible": false
   },
   {
    "edid": "GroundDismountDragonNPC",
@@ -4555,8 +4509,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Fade-out animación de montar",
-   "visible": false,
-   "esSalida": true
+   "visible": false
   },
   {
    "edid": "Dismount",
@@ -4566,8 +4519,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Bajarse del caballo",
-   "visible": false,
-   "esSalida": true
+   "visible": false
   },
   {
    "edid": "DismountSwim",
@@ -4597,8 +4549,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Montarse en un caballo",
-   "visible": false,
-   "salida": "HorseExit"
+   "visible": false
   },
   {
    "edid": "DragonMount",
@@ -4608,8 +4559,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Montarse en un dragón",
-   "visible": false,
-   "salida": "DragonMountExit"
+   "visible": false
   },
   {
    "edid": "MountedSwimStart",
@@ -4619,8 +4569,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Nadar mientras estás montado",
-   "visible": false,
-   "salida": "MountedSwimStop"
+   "visible": false
   },
   {
    "edid": "MountedStaggerStart",
@@ -5065,8 +5014,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Bajarse de la carreta",
-   "visible": false,
-   "esSalida": true
+   "visible": false
   },
   {
    "edid": "IdleLooseSweepingStart",
@@ -5152,8 +5100,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "confirmado": false,
-   "descripcion": "Dejar la leña. Necesita: haber ejecutado antes: Recoger leña.",
-   "esSalida": true
+   "descripcion": "Dejar la leña. Necesita: haber ejecutado antes: Recoger leña."
   },
   {
    "edid": "IdleStonePutDownEnter",
@@ -5162,8 +5109,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Dejar una piedra. Necesita: haber ejecutado antes: Recoger una piedra.",
-   "esSalida": true
+   "descripcion": "Dejar una piedra. Necesita: haber ejecutado antes: Recoger una piedra."
   },
   {
    "edid": "IdleCraftingCookingPotAddIngredient",
@@ -5284,8 +5230,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Levantarse del escritorio por la derecha. Necesita: haber ejecutado antes: Sentarse a escribir por la derecha.",
-   "visible": false,
-   "esSalida": true
+   "visible": false
   },
   {
    "edid": "IdleWriteTableChairExitLeft",
@@ -5295,8 +5240,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Levantarse del escritorio por la izquierda. Necesita: haber ejecutado antes: Sentarse a escribir por la izquierda.",
-   "visible": false,
-   "esSalida": true
+   "visible": false
   },
   {
    "edid": "IdleGrainMillExit",
@@ -5364,8 +5308,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "andando": true,
-   "descripcion": "Llevar un cesto. Necesita: necesita llevar el objeto en las manos. Termina con: Soltar lo que lleva en las manos.",
-   "salida": "OffsetStop"
+   "descripcion": "Llevar un cesto. Necesita: necesita llevar el objeto en las manos. Termina con: Soltar lo que lleva en las manos."
   },
   {
    "edid": "OffsetCarryMQ201DrinkTray",
@@ -5395,8 +5338,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "andando": true,
-   "descripcion": "Llevar una olla. Necesita: necesita llevar el objeto en las manos. Termina con: Soltar lo que lleva en las manos.",
-   "salida": "OffsetStop"
+   "descripcion": "Llevar una olla. Necesita: necesita llevar el objeto en las manos. Termina con: Soltar lo que lleva en las manos."
   },
   {
    "edid": "IdleDwemerExtractor",
@@ -5426,8 +5368,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Ponerse a cocinar en el asador. Necesita: estar delante de la mesa de trabajo.",
-   "visible": false,
-   "salida": "IdleFurnitureExit"
+   "visible": false
   },
   {
    "edid": "IdleCookingPotEnter",
@@ -5437,8 +5378,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Ponerse a cocinar en la olla. Necesita: estar delante de la mesa de trabajo.",
-   "visible": false,
-   "salida": "IdleFurnitureExit"
+   "visible": false
   },
   {
    "edid": "IdleHadvarWriteLedgerEnter",
@@ -5458,8 +5398,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Ponerse a la mesa de alquimia. Necesita: estar delante de la mesa de trabajo.",
-   "visible": false,
-   "salida": "IdleFurnitureExit"
+   "visible": false
   },
   {
    "edid": "IdleEnchantingEnter",
@@ -5469,8 +5408,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Ponerse a la mesa de encantamiento. Necesita: estar delante de la mesa de trabajo.",
-   "visible": false,
-   "salida": "IdleFurnitureExit"
+   "visible": false
   },
   {
    "edid": "IdleHammerCarpenterTableEnter",
@@ -5480,8 +5418,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Ponerse a martillear en el banco de carpintero. Necesita: estar delante de la mesa de trabajo.",
-   "visible": false,
-   "salida": "IdleFurnitureExit"
+   "visible": false
   },
   {
    "edid": "IdleHammerTableEnter",
@@ -5491,8 +5428,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Ponerse a martillear en la mesa. Necesita: estar delante de la mesa de trabajo.",
-   "visible": false,
-   "salida": "IdleFurnitureExit"
+   "visible": false
   },
   {
    "edid": "IdleHammerWallEnter",
@@ -5502,8 +5438,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Ponerse a martillear en la pared.",
-   "visible": false,
-   "salida": "IdleFurnitureExit"
+   "visible": false
   },
   {
    "edid": "DLC2IdlePickaxeEnterDUPLICATE001",
@@ -5513,8 +5448,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Ponerse a picar con el pico.",
-   "visible": false,
-   "salida": "IdleFurnitureExit"
+   "visible": false
   },
   {
    "edid": "IdlePickaxeFloorEnter",
@@ -5523,8 +5457,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ponerse a picar en el suelo. Necesita: termina con: Levantarse del mueble.",
-   "salida": "IdleFurnitureExit"
+   "descripcion": "Ponerse a picar en el suelo. Necesita: termina con: Levantarse del mueble."
   },
   {
    "edid": "DLC2IdlePickaxeFloorEnterDUPLICATE001",
@@ -5533,8 +5466,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ponerse a picar en el suelo (Solstheim). Necesita: termina con: Levantarse del mueble.",
-   "salida": "IdleFurnitureExit"
+   "descripcion": "Ponerse a picar en el suelo (Solstheim). Necesita: termina con: Levantarse del mueble."
   },
   {
    "edid": "IdlePickaxeTableEnter",
@@ -5544,8 +5476,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Ponerse a picar en la mesa. Necesita: estar delante de la mesa de trabajo.",
-   "visible": false,
-   "salida": "IdleFurnitureExit"
+   "visible": false
   },
   {
    "edid": "DLC2IdlePickaxeTableEnterDUPLICATE001",
@@ -5555,8 +5486,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Ponerse a picar en la mesa (Solstheim). Necesita: estar delante de la mesa de trabajo.",
-   "visible": false,
-   "salida": "IdleFurnitureExit"
+   "visible": false
   },
   {
    "edid": "IdleOvenEnter",
@@ -5566,8 +5496,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Ponerse al horno. Necesita: estar delante de la mesa de trabajo.",
-   "visible": false,
-   "salida": "IdleFurnitureExit"
+   "visible": false
   },
   {
    "edid": "IdleTanningEnter",
@@ -5577,8 +5506,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Ponerse en el banco de curtido. Necesita: estar delante de la mesa de trabajo.",
-   "visible": false,
-   "salida": "IdleFurnitureExit"
+   "visible": false
   },
   {
    "edid": "IdleGrainMillEnter",
@@ -5588,8 +5516,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Ponerse en el molino. Necesita: estar delante de la mesa de trabajo.",
-   "visible": false,
-   "salida": "IdleFurnitureExit"
+   "visible": false
   },
   {
    "edid": "IdleSmelterEnter",
@@ -5599,8 +5526,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Ponerse en la fundición. Necesita: estar delante de la mesa de trabajo.",
-   "visible": false,
-   "salida": "IdleFurnitureExit"
+   "visible": false
   },
   {
    "edid": "IdleCounterStart",
@@ -5609,8 +5535,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ponerse tras el mostrador. Necesita: estar en el mostrador o el mostrador. Termina con: Levantarse del mueble.",
-   "salida": "IdleFurnitureExit"
+   "descripcion": "Ponerse tras el mostrador. Necesita: estar en el mostrador o el mostrador. Termina con: Levantarse del mueble."
   },
   {
    "edid": "IdleScrapeTreeBark",
@@ -5693,8 +5618,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "andando": true,
-   "descripcion": "Recoger flores en el cesto. Necesita: necesita llevar el objeto en las manos. Termina con: Soltar lo que lleva en las manos.",
-   "salida": "OffsetStop"
+   "descripcion": "Recoger flores en el cesto. Necesita: necesita llevar el objeto en las manos. Termina con: Soltar lo que lleva en las manos."
   },
   {
    "edid": "IdleWoodPickUpExit",
@@ -5703,8 +5627,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Recoger leña. Necesita: necesita llevar el objeto en las manos. Termina con: Dejar la leña.",
-   "salida": "IdlewoodputdownEnter"
+   "descripcion": "Recoger leña. Necesita: necesita llevar el objeto en las manos. Termina con: Dejar la leña."
   },
   {
    "edid": "IdleRFPickUpScroll",
@@ -5722,8 +5645,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Recoger una piedra. Necesita: necesita llevar el objeto en las manos. Termina con: Dejar una piedra.",
-   "salida": "IdleStonePutDownEnter"
+   "descripcion": "Recoger una piedra. Necesita: necesita llevar el objeto en las manos. Termina con: Dejar una piedra."
   },
   {
    "edid": "IdleWriteTableChairEnterRight",
@@ -5733,8 +5655,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Sentarse a escribir por la derecha. Necesita: estar sentado en una silla, banco o taburete.",
-   "visible": false,
-   "salida": "IdleWriteTableChairRightExit"
+   "visible": false
   },
   {
    "edid": "IdleWriteTableChairEnterLeft",
@@ -5744,8 +5665,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Sentarse a escribir por la izquierda. Necesita: estar sentado en una silla, banco o taburete.",
-   "visible": false,
-   "salida": "IdleWriteTableChairLeftExit"
+   "visible": false
   },
   {
    "edid": "IdleOffsetCarryPotServe",
@@ -5755,8 +5675,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "andando": true,
-   "descripcion": "Servir de la olla. Necesita: necesita llevar el objeto en las manos. Termina con: Soltar lo que lleva en las manos.",
-   "salida": "OffsetStop"
+   "descripcion": "Servir de la olla. Necesita: necesita llevar el objeto en las manos. Termina con: Soltar lo que lleva en las manos."
   },
   {
    "edid": "IdleLadderEnter",
@@ -5766,8 +5685,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Subir por una escalera.",
-   "visible": false,
-   "salida": "IdleFurnitureExit"
+   "visible": false
   },
   {
    "edid": "IdleCartTravelPlayerEnter",
@@ -5777,8 +5695,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Subirse al carro. Necesita: estar subido en el carro.",
-   "visible": false,
-   "salida": "IdleCartPrisonerAExit"
+   "visible": false
   },
   {
    "edid": "IdleCartTravelDriverEnter",
@@ -5788,8 +5705,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Subirse al pescante. Necesita: estar subido en el carro.",
-   "visible": false,
-   "salida": "IdleCartDriverExit"
+   "visible": false
   },
   {
    "edid": "IdlePullChainEnter",
@@ -6981,8 +6897,7 @@
    "categoria": "sentarse",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Apoya en el mostrador de bar, a veces limpia",
-   "salida": "IdleFurnitureExit"
+   "descripcion": "Apoya en el mostrador de bar, a veces limpia"
   },
   {
    "edid": "RailLeanEnter",
@@ -6992,8 +6907,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "destacada": true,
-   "descripcion": "Avanza un poco y apoyate en la baranda",
-   "salida": "IdleRailLeanExit"
+   "descripcion": "Avanza un poco y apoyate en la baranda"
   },
   {
    "edid": "IdleLeanTableEnter",
@@ -7003,8 +6917,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Apoyarse en la mesa. Necesita: estar delante de la mesa de trabajo.",
-   "visible": false,
-   "salida": "IdleFurnitureExit"
+   "visible": false
   },
   {
    "edid": "IdleTableLeanPoint",
@@ -7082,8 +6995,7 @@
    "categoria": "sentarse",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Retrocede un poco y sale de apoyate en la baranda",
-   "esSalida": true
+   "descripcion": "Retrocede un poco y sale de apoyate en la baranda"
   },
   {
    "edid": "IdleShelfExit",
@@ -7102,8 +7014,7 @@
    "categoria": "sentarse",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Esconderse contra la pared. Necesita: termina con: Levantarse del mueble.",
-   "salida": "IdleFurnitureExit"
+   "descripcion": "Esconderse contra la pared. Necesita: termina con: Levantarse del mueble."
   },
   {
    "edid": "IdleSoldierWallEnter",
@@ -7132,8 +7043,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Levantarse de la silla de frente",
-   "visible": false,
-   "esSalida": true
+   "visible": false
   },
   {
    "edid": "ExitChairFrontQuick",
@@ -7153,8 +7063,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Levantarse de mesa hacia atras",
-   "visible": false,
-   "esSalida": true
+   "visible": false
   },
   {
    "edid": "IdleHadvarWriteLedgerExit",
@@ -7174,8 +7083,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Levantarse de taburete de bar",
-   "visible": false,
-   "esSalida": true
+   "visible": false
   },
   {
    "edid": "ExitChairRight",
@@ -7185,8 +7093,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Levantarse de la silla del lado derecho",
-   "visible": false,
-   "esSalida": true
+   "visible": false
   },
   {
    "edid": "ExitChairRightQuick",
@@ -7206,8 +7113,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Levantarse de la silla del lado izquierdo",
-   "visible": false,
-   "esSalida": true
+   "visible": false
   },
   {
    "edid": "ExitChairLeftQuick",
@@ -7248,8 +7154,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Sentarse a la mesa. Necesita: estar delante de la mesa de trabajo.",
-   "visible": false,
-   "salida": "IdleTableBackExit"
+   "visible": false
   },
   {
    "edid": "IdleTableEnterPlayer",
@@ -7259,8 +7164,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Sentarse a la mesa (jugador). Necesita: estar delante de la mesa de trabajo.",
-   "visible": false,
-   "salida": "IdleTableBackExit"
+   "visible": false
   },
   {
    "edid": "IdleSitCrossLeggedEnter",
@@ -7269,8 +7173,7 @@
    "categoria": "sentarse",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Sentarse con las piernas cruzadas. Necesita: estar sentado en una silla, banco o taburete. Termina con: Levantarse del mueble.",
-   "salida": "IdleFurnitureExit"
+   "descripcion": "Sentarse con las piernas cruzadas. Necesita: estar sentado en una silla, banco o taburete. Termina con: Levantarse del mueble."
   },
   {
    "edid": "IdleChildLegsOut",
@@ -7291,8 +7194,7 @@
    "origen": "vanilla",
    "destacada": true,
    "descripcion": "Sentarse de frente en silla",
-   "visible": false,
-   "salida": "IdleChairFrontExit"
+   "visible": false
   },
   {
    "edid": "IdleStoolEnter",
@@ -7303,8 +7205,7 @@
    "origen": "vanilla",
    "destacada": true,
    "descripcion": "Sentarse en taburete de bar",
-   "visible": false,
-   "salida": "IdleStoolBackExit"
+   "visible": false
   },
   {
    "edid": "IdleStoolEnterPlayer",
@@ -7314,8 +7215,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Sentarse en el taburete (jugador). Necesita: estar sentado en una silla, banco o taburete.",
-   "visible": false,
-   "salida": "IdleStoolBackExit"
+   "visible": false
   },
   {
    "edid": "IdleJarlChairEnter",
@@ -7345,8 +7245,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Sentarse en una repisa. Necesita: estar sentado en una silla, banco o taburete.",
-   "visible": false,
-   "salida": "IdleFurnitureExit"
+   "visible": false
   },
   {
    "edid": "EnterChairRight",
@@ -7356,8 +7255,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Sentarse por la derecha en silla",
-   "visible": false,
-   "salida": "idleChairRightExit"
+   "visible": false
   },
   {
    "edid": "EnterChairLeft",
@@ -7367,8 +7265,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Sentarse por la izquierda en silla",
-   "visible": false,
-   "salida": "idleChairLeftExit"
+   "visible": false
   }
  ]
 }

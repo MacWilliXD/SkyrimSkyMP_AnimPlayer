@@ -64,13 +64,6 @@ def main():
     for a in animaciones:
         (viejas if a["evento"] in revisado else nuevas).append(a)
 
-    # Para poder nombrar la animacion de la que depende cada salida.
-    porEvento = dict((x["evento"], x) for x in animaciones)
-    deQuienEsSalida = {}
-    for x in animaciones:
-        if x.get("salida"):
-            deQuienEsSalida.setdefault(x["salida"], []).append(x["nombre"])
-
     def fila(a):
         previo = revisado.get(a["evento"], {})
         # Lo escrito a mano manda; si no hay nada, lo que trae el catalogo.
@@ -81,19 +74,6 @@ def main():
         nota = (previo.get("nota") or "").strip()
         dep = dependencias.dependencia(a["evento"], a)
 
-        # Si esta animacion es la SALIDA de otra, se dice de cual y se descarta:
-        # no es una pose que uno elija, es la contraparte de otra. El mod la
-        # lanza solo al detener, asi que en la lista solo estorba.
-        padres = deQuienEsSalida.get(a["evento"])
-        if padres:
-            dep = u"Haber ejecutado antes: " + u", ".join(sorted(set(padres))[:3])
-            if not estado:
-                estado = u"Descartado"
-            if not nota:
-                nota = (u"Es la animacion de salida de "
-                        + sorted(set(padres))[0]
-                        + u"; el mod la lanza solo al detener")
-
         # Los descartes automaticos: remates y jugabilidad. Solo si no has
         # decidido tu otra cosa.
         # Los remates se descartan siempre; el resto solo si no lo decidiste tu.
@@ -102,11 +82,6 @@ def main():
             estado = u"Descartado"
             if not nota:
                 nota = porQue
-
-        # Y si tiene salida propia, se dice cual, que es util al revisarla.
-        elif a.get("salida") and a["salida"] in porEvento:
-            suSalida = porEvento[a["salida"]]["nombre"]
-            dep = (dep + u". " if dep else u"") + u"Termina con: " + suSalida
 
         # Todo lo que se lee pasa por el filtro de espanol neutral: nombre,
         # descripcion, nota y dependencia. Ver herramientas/neutral.py.

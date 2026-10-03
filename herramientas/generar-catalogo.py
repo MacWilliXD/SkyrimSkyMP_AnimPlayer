@@ -45,7 +45,6 @@ import csv
 import descartes
 import idles
 import neutral
-import salidas as salidasMod
 import traducciones
 
 RUTA_POR_DEFECTO = ("C:/Program Files (x86)/Steam/steamapps/common/"
@@ -682,18 +681,6 @@ def generar(data):
         fuera, motivo = descartes.descarte(a["evento"], a["categoria"])
         if fuera:
             a["visible"] = False
-
-    # Las parejas entrada/salida. Muchas poses son de dos piezas —sentarse y
-    # levantarse, recoger y soltar— y la de salida no se puede lanzar sola.
-    # Ver herramientas/salidas.py.
-    eventos = [a["evento"] for a in animaciones]
-    mapa = salidasMod.construirMapa(eventos)
-    lasSalidas = set(mapa.values())
-    for a in animaciones:
-        if a["evento"] in mapa:
-            a["salida"] = mapa[a["evento"]]
-        if a["evento"] in lasSalidas:
-            a["esSalida"] = True
 
     animaciones.sort(key=lambda a: (a["categoria"], a["nombre"].lower()))
     return animaciones
