@@ -2252,6 +2252,60 @@ app.whenReady().then(async () => {
             'recoger y soltar son dos animaciones normales de la lista',
             conPiedra.join(', '));
 
+  console.log('\n=== con el arma fuera no se suelta lo de la mano ===');
+  /* El arma pasa por el MISMO sistema que la copa o el laud: en el grafo del
+     personaje estan AnimObjectDrawBlade, AnimObjectIronSword, AnimObjectEquip.
+     Asi que AnimObjectStop, que suelta lo que lleves en la mano, soltaba
+     tambien la espada y el personaje bajaba las manos al encadenar.
+
+     Con el arma guardada si se manda, que es lo que hace que el brindis suelte
+     la copa. */
+  const conEspada = falsoSp.cargarPlugin(PLUGIN, {});
+  conEspada.tic();
+  const apEspada = conEspada.sp.storage.AnimPlayer;
+
+  conEspada.registro.armaFuera = true;
+  apEspada.reproducir('IdleWave');
+  conEspada.tic();
+  dejarPasarLaEspera(conEspada);
+  conEspada.registro.animaciones.length = 0;
+  apEspada.parar();
+  conEspada.tic();
+  const corteConEspada = conEspada.registro.animaciones.map((a) => a.evento);
+  comprobar(corteConEspada.indexOf('AnimObjectStop') === -1,
+            'con el arma desenvainada NO se manda AnimObjectStop',
+            corteConEspada.join(' + '));
+  comprobar(corteConEspada.indexOf('IdleStop') !== -1,
+            'pero la pose se corta igual', corteConEspada.join(' + '));
+
+  conEspada.registro.armaFuera = false;
+  apEspada.reproducir('IdleWave');
+  conEspada.tic();
+  dejarPasarLaEspera(conEspada);
+  conEspada.registro.animaciones.length = 0;
+  apEspada.parar();
+  conEspada.tic();
+  const corteSinEspada = conEspada.registro.animaciones.map((a) => a.evento);
+  comprobar(corteSinEspada.indexOf('AnimObjectStop') !== -1,
+            'y con el arma guardada si: es lo que suelta la copa del brindis',
+            corteSinEspada.join(' + '));
+
+  console.log('\n=== buscar con parentesis y palabras sueltas ===');
+  /* Escribir "en guardia" no encontraba "Estirar hombros (En guardia)": el
+     parentesis se quedaba pegado en el indice —"(en guardia)"— y cada palabra
+     se busca con un espacio delante. */
+  await verLista();
+  const porDosPalabras = await buscar('en guardia');
+  comprobar(porDosPalabras.length > 0,
+            'buscar "en guardia" encuentra las de en guardia',
+            porDosPalabras.length + ' resultados');
+  const nombresEnGuardia = await js(`[...document.querySelectorAll(
+    '#animplayer .ap-fila .ap-nombre')].map((n) => n.textContent)`);
+  comprobar(nombresEnGuardia.some((n) => /\(En guardia\)/.test(n)),
+            'y son las que llevan "(En guardia)" en el nombre',
+            nombresEnGuardia.slice(0, 3).join(' / '));
+  await buscar('');
+
   console.log('\n=== esconder animaciones ===');
   /* Para que el servidor pueda repartirlas por jugador: unas las ve todo el
      mundo y otras solo quien deba. Por ahora no esconde nada nadie. */

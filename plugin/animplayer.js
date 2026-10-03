@@ -1081,7 +1081,7 @@
     }
   }
 
-  /** Minusculas y sin acentos, para buscar como se escribe de verdad. */
+  /** Minusculas, sin acentos y sin signos, para buscar como se escribe. */
   function sinAcentos(t) {
     return String(t || '').toLowerCase()
       .replace(/\u00e1|\u00e0|\u00e4/g, 'a')
@@ -1089,7 +1089,12 @@
       .replace(/\u00ed|\u00ec|\u00ef/g, 'i')
       .replace(/\u00f3|\u00f2|\u00f6/g, 'o')
       .replace(/\u00fa|\u00f9|\u00fc/g, 'u')
-      .replace(/\u00f1/g, 'n');
+      .replace(/\u00f1/g, 'n')
+      /* Y todo lo que no sea letra o numero pasa a ser un espacio. Sin esto,
+         "Estirar hombros (En guardia)" se indexaba con el parentesis pegado
+         —"(en guardia)"— y buscar "en guardia" no lo encontraba: cada palabra
+         se busca con un espacio delante, y un parentesis no es un espacio. */
+      .replace(/[^a-z0-9 ]+/g, ' ');
   }
 
   reconstruirIndice();
@@ -1289,6 +1294,13 @@
        *   AnimObjectStop   lo que el juego te engancha a la mano: la copa del
        *                    brindis, la jarra, el libro. Sin esto el objeto se
        *                    queda puesto y con el la animacion que lo sostiene.
+       *                    OJO: solo si no llevas un arma desenvainada. El
+       *                    arma pasa por ese mismo sistema —en el grafo estan
+       *                    AnimObjectDrawBlade, AnimObjectIronSword,
+       *                    AnimObjectEquip— asi que soltar "lo de la mano"
+       *                    soltaba tambien la espada y el personaje bajaba las
+       *                    manos. Y no se pierde nada: con el arma fuera no
+       *                    hay ninguna copa que soltar.
        *   IdleStop         y el idle en si
        *
        * Los que no vienen al caso no hacen nada: el grafo ignora lo que no
@@ -1302,13 +1314,41 @@
        * IdleForceDefaultState en su dia, por el mismo motivo: un corte que se
        * lleva por delante mas de lo que tiene que cortar. Se quedo abajo, en
        * el corte a por todas. */
+      /* Se mira el estado de AHORA, no el recuerdo: lo que importa es si en
+         este momento hay un arma en la mano. */
+      var conElArmaFuera = false;
+      try { conElArmaFuera = !!actor.isWeaponDrawn(); } catch (e) { }
+
       try {
         enviarAlGrafo(actor, 'OffsetStop');
-        enviarAlGrafo(actor, 'AnimObjectStop');
+        if (!conElArmaFuera) {
+          enviarAlGrafo(actor, 'AnimObjectStop');
+        }
         if (!enUnMueble) {
           enviarAlGrafo(actor, 'IdleFurnitureExit');
         }
         enviarAlGrafo(actor, EVENTO_DE_PARADA);
+
+        /* Y SI ESTABAS EN GUARDIA, SE TE DEVUELVE A LA GUARDIA.
+         *
+         * Con el arma fuera, tu sitio no es "de pie con las manos vacias": es
+         * la guardia. El corte tiene que cortar la pose, no tu postura.
+         *
+         * Antes esto se intentaba al reves, quitando del corte los eventos que
+         * se llevaban la postura por delante. Era ir a ciegas: cada vez que se
+         * anadia uno nuevo habia que descubrir si tocaba la guardia o no, y
+         * bastaba con que uno lo hiciera para que el personaje bajara las
+         * manos al encadenar animaciones.
+         *
+         * Asi da igual cual del corte la tire: detras va la guardia otra vez.
+         * Y se hace con el evento del juego, combatStanceStart —el mismo que
+         * en la lista se llama "Ponerse en guardia"—, no forzando la postura
+         * con setWeaponDrawnMode: aquello dejaba la postura forzada y la pose
+         * siguiente salia mal. */
+        if (conElArmaFuera) {
+          enviarAlGrafo(actor, 'combatStanceStart');
+          apuntar('estabas en guardia: se te devuelve a la guardia');
+        }
 
         /* A POR TODAS, si es la segunda vez seguida que pulsas Detener.
          *
@@ -2590,7 +2630,11 @@
     function llano(t) {
       return String(t || '').toLowerCase()
         .replace(/[áàä]/g, 'a').replace(/[éèë]/g, 'e').replace(/[íìï]/g, 'i')
-        .replace(/[óòö]/g, 'o').replace(/[úùü]/g, 'u').replace(/ñ/g, 'n');
+        .replace(/[óòö]/g, 'o').replace(/[úùü]/g, 'u').replace(/ñ/g, 'n')
+        /* Los signos, a espacios, igual que en el plugin. Las dos copias
+           tienen que hacer lo mismo o buscar daria resultados distintos segun
+           por donde entres. */
+        .replace(/[^a-z0-9 ]+/g, ' ');
     }
 
     function cargar(d, favs) {
