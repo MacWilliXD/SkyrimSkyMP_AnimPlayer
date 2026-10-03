@@ -1,0 +1,612 @@
+id,nombre,descripción,estado,nota
+SneakStart,Agacharse,Animación básica del jugador para agacharse (usada al usar el cntrl),Descartado,No usable para rueda de animaciones
+MRh_SpellAimedStart,"Apuntar con un hechizo, derecha",Incrementa el efecto del hechizo derecho,Descartado,Animación cuando inicias a lanzar un hechizo
+MLh_SpellAimedStart,"Apuntar con un hechizo, izquierda",Incrementa el efecto del hechizo izquierdo,Descartado,Animación cuando inicias a lanzar un hechizo
+attackStart,Atacar,Ataca con el arma equipada (Mano derecha),Descartado,Usada al hacer click izquierdo
+attackStart_MC_1HMRight,Atacar con la derecha (una mano),"Ataca con el arma equipada (Una mano, mano derecha)",Descartado,
+attackStartLeftHand,Atacar con la izquierda,Ataca con el arma equipada (Mano izquierda),Descartado,Usada al hacer click derecho
+attackStart_MC_1HMLeft,Atacar con la izquierda (una mano),"Ataca con el arma equipada (Una mano, mano izquierda)",Descartado,
+attackStartDualWield,Atacar con las dos armas,Ataca con el arma equipada (A dos manos),Descartado,
+attackPowerStartRightLeftHand,"Ataque potente a la derecha, con la izquierda","Ataque potente con arma equipada (Una mano, izquierda)",Descartado,
+attackPowerStartLeftLeftHand,"Ataque potente a la izquierda, con la izquierda","Ataque potente con arma equipada (Una mano, derecha)",Descartado,
+attackPowerStart_MC_1HMRight,Ataque potente con la derecha (una mano),Ataque potente con arma equipada,Descartado,
+attackPowerStart_MC_1HMLeft,Ataque potente con la izquierda (una mano),Ataque potente con arma equipada,Descartado,
+attackPowerStartDualWield,Ataque potente con las dos armas,Ataque potente con arma equipada,Descartado,
+attackPowerStartInPlaceLeftHand,"Ataque potente en el sitio, con la izquierda",Ataque potente con arma equipada,Descartado,
+attackPowerStartBackLeftHand,"Ataque potente hacia atrás, con la izquierda",Ataque potente con arma equipada,Descartado,
+attackPowerStartLeft,Ataque potente hacia la izquierda,Ataque potente con arma equipada,Descartado,
+JumpLandEnd,Aterrizar,Animación de cierre al caer de un salto (No tiene movimiento),Descartado,
+JumpLandDirectional,Aterrizar de lado,Animación de cierre al caer de un salto mientras te mueves (No tiene movimiento),Descartado,
+DragonMountExit,Bajar del dragón,Animación de bajarse de dragón,Descartado,Requiere estar subido en un dragón para ejecutarse
+Ground_Dismount_Dragon,Bajar del dragón en tierra,Animación de bajarse de dragón mientras el dragón está en el suelo,Descartado,Requiere estar subido en un dragón para ejecutarse
+JumpFall,Caer,Animación que se ejecuta automaticamente mientras cae el jugador (Aleteo mientras caes),Descartado,
+WeapOutRightReplaceForceEquip,Sacar Arma,Desenfunda el arma equipada,Descartado,Saca el arma equipada sin discreción
+MC_WeapOutRightReplaceForceEquip,Cambiar el arma de la derecha (2),Desenfunda el arma equipada,Descartado,Hace lo mismo que la anterior pero no ejecuta animación
+WeapOutLeftReplaceForceEquip,Cambiar el arma de la izquierda,Desenfunda el arma equipada izquierda,Descartado,Saca el arma equipada sin discreción (Aunque su animación es más bruta y las saca de inmediato sin transición)
+ShoutSprintLongStart,"Carrera del Torbellino, larga",Grito de torbellino arrollador Nivel 1,Descartado,Requiere y solo ejecutable con el grito y sue fecto
+ShoutSprintMediumStart,"Carrera del Torbellino, media",Grito de torbellino arrollador Nivel 2,Descartado,Requiere y solo ejecutable con el grito y sue fecto
+ShoutSprintLongestStart,"Carrera del Torbellino, muy larga",Grito de torbellino arrollador Nivel 3,Descartado,Requiere y solo ejecutable con el grito y sue fecto
+attackPowerStartH2HCombo,Combinación de puñetazos,Golpe cargado intercambiado entre ambos puños,Descartado,Animación que se ejecuta al hacer el ataque cargado con ambos golpes (clicks) al mismo tiempo
+RitualSpellOut,Cortar el hechizo ritual,Corta la animación del hechizo de alto nivel (los que usan dos manos para cargar el hechizo),Descartado,"Solo corta la animación, no hace nada en si"
+pa_OffsetBoundStandingCut,Cortar las ataduras (A ti),Se cortan las ataduras de las manos por alguien más (hace un pequeño movimiento de manos como que alguien le corta la atadura de las manos),Modificado,Posible transición entre estar atado y quitar ataduras (usada en helguen cuando te cortan las ataduras)
+moveStop,Dejar de andar,Fade-outanimación de cuando caminas,Descartado,"Sin animación, es un stop"
+blockStop,Dejar de bloquear,Fade-out animación de bloquear,Descartado,"Sin animación, es un stop"
+SprintStop,Dejar de correr,Fade-out animación de correr,Descartado,"Sin animación, es un stop"
+bleedOutStop,Caer abatido (Levantarse),Fade-out animación de bleedOutStart (Se levanta de estar abatido),Modificado,Transición de animación de estar abatido a levantarse
+turnStop,Dejar de girar,Fade-out animación de girar,Descartado,"Sin animación, es un stop"
+SwimStop,Dejar de nadar,Fade-out animación de nadar,Descartado,"Sin animación, es un stop"
+MountedSwimStop,Dejar de nadar montado,Fade-out animación de montar,Descartado,"Sin animación, es un stop"
+bleedOutStart,Caer abatido,Cae al suelo tocandose el estomago y en 4 patas derrotado,Modificado,"Animación ejecutada por npc inmortales cuando caen derrotados, se arrastran en el piso abatidos"
+WeapEquip,Desenvainar,Desenvaina el arma equipada ,Descartado,Misma animación de la R del juego base
+WeapSoloEquip,Desenvainar (sin nada más),Desenvaina el arma equipada ,Descartado,Misma animación de la R del juego base
+HorseExit,Desmontar del caballo,Bajarse del caballo ,Descartado,Se necesita estar montado en el caballo para poder ejecutarla
+HorseExitSwim,Desmontar del caballo en el agua,Bajarse del caballo estando en el agua,Descartado,Se necesita estar montado en el caballo para poder ejecutarla
+bowAttackStart,Disparar el arco,Dispara con el arco equipado,Descartado,Se necesita tener equipado y desenvainado un arco con munición
+crossbowAttackStart,Disparar la ballesta,Dispara con la ballesta equipada,Descartado,Se necesita tener equipado y desenvainado una ballesta con munición
+crossbowDwarvenAttackStart,Disparar la ballesta mejorada,Dispara con la ballesta mejorada equipada,Descartado,Se necesita tener equipado y desenvainado una ballesta mejorada con munición
+moveStart,Echar a andar,Comienza la animación de caminar (varia la velocidad de la animación),Descartado,Se requiere estar idle para ejecutar y dependiendo de la velocidad del jugador es la velocidad de la animación
+SprintStart,Echar a correr,Comienza la animación de correr ,Descartado,Se requiere estar haciendola animación de caminar para ejecutarse.
+ExecutionNextClip,Ejecución: siguiente parte,Siguiente paso de la animación de ejecución,Descartado,"Animación usada en las ejecuciones publicas, no funciona si no está scripteado el corte de cabeza de otro pj"
+shoutStart,Empezar un Grito,Inicia grito (bucle),Descartado,Comienza la animación al momento de lanzar un grito. Se repite en bucle.
+MC_shoutStart,Empezar un Grito (2),Inicia grito (bucle),Descartado,Comienza la animación al momento de lanzar un grito. Se repite en bucle.
+NPCshoutStart,Empezar un Grito (3),Inicia grito (solo npcs),Descartado,Comienza la animación al momento de lanzar un grito. Se repite en bucle. Solo para Npcs
+RitualSpellStart,Empezar un hechizo ritual,Usa las dos manos para cargar un hechizo/ritual y quedarse cargando,Descartado,"Animación usada para hechizos de dos manos cargados o spells grandes, carga con las dos manos y se queda idle en la animación de carga con las manos abiertas."
+idleRitualSpellStart,Empezar un hechizo ritual (pose),Comenzar a cargar hechizo de 2 manos tipo ritual,Modificado,"Se queda porque se mantiene la animación. Animación usada para hechizos de dos manos cargados o spells grandes, carga con las dos manos y se queda idle en la animación de carga con las manos abiertas."
+IdleCombatShieldStart,Provocar golpeando armas (En guardia),Golpea tus armas para provocar,Modificado,Animación del escudo que golpea para hacer ruido (meme del esqueleto golpeando escudo)
+IdleCombatStretchingStart,Estirar hombros (En guardia),Estira tus brazos y hombros cuando estas en guardia,Modificado,Animación que requiere tener las armas desenvainadas para hacer el estiramiento de los hombros
+IdleCombatLookingAroundStart,Mirar alrededor (En guardia),Mirar alrededor cuandoe stas en guardia,Modificado,Animación que requiere tener las armas desenvainadas. Mira alrededor
+IdleCombatSpecialStart,Estirar hombros 2 (En guardia),Estira tus brazos y hombros cuando estas en guardia,Modificado,Animación que requiere tener las armas desenvainadas para hacer el estiramiento de los hombros de manera diferente
+IdleCombatWeaponCheckStart,Revisar arma (En guardia),Revisa el arma desenvainada,Modificado,Animación que requiere tener las armas desenvainadas. Levanta el arma que tiene y la mira para volver a bajarla.
+blockHitStart,Encajar un golpe con el bloqueo,Empieza la animación que detiene golpes con el escudo,Descartado,Animación para bloquear perfecto los golpes provenientes con el escudo.
+UnequipNoAnim,Envainar sin animación,"Envaina arma sin animación, envaine directo.",Descartado,"Envaina arma sin animación, envaine directo."
+FlinchStart,Retroceder por golpe,Retrocede por un golpe en la parte superior del cuerpo,Modificado,"Golpe en el rostro o en la parte superior del cuerpo, retrocediendo un poco"
+NPC_TurnRight90,Girar 90 grados a la derecha,Girar 90 grados a la derecha,Descartado,
+NPC_TurnToWalkRight90,Girar 90 grados y echar a andar,Girar 90 grados a la derecha y anda,Descartado,
+turnRight,Girar a la derecha,Inicia la animación de girar a la derecha,Descartado,Usado al girar la camara cuando estás desenvainado que hace la animación transición al girar
+turnLeft,Girar a la izquierda,Inicia la animación de girar a la izquierda,Descartado,Usado al girar la camara cuando estás desenvainado que hace la animación transición al girar
+bashFail,Golpe de escudo fallido,Arrazar con escudo y falla el golpe,Descartado,"Perk, no hace nada de pie normal"
+BashFail,Golpe de escudo fallido (2),Arrazar con escudo y falla el golpe,Descartado,"Perk, no hace nada de pie normal"
+bashPowerStart,Golpe de escudo potente,Golpear con el escudo fuerte,Descartado,Lanza un golpe fuerte con ele scudo hacia la izquierda arriba.
+pa_KillingBlow,Golpe de gracia,Toma su espada de una mano y la clava rematando,Descartado,"Remata con el arma equipada hacia el suelo, junta sus dos manos y hace el Rematar en el suelo."
+StaffBashRelease,Golpear con el bastón,Golpea con el bastón,Descartado,Requiere tener equipado y desenvainado un bastón
+bashStart,Golpear con el escudo,Golpea con el escudo,Descartado,Requiere tener equipado y desenvainado un escudo
+shoutReleaseSlowTime,Grito: Tiempo Lento,Comenzar grito de Relentizar tiempo,Descartado,
+torchUnequip,Guardar la antorcha,Guarda la antorcha equipada,Descartado,Se necesita tener la antorcha equipada
+MLh_SpellAimedConcentrationStart,"Hechizo de concentración, izquierda",Carga hechizo,Descartado,Requiere tener hechizo equipado en la mano izquierda
+MRh_Equipped_Event,Hechizo equipado en la derecha,Equipo hechizo,Descartado,
+MLh_Equipped_Event,Hechizo equipado en la izquierda,Equipo hechizo,Descartado,
+MRh_SpellReady_Event,Hechizo listo en la derecha,Equipo hechizo,Descartado,
+MLh_SpellReady_Event,Hechizo listo en la izquierda,Equipo hechizo,Descartado,
+RitualSpellAimConcentrationStart,Hechizo ritual de concentración,Misma animación que RitualSpellStart,Descartado,
+MRh_SpellSelfStart,"Hechizo sobre uno mismo, derecha",Carga hechizo,Descartado,
+wardAbsorb,La protección absorbe un hechizo,Carga hechizo,Descartado,
+MRh_WardStart,Levantar protección con la derecha,Carga hechizo,Descartado,
+MLh_WardStart,Levantar protección con la izquierda,Carga hechizo,Descartado,
+SneakStop,Levantarse de agacharse,Animación básica del jugador para salir de agacharse (usada al usar el cntrl),Descartado,Necesita estar Agachado para ejecutarse. No usable para rueda de animaciones
+HorseEnter,Montar a caballo,Montarse en un caballo,Descartado,
+DragonMountEnter,Montar en el dragón,Montarse en un dragón,Descartado,
+MountedSwimStart,Nadar montado,Nadar mientras estás montado,Descartado,
+MagicForceEquipRight,Poner magia en la derecha,Equipo hechizo,Descartado,
+MagicForceEquipLeft,Poner magia en la izquierda,Equipo hechizo,Descartado,
+MagicWeap_ForceEquip,Poner magia y arma,Equipo hechizo y arma,Descartado,
+blockStart,Ponerse a bloquear,Comenzar animación de bloquear,Descartado,
+SwimStart,Ponerse a nadar,Comenzar animación de nadar,Descartado,
+IdleCombatStart,Postura de combate,Comenzar animación de postura de combate,Descartado,
+blockAnticipateStart,Prepararse para bloquear,Inicia la animación de bloquear,Descartado,
+AttackStartH2HRight,Puñetazo con la derecha,Golpear con puño con la derecha,Descartado,
+AttackStartH2HLeft,Puñetazo con la izquierda,Golpear con puño con la izquierda,Descartado,
+attackPowerStartForwardH2HRightHand,"Puñetazo potente hacia delante, derecha",Golpear fuerte con el puño derecho,Descartado,
+attackPowerStartForwardH2HLeftHand,"Puñetazo potente hacia delante, izquierda",Golpear fuerte con el puño izquierdo,Descartado,
+NPC_BumpFromFront,Retroceder por golpe 2,Eres empujado y retrocedes del golpe,Modificado,
+reloadStart,Recargar Ballesta,Recargar ballesta,Descartado,Hace la animación de recargar una ballesta
+pa_KillMoveJ,Rematar con pierna,Remata aplastando lo que está en el suelo,Descartado,
+pa_KillMoveC,Rematar cargando (Una mano),Remata cargando al enemigo hacia atrás y lo remata con espada,Descartado,
+pa_KillMoveTrollA,Rematar hacia arriba (Una mano),Remata agarrando y cortando hacia arriba horizontalmente,Descartado,Animación usada para matar trolls con una mano
+pa_KillMoveSabreCat,Rematar hacia la izquierda (Una mano),Remata hacia la izquierda perforando con nuestra arma,Descartado,Animación usada para matar dientes de sable
+pa_KillMoveGiantA,Rematar cortando y punzando arriba (Una mano),Remata cortando en horizontal y posteriormente punzar hacia arriba,Descartado,Animación usada para matar gigantes
+pa_KillMoveDraugrB,Rematar girando (Una mano),Remata haciendo una rotación 360 grados,Descartado,Animación usada para matar draugrs
+pa_KillMoveDraugr,Rematar repetidamente (Una mano),Remata haciendo 3 tajos diagonales,Descartado,Animación usada para matar draugrs
+pa_KillMoveBearA,Rematar con fuerza (Una mano),"Remata haciendo 2 tajos, el último en el centro",Descartado,Animación usada para matar osos
+pa_KillMoveF,Rematar con altura (Una mano),Remata cargando hacia adelante y subirse para rematar,Descartado,Animación que te subes en algo para rematar en altura
+pa_KillMoveD,Rematar con estilo (Una mano),Remata con un salto y tajo hacia adelante,Descartado,
+pa_KillMoveShortD,Rematar desde arriba (Una mano),Remata perforando desde arriba hacia abajo,Descartado,
+pa_KillMoveShortC,Rematar tajando desde arriba (Una mano),Remata haciendo un tajo verticalmente ,Descartado,
+pa_KillMoveShortB,Rematar desde abajo (Una mano),Remata perforando desde abajo hacia arriba,Descartado,
+pa_KillMoveShortA,Rematar con fuerza desde abajo (Una mano),Remata haciendo un corte diagonal desde abajo hacia arriba,Descartado,
+pa_KillMoveSabreCatShortB,Rematar con fuerza desde arriba (Una mano),Remata haciendo un corte diagonal desde arriba pero se queda atascado,Descartado,
+pa_KillMoveSabreCatShortA,Rematar en el suelo (Una mano),Remata perforando desde arriba hacia abajo,Descartado,
+pa_KillMoveDraugrShortA,Rematar con un golpe (Una mano),Remata golpeando con el arma contundentemente,Descartado,
+pa_KillMoveH2HComboA,Rematar a puñetazos (Puños),Remata agarrando y golpeando con los puños,Descartado,
+pa_KillMoveDualWieldA,Rematar con dos armas (Una mano Doble),Remata perforando desde abajo con las dos armas de una mano,Descartado,
+pa_KillMove2HMDraugrA,Rematar tajante doble (Dos manos),Remata tajano dos veces,Descartado,
+pa_KillMove2HMFalmerB,Rematar tajante doble 2 (Dos manos),Remata tajano dos veces,Descartado,
+pa_KillMove2HMFalmerA,Rematar clavando desde abajo (Dos manos),Remata clavando el arma desde abajo,Descartado,
+pa_KillMove2HMBearB,Rematar con vuelta (Dos manos),Remata dando una vuelta y tajando horizontalmente,Descartado,Oso
+pa_KillMove2HMBearA,Rematar perforante (Dos manos),Remata perforando en el centro el arma,Descartado,Oso
+pa_KillMove2HMSabreCatB,Rematar con vuelta 2 (Dos manos),Remata dando una vuelta y tajando horizontalmente,Descartado,Dientes de sable
+pa_KillMove2HMSabreCatA,Rematar perforante 2 (Dos manos),Remata perforando en el centro el arma,Descartado,Dientes de sable
+pa_KillMove2HMWolfB,Rematar con doble tajo (Dos manos),Remata tajando 2 veces,Descartado,Lobo. Tiene sonido de lobo
+pa_KillMove2HMWolfA,Rematar clavando desde abajo 2 (Dos manos),Remata clavando el arma desde abajo,Descartado,Lobo
+pa_KillMove2HMTrollB,Rematar con doble tajo (Dos manos),Remata tajando 2 veces,Descartado,Troll
+pa_KillMove2HMTrollA,Rematar perforante 3 (Dos manos),Remata perforando en el centro el arma,Descartado,Troll
+pa_KillMove2HMSteamCenturionA,Rematar con dificultad (Dos manos),"Remata tajando arriba horizontalmente, pero se queda atascado",Descartado,
+pa_KillMove2HMSprigganA,Rematar con estilo (Dos manos),Remata con un salto y tajo hacia abajo,Descartado,
+pa_KillMove2HMHagravenA,Rematar con estilo 2 (Dos manos),Remata con un salto y tajo hacia abajo,Descartado,
+pa_KillMove2HMGiantA,Rematar con vuelta 3 (Dos manos),Remata dando una vuelta y tajando horizontalmente,Descartado,
+pa_KillMove1HMWolfB,Rematar con patada y tajo (Una mano),Remata dando una patada y luego un tajo vertical,Descartado,
+pa_KillMove1HMGiantBleedOutA,Rematar con vuelta y tajo (Una mano),Remata dando una vuelta y tajando verticalmente,Descartado,
+pa_KillMove1HMGiantB,Rematar con vuelta y tajo hacia arriba (Una mano),Remata dando una vuelta y haciendo un pequeño salto para tajar arriba,Descartado,
+pa_KillMove1HMFalmerC,Rematar con tajo fuerte (Una mano),Remata dando un tajo que se queda atascado,Descartado,
+pa_KillMove1HMFalmerB,Rematar con tajo doble (Una mano),Remata con 2 tajos rapidos,Descartado,
+pa_KillMove1HMFalmerA,Rematar con agarre (Una mano),Remata agarrando y haciendo un tajo horizontal arriba,Descartado,
+pa_KillMove1HMBearB,Rematar con tajo fuerte 2 (Una mano),Remata dando un tajo que se queda atascado,Descartado,
+pa_KillMove1HMWolfA,Rematar con golpe (Una mano),Remata dando un golpe contundente,Descartado,
+pa_KillMove1HMTrollB,Rematar con doble tajo (Una mano),Remata con dos tajos rapidos,Descartado,
+pa_KillMove1HMSteamCenturionB,Rematar con doble tajo lento (Una mano),Remata con dos tajos lentos,Descartado,
+pa_KillMove1HMSteamCenturionA,Rematar con vuelta y tajo (Una mano),Remata con una vuelt ay tajo alto horizontal que se traba,Descartado,
+pa_KillMove1HMSprigganB,Rematar con perforante superior (Una mano),Remata perforando desde arriba hacia abajo,Descartado,
+pa_KillMove1HMSprigganA,Rematar con voltereta y tajo vertical (Una mano),Remata dando una vuelta a la izquierda y tajando verticalmente,Descartado,
+pa_KillMove1HMHagravenB,Rematar con agarre 2 (Una mano),Remata agarrando y dando un tjao horizontal,Descartado,
+pa_KillMove1HMHagravenA,Rematar con doble tajo 2 (Una mano),Remata con dos tajos rapidos,Descartado,
+pa_KillMove2HWWolfA,Rematar con doble golpe (Dos manos),Remata con dos golpes ,Descartado,Sonidos de lobo
+pa_KillMove2HWTrollA,Rematar con doble golpe (Dos manos),Remata con dos golpes ,Descartado,Sonido tajante
+pa_KillMove2HWSabreCatA,Rematar con vuelta y golpe centrico (Dos manos),Remata con una vuelta y golpe en el centro,Descartado,Sonido tajante
+pa_KillMove2HWGiantA,Rematar con vuelta y golpe centrico 2 (Dos manos),Remata con una vuelta y golpe en el centro,Descartado,Sonido de golpe
+pa_KillMove2HWBearA,Rematar con vuelta y golpe centrico 3 (Dos manos),Remata con una vuelta y golpe en el centro,Descartado,Sonido tajante
+pa_2HWKillMoveA,Rematar ,No funciona,Descartado,No ejecuta animación
+pa_KillMove2HWSprigganA,Rematar con salto y golpe (Dos manos),Remata con un salto y golpe tajante vertical,Descartado,
+pa_KillMove1HMSpiderSmashA,Rematar sencillo (Una mano),Remata con impacto rápido en el suelo,Revisión,
+pa_KillMove2HMStabA,Rematar apuñalada (Dos manos),Remata apuñalando en el centro hacia arriba con dos manos,Revisión,
+pa_KillMove1HMSpiderStabA,Rematar apuñalada baja (Una mano),Remata apuñalando hacia abajo con una mano,Revisión,
+pa_KillMove2HMChaurusFlyerStabDown,Rematar apuñalada baja (Dos manos),Remata preparando el arma y apuñalando hacia abajo dos manos,Revisión,
+pa_KillMove1HMBackStab,Rematar apuñalar por la espalda (Una mano),Remata agarrando y apuñalando ,Revisión,
+pa_KillMove1HMVBSlowBackStab,Rematar largo (Una mano),Remata apuñalando y luego corte de garganta,Revisión,
+pa_KillMoveDLC02RipHeartOut,Rematar arrancando corazón,Remata agarrandolo en el aire y arrancando el corazón,Revisión,
+pa_KillMove2HMDecapBleedOut,Rematar decapitando (Dos manos),Remata decapitando lo que haya debilitado en el suelo,Revisión,
+pa_KillMove1HMDecapBleedOut,Rematar corte circular bajo (Una mano),Remata haciendo un movimiento circular hacia abajo,Revisión,
+pa_KillMove2HWDecapBleedOut,Rematar decapitando fuertemente (Dos manos),Remata decapitando lo que haya debilitado en el suelo,Revisión,
+pa_KillMoveDWDecap,Rematar decapitando (Una mano Doble),Remata decapitando con dos armas de una mano,Revisión,
+pa_KillMove2HMDecap,Rematar decapitando 2 (Dos manos),Remata decapitando lo que haya debilitado en el suelo,Revisión,
+pa_KillMove1HMDecap,Rematar con vuelta y decapitando (Una mano),Remata dando una vuelta y decapitando,Revisión,
+pa_KillMove1HMDecapKnife,Rematar degollando con cuchillo,Remata degollando con el cuchillo,Descartado,No se ejecuta
+pa_KillMove2HWChaurusFlyerPullDownSlash,Rematar debilitando y golpe (Dos manos),Remata de forma pezada con un primer golpe y otro fulminante,Revisión,
+pa_KillMoveH2HSlamA,Rematar estrellando al suelo (Puños),Remata cargando y estrellandolo al suelo,Revisión,
+pa_KillMove2HMSpiderSlamA,Rematar con salto y tajo (Dos manos),Remata con un salto y cae tajando,Revisión,
+pa_KillMove2HWSpiderSlamA,Rematar con salto y tajo 2 (Dos manos),Remata con un salto y cae tajando,Descartado,Repetido
+pa_KillMove2HMVBBlockAndSlash,Rematar con doble bloqueo (Dos manos),Remata bloqueando dos veces y luego tajando,Revisión,
+pa_KillMove2HWVBBackBreaker,Rematar con dificultad (Dos manos),Remata con dificultad con dos golpes,Revisión,
+pa_KillMove1HMVBSoccerKick,Rematar con patada (Una mano),Remata con un tajo alto y patada de Rematar,Revisión,
+pa_KillMove1HMChaurusFlyerKick,Rematar con una patada,Remata dando una patada fuerte,Revisión,
+pa_KillMoveSneakBackA,Rematar a hurtadillas y degollado (Una mano),Remata agarrando y degollando,Revisión,
+pa_KillMove1HMDragonRodeoStabShort,Rematar tajo y montarse (Una mano),Remata dando un tajo y se sube en algo grande,Descartado,
+pa_KillMove1HMDragonRodeoSlash,Rematar tajo y montarse 2 (Una mano),Remata dando un tajo y se sube en algo grande,Descartado,
+pa_KillMove2HWDragonRodeoSlash,Rematar tajo y montarse (Dos manos),Remata dando un tajo y se sube en algo grande,Descartado,Sonido de filo
+pa_KillMove2HMDragonSlash,Rematar tajo y montarse 2 (Dos manos),Remata dando un tajo y se sube en algo grande,Descartado,Sonido de filo
+pa_KillMove2HWDragonSlash,Rematar tajo y montarse 3 (Dos manos),Remata dando un tajo y se sube en algo grande,Descartado,Sonido contundente
+MT_BreathExhaleShort,Exhalar,Exhala nuestra respiración,Descartado,No ejecuta animación
+CombatReady_BreathExhaleShort,Exhalar (En guardia),Exhala nuestra respiración,Descartado,No ejecuta animación
+recoilLargeStart,Retroceder de un golpetazo,Retrocede de un golpe ,Descartado,Animación muy fea
+recoilStart,Retroceder por el golpe,Retrocede de un golpe rapido,Descartado,Animación muy fea
+ShdEquip,Sacar el escudo,Saca el escudo equipado,Descartado,
+torchEquip,Sacar la antorcha,Saca una antorcha y se mantiene,Revisión,Hace la animación y se queda de levantar la antorcha
+torchForceEquip,Sacar la antorcha a la fuerza,Saca una antorcha y se mantiene,Descartado,No ejecuta animación
+Magic_Equip,Sacar la magia,Desenvaina la mano preparada para lelvar hechizo,Revisión,Hace la animación de poner la palma como si tuviera un hechizo
+Magic_Solo_Equip,Sacar la magia (sin nada más),Desenvaina la mano preparada para lelvar hechizo,Descartado,No ejecuta animación
+JumpStandingStart,Saltar en el sitio,Salta en el sitio,Descartado,
+JumpDirectionalStart,Saltar hacia un lado,Salta hacia el lado derecho,Descartado,
+WardBreak,Retroceder por golpe 3.2,Retrocede al ser golpeado ,Descartado,Animación ejecutada cuando se rompe hehcizo de protecciones
+attackRelease,Soltar el ataque,Suelta el ataque que se va a efectuar,Descartado,Animación ejecutada al soltar el ataque
+attackReleaseL,Soltar el ataque con la izquierda,Suelta el ataque que se va a efectuar,Descartado,Animación ejecutada al soltar el ataque
+bashRelease,Soltar el golpe de escudo,Suelta el ataque que se va a efectuar,Descartado,Animación ejecutada al soltar el ataque
+MRh_SpellRelease_Event,Soltar el hechizo con la derecha,Suelta el ataque que se va a efectuar,Descartado,Animación ejecutada al soltar el ataque
+MLh_SpellRelease_Event,Soltar el hechizo con la izquierda,Suelta el ataque que se va a efectuar,Descartado,Animación ejecutada al soltar el ataque
+MLH_SpellRelease_event,Soltar el hechizo con la izquierda (2),Suelta el ataque que se va a efectuar,Descartado,Animación ejecutada al soltar el ataque
+idleRitualSpellRelease,Soltar el hechizo ritual (pose),Suelta el ataque que se va a efectuar,Descartado,Animación ejecutada al soltar el ataque
+swimForceEquip,Soltar lo que llevas al nadar,Fuerza soltar lo que lleves al nadar,Revisión,Puede servir para hacer soltar lo que lleve en las manos
+pa_DLC1SeranaHoldsVyrthur,Sujetar a alguien y soltarlo,Levantar a alguien para despues de unos segundos soltarlo,Revisión,Animación hecha por serana al vampiro. Puede servir para cargar cosas. Suena sonido al final de brillo
+MRh_SpellTelekinesisStart,Telequinesis con la derecha,Estira el brazo para mover con telequinesis,Descartado,No funciona sin el hechizo equipado
+MLh_SpellTelekinesisStart,Telequinesis con la izquierda,Estira el brazo para mover con telequinesis,Descartado,No funciona sin el hechizo equipado
+bowEnd,Terminar con el arco,Termina al lanzar una flecha,Descartado,Animación ejecutada al terminar de lanzar una flecha con el arco
+shoutStop,Terminar el Grito,Terminar de gritar,Descartado,Animación ejecutada al finalizar un grito
+staggerStart,Retroceder por golpe 3.2,Retrocede al ser golpeado ,Descartado,Repetido de StaggerPlayer
+StaggerPlayer,Retroceder por golpe 3,Retrocede al ser golpeado ,Modificado,
+MountedStaggerStart,Retroceder por golpe (Montado),Retrocede al ser golpeado mientras vas montado,Descartado,
+IdleRailLeanEnter,Apoyarse en la baranda,Avanza un poco y apoyate en la baranda,Aceptado,
+IdleBarCounterEnter,Apoyarse en la barra,"Apoya en la barra de bar, a veces limpia",Aceptado,
+IdleTableLeanPoint,Apoyarse en la mesa y señalar,Apoyarse en la mesa para señalar,Descartado,"No pareciera funcionar y no da animación, es usada para Esbern en la mesa con el mapa"
+IdleWallLeanStart,Apoyarse en la pared,Voltea y te apoyas con brazos cruzados,Aceptado,Voltea y se apoya en la pared. Pone la espalda donde estabas mirando.
+IdleRailLeanExit,Dejar de apoyarse en la baranda,Retrocede un poco y sale de apoyate en la baranda,Revisión,Animación de salida de IdleRailLeanEnter
+IdleLounge_Exit,Dejar de repantigarse,Bajarse de mueble alto.,Descartado,Animación  de salida de IdleLounge. Animación usada por astrid en la cabaña abandonada
+IdleChairFrontExit,Levantarse de frente,Levantarse de la silla de frente,Descartado,
+IdleChairFrontQuickExit,"Levantarse de frente, rápido",Levantarse de la silla de frente rapido,Descartado,
+IdleTableBackExit,Levantarse de la mesa,Levantarse de mesa hacia atras,Descartado,
+IdleChairExitStart,Levantarse de la silla,Levantarse de la silla de lado,Descartado,
+IdleStoolBackExit,Levantarse del taburete,Levantarse de taburete de bar,Descartado,
+idleChairRightExit,Levantarse por la derecha,Levantarse de la silla del lado derecho,Descartado,
+IdleChairRightQuickExit,"Levantarse por la derecha, rápido",Levantarse de la silla del lado derecho rapido,Descartado,
+idleChairLeftExit,Levantarse por la izquierda,Levantarse de la silla del lado izquierdo,Descartado,
+IdleChairLeftQuickExit,"Levantarse por la izquierda, rápido",Levantarse de la silla del lado izquierdo rapido,Descartado,
+IdleLounge,Repantigarse,Subirse a mueble alto,Descartado,Animación usada por astrid en la cabaña abandonada
+idleChairArmsCrossedVar1,Brazos cruzados (Sentado),Cruzar los brazos mientras estás sentado en una silla,Aceptado,Necesita estar sentado en silla para ejecutarse
+idleChairArmsCrossedVar2,Brazos cruzados 2 (Sentado),Cruzar los brazos mientras estás sentado en una silla,Aceptado,Necesita estar sentado en silla para ejecutarse
+idleChairShoulderFlex,Estirarse (Sentado),Estirar los brazos mientras estás sentado en una silla,Aceptado,Necesita estar sentado en silla para ejecutarse
+idleChairLookDown,Mirar al suelo (Sentado),Mirar alrededor y luego mirar al suelo mientras estás sentado en una silla,Aceptado,Necesita estar sentado en silla para ejecutarse
+IdleChairVar1,Cambio de pose (Sentado),Pose de estar centado ,Aceptado,Necesita estar sentado en silla para ejecutarse
+idleChairVar2,Cambio de pose 2 (Sentado),Pose de estar centado ,Aceptado,Necesita estar sentado en silla para ejecutarse
+IdleChildLegsOutStart,Sentarse con las piernas estiradas,Sentarse con piernas cruzadas ,Descartado,"No se ejecuta a pesar de estar sentados, pareciera estar ligado a los niños"
+IdleChairFrontEnter,Sentarse de frente,Sentarse de frente en silla,Descartado,"Se sienta en una ""silla"" con la espalda hacia donde estaba mirando"
+IdleChildSitOnKnees,Arrodillarse,Sentarse sobre las rodillas y hace un pequeño balanceo,Aceptado,
+IdleStoolEnter,Sentarse en el taburete,Sentarse en taburete de bar,Descartado,Se sienta como en un taburete
+IdleJarlChairEnter,Sentarse en el trono del jarl,Sentarse en trono de jarl,Descartado,
+IdleChairRightEnter,Sentarse por la derecha,Sentarse por la derecha en silla,Descartado,
+IdleChairLeftEnter,Sentarse por la izquierda,Sentarse por la izquierda en silla,Descartado,
+IdleWallSoldierEnter,Esperar atento,Quedarse quieto esperando con diferentes poses intercaladas,Aceptado,Se ejecuta y pone la espalda hacia donde estemos mirando
+IdleBedRightEnterStart,Acostarse por la derecha (Cama),Acostarse en una cama por la derecha,Descartado,"Te acuestas en horizontal donde estés viendo, te quedas en el aire porque simula estar dormido en cama"
+IdleBedLeftEnterStart,Acostarse por la izquierda (Cama),Acostarse en una cama por la izquierda,Descartado,"Te acuestas en horizontal donde estés viendo, te quedas en el aire porque simula estar dormido en cama"
+IdleSleepNod,Dar cabezadas,Dar cabezadas del sueño,Aceptado,
+IdleBedExitStart,Levantarse (Cama),Levantarse de una cama,Descartado,Se requiere estar acostado en la cama
+Idle_1stPersonWoozyGetUpFromBed,Levantarse de la cama aturdido (1ª persona),Levantarse de una cama aturdido,Descartado,"No se ejecuta con normalidad, no descubrí su condición"
+IdleBedQuickExitStart,Levantarse rápido (Cama),Levantarse de una cama rapidamente,Descartado,Se requiere estar acostado en la cama
+IdleCoffinEnter,Acostarse (Ataúd),Se acuesta con manos en el abdomen y cerrando los ojos,Aceptado,
+DLC01CoffinEnterInstant,Acostarse verticalmente (Ataúd),Se acuesta en un ataúd vertical con brazos cruzados,Revisión,Coloca la espalda donde mires
+IdleCoffinVertEnter,Acostarse verticalmente 2 (Ataúd),Se mete en el ataúd vertical para acostarse con brazos abajos,Revisión,Coloca la espalda donde mires
+IdleCoffinHorzEnter,Acostarse 2 (Ataúd),Se acuesta en un ataúd con manos a los lados,Aceptado,
+IdleBedRollFrontEnterStart,Acostarse (Saco),Se acuesta en un saco de dormir,Aceptado,
+IdleBedRollRightEnterStart,Acostarse por la derecha (Saco),Se acuesta en un saco de dormir por la derecha,Aceptado,
+IdleBedRollLeftEnterStart,Acostarse por la izquierda (Saco),Se acuesta en un saco de dormir por la izquierda,Aceptado,
+IdleChildLayOnFloor,Tumbarse boca abajo,Tumbarse en el suelo con cabeza apoyada en los brazos y piernas juguetonas,Aceptado,
+IdleActivateCoffinPuzzle,Accionar el cuenco del ataúd,Accionar botón con pincho del ataúd,Descartado,Animación usada para el botón con pincho de Serana
+Lever_PlayerPush,Accionar una palanca,Acciona palanca,Descartado,No se ejecuta sin una palanca cercana
+IdleSharpeningWheelStart,Afilar arma,Sentarse a afilar el arma,Descartado,Animación usada para afilar en la peidra de afilar de las herrerias
+IdleCartDriverExit,Bajarse de la carreta,Bajarse de la carreta,Descartado,
+idleLooseSweepingStart,Barrer,Barre el suelo con una escoba,Aceptado,
+IdleHoe,Arar suelo,Ara el suelo con una azada,Aceptado,
+IdleChiselStandingEnter,Cincelar de pie,Cincela con martillo y cincel hacia adelante,Aceptado,
+IdleChiselKneelingEnter,Cincelar de rodillas,Cincela con martillo y cincel en el suelo,Aceptado,
+IdleCraftingCookingPotTalkA,Cocinar y hablar (A),Habla mientras cocinas en el cookingpot,Descartado,
+IdleCraftingCookingPotTalkB,Cocinar y hablar (B),Habla mientras cocinas en el cookingpot,Descartado,
+IdleTake,Coger algo,,,
+IdleWoodChopStart,Cortar leña,,,
+IdleFeedChicken,Dar de comer a las gallinas,,,
+IdlewoodputdownEnter,Dejar la leña,,,
+IdleStonePutDownEnter,Dejar una piedra,,,
+IdleCraftingCookingPotAddIngredient,Echar un ingrediente al puchero,,,
+IdleLightSconce,Encender una antorcha de pared,,,
+IdleGive,Entregar algo,,,
+IdleGiveMQ105Horn,Entregar el cuerno,,,
+IdleWriteTableStandingEnter,Escribir de pie en la mesa,,,
+IdleWriteLedgerEnter,Escribir en el registro,,,
+IdleWriteLedgerWrite,Escribir en el registro (escribiendo),,,
+IdleChairWrite,Escribir sentado,,,
+IdleExamine,Examinar algo,,,
+IdleLockPick,Forzar una cerradura,,,
+IdleDLC02BoatRide,Ir en barca,,,
+IdleWriteTableChairRightExit,Levantarse del escritorio por la derecha,,,
+IdleWriteTableChairLeftExit,Levantarse del escritorio por la izquierda,,,
+IdleBarCounterWipe,Limpiar la barra,,,
+IdleCartDriverIdle,Llevar el carro,,,
+IdleCartDriverSway,"Llevar el carro, con vaivén",,,
+OffsetFlowerBasketStart,Llevar el cesto de flores,,,
+OffsetCarryBasketStart,Llevar un cesto,,,
+OffsetCarryPotStart,Llevar un puchero,,,
+IdleDwemerExtractorEnter,Manejar un extractor,,,
+IdlePickaxeEnter,Picar con el pico,,,
+IdleWriteLedgerChargenEnter,Ponerse a escribir en el registro,,,
+IdleCounterStart,Ponerse tras el mostrador,,,
+IdleSearchingChest,Rebuscando en el cofre,,,
+IdleSearchingTable,Rebuscando en la mesa,,,
+IdleSearchTableEnter,Rebuscar en la mesa,,,
+IdleSearchChestEnter,Rebuscar en un cofre,,,
+IdleWayShrineWaterScoopEnter,Recoger agua del santuario,,,
+IdleActivatePickUp,Recoger algo,,,
+IdlePickup_Ground,Recoger algo del suelo,,,
+OffsetCarryFlowerBasketPickStart,Recoger flores en el cesto,,,
+IdleWoodPickUpEnter,Recoger leña,,,
+IdleStonePickUpEnter,Recoger una piedra,,,
+IdleWriteTableChairRightEnter,Sentarse a escribir por la derecha,,,
+IdleWriteTableChairLeftEnter,Sentarse a escribir por la izquierda,,,
+IdleOffsetCarryPotServe,Servir del puchero,,,
+IdleCartTravelPlayerEnter,Subirse al carro,,,
+IdleCartTravelDriverEnter,Subirse al pescante,,,
+IdlePullChain,Tirar de la cadena,,,
+IdleBlackSmithingEnterStart,Trabajar en la forja,,,
+IdleSell,Vender algo,,,
+VampireFeedingBedRollRight,"Alimentarse en el petate, por la derecha",,,
+VampireFeedingBedRollLeft,"Alimentarse en el petate, por la izquierda",,,
+VampireFeedingBedRight,"Alimentarse en la cama, por la derecha",,,
+VampireFeedingBedLeft,"Alimentarse en la cama, por la izquierda",,,
+IdleDrink,Beber,,,
+IdleDrinkFromFountain,Beber de la fuente,,,
+idleDrinkingStandingStart,Beber de pie,,,
+idleBarDrinkingStart,Beber en la barra,,,
+IdleMQ201Drink,Beber en la fiesta,,,
+ChairVampireEatingStart,Beber sangre sentado,,,
+ChairDrinkingStart,Beber sentado,,,
+IdleDrinkPotion,Beberse una poción,,,
+IdleMQ201ToastStart,Brindar,,,
+idleEatingStandingStart_DLC1Vampire,Comer carne cruda de pie,,,
+ChairEatingStart_VampireMeat,Comer carne cruda sentado,,,
+idleEatingStandingStart,Comer de pie,,,
+ChairEatingStart,Comer sentado,,,
+DrunkStop,Dejar de hacer eses,,,
+IdleTablePassOutEnter,Desplomarse sobre la mesa,,,
+IdleCannibalFeedStanding,Devorar de pie,,,
+IdleCannibalFeedCrouching,Devorar en cuclillas,,,
+OffsetCarryMQ201DrinkTray,Llevar una bandeja de bebidas,,,
+OffsetCarryMQ201DrinkR,Llevar una copa en la mano,,,
+pa_VampireFeedStanding_Front,Morder el cuello de frente,,,
+pa_VampireFeedStanding_Back,Morder el cuello por la espalda,,,
+DrunkStart,Ponerse a hacer eses,,,
+IdleTableDrinkEnter,Sentarse a la mesa a beber,,,
+IdleTableDrinkAndMugEnter,Sentarse a la mesa con jarra y bebida,,,
+IdleTableMugEnter,Sentarse a la mesa con una jarra,,,
+IdleTG03UseMeadBarrel,Servirse del barril de hidromiel,,,
+IdleMQ201HoldingDrinkTray,Sostener una bandeja de bebidas,,,
+IdleEatSoup,Tomar sopa,,,
+ChairEatingSoupStart,Tomar sopa sentado,,,
+IdleApplaud2,Aplaudir,,,
+IdleApplaud3,Aplaudir (2),,,
+IdleApplaud4,Aplaudir (3),,,
+IdleApplaud5,Aplaudir (4),,,
+IdleApplaudSarcastic,Aplaudir con sorna,,,
+IdleCiceroDance1,Baile (1),,,
+IdleCiceroDance2,Baile (2),,,
+IdleCiceroDance3,Baile (3),,,
+SpectatorClap,Público: aplaudir,,,
+SpectatorTalking,Público: cuchichear,,,
+SpectatorGawk,Público: quedarse boquiabierto,,,
+SpectatorCheer,Público: vitorear,,,
+IdleBlowHornStormcloak,Tocar el cuerno de los Capas de la Tormenta,,,
+IdleBlowHornImperial,Tocar el cuerno imperial,,,
+IdleLuteStart,Tocar el laúd,,,
+IdleDrumStart,Tocar el tambor,,,
+IdleFluteStart,Tocar la flauta,,,
+IdleCivilWarCheer,Vitorear,,,
+IdleDLC2TentacleWarpBook,Abrir el libro que te transporta,,,
+IdleBloodPortalActivate,Activar el portal de sangre,,,
+IdleNocturnal_Rise,Alzarse,,,
+IdleTGFalmerStatueEnter,Ante una estatua,,,
+IdleNocturnalEnter,Aparecer,,,
+IdleBlessingKneelEnter,Arrodillarse a recibir la bendición,,,
+IdleAltarEnter,Arrodillarse en el altar,,,
+IdleT02AscendMale,Ascender (hombre),,,
+IdleT02AscendFemale,Ascender (mujer),,,
+IdleTelvanniTowerFloatUp,Ascender flotando,,,
+IdleSnowElfPrinceAscensionBurning,Ascensión en llamas,,,
+IdleDA02BoethiahPostEnter,Atado a un poste,,,
+IdleWalkThroughWallEnter,Atravesar la pared,,,
+IdleTG08_Phase1,Ceremonia del Gremio: fase 1,,,
+IdleTG08_Phase2,Ceremonia del Gremio: fase 2,,,
+IdleTG08_Phase3,Ceremonia del Gremio: fase 3,,,
+IdleTG08_Phase4,Ceremonia del Gremio: fase 4,,,
+IdleTG08_Phase5,Ceremonia del Gremio: fase 5,,,
+IdleCO2Ceremony3Chest,Ceremonia: abrir el cofre,,,
+IdleCO2Ceremony2Blessing,Ceremonia: bendecir,,,
+IdleCO2Ceremony1Welcome,Ceremonia: dar la bienvenida,,,
+pa_WW_CutWrist,Cortarse la muñeca,,,
+IdleMesmerizeStop,Dejar de hipnotizar,,,
+IdleNocturnal_Exit,Desaparecer,,,
+IdleTelvanniTowerFloatDown,Descender flotando,,,
+IdleRitualStart,Empezar un ritual,,,
+IdleGreybeardWordTeach,Enseñar una Palabra,,,
+IdleDLC1BossExplosion1stP,Explosión (1ª persona),,,
+pa_ExtractWerewolfSpirit,Extraer un espíritu,,,
+IdleMagic_01,Gesto de magia,,,
+IdleDLC02TentacleWordBurnBegin,Grabar la Palabra (empezar),,,
+IdleDLC02TentacleWordBurnEnd,Grabar la Palabra (terminar),,,
+IdleSnowElfPrinceBigSpell,Gran hechizo,,,
+IdleMesmerize,Hipnotizar,,,
+IdleSnowElfPrinceFireAndForget,Lanzar un hechizo sentado,,,
+IdleGreybeardMeditateEnter,Meditar,,,
+IdleNocturnal_IdleA,Pose solemne,,,
+IdleNocturnal_IdleB,Pose solemne (2),,,
+IdleNocturnal_IdleAMirror,Pose solemne (reflejada),,,
+IdlePray,Rezar,,,
+IdlePrayCrouchedEnter,Rezar en cuclillas,,,
+IdleBoyRitual,Ritual,,,
+IdleRitualSkull1,Ritual con la calavera (1),,,
+IdleRitualSkull2,Ritual con la calavera (2),,,
+IdleRitualSkull3,Ritual con la calavera (3),,,
+IdleMQ206FelldirRitualEnter,Ritual con las manos en alto,,,
+IdleSnowElfPrinceBigSpellRelease,Soltar el gran hechizo,,,
+IdleWerewolfTransformation,Transformarse,,,
+IdleVampireLordTransformation,Transformarse (2),,,
+IdleMQ203EsbernBookEnter,Consultar un libro,,,
+IdleStudy,Estudiar,,,
+IdleReadElderScroll,Leer el Pergamino Ancestral,,,
+IdleReadElderScroll3rdP,Leer el Pergamino Ancestral (3ª persona),,,
+IdleReadElderScrollLonger,Leer el Pergamino Ancestral (largo),,,
+ChairReadingStart,Leer sentado,,,
+ChairReadingIdles,Leer sentado: pasar páginas,,,
+IdleBook_Read,Leer un libro,,,
+IdleBook_ReadTG06,Leer un libro (traducción),,,
+IdleNoteRead,Leer una nota,,,
+IdleMQ206FelldirShowScroll,Mostrar el pergamino,,,
+IdleTG06FlipPage,Pasar la página,,,
+IdleBook_PageTurn,Pasar páginas,,,
+IdleBook_OnePage,Pasar una página,,,
+IdleRFPickUpScroll,Recoger un pergamino,,,
+IdleReadElderScrollEnd,Terminar de leer el Pergamino Ancestral,,,
+IdleTG06TranslationEnter,Traducir un texto,,,
+pa_HugA,Abrazar a alguien,,,
+IdleMT_DoorBang,Aporrear una puerta,,,
+IdleKneelingEnter,Arrodillarse,,,
+IdleKneeling,Arrodillarse junto a un cadáver,,,
+IdleWallCornerPeekREnter,"Asomarse por la esquina, a la derecha",,,
+IdleWallCornerPeekLEnter,"Asomarse por la esquina, a la izquierda",,,
+idle_A_sway_fastTrans,Balancearse,,,
+IdleChildTaunt1,Burlarse (1),,,
+IdleChildTaunt2,Burlarse (2),,,
+IdleChildTaunt3,Burlarse (3),,,
+IdleChildTaunt4,Burlarse (4),,,
+IdleWarmHands,Calentarse las manos,,,
+IdleWarmHandsStanding,Calentarse las manos de pie,,,
+IdleWarmHandsCrouched,Calentarse las manos en cuclillas,,,
+IdleWarmArms,Calentarse los brazos,,,
+idle_A_leg_shift,Cambiar el peso de pierna,,,
+IdleValericaWalkForward,Caminar hacia delante,,,
+idle_A_left_longTrans,Cargar el peso a la izquierda,,,
+OffsetArmsCrossedStart,Cruzarse de brazos,,,
+IdleCiceroHappy,Dar saltos de alegría,,,
+IdleChildCryingEnd,Dejar de llorar,,,
+IdleCowering,Encogerse de miedo,,,
+IdleCowerEnter,Encogerse de miedo (empezar),,,
+IdleHideREnter,Esconderse a la derecha,,,
+idle_A_swat_flies,Espantar moscas,,,
+idle_A_shoulders,Estirar los hombros,,,
+idle_A_shouldersVar1,Estirar los hombros (2),,,
+IdleWalkingCameraEnd,Fin del paseo de cámara,,,
+IdleCiceroAgitated,Gesticular alterado,,,
+IdleHDRight,Gesto hacia la derecha (variante HD),,,
+IdleHHRight,Gesto hacia la derecha (variante HH),,,
+IdleTalkAndUseItem,Hablar manejando algo,,,
+IdleComeThisWay,Hacer señas para que te sigan,,,
+IdleGrave_01,Inclinar la cabeza ante una tumba,,,
+IdleGrave_02,Inclinar la cabeza ante una tumba (2),,,
+IdleSilentBow,Inclinarse en silencio,,,
+idleDisbelief01Start,Incredulidad,,,
+idleDisbelief02Start,Incredulidad (2),,,
+idleFreaReactionStart,Incredulidad (3),,,
+IdleFreaReaction2Start,Incredulidad (4),,,
+IdleChildPlayDirt,Jugar con la tierra,,,
+IdleChildPlayDoll,Jugar con una muñeca,,,
+idle_A_soft_rightTrans,Ladearse a la derecha,,,
+IdleCleanSword,Limpiar la espada,,,
+IdleGetAttention,Llamar la atención,,,
+IdleChildCryingStart,Llorar,,,
+IdleHandsBehindBack,Manos a la espalda,,,
+IdlePresentSkeletonKey,Mostrar la Llave Maestra,,,
+IdleChildFidget,Moverse inquieto,,,
+IdleNervous,Nerviosismo,,,
+IdleLookFar,Otear el horizonte,,,
+IdleWalkingCameraStart,Paseo de cámara,,,
+IdleChildApologize,Pedir perdón,,,
+idleFreaSorrowLoopEnter,Pena,,,
+IdleSnapToAttention,Ponerse firme,,,
+IdleAstridEnter,Pose de espera,,,
+IdleStaticPoseAStart,Pose fija A,,,
+IdleStaticPoseBStart,Pose fija B,,,
+IdleStaticPoseCStart,Pose fija C,,,
+IdlePlayer,Postura del jugador,,,
+IdleChildWhineKick,Rabieta a patadas,,,
+IdleChildWhineStompFeet,Rabieta pataleando,,,
+idle_A_scratch_back,Rascarse la espalda,,,
+IdleSurrender,Rendirse,,,
+IdleLaugh,Reírse,,,
+idle_A_shakeout,Sacudirse,,,
+idleDisbelief01Exit,Salir de la incredulidad,,,
+idleDisbelief02Exit,Salir de la incredulidad (2),,,
+idleFreaDisbeliefLoopStop,Salir de la incredulidad (3),,,
+IdleFreaDisbelief2LoopStop,Salir de la incredulidad (4),,,
+idleFreaSorrowExit,Salir de la pena,,,
+IdleWave,Saludar con la mano,,,
+IdleSalute,Saludo militar,,,
+IdleWipeBrow,Secarse la frente,,,
+IdlePointFar_01,Señalar a lo lejos,,,
+IdlePointFar_02,Señalar a lo lejos (2),,,
+IdlePointClose,Señalar algo cerca,,,
+idle_A_pull_pants,Subirse los pantalones,,,
+idle_A_sigh_var1Trans,Suspirar,,,
+idle_A_sigh_var2Trans,Suspirar (2),,,
+IdleChildShy,Timidez,,,
+IdleNocturnal_LookRight,Volver la mirada a la derecha,,,
+IdleNocturnal_LookLeft,Volver la mirada a la izquierda,,,
+RF_OpenStart,Actitud: cercana,,,
+RF_GuardedStart,Actitud: distante,,,
+RF_PlayfulStart,Actitud: juguetona,,,
+RF_SeriousStart,Actitud: seria,,,
+RF_MoodChangeOpen,Cambiar a actitud cercana,,,
+RF_MoodChangeGuarded,Cambiar a actitud distante,,,
+RF_MoodChangePlayful,Cambiar a actitud juguetona,,,
+RF_MoodChangeSerious,Cambiar a actitud seria,,,
+RF_OpenDismissive_In,Cercana: desdén,,,
+RF_OpenInterested_In,Cercana: interés,,,
+RF_OpenThrowHands_In,Cercana: manos al aire,,,
+RF_Shock_Open,Cercana: sobresalto,,,
+RF_OpenPleading_In,Cercana: súplica,,,
+RF_GuardedDismissive_In,Distante: desdén,,,
+RF_GuardedInterested_In,Distante: interés,,,
+RF_GuardedThrowHands_In,Distante: manos al aire,,,
+RF_Shock_Guarded,Distante: sobresalto,,,
+RF_GuardedPleading_In,Distante: súplica,,,
+PairEnd,Fin de la escena en pareja,,,
+IdleDialogueDefensiveHandGesture,Gesto a la defensiva,,,
+IdleDialogueWelcomeHandGesture,Gesto de bienvenida,,,
+IdleDialogueStart,Hablar,,,
+IdleDialogueMovingTalkA,Hablar andando (A),,,
+IdleDialogueMovingTalkB,Hablar andando (B),,,
+IdleDialogueMovingTalkC,Hablar andando (C),,,
+IdleDialogueMovingTalkD,Hablar andando (D),,,
+DialogueNeutral,Hablar con naturalidad,,,
+IdleDialogueAngryStart,Hablar enfadado,,,
+MotionDrivenDialogueAngry,Hablar enfadado mientras te mueves,,,
+IdleDialogueExpressiveStart,Hablar gesticulando,,,
+MotionDrivenDialogueGeneric,Hablar mientras te mueves,,,
+IdleSnowElfPrinceChairDialogue,Hablar sentado con gesto solemne,,,
+MotionDrivenDialogueNextClip,Hablar: cambiar de gesto,,,
+RF_PlayfulDismissive_In,Juguetona: desdén,,,
+RF_PlayfulInterested_In,Juguetona: interés,,,
+RF_PlayfulThrowHands_In,Juguetona: manos al aire,,,
+RF_Shock_Playful,Juguetona: sobresalto,,,
+RF_PlayfulPleading_In,Juguetona: súplica,,,
+IdleDialogueHandOnChinGesture,Mano en la barbilla,,,
+RF_Talk_In,Ponerse a hablar,,,
+LooseDialogueResponseNegative,Responder que no,,,
+LooseDialogueResponsePositive,Responder que sí,,,
+RF_SeriousDismissive_In,Seria: desdén,,,
+RF_SeriousInterested_In,Seria: interés,,,
+RF_SeriousThrowHands_In,Seria: manos al aire,,,
+RF_Shock_Serious,Seria: sobresalto,,,
+RF_SeriousPleading_In,Seria: súplica,,,
+RF_Idle_Out,Volver a la actitud normal,,,
+IdleBracedPain,Aguantar el dolor,,,
+IdlePrisonerBeat,Apalear a un preso,,,
+TG05_StabPlayer,Apuñalar al jugador,,,
+IdleDLC02FallOnKnees,Caer de rodillas,,,
+BoundStandingCut,Cortar las ataduras,,,
+BoundStandingCutNPC,Cortarle las ataduras a alguien,,,
+IdleHandCut,Cortarse la mano,,,
+IdleBoundKneesEnterInstant,De rodillas y maniatado,,,
+IdleExecutionerChop_Player,Decapitar al jugador,,,
+IdleExecutionerChop,Decapitar con el hacha,,,
+IdleVampireFeastVictim,Dejarse morder el cuello,,,
+Ragdoll,Desplomarse como un muñeco,,,
+IdleWebThrashShort,Forcejear en la telaraña,,,
+IdleWebThrashShort2,Forcejear en la telaraña (2),,,
+IdleExecutionGuardIdle,Guardia de la ejecución,,,
+IdleInjured,Herido,,,
+IdleWounded_01,Herido (1),,,
+IdleWounded_02,Herido (2),,,
+IdleWounded_03,Herido (3),,,
+TG05_GetUp,Levantarse aturdido,,,
+GetUpBegin,Levantarse del suelo,,,
+OffsetBoundStandingStart,Maniatado de pie,,,
+DeathAnim,Morir,,,
+IdleDLC02MiraakDeath,Morir despacio,,,
+MS12BedDeath,Morir en la cama,,,
+IdleSoupDeath,Morir sobre el plato,,,
+IdleCartPrisonerAExit,Preso A: bajarse del carro,,,
+IdleCartPrisonerAIdle,Preso A: en el carro,,,
+IdleCartPrisonerASway,Preso A: vaivén del carro,,,
+IdleCartPrisonerBExit,Preso B: bajarse del carro,,,
+IdleCartPrisonerBIdle,Preso B: en el carro,,,
+IdleCartPrisonerBSway,Preso B: vaivén del carro,,,
+IdleCartPrisonerCExit,Preso C: bajarse del carro,,,
+IdleCartPrisonerCIdle,Preso C: en el carro,,,
+IdleCartPrisonerCSway,Preso C: vaivén del carro,,,
+IdleCartPrisonerDExit,Preso D: bajarse del carro,,,
+IdleCartPrisonerDIdle,Preso D: en el carro,,,
+IdleCartPrisonerDSway,Preso D: vaivén del carro,,,
+IdleWebEnterInstant,Quedar atrapado en la telaraña,,,
+TG05_KnockOut,Quedar inconsciente,,,
+IdleExecutionerAlduinReaction,Reaccionar con espanto,,,
+IdleExecutionerAlduinReactionDeath,Reaccionar con espanto y morir,,,
+IdleFurnitureExitTriggered,Salir del mueble (forzado),,,
+IdleWebExit,Soltarse de la telaraña,,,
+IdleWebExitQuickTurn,Soltarse de la telaraña y girarse,,,
+IdleDLC02MiraakDeathFinish,Terminar de morir despacio,,,
+IdleUncontrollableCough,Tos incontrolable,,,
+IdleFurnitureExit,Levantarse del mueble,,,
+IdleStop,Parar la animación,,,
+IdleForceDefaultState,Parar y volver a la postura normal,,,
+OffsetStop,Soltar lo que lleva en las manos,,,
