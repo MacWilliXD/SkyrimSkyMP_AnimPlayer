@@ -150,52 +150,14 @@
    * al arrancar (ver mezclarCatalogo, mas abajo).
    * ======================================================================= */
 
-  /* Los dibujos de los iconos, uno por cada tipo de accion. Se generan
-     tambien: el original esta en herramientas/dibujos.py, y que icono le toca
-     a cada animacion lo decide herramientas/iconos.py. */
-  // >>> DIBUJOS GENERADOS — no editar a mano >>>
-  var DIBUJOS = {
-    "bocadillo": "M3.3 3.9h17.4c1 0 1.8.8 1.8 1.8v8.8c0 1-.8 1.8-1.8 1.8H9.9l-4.8 4.1v-4.1H3.3c-1 0-1.8-.8-1.8-1.8V5.7c0-1 .8-1.8 1.8-1.8z",
-    "caja": "M12 1.8 2.3 6.3 12 10.8l9.7-4.5zM2 8.2l9 4.2v9.4L2 17.6zM13 12.4l9-4.2v9.4l-9 4.2z",
-    "calavera": "M12 1.6c-4.5 0-8.1 3.6-8.1 8.1 0 2.6 1.2 4.9 3.1 6.4v2.6c0 1.7 1.4 3.1 3.1 3.1h3.8c1.7 0 3.1-1.4 3.1-3.1v-2.6c1.9-1.5 3.1-3.8 3.1-6.4 0-4.5-3.6-8.1-8.1-8.1zM9.2 7.7a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM14.8 7.7a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM12 13.2l1.3 2.4h-2.6z",
-    "cama": "M2 6.4h2.3v6.2H21c.6 0 1 .4 1 1v6.1h-2.3v-4.9H4.3V19.7H2zM6.5 8.6a2.4 2.4 0 1 0 0 4.8 2.4 2.4 0 0 0 0-4.8z",
-    "chispa": "M12 1.5l1.9 5.9 5.9 1.9-5.9 1.9L12 17.1l-1.9-5.9-5.9-1.9 5.9-1.9zM19.4 15l.9 2.6 2.6.9-2.6.9-.9 2.6-.9-2.6-2.6-.9 2.6-.9zM5 16.6l.6 1.8 1.8.6-1.8.6-.6 1.8-.6-1.8-1.8-.6 1.8-.6z",
-    "copa": "M5.9 2.2h12.2l-.7 5.2c-.3 2.4-2.1 4.3-4.4 4.7v7.4h3.4c.6 0 1.1.5 1.1 1.1s-.5 1.1-1.1 1.1H7.6c-.6 0-1.1-.5-1.1-1.1s.5-1.1 1.1-1.1H11v-7.4C8.7 11.7 6.9 9.8 6.6 7.4z",
-    "cruz": "M9.2 1.8h5.6v7.4h7.4v5.6h-7.4v7.4H9.2v-7.4H1.8V9.2h7.4z",
-    "cubiertos": "M4.4 1.9h1.7v5.4h.8V1.9h1.7v5.4h.8V1.9h1.7v6.2c0 1.2-.8 2.2-1.9 2.5V22.1H6.3V10.6c-1.1-.3-1.9-1.3-1.9-2.5zM17.1 1.9c1.5 2.1 2.3 4.6 2.3 7.1 0 1.7-.4 3.2-1.2 4.4h-1.1V1.9zM16.3 13.4h1.8V22.1h-1.8z",
-    "escudo": "M12 1.6 3.8 4.2v7.2c0 5.1 3.4 8.8 8.2 10.9 4.8-2.1 8.2-5.8 8.2-10.9V4.2z",
-    "espada": "M12 3.4 13.4 6.4v7.8h-2.8V6.4zM8.4 14.8h7.2v2H8.4zM11.2 17.4h1.6v2.2h-1.6zM12 19.2a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z",
-    "grilletes": "M6.2 7.6a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6zM6.2 10.2a2.2 2.2 0 1 1 0 4.4 2.2 2.2 0 0 1 0-4.4zM17.8 7.6a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6zM17.8 10.2a2.2 2.2 0 1 1 0 4.4 2.2 2.2 0 0 1 0-4.4zM10.6 11.3h2.8v2.2h-2.8z",
-    "libro": "M2 4.1c2.9-.9 6.1-.9 9 .6v15.2c-2.9-1.5-6.1-1.5-9-.6zM22 4.1v15.2c-2.9-.9-6.1-.9-9 .6V4.7c2.9-1.5 6.1-1.5 9-.6z",
-    "mandoble": "M12 1.4 13.9 5v9.6h-3.8V5zM5.6 15.2h12.8v2.2H5.6zM11 18h2v2.4h-2zM12 20a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2z",
-    "mano": "M12 1.9c-.7 0-1.3.6-1.3 1.3v6.2H9.5V4.5c0-.7-.6-1.3-1.3-1.3s-1.3.6-1.3 1.3v7.4H5.7V7c0-.7-.6-1.3-1.3-1.3S3.1 6.3 3.1 7v8.2c0 3.8 3.1 6.9 6.9 6.9h2.6c3.8 0 6.9-3.1 6.9-6.9V8.2c0-.7-.6-1.3-1.3-1.3s-1.3.6-1.3 1.3v3.7h-1.2V4.5c0-.7-.6-1.3-1.3-1.3S14 3.8 14 4.5v4.9h-1.2V3.2c0-.7-.6-1.3-1.3-1.3z",
-    "martillo": "M4.2 3.2h15.6c.7 0 1.3.6 1.3 1.3v4.2c0 .7-.6 1.3-1.3 1.3H4.2c-.7 0-1.3-.6-1.3-1.3V4.5c0-.7.6-1.3 1.3-1.3zM10.3 10.6h3.4v11.6h-3.4z",
-    "nota": "M10.2 14.1a4 3.3 0 1 0 0 6.6 4 3.3 0 0 0 0-6.6zM11.9 3.1h2.5v14.8h-2.5zM14.4 2.8c3 1.7 5.4 3.7 5.4 6.6 0 1.9-1 3.5-2.6 4.5.6-1.3.6-2.5.1-3.6-.7-1.7-1.8-2.8-2.9-3.8z",
-    "silla": "M6.2 1.8h11.6c.9 0 1.6.7 1.6 1.6v8.2H4.6V3.4c0-.9.7-1.6 1.6-1.6zM3 12.4h18v3.2H3zM4.6 16.4h2.8v5.8H4.6zM16.6 16.4h2.8v5.8h-2.8z",
-    "vela": "M12 1.5c1.7 1.8 2.6 3.2 2.6 4.5 0 1.4-1.2 2.6-2.6 2.6S9.4 7.4 9.4 6c0-1.3.9-2.7 2.6-4.5zM9.2 9.9h5.6c.6 0 1.1.5 1.1 1.1v10c0 .6-.5 1.1-1.1 1.1H9.2c-.6 0-1.1-.5-1.1-1.1V11c0-.6.5-1.1 1.1-1.1z"
-  };
-  // <<< DIBUJOS GENERADOS <<<
-
-  /* Si una animacion llega sin icono —las que anade un mod por los ajustes o
-     por la puerta— se le da el de su categoria. Nunca se queda sin dibujo. */
-  var ICONO_POR_CATEGORIA = {
-    combate: 'espada', gestos: 'mano', oficios: 'martillo', magia: 'chispa',
-    dialogo: 'bocadillo', herido: 'cruz', comer: 'cubiertos',
-    sentarse: 'silla', musica: 'nota', leer: 'libro', dormir: 'cama',
-    control: 'mano', mods: 'mano', otras: 'mano'
-  };
-
-  function iconoDe(ficha) {
-    if (ficha.icono && DIBUJOS[ficha.icono]) return ficha.icono;
-    var porCat = ICONO_POR_CATEGORIA[ficha.categoria];
-    return (porCat && DIBUJOS[porCat]) ? porCat : 'mano';
-  }
-
   // >>> CATALOGO GENERADO — no editar a mano >>>
   var CATALOGO = {
     "version": 1,
     "categorias": [
+      {"clave": "remates", "nombre": "Remates", "busqueda": "remate golpe de gracia ejecucion matar acabar"},
+      {"clave": "montar", "nombre": "Montar", "busqueda": "caballo dragon montura cabalgar jinete"},
       {"clave": "combate", "nombre": "Combate", "busqueda": "pelear luchar atacar espada arco escudo grito"},
+      {"clave": "moverse", "nombre": "Moverse", "busqueda": "saltar correr frenar nadar caer aterrizar andar"},
       {"clave": "sentarse", "nombre": "Sentarse y apoyarse", "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono"},
       {"clave": "dormir", "nombre": "Dormir y tumbarse", "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo"},
       {"clave": "oficios", "nombre": "Oficios y tareas", "busqueda": "trabajar herrero minar talar barrer granja escribir recoger"},
@@ -205,622 +167,748 @@
       {"clave": "leer", "nombre": "Leer y estudiar", "busqueda": "leer libro estudiar nota pergamino traducir pagina"},
       {"clave": "gestos", "nombre": "Gestos y expresión", "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose"},
       {"clave": "dialogo", "nombre": "Diálogo", "busqueda": "hablar conversar charlar discutir responder"},
-      {"clave": "herido", "nombre": "Herido y muerte", "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion"},
+      {"clave": "herido", "nombre": "Herido y cautiverio", "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion"},
       {"clave": "control", "nombre": "Control", "busqueda": "parar detener cancelar"},
       {"clave": "otras", "nombre": "Otras", "busqueda": ""}
     ],
     "animaciones": [
-      {"evento": "SneakStart", "nombre": "Agacharse", "categoria": "combate", "icono": "espada", "sincroniza": false, "motivo": "SkyMP lo usa para su propio sincronizado de agacharse"},
-      {"evento": "MRh_SpellAimedStart", "nombre": "Apuntar con un hechizo, derecha", "categoria": "combate", "icono": "chispa"},
-      {"evento": "MLh_SpellAimedStart", "nombre": "Apuntar con un hechizo, izquierda", "categoria": "combate", "icono": "chispa"},
-      {"evento": "attackStart", "nombre": "Atacar", "categoria": "combate", "icono": "espada"},
-      {"evento": "attackStart_MC_1HMRight", "nombre": "Atacar con la derecha (una mano)", "categoria": "combate", "icono": "espada"},
-      {"evento": "attackStartLeftHand", "nombre": "Atacar con la izquierda", "categoria": "combate", "icono": "espada"},
-      {"evento": "attackStart_MC_1HMLeft", "nombre": "Atacar con la izquierda (una mano)", "categoria": "combate", "icono": "espada"},
-      {"evento": "attackStartDualWield", "nombre": "Atacar con las dos armas", "categoria": "combate", "icono": "espada"},
-      {"evento": "attackPowerStartRightLeftHand", "nombre": "Ataque potente a la derecha, con la izquierda", "categoria": "combate", "icono": "espada"},
-      {"evento": "attackPowerStartLeftLeftHand", "nombre": "Ataque potente a la izquierda, con la izquierda", "categoria": "combate", "icono": "espada"},
-      {"evento": "attackPowerStart_MC_1HMRight", "nombre": "Ataque potente con la derecha (una mano)", "categoria": "combate", "icono": "espada"},
-      {"evento": "attackPowerStart_MC_1HMLeft", "nombre": "Ataque potente con la izquierda (una mano)", "categoria": "combate", "icono": "espada"},
-      {"evento": "attackPowerStartDualWield", "nombre": "Ataque potente con las dos armas", "categoria": "combate", "icono": "espada"},
-      {"evento": "attackPowerStartInPlaceLeftHand", "nombre": "Ataque potente en el sitio, con la izquierda", "categoria": "combate", "icono": "espada"},
-      {"evento": "attackPowerStartBackLeftHand", "nombre": "Ataque potente hacia atrás, con la izquierda", "categoria": "combate", "icono": "espada"},
-      {"evento": "attackPowerStartLeft", "nombre": "Ataque potente hacia la izquierda", "categoria": "combate", "icono": "espada"},
-      {"evento": "JumpLandEnd", "nombre": "Aterrizar", "categoria": "combate", "icono": "espada"},
-      {"evento": "JumpLandDirectional", "nombre": "Aterrizar de lado", "categoria": "combate", "icono": "espada"},
-      {"evento": "DragonMountExit", "nombre": "Bajar del dragón", "categoria": "combate", "icono": "espada"},
-      {"evento": "Ground_Dismount_Dragon", "nombre": "Bajar del dragón en tierra", "categoria": "combate", "icono": "espada"},
-      {"evento": "JumpFall", "nombre": "Caer", "categoria": "combate", "icono": "espada"},
-      {"evento": "WeapOutRightReplaceForceEquip", "nombre": "Cambiar el arma de la derecha", "categoria": "combate", "icono": "espada", "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
-      {"evento": "MC_WeapOutRightReplaceForceEquip", "nombre": "Cambiar el arma de la derecha (2)", "categoria": "combate", "icono": "espada", "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
-      {"evento": "WeapOutLeftReplaceForceEquip", "nombre": "Cambiar el arma de la izquierda", "categoria": "combate", "icono": "espada", "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
-      {"evento": "ShoutSprintLongStart", "nombre": "Carrera del Torbellino, larga", "categoria": "combate", "icono": "chispa"},
-      {"evento": "ShoutSprintMediumStart", "nombre": "Carrera del Torbellino, media", "categoria": "combate", "icono": "chispa"},
-      {"evento": "ShoutSprintLongestStart", "nombre": "Carrera del Torbellino, muy larga", "categoria": "combate", "icono": "chispa"},
-      {"evento": "attackPowerStartH2HCombo", "nombre": "Combinación de puñetazos", "categoria": "combate", "icono": "espada"},
-      {"evento": "RitualSpellOut", "nombre": "Cortar el hechizo ritual", "categoria": "combate", "icono": "chispa"},
-      {"evento": "pa_OffsetBoundStandingCut", "nombre": "Cortarle las ataduras a alguien (en pareja)", "categoria": "combate", "icono": "grilletes"},
-      {"evento": "moveStop", "nombre": "Dejar de andar", "categoria": "combate", "icono": "espada", "sincroniza": false, "motivo": "esta en la lista de eventos que SkyMP ignora"},
-      {"evento": "blockStop", "nombre": "Dejar de bloquear", "categoria": "combate", "icono": "escudo"},
-      {"evento": "SprintStop", "nombre": "Dejar de correr", "categoria": "combate", "icono": "espada"},
-      {"evento": "bleedOutStop", "nombre": "Dejar de desangrarse", "categoria": "combate", "icono": "espada"},
-      {"evento": "turnStop", "nombre": "Dejar de girar", "categoria": "combate", "icono": "espada", "sincroniza": false, "motivo": "esta en la lista de eventos que SkyMP ignora"},
-      {"evento": "SwimStop", "nombre": "Dejar de nadar", "categoria": "combate", "icono": "espada"},
-      {"evento": "MountedSwimStop", "nombre": "Dejar de nadar montado", "categoria": "combate", "icono": "espada"},
-      {"evento": "bleedOutStart", "nombre": "Desangrarse", "categoria": "combate", "icono": "espada"},
-      {"evento": "WeapEquip", "nombre": "Desenvainar", "categoria": "combate", "icono": "espada", "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
-      {"evento": "WeapSoloEquip", "nombre": "Desenvainar (sin nada más)", "categoria": "combate", "icono": "espada", "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
-      {"evento": "HorseExit", "nombre": "Desmontar del caballo", "categoria": "combate", "icono": "espada"},
-      {"evento": "HorseExitSwim", "nombre": "Desmontar del caballo en el agua", "categoria": "combate", "icono": "espada"},
-      {"evento": "bowAttackStart", "nombre": "Disparar el arco", "categoria": "combate", "icono": "espada"},
-      {"evento": "crossbowAttackStart", "nombre": "Disparar la ballesta", "categoria": "combate", "icono": "espada"},
-      {"evento": "crossbowDwarvenAttackStart", "nombre": "Disparar la ballesta mejorada", "categoria": "combate", "icono": "espada"},
-      {"evento": "moveStart", "nombre": "Echar a andar", "categoria": "combate", "icono": "espada", "sincroniza": false, "motivo": "esta en la lista de eventos que SkyMP ignora"},
-      {"evento": "SprintStart", "nombre": "Echar a correr", "categoria": "combate", "icono": "espada"},
-      {"evento": "ExecutionNextClip", "nombre": "Ejecución: siguiente parte", "categoria": "combate", "icono": "espada"},
-      {"evento": "shoutStart", "nombre": "Empezar un Grito", "categoria": "combate", "icono": "chispa"},
-      {"evento": "MC_shoutStart", "nombre": "Empezar un Grito (2)", "categoria": "combate", "icono": "chispa"},
-      {"evento": "NPCshoutStart", "nombre": "Empezar un Grito (3)", "categoria": "combate", "icono": "espada"},
-      {"evento": "RitualSpellStart", "nombre": "Empezar un hechizo ritual", "categoria": "combate", "icono": "chispa"},
-      {"evento": "idleRitualSpellStart", "nombre": "Empezar un hechizo ritual (pose)", "categoria": "combate", "icono": "chispa"},
-      {"evento": "IdleCombatShieldStart", "nombre": "En guardia, con el escudo", "categoria": "combate", "icono": "escudo"},
-      {"evento": "IdleCombatStretchingStart", "nombre": "En guardia, estirándose", "categoria": "combate", "icono": "espada"},
-      {"evento": "IdleCombatLookingAroundStart", "nombre": "En guardia, mirando alrededor", "categoria": "combate", "icono": "espada"},
-      {"evento": "IdleCombatSpecialStart", "nombre": "En guardia, pose especial", "categoria": "combate", "icono": "espada"},
-      {"evento": "IdleCombatWeaponCheckStart", "nombre": "En guardia, revisando el arma", "categoria": "combate", "icono": "espada"},
-      {"evento": "blockHitStart", "nombre": "Encajar un golpe con el bloqueo", "categoria": "combate", "icono": "escudo"},
-      {"evento": "UnequipNoAnim", "nombre": "Envainar sin animación", "categoria": "combate", "icono": "espada", "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
-      {"evento": "FlinchStart", "nombre": "Estremecerse", "categoria": "combate", "icono": "espada"},
-      {"evento": "NPC_TurnRight90", "nombre": "Girar 90 grados a la derecha", "categoria": "combate", "icono": "espada"},
-      {"evento": "NPC_TurnToWalkRight90", "nombre": "Girar 90 grados y echar a andar", "categoria": "combate", "icono": "espada"},
-      {"evento": "turnRight", "nombre": "Girar a la derecha", "categoria": "combate", "icono": "espada"},
-      {"evento": "turnLeft", "nombre": "Girar a la izquierda", "categoria": "combate", "icono": "espada"},
-      {"evento": "bashFail", "nombre": "Golpe de escudo fallido", "categoria": "combate", "icono": "escudo"},
-      {"evento": "BashFail", "nombre": "Golpe de escudo fallido (2)", "categoria": "combate", "icono": "escudo"},
-      {"evento": "bashPowerStart", "nombre": "Golpe de escudo potente", "categoria": "combate", "icono": "escudo"},
-      {"evento": "pa_KillingBlow", "nombre": "Golpe de gracia", "categoria": "combate", "icono": "espada"},
-      {"evento": "StaffBashRelease", "nombre": "Golpear con el bastón", "categoria": "combate", "icono": "escudo"},
-      {"evento": "bashStart", "nombre": "Golpear con el escudo", "categoria": "combate", "icono": "escudo"},
-      {"evento": "shoutReleaseSlowTime", "nombre": "Grito: Tiempo Lento", "categoria": "combate", "icono": "chispa"},
-      {"evento": "torchUnequip", "nombre": "Guardar la antorcha", "categoria": "combate", "icono": "espada"},
-      {"evento": "MLh_SpellAimedConcentrationStart", "nombre": "Hechizo de concentración, izquierda", "categoria": "combate", "icono": "chispa"},
-      {"evento": "MRh_Equipped_Event", "nombre": "Hechizo equipado en la derecha", "categoria": "combate", "icono": "chispa", "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
-      {"evento": "MLh_Equipped_Event", "nombre": "Hechizo equipado en la izquierda", "categoria": "combate", "icono": "chispa", "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
-      {"evento": "MRh_SpellReady_Event", "nombre": "Hechizo listo en la derecha", "categoria": "combate", "icono": "chispa"},
-      {"evento": "MLh_SpellReady_Event", "nombre": "Hechizo listo en la izquierda", "categoria": "combate", "icono": "chispa"},
-      {"evento": "RitualSpellAimConcentrationStart", "nombre": "Hechizo ritual de concentración", "categoria": "combate", "icono": "chispa"},
-      {"evento": "MRh_SpellSelfStart", "nombre": "Hechizo sobre uno mismo, derecha", "categoria": "combate", "icono": "chispa"},
-      {"evento": "wardAbsorb", "nombre": "La protección absorbe un hechizo", "categoria": "combate", "icono": "chispa"},
-      {"evento": "MRh_WardStart", "nombre": "Levantar protección con la derecha", "categoria": "combate", "icono": "espada"},
-      {"evento": "MLh_WardStart", "nombre": "Levantar protección con la izquierda", "categoria": "combate", "icono": "espada"},
-      {"evento": "SneakStop", "nombre": "Levantarse de agacharse", "categoria": "combate", "icono": "espada", "sincroniza": false, "motivo": "SkyMP lo usa para su propio sincronizado de agacharse"},
-      {"evento": "HorseEnter", "nombre": "Montar a caballo", "categoria": "combate", "icono": "espada"},
-      {"evento": "DragonMountEnter", "nombre": "Montar en el dragón", "categoria": "combate", "icono": "espada"},
-      {"evento": "MountedSwimStart", "nombre": "Nadar montado", "categoria": "combate", "icono": "espada"},
-      {"evento": "MagicForceEquipRight", "nombre": "Poner magia en la derecha", "categoria": "combate", "icono": "chispa", "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
-      {"evento": "MagicForceEquipLeft", "nombre": "Poner magia en la izquierda", "categoria": "combate", "icono": "chispa", "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
-      {"evento": "MagicWeap_ForceEquip", "nombre": "Poner magia y arma", "categoria": "combate", "icono": "chispa", "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
-      {"evento": "blockStart", "nombre": "Ponerse a bloquear", "categoria": "combate", "icono": "escudo"},
-      {"evento": "SwimStart", "nombre": "Ponerse a nadar", "categoria": "combate", "icono": "espada"},
-      {"evento": "IdleCombatStart", "nombre": "Postura de combate", "categoria": "combate", "icono": "espada"},
-      {"evento": "blockAnticipateStart", "nombre": "Prepararse para bloquear", "categoria": "combate", "icono": "escudo"},
-      {"evento": "AttackStartH2HRight", "nombre": "Puñetazo con la derecha", "categoria": "combate", "icono": "espada"},
-      {"evento": "AttackStartH2HLeft", "nombre": "Puñetazo con la izquierda", "categoria": "combate", "icono": "espada"},
-      {"evento": "attackPowerStartForwardH2HRightHand", "nombre": "Puñetazo potente hacia delante, derecha", "categoria": "combate", "icono": "espada"},
-      {"evento": "attackPowerStartForwardH2HLeftHand", "nombre": "Puñetazo potente hacia delante, izquierda", "categoria": "combate", "icono": "espada"},
-      {"evento": "NPC_BumpFromFront", "nombre": "Que te empujen de frente", "categoria": "combate", "icono": "espada"},
-      {"evento": "reloadStart", "nombre": "Recargar", "categoria": "combate", "icono": "espada"},
-      {"evento": "pa_KillMoveJ", "nombre": "Remate (1)", "categoria": "combate", "icono": "calavera"},
-      {"evento": "pa_KillMoveC", "nombre": "Remate (10)", "categoria": "combate", "icono": "calavera"},
-      {"evento": "pa_KillMoveTrollA", "nombre": "Remate (2)", "categoria": "combate", "icono": "calavera"},
-      {"evento": "pa_KillMoveSabreCat", "nombre": "Remate (3)", "categoria": "combate", "icono": "calavera"},
-      {"evento": "pa_KillMoveGiantA", "nombre": "Remate (4)", "categoria": "combate", "icono": "calavera"},
-      {"evento": "pa_KillMoveDraugrB", "nombre": "Remate (5)", "categoria": "combate", "icono": "calavera"},
-      {"evento": "pa_KillMoveDraugr", "nombre": "Remate (6)", "categoria": "combate", "icono": "calavera"},
-      {"evento": "pa_KillMoveBearA", "nombre": "Remate (7)", "categoria": "combate", "icono": "calavera"},
-      {"evento": "pa_KillMoveF", "nombre": "Remate (8)", "categoria": "combate", "icono": "calavera"},
-      {"evento": "pa_KillMoveD", "nombre": "Remate (9)", "categoria": "combate", "icono": "calavera"},
-      {"evento": "pa_KillMoveShortD", "nombre": "Remate (corto) (1)", "categoria": "combate", "icono": "calavera"},
-      {"evento": "pa_KillMoveShortC", "nombre": "Remate (corto) (2)", "categoria": "combate", "icono": "calavera"},
-      {"evento": "pa_KillMoveShortB", "nombre": "Remate (corto) (3)", "categoria": "combate", "icono": "calavera"},
-      {"evento": "pa_KillMoveShortA", "nombre": "Remate (corto) (4)", "categoria": "combate", "icono": "calavera"},
-      {"evento": "pa_KillMoveSabreCatShortB", "nombre": "Remate (corto) (5)", "categoria": "combate", "icono": "calavera"},
-      {"evento": "pa_KillMoveSabreCatShortA", "nombre": "Remate (corto) (6)", "categoria": "combate", "icono": "calavera"},
-      {"evento": "pa_KillMoveDraugrShortA", "nombre": "Remate (corto) (7)", "categoria": "combate", "icono": "calavera"},
-      {"evento": "pa_KillMoveH2HComboA", "nombre": "Remate a puñetazos", "categoria": "combate", "icono": "calavera"},
-      {"evento": "pa_KillMoveDualWieldA", "nombre": "Remate con dos armas", "categoria": "combate", "icono": "calavera"},
-      {"evento": "pa_KillMove2HMDraugrA", "nombre": "Remate con un arma a dos manos (1)", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove2HMFalmerB", "nombre": "Remate con un arma a dos manos (10)", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove2HMFalmerA", "nombre": "Remate con un arma a dos manos (11)", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove2HMBearB", "nombre": "Remate con un arma a dos manos (12)", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove2HMBearA", "nombre": "Remate con un arma a dos manos (13)", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove2HMSabreCatB", "nombre": "Remate con un arma a dos manos (14)", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove2HMSabreCatA", "nombre": "Remate con un arma a dos manos (15)", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove2HMWolfB", "nombre": "Remate con un arma a dos manos (2)", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove2HMWolfA", "nombre": "Remate con un arma a dos manos (3)", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove2HMTrollB", "nombre": "Remate con un arma a dos manos (4)", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove2HMTrollA", "nombre": "Remate con un arma a dos manos (5)", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove2HMSteamCenturionA", "nombre": "Remate con un arma a dos manos (6)", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove2HMSprigganA", "nombre": "Remate con un arma a dos manos (7)", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove2HMHagravenA", "nombre": "Remate con un arma a dos manos (8)", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove2HMGiantA", "nombre": "Remate con un arma a dos manos (9)", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove1HMWolfB", "nombre": "Remate con un arma de una mano (1)", "categoria": "combate", "icono": "espada"},
-      {"evento": "pa_KillMove1HMGiantBleedOutA", "nombre": "Remate con un arma de una mano (10)", "categoria": "combate", "icono": "espada"},
-      {"evento": "pa_KillMove1HMGiantB", "nombre": "Remate con un arma de una mano (11)", "categoria": "combate", "icono": "espada"},
-      {"evento": "pa_KillMove1HMFalmerC", "nombre": "Remate con un arma de una mano (12)", "categoria": "combate", "icono": "espada"},
-      {"evento": "pa_KillMove1HMFalmerB", "nombre": "Remate con un arma de una mano (13)", "categoria": "combate", "icono": "espada"},
-      {"evento": "pa_KillMove1HMFalmerA", "nombre": "Remate con un arma de una mano (14)", "categoria": "combate", "icono": "espada"},
-      {"evento": "pa_KillMove1HMBearB", "nombre": "Remate con un arma de una mano (15)", "categoria": "combate", "icono": "espada"},
-      {"evento": "pa_KillMove1HMWolfA", "nombre": "Remate con un arma de una mano (2)", "categoria": "combate", "icono": "espada"},
-      {"evento": "pa_KillMove1HMTrollB", "nombre": "Remate con un arma de una mano (3)", "categoria": "combate", "icono": "espada"},
-      {"evento": "pa_KillMove1HMSteamCenturionB", "nombre": "Remate con un arma de una mano (4)", "categoria": "combate", "icono": "espada"},
-      {"evento": "pa_KillMove1HMSteamCenturionA", "nombre": "Remate con un arma de una mano (5)", "categoria": "combate", "icono": "espada"},
-      {"evento": "pa_KillMove1HMSprigganB", "nombre": "Remate con un arma de una mano (6)", "categoria": "combate", "icono": "espada"},
-      {"evento": "pa_KillMove1HMSprigganA", "nombre": "Remate con un arma de una mano (7)", "categoria": "combate", "icono": "espada"},
-      {"evento": "pa_KillMove1HMHagravenB", "nombre": "Remate con un arma de una mano (8)", "categoria": "combate", "icono": "espada"},
-      {"evento": "pa_KillMove1HMHagravenA", "nombre": "Remate con un arma de una mano (9)", "categoria": "combate", "icono": "espada"},
-      {"evento": "pa_KillMove2HWWolfA", "nombre": "Remate con un arma pesada (1)", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove2HWTrollA", "nombre": "Remate con un arma pesada (2)", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove2HWSabreCatA", "nombre": "Remate con un arma pesada (3)", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove2HWGiantA", "nombre": "Remate con un arma pesada (4)", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove2HWBearA", "nombre": "Remate con un arma pesada (5)", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_2HWKillMoveA", "nombre": "Remate con un arma pesada (6)", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove2HWSprigganA", "nombre": "Remate con un arma pesada (7)", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove1HMSpiderSmashA", "nombre": "Remate: aplastar con un arma de una mano", "categoria": "combate", "icono": "espada"},
-      {"evento": "pa_KillMove2HMStabA", "nombre": "Remate: apuñalar con un arma a dos manos", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove1HMSpiderStabA", "nombre": "Remate: apuñalar con un arma de una mano", "categoria": "combate", "icono": "espada"},
-      {"evento": "pa_KillMove2HMChaurusFlyerStabDown", "nombre": "Remate: apuñalar hacia abajo con un arma a dos manos", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove1HMBackStab", "nombre": "Remate: apuñalar por la espalda con un arma de una mano", "categoria": "combate", "icono": "espada"},
-      {"evento": "pa_KillMove1HMVBSlowBackStab", "nombre": "Remate: apuñalar por la espalda, despacio con un arma de una mano", "categoria": "combate", "icono": "espada"},
-      {"evento": "pa_KillMoveDLC02RipHeartOut", "nombre": "Remate: arrancarle el corazón", "categoria": "combate", "icono": "calavera"},
-      {"evento": "pa_KillMove2HMDecapBleedOut", "nombre": "Remate: decapitar al desangrado con un arma a dos manos", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove1HMDecapBleedOut", "nombre": "Remate: decapitar al desangrado con un arma de una mano", "categoria": "combate", "icono": "espada"},
-      {"evento": "pa_KillMove2HWDecapBleedOut", "nombre": "Remate: decapitar al desangrado con un arma pesada", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMoveDWDecap", "nombre": "Remate: decapitar con dos armas", "categoria": "combate", "icono": "calavera"},
-      {"evento": "pa_KillMove2HMDecap", "nombre": "Remate: decapitar con un arma a dos manos", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove1HMDecap", "nombre": "Remate: decapitar con un arma de una mano", "categoria": "combate", "icono": "espada"},
-      {"evento": "pa_KillMove1HMDecapKnife", "nombre": "Remate: degollar con el cuchillo con un arma de una mano", "categoria": "combate", "icono": "espada"},
-      {"evento": "pa_KillMove2HWChaurusFlyerPullDownSlash", "nombre": "Remate: derribar y rajar con arma pesada", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMoveH2HSlamA", "nombre": "Remate: estrellarlo contra el suelo a puñetazos", "categoria": "combate", "icono": "calavera"},
-      {"evento": "pa_KillMove2HMSpiderSlamA", "nombre": "Remate: estrellarlo contra el suelo con un arma a dos manos", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove2HWSpiderSlamA", "nombre": "Remate: estrellarlo contra el suelo con un arma pesada", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove2HMVBBlockAndSlash", "nombre": "Remate: parar y rajar con un arma a dos manos", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove2HWVBBackBreaker", "nombre": "Remate: partirle la espalda con un arma pesada", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove1HMVBSoccerKick", "nombre": "Remate: patada con un arma de una mano (1)", "categoria": "combate", "icono": "espada"},
-      {"evento": "pa_KillMove1HMChaurusFlyerKick", "nombre": "Remate: patada con un arma de una mano (2)", "categoria": "combate", "icono": "espada"},
-      {"evento": "pa_KillMoveSneakBackA", "nombre": "Remate: por la espalda, a hurtadillas", "categoria": "combate", "icono": "calavera"},
-      {"evento": "pa_KillMove1HMDragonRodeoStabShort", "nombre": "Remate: puñalada a lomos con un arma de una mano", "categoria": "combate", "icono": "espada"},
-      {"evento": "pa_KillMove1HMDragonRodeoSlash", "nombre": "Remate: tajo a lomos con un arma de una mano", "categoria": "combate", "icono": "espada"},
-      {"evento": "pa_KillMove2HWDragonRodeoSlash", "nombre": "Remate: tajo a lomos con un arma pesada", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove2HMDragonSlash", "nombre": "Remate: tajo con un arma a dos manos", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "pa_KillMove2HWDragonSlash", "nombre": "Remate: tajo con un arma pesada", "categoria": "combate", "icono": "mandoble"},
-      {"evento": "MT_BreathExhaleShort", "nombre": "Resoplar", "categoria": "combate", "icono": "espada"},
-      {"evento": "CombatReady_BreathExhaleShort", "nombre": "Resoplar en guardia", "categoria": "combate", "icono": "espada"},
-      {"evento": "recoilLargeStart", "nombre": "Retroceder de un golpetazo", "categoria": "combate", "icono": "espada"},
-      {"evento": "recoilStart", "nombre": "Retroceder por el golpe", "categoria": "combate", "icono": "espada"},
-      {"evento": "ShdEquip", "nombre": "Sacar el escudo", "categoria": "combate", "icono": "escudo", "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
-      {"evento": "torchEquip", "nombre": "Sacar la antorcha", "categoria": "combate", "icono": "espada"},
-      {"evento": "torchForceEquip", "nombre": "Sacar la antorcha a la fuerza", "categoria": "combate", "icono": "espada"},
-      {"evento": "Magic_Equip", "nombre": "Sacar la magia", "categoria": "combate", "icono": "chispa", "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
-      {"evento": "Magic_Solo_Equip", "nombre": "Sacar la magia (sin nada más)", "categoria": "combate", "icono": "chispa", "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
-      {"evento": "JumpStandingStart", "nombre": "Saltar en el sitio", "categoria": "combate", "icono": "espada"},
-      {"evento": "JumpDirectionalStart", "nombre": "Saltar hacia un lado", "categoria": "combate", "icono": "espada"},
-      {"evento": "WardBreak", "nombre": "Se rompe la protección", "categoria": "combate", "icono": "espada"},
-      {"evento": "attackRelease", "nombre": "Soltar el ataque", "categoria": "combate", "icono": "espada"},
-      {"evento": "attackReleaseL", "nombre": "Soltar el ataque con la izquierda", "categoria": "combate", "icono": "espada"},
-      {"evento": "bashRelease", "nombre": "Soltar el golpe de escudo", "categoria": "combate", "icono": "escudo"},
-      {"evento": "MRh_SpellRelease_Event", "nombre": "Soltar el hechizo con la derecha", "categoria": "combate", "icono": "chispa"},
-      {"evento": "MLh_SpellRelease_Event", "nombre": "Soltar el hechizo con la izquierda", "categoria": "combate", "icono": "chispa"},
-      {"evento": "MLH_SpellRelease_event", "nombre": "Soltar el hechizo con la izquierda (2)", "categoria": "combate", "icono": "chispa"},
-      {"evento": "idleRitualSpellRelease", "nombre": "Soltar el hechizo ritual (pose)", "categoria": "combate", "icono": "chispa"},
-      {"evento": "swimForceEquip", "nombre": "Soltar lo que llevas al nadar", "categoria": "combate", "icono": "espada", "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
-      {"evento": "pa_DLC1SeranaHoldsVyrthur", "nombre": "Sujetar a alguien", "categoria": "combate", "icono": "espada"},
-      {"evento": "MRh_SpellTelekinesisStart", "nombre": "Telequinesis con la derecha", "categoria": "combate", "icono": "chispa"},
-      {"evento": "MLh_SpellTelekinesisStart", "nombre": "Telequinesis con la izquierda", "categoria": "combate", "icono": "chispa"},
-      {"evento": "bowEnd", "nombre": "Terminar con el arco", "categoria": "combate", "icono": "espada"},
-      {"evento": "shoutStop", "nombre": "Terminar el Grito", "categoria": "combate", "icono": "chispa"},
-      {"evento": "staggerStart", "nombre": "Trastabillar", "categoria": "combate", "icono": "espada"},
-      {"evento": "StaggerPlayer", "nombre": "Trastabillar (jugador)", "categoria": "combate", "icono": "espada"},
-      {"evento": "MountedStaggerStart", "nombre": "Trastabillar montado", "categoria": "combate", "icono": "espada"},
-      {"evento": "VampireFeedingBedRollRight", "nombre": "Alimentarse en el petate, por la derecha", "categoria": "comer", "icono": "cama"},
-      {"evento": "VampireFeedingBedRollLeft", "nombre": "Alimentarse en el petate, por la izquierda", "categoria": "comer", "icono": "cama"},
-      {"evento": "VampireFeedingBedRight", "nombre": "Alimentarse en la cama, por la derecha", "categoria": "comer", "icono": "cama"},
-      {"evento": "VampireFeedingBedLeft", "nombre": "Alimentarse en la cama, por la izquierda", "categoria": "comer", "icono": "cama"},
-      {"evento": "IdleDrink", "nombre": "Beber", "categoria": "comer", "destacada": true, "icono": "copa"},
-      {"evento": "IdleDrinkFromFountain", "nombre": "Beber de la fuente", "categoria": "comer", "icono": "copa"},
-      {"evento": "idleDrinkingStandingStart", "nombre": "Beber de pie", "categoria": "comer", "destacada": true, "icono": "copa"},
-      {"evento": "idleBarDrinkingStart", "nombre": "Beber en la barra", "categoria": "comer", "icono": "copa"},
-      {"evento": "IdleMQ201Drink", "nombre": "Beber en la fiesta", "categoria": "comer", "icono": "copa"},
-      {"evento": "ChairVampireEatingStart", "nombre": "Beber sangre sentado", "categoria": "comer", "sentado": true, "icono": "silla"},
-      {"evento": "ChairDrinkingStart", "nombre": "Beber sentado", "categoria": "comer", "sentado": true, "icono": "silla"},
-      {"evento": "IdleDrinkPotion", "nombre": "Beberse una poción", "categoria": "comer", "icono": "copa"},
-      {"evento": "IdleMQ201ToastStart", "nombre": "Brindar", "categoria": "comer", "icono": "copa"},
-      {"evento": "idleEatingStandingStart_DLC1Vampire", "nombre": "Comer carne cruda de pie", "categoria": "comer", "icono": "cubiertos"},
-      {"evento": "ChairEatingStart_VampireMeat", "nombre": "Comer carne cruda sentado", "categoria": "comer", "sentado": true, "icono": "silla"},
-      {"evento": "idleEatingStandingStart", "nombre": "Comer de pie", "categoria": "comer", "destacada": true, "icono": "cubiertos"},
-      {"evento": "ChairEatingStart", "nombre": "Comer sentado", "categoria": "comer", "sentado": true, "icono": "silla"},
-      {"evento": "DrunkStop", "nombre": "Dejar de hacer eses", "categoria": "comer", "icono": "copa"},
-      {"evento": "IdleTablePassOutEnter", "nombre": "Desplomarse sobre la mesa", "categoria": "comer", "icono": "cubiertos"},
-      {"evento": "IdleCannibalFeedStanding", "nombre": "Devorar de pie", "categoria": "comer", "icono": "cubiertos"},
-      {"evento": "IdleCannibalFeedCrouching", "nombre": "Devorar en cuclillas", "categoria": "comer", "icono": "cubiertos"},
-      {"evento": "OffsetCarryMQ201DrinkTray", "nombre": "Llevar una bandeja de bebidas", "categoria": "comer", "andando": true, "icono": "copa"},
-      {"evento": "OffsetCarryMQ201DrinkR", "nombre": "Llevar una copa en la mano", "categoria": "comer", "andando": true, "icono": "copa"},
-      {"evento": "pa_VampireFeedStanding_Front", "nombre": "Morder el cuello de frente", "categoria": "comer", "icono": "cubiertos"},
-      {"evento": "pa_VampireFeedStanding_Back", "nombre": "Morder el cuello por la espalda", "categoria": "comer", "icono": "cubiertos"},
-      {"evento": "DrunkStart", "nombre": "Ponerse a hacer eses", "categoria": "comer", "icono": "copa"},
-      {"evento": "IdleTableDrinkEnter", "nombre": "Sentarse a la mesa a beber", "categoria": "comer", "icono": "silla"},
-      {"evento": "IdleTableDrinkAndMugEnter", "nombre": "Sentarse a la mesa con jarra y bebida", "categoria": "comer", "icono": "silla"},
-      {"evento": "IdleTableMugEnter", "nombre": "Sentarse a la mesa con una jarra", "categoria": "comer", "icono": "silla"},
-      {"evento": "IdleTG03UseMeadBarrel", "nombre": "Servirse del barril de hidromiel", "categoria": "comer", "icono": "copa"},
-      {"evento": "IdleMQ201HoldingDrinkTray", "nombre": "Sostener una bandeja de bebidas", "categoria": "comer", "icono": "copa"},
-      {"evento": "IdleEatSoup", "nombre": "Tomar sopa", "categoria": "comer", "sentado": true, "icono": "cubiertos"},
-      {"evento": "ChairEatingSoupStart", "nombre": "Tomar sopa sentado", "categoria": "comer", "sentado": true, "icono": "silla"},
-      {"evento": "IdleFurnitureExit", "nombre": "Levantarse del mueble", "categoria": "control", "busqueda": "levantarse salir silla cama mueble", "icono": "silla"},
-      {"evento": "IdleStop", "nombre": "Parar la animación", "categoria": "control", "icono": "mano"},
-      {"evento": "IdleForceDefaultState", "nombre": "Parar y volver a la postura normal", "categoria": "control", "busqueda": "parar detener cancelar normal quieto", "destacada": true, "icono": "mano"},
-      {"evento": "OffsetStop", "nombre": "Soltar lo que lleva en las manos", "categoria": "control", "busqueda": "soltar dejar manos", "icono": "mano"},
-      {"evento": "RF_OpenStart", "nombre": "Actitud: cercana", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "RF_GuardedStart", "nombre": "Actitud: distante", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "RF_PlayfulStart", "nombre": "Actitud: juguetona", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "RF_SeriousStart", "nombre": "Actitud: seria", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "RF_MoodChangeOpen", "nombre": "Cambiar a actitud cercana", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "RF_MoodChangeGuarded", "nombre": "Cambiar a actitud distante", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "RF_MoodChangePlayful", "nombre": "Cambiar a actitud juguetona", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "RF_MoodChangeSerious", "nombre": "Cambiar a actitud seria", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "RF_OpenDismissive_In", "nombre": "Cercana: desdén", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "RF_OpenInterested_In", "nombre": "Cercana: interés", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "RF_OpenThrowHands_In", "nombre": "Cercana: manos al aire", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "RF_Shock_Open", "nombre": "Cercana: sobresalto", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "RF_OpenPleading_In", "nombre": "Cercana: súplica", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "RF_GuardedDismissive_In", "nombre": "Distante: desdén", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "RF_GuardedInterested_In", "nombre": "Distante: interés", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "RF_GuardedThrowHands_In", "nombre": "Distante: manos al aire", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "RF_Shock_Guarded", "nombre": "Distante: sobresalto", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "RF_GuardedPleading_In", "nombre": "Distante: súplica", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "PairEnd", "nombre": "Fin de la escena en pareja", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "IdleDialogueDefensiveHandGesture", "nombre": "Gesto a la defensiva", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "IdleDialogueWelcomeHandGesture", "nombre": "Gesto de bienvenida", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "IdleDialogueStart", "nombre": "Hablar", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "IdleDialogueMovingTalkA", "nombre": "Hablar andando (A)", "categoria": "dialogo", "andando": true, "icono": "bocadillo"},
-      {"evento": "IdleDialogueMovingTalkB", "nombre": "Hablar andando (B)", "categoria": "dialogo", "andando": true, "icono": "bocadillo"},
-      {"evento": "IdleDialogueMovingTalkC", "nombre": "Hablar andando (C)", "categoria": "dialogo", "andando": true, "icono": "bocadillo"},
-      {"evento": "IdleDialogueMovingTalkD", "nombre": "Hablar andando (D)", "categoria": "dialogo", "andando": true, "icono": "bocadillo"},
-      {"evento": "DialogueNeutral", "nombre": "Hablar con naturalidad", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "IdleDialogueAngryStart", "nombre": "Hablar enfadado", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "MotionDrivenDialogueAngry", "nombre": "Hablar enfadado mientras te mueves", "categoria": "dialogo", "andando": true, "icono": "bocadillo"},
-      {"evento": "IdleDialogueExpressiveStart", "nombre": "Hablar gesticulando", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "MotionDrivenDialogueGeneric", "nombre": "Hablar mientras te mueves", "categoria": "dialogo", "andando": true, "icono": "bocadillo"},
-      {"evento": "IdleSnowElfPrinceChairDialogue", "nombre": "Hablar sentado con gesto solemne", "categoria": "dialogo", "sentado": true, "icono": "silla"},
-      {"evento": "MotionDrivenDialogueNextClip", "nombre": "Hablar: cambiar de gesto", "categoria": "dialogo", "andando": true, "icono": "bocadillo"},
-      {"evento": "RF_PlayfulDismissive_In", "nombre": "Juguetona: desdén", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "RF_PlayfulInterested_In", "nombre": "Juguetona: interés", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "RF_PlayfulThrowHands_In", "nombre": "Juguetona: manos al aire", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "RF_Shock_Playful", "nombre": "Juguetona: sobresalto", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "RF_PlayfulPleading_In", "nombre": "Juguetona: súplica", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "IdleDialogueHandOnChinGesture", "nombre": "Mano en la barbilla", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "RF_Talk_In", "nombre": "Ponerse a hablar", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "LooseDialogueResponseNegative", "nombre": "Responder que no", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "LooseDialogueResponsePositive", "nombre": "Responder que sí", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "RF_SeriousDismissive_In", "nombre": "Seria: desdén", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "RF_SeriousInterested_In", "nombre": "Seria: interés", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "RF_SeriousThrowHands_In", "nombre": "Seria: manos al aire", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "RF_Shock_Serious", "nombre": "Seria: sobresalto", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "RF_SeriousPleading_In", "nombre": "Seria: súplica", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "RF_Idle_Out", "nombre": "Volver a la actitud normal", "categoria": "dialogo", "icono": "bocadillo"},
-      {"evento": "IdleBedRightEnterStart", "nombre": "Acostarse por la derecha", "categoria": "dormir", "icono": "cama"},
-      {"evento": "IdleBedLeftEnterStart", "nombre": "Acostarse por la izquierda", "categoria": "dormir", "destacada": true, "icono": "cama"},
-      {"evento": "IdleSleepNod", "nombre": "Dar cabezadas", "categoria": "dormir", "icono": "cama"},
-      {"evento": "IdleBedExitStart", "nombre": "Levantarse de la cama", "categoria": "dormir", "icono": "cama"},
-      {"evento": "Idle_1stPersonWoozyGetUpFromBed", "nombre": "Levantarse de la cama aturdido (1ª persona)", "categoria": "dormir", "icono": "cama"},
-      {"evento": "IdleBedQuickExitStart", "nombre": "Levantarse de la cama, rápido", "categoria": "dormir", "icono": "cama"},
-      {"evento": "IdleCoffinEnter", "nombre": "Meterse en el ataúd", "categoria": "dormir", "icono": "cama"},
-      {"evento": "DLC01CoffinEnterInstant", "nombre": "Meterse en el ataúd (2)", "categoria": "dormir", "icono": "cama"},
-      {"evento": "IdleCoffinVertEnter", "nombre": "Meterse en el ataúd de pie", "categoria": "dormir", "icono": "cama"},
-      {"evento": "IdleCoffinHorzEnter", "nombre": "Meterse en el ataúd tumbado", "categoria": "dormir", "icono": "cama"},
-      {"evento": "IdleBedRollFrontEnterStart", "nombre": "Meterse en el petate de frente", "categoria": "dormir", "icono": "cama"},
-      {"evento": "IdleBedRollRightEnterStart", "nombre": "Meterse en el petate por la derecha", "categoria": "dormir", "icono": "cama"},
-      {"evento": "IdleBedRollLeftEnterStart", "nombre": "Meterse en el petate por la izquierda", "categoria": "dormir", "icono": "cama"},
-      {"evento": "IdleChildLayOnFloor", "nombre": "Tumbarse en el suelo", "categoria": "dormir", "icono": "cama"},
-      {"evento": "pa_HugA", "nombre": "Abrazar a alguien", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleMT_DoorBang", "nombre": "Aporrear una puerta", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleKneelingEnter", "nombre": "Arrodillarse", "categoria": "gestos", "destacada": true, "icono": "vela"},
-      {"evento": "IdleKneeling", "nombre": "Arrodillarse junto a un cadáver", "categoria": "gestos", "icono": "calavera"},
-      {"evento": "IdleWallCornerPeekREnter", "nombre": "Asomarse por la esquina, a la derecha", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleWallCornerPeekLEnter", "nombre": "Asomarse por la esquina, a la izquierda", "categoria": "gestos", "icono": "mano"},
-      {"evento": "idle_A_sway_fastTrans", "nombre": "Balancearse", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleChildTaunt1", "nombre": "Burlarse (1)", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleChildTaunt2", "nombre": "Burlarse (2)", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleChildTaunt3", "nombre": "Burlarse (3)", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleChildTaunt4", "nombre": "Burlarse (4)", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleWarmHands", "nombre": "Calentarse las manos", "categoria": "gestos", "icono": "vela"},
-      {"evento": "IdleWarmHandsStanding", "nombre": "Calentarse las manos de pie", "categoria": "gestos", "destacada": true, "icono": "vela"},
-      {"evento": "IdleWarmHandsCrouched", "nombre": "Calentarse las manos en cuclillas", "categoria": "gestos", "icono": "vela"},
-      {"evento": "IdleWarmArms", "nombre": "Calentarse los brazos", "categoria": "gestos", "icono": "vela"},
-      {"evento": "idle_A_leg_shift", "nombre": "Cambiar el peso de pierna", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleValericaWalkForward", "nombre": "Caminar hacia delante", "categoria": "gestos", "andando": true, "icono": "mano"},
-      {"evento": "idle_A_left_longTrans", "nombre": "Cargar el peso a la izquierda", "categoria": "gestos", "icono": "caja"},
-      {"evento": "OffsetArmsCrossedStart", "nombre": "Cruzarse de brazos", "categoria": "gestos", "destacada": true, "andando": true, "icono": "mano"},
-      {"evento": "IdleCiceroHappy", "nombre": "Dar saltos de alegría", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleChildCryingEnd", "nombre": "Dejar de llorar", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleCowering", "nombre": "Encogerse de miedo", "categoria": "gestos", "destacada": true, "icono": "mano"},
-      {"evento": "IdleCowerEnter", "nombre": "Encogerse de miedo (empezar)", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleHideREnter", "nombre": "Esconderse a la derecha", "categoria": "gestos", "icono": "mano"},
-      {"evento": "idle_A_swat_flies", "nombre": "Espantar moscas", "categoria": "gestos", "icono": "mano"},
-      {"evento": "idle_A_shoulders", "nombre": "Estirar los hombros", "categoria": "gestos", "icono": "mano"},
-      {"evento": "idle_A_shouldersVar1", "nombre": "Estirar los hombros (2)", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleWalkingCameraEnd", "nombre": "Fin del paseo de cámara", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleCiceroAgitated", "nombre": "Gesticular alterado", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleHDRight", "nombre": "Gesto hacia la derecha (variante HD)", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleHHRight", "nombre": "Gesto hacia la derecha (variante HH)", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleTalkAndUseItem", "nombre": "Hablar manejando algo", "categoria": "gestos", "icono": "bocadillo"},
-      {"evento": "IdleComeThisWay", "nombre": "Hacer señas para que te sigan", "categoria": "gestos", "destacada": true, "icono": "mano"},
-      {"evento": "IdleGrave_01", "nombre": "Inclinar la cabeza ante una tumba", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleGrave_02", "nombre": "Inclinar la cabeza ante una tumba (2)", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleSilentBow", "nombre": "Inclinarse en silencio", "categoria": "gestos", "icono": "espada"},
-      {"evento": "idleDisbelief01Start", "nombre": "Incredulidad", "categoria": "gestos", "icono": "mano"},
-      {"evento": "idleDisbelief02Start", "nombre": "Incredulidad (2)", "categoria": "gestos", "icono": "mano"},
-      {"evento": "idleFreaReactionStart", "nombre": "Incredulidad (3)", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleFreaReaction2Start", "nombre": "Incredulidad (4)", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleChildPlayDirt", "nombre": "Jugar con la tierra", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleChildPlayDoll", "nombre": "Jugar con una muñeca", "categoria": "gestos", "icono": "mano"},
-      {"evento": "idle_A_soft_rightTrans", "nombre": "Ladearse a la derecha", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleCleanSword", "nombre": "Limpiar la espada", "categoria": "gestos", "icono": "espada"},
-      {"evento": "IdleGetAttention", "nombre": "Llamar la atención", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleChildCryingStart", "nombre": "Llorar", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleHandsBehindBack", "nombre": "Manos a la espalda", "categoria": "gestos", "destacada": true, "icono": "mano"},
-      {"evento": "IdlePresentSkeletonKey", "nombre": "Mostrar la Llave Maestra", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleChildFidget", "nombre": "Moverse inquieto", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleNervous", "nombre": "Nerviosismo", "categoria": "gestos", "destacada": true, "icono": "mano"},
-      {"evento": "IdleLookFar", "nombre": "Otear el horizonte", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleWalkingCameraStart", "nombre": "Paseo de cámara", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleChildApologize", "nombre": "Pedir perdón", "categoria": "gestos", "icono": "mano"},
-      {"evento": "idleFreaSorrowLoopEnter", "nombre": "Pena", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleSnapToAttention", "nombre": "Ponerse firme", "categoria": "gestos", "destacada": true, "icono": "mano"},
-      {"evento": "IdleAstridEnter", "nombre": "Pose de espera", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleStaticPoseAStart", "nombre": "Pose fija A", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleStaticPoseBStart", "nombre": "Pose fija B", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleStaticPoseCStart", "nombre": "Pose fija C", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdlePlayer", "nombre": "Postura del jugador", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleChildWhineKick", "nombre": "Rabieta a patadas", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleChildWhineStompFeet", "nombre": "Rabieta pataleando", "categoria": "gestos", "icono": "mano"},
-      {"evento": "idle_A_scratch_back", "nombre": "Rascarse la espalda", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleSurrender", "nombre": "Rendirse", "categoria": "gestos", "destacada": true, "icono": "mano"},
-      {"evento": "IdleLaugh", "nombre": "Reírse", "categoria": "gestos", "destacada": true, "icono": "mano"},
-      {"evento": "idle_A_shakeout", "nombre": "Sacudirse", "categoria": "gestos", "icono": "mano"},
-      {"evento": "idleDisbelief01Exit", "nombre": "Salir de la incredulidad", "categoria": "gestos", "icono": "mano"},
-      {"evento": "idleDisbelief02Exit", "nombre": "Salir de la incredulidad (2)", "categoria": "gestos", "icono": "mano"},
-      {"evento": "idleFreaDisbeliefLoopStop", "nombre": "Salir de la incredulidad (3)", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleFreaDisbelief2LoopStop", "nombre": "Salir de la incredulidad (4)", "categoria": "gestos", "icono": "mano"},
-      {"evento": "idleFreaSorrowExit", "nombre": "Salir de la pena", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleWave", "nombre": "Saludar con la mano", "categoria": "gestos", "destacada": true, "icono": "mano"},
-      {"evento": "IdleSalute", "nombre": "Saludo militar", "categoria": "gestos", "destacada": true, "icono": "mano"},
-      {"evento": "IdleWipeBrow", "nombre": "Secarse la frente", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdlePointFar_01", "nombre": "Señalar a lo lejos", "categoria": "gestos", "destacada": true, "icono": "mano"},
-      {"evento": "IdlePointFar_02", "nombre": "Señalar a lo lejos (2)", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdlePointClose", "nombre": "Señalar algo cerca", "categoria": "gestos", "icono": "mano"},
-      {"evento": "idle_A_pull_pants", "nombre": "Subirse los pantalones", "categoria": "gestos", "icono": "mano"},
-      {"evento": "idle_A_sigh_var1Trans", "nombre": "Suspirar", "categoria": "gestos", "icono": "mano"},
-      {"evento": "idle_A_sigh_var2Trans", "nombre": "Suspirar (2)", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleChildShy", "nombre": "Timidez", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleNocturnal_LookRight", "nombre": "Volver la mirada a la derecha", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleNocturnal_LookLeft", "nombre": "Volver la mirada a la izquierda", "categoria": "gestos", "icono": "mano"},
-      {"evento": "IdleBracedPain", "nombre": "Aguantar el dolor", "categoria": "herido", "icono": "cruz"},
-      {"evento": "IdlePrisonerBeat", "nombre": "Apalear a un preso", "categoria": "herido", "icono": "grilletes"},
-      {"evento": "TG05_StabPlayer", "nombre": "Apuñalar al jugador", "categoria": "herido", "icono": "cruz"},
-      {"evento": "IdleDLC02FallOnKnees", "nombre": "Caer de rodillas", "categoria": "herido", "icono": "vela"},
-      {"evento": "BoundStandingCut", "nombre": "Cortar las ataduras", "categoria": "herido", "icono": "grilletes"},
-      {"evento": "BoundStandingCutNPC", "nombre": "Cortarle las ataduras a alguien", "categoria": "herido", "icono": "grilletes"},
-      {"evento": "IdleHandCut", "nombre": "Cortarse la mano", "categoria": "herido", "icono": "cruz"},
-      {"evento": "IdleBoundKneesEnterInstant", "nombre": "De rodillas y maniatado", "categoria": "herido", "icono": "grilletes"},
-      {"evento": "IdleExecutionerChop_Player", "nombre": "Decapitar al jugador", "categoria": "herido", "icono": "calavera"},
-      {"evento": "IdleExecutionerChop", "nombre": "Decapitar con el hacha", "categoria": "herido", "icono": "calavera"},
-      {"evento": "IdleVampireFeastVictim", "nombre": "Dejarse morder el cuello", "categoria": "herido", "icono": "cruz"},
-      {"evento": "Ragdoll", "nombre": "Desplomarse como un muñeco", "categoria": "herido", "icono": "cruz"},
-      {"evento": "IdleWebThrashShort", "nombre": "Forcejear en la telaraña", "categoria": "herido", "icono": "grilletes"},
-      {"evento": "IdleWebThrashShort2", "nombre": "Forcejear en la telaraña (2)", "categoria": "herido", "icono": "grilletes"},
-      {"evento": "IdleExecutionGuardIdle", "nombre": "Guardia de la ejecución", "categoria": "herido", "icono": "espada"},
-      {"evento": "IdleInjured", "nombre": "Herido", "categoria": "herido", "destacada": true, "icono": "cruz"},
-      {"evento": "IdleWounded_01", "nombre": "Herido (1)", "categoria": "herido", "destacada": true, "icono": "cruz"},
-      {"evento": "IdleWounded_02", "nombre": "Herido (2)", "categoria": "herido", "icono": "cruz"},
-      {"evento": "IdleWounded_03", "nombre": "Herido (3)", "categoria": "herido", "icono": "cruz"},
-      {"evento": "TG05_GetUp", "nombre": "Levantarse aturdido", "categoria": "herido", "icono": "silla"},
-      {"evento": "GetUpBegin", "nombre": "Levantarse del suelo", "categoria": "herido", "icono": "silla"},
-      {"evento": "OffsetBoundStandingStart", "nombre": "Maniatado de pie", "categoria": "herido", "andando": true, "icono": "grilletes"},
-      {"evento": "DeathAnim", "nombre": "Morir", "categoria": "herido", "icono": "calavera"},
-      {"evento": "IdleDLC02MiraakDeath", "nombre": "Morir despacio", "categoria": "herido", "icono": "calavera"},
-      {"evento": "MS12BedDeath", "nombre": "Morir en la cama", "categoria": "herido", "icono": "calavera"},
-      {"evento": "IdleSoupDeath", "nombre": "Morir sobre el plato", "categoria": "herido", "icono": "calavera"},
-      {"evento": "IdleCartPrisonerAExit", "nombre": "Preso A: bajarse del carro", "categoria": "herido", "icono": "grilletes"},
-      {"evento": "IdleCartPrisonerAIdle", "nombre": "Preso A: en el carro", "categoria": "herido", "icono": "grilletes"},
-      {"evento": "IdleCartPrisonerASway", "nombre": "Preso A: vaivén del carro", "categoria": "herido", "icono": "grilletes"},
-      {"evento": "IdleCartPrisonerBExit", "nombre": "Preso B: bajarse del carro", "categoria": "herido", "icono": "grilletes"},
-      {"evento": "IdleCartPrisonerBIdle", "nombre": "Preso B: en el carro", "categoria": "herido", "icono": "grilletes"},
-      {"evento": "IdleCartPrisonerBSway", "nombre": "Preso B: vaivén del carro", "categoria": "herido", "icono": "grilletes"},
-      {"evento": "IdleCartPrisonerCExit", "nombre": "Preso C: bajarse del carro", "categoria": "herido", "icono": "grilletes"},
-      {"evento": "IdleCartPrisonerCIdle", "nombre": "Preso C: en el carro", "categoria": "herido", "icono": "grilletes"},
-      {"evento": "IdleCartPrisonerCSway", "nombre": "Preso C: vaivén del carro", "categoria": "herido", "icono": "grilletes"},
-      {"evento": "IdleCartPrisonerDExit", "nombre": "Preso D: bajarse del carro", "categoria": "herido", "icono": "grilletes"},
-      {"evento": "IdleCartPrisonerDIdle", "nombre": "Preso D: en el carro", "categoria": "herido", "icono": "grilletes"},
-      {"evento": "IdleCartPrisonerDSway", "nombre": "Preso D: vaivén del carro", "categoria": "herido", "icono": "grilletes"},
-      {"evento": "IdleWebEnterInstant", "nombre": "Quedar atrapado en la telaraña", "categoria": "herido", "icono": "cruz"},
-      {"evento": "TG05_KnockOut", "nombre": "Quedar inconsciente", "categoria": "herido", "icono": "cruz"},
-      {"evento": "IdleExecutionerAlduinReaction", "nombre": "Reaccionar con espanto", "categoria": "herido", "icono": "cruz"},
-      {"evento": "IdleExecutionerAlduinReactionDeath", "nombre": "Reaccionar con espanto y morir", "categoria": "herido", "icono": "calavera"},
-      {"evento": "IdleFurnitureExitTriggered", "nombre": "Salir del mueble (forzado)", "categoria": "herido", "icono": "silla"},
-      {"evento": "IdleWebExit", "nombre": "Soltarse de la telaraña", "categoria": "herido", "icono": "cruz"},
-      {"evento": "IdleWebExitQuickTurn", "nombre": "Soltarse de la telaraña y girarse", "categoria": "herido", "icono": "cruz"},
-      {"evento": "IdleDLC02MiraakDeathFinish", "nombre": "Terminar de morir despacio", "categoria": "herido", "icono": "calavera"},
-      {"evento": "IdleUncontrollableCough", "nombre": "Tos incontrolable", "categoria": "herido", "icono": "cruz"},
-      {"evento": "IdleMQ203EsbernBookEnter", "nombre": "Consultar un libro", "categoria": "leer", "icono": "libro"},
-      {"evento": "IdleStudy", "nombre": "Estudiar", "categoria": "leer", "destacada": true, "icono": "libro"},
-      {"evento": "IdleReadElderScroll", "nombre": "Leer el Pergamino Ancestral", "categoria": "leer", "icono": "libro"},
-      {"evento": "IdleReadElderScroll3rdP", "nombre": "Leer el Pergamino Ancestral (3ª persona)", "categoria": "leer", "icono": "libro"},
-      {"evento": "IdleReadElderScrollLonger", "nombre": "Leer el Pergamino Ancestral (largo)", "categoria": "leer", "icono": "libro"},
-      {"evento": "ChairReadingStart", "nombre": "Leer sentado", "categoria": "leer", "sentado": true, "icono": "silla"},
-      {"evento": "ChairReadingIdles", "nombre": "Leer sentado: pasar páginas", "categoria": "leer", "sentado": true, "icono": "silla"},
-      {"evento": "IdleBook_Read", "nombre": "Leer un libro", "categoria": "leer", "destacada": true, "icono": "libro"},
-      {"evento": "IdleBook_ReadTG06", "nombre": "Leer un libro (traducción)", "categoria": "leer", "icono": "libro"},
-      {"evento": "IdleNoteRead", "nombre": "Leer una nota", "categoria": "leer", "destacada": true, "icono": "libro"},
-      {"evento": "IdleMQ206FelldirShowScroll", "nombre": "Mostrar el pergamino", "categoria": "leer", "icono": "libro"},
-      {"evento": "IdleTG06FlipPage", "nombre": "Pasar la página", "categoria": "leer", "icono": "libro"},
-      {"evento": "IdleBook_PageTurn", "nombre": "Pasar páginas", "categoria": "leer", "icono": "libro"},
-      {"evento": "IdleBook_OnePage", "nombre": "Pasar una página", "categoria": "leer", "icono": "libro"},
-      {"evento": "IdleRFPickUpScroll", "nombre": "Recoger un pergamino", "categoria": "leer", "icono": "libro"},
-      {"evento": "IdleReadElderScrollEnd", "nombre": "Terminar de leer el Pergamino Ancestral", "categoria": "leer", "icono": "libro"},
-      {"evento": "IdleTG06TranslationEnter", "nombre": "Traducir un texto", "categoria": "leer", "icono": "libro"},
-      {"evento": "IdleDLC2TentacleWarpBook", "nombre": "Abrir el libro que te transporta", "categoria": "magia", "icono": "libro"},
-      {"evento": "IdleBloodPortalActivate", "nombre": "Activar el portal de sangre", "categoria": "magia", "icono": "chispa"},
-      {"evento": "IdleNocturnal_Rise", "nombre": "Alzarse", "categoria": "magia", "icono": "chispa"},
-      {"evento": "IdleTGFalmerStatueEnter", "nombre": "Ante una estatua", "categoria": "magia", "icono": "chispa"},
-      {"evento": "IdleNocturnalEnter", "nombre": "Aparecer", "categoria": "magia", "icono": "chispa"},
-      {"evento": "IdleBlessingKneelEnter", "nombre": "Arrodillarse a recibir la bendición", "categoria": "magia", "destacada": true, "icono": "vela"},
-      {"evento": "IdleAltarEnter", "nombre": "Arrodillarse en el altar", "categoria": "magia", "icono": "vela"},
-      {"evento": "IdleT02AscendMale", "nombre": "Ascender (hombre)", "categoria": "magia", "icono": "vela"},
-      {"evento": "IdleT02AscendFemale", "nombre": "Ascender (mujer)", "categoria": "magia", "icono": "vela"},
-      {"evento": "IdleTelvanniTowerFloatUp", "nombre": "Ascender flotando", "categoria": "magia", "icono": "vela"},
-      {"evento": "IdleSnowElfPrinceAscensionBurning", "nombre": "Ascensión en llamas", "categoria": "magia", "icono": "chispa"},
-      {"evento": "IdleDA02BoethiahPostEnter", "nombre": "Atado a un poste", "categoria": "magia", "icono": "grilletes"},
-      {"evento": "IdleWalkThroughWallEnter", "nombre": "Atravesar la pared", "categoria": "magia", "icono": "chispa"},
-      {"evento": "IdleTG08_Phase1", "nombre": "Ceremonia del Gremio: fase 1", "categoria": "magia", "icono": "vela"},
-      {"evento": "IdleTG08_Phase2", "nombre": "Ceremonia del Gremio: fase 2", "categoria": "magia", "icono": "vela"},
-      {"evento": "IdleTG08_Phase3", "nombre": "Ceremonia del Gremio: fase 3", "categoria": "magia", "icono": "vela"},
-      {"evento": "IdleTG08_Phase4", "nombre": "Ceremonia del Gremio: fase 4", "categoria": "magia", "icono": "vela"},
-      {"evento": "IdleTG08_Phase5", "nombre": "Ceremonia del Gremio: fase 5", "categoria": "magia", "icono": "vela"},
-      {"evento": "IdleCO2Ceremony3Chest", "nombre": "Ceremonia: abrir el cofre", "categoria": "magia", "icono": "vela"},
-      {"evento": "IdleCO2Ceremony2Blessing", "nombre": "Ceremonia: bendecir", "categoria": "magia", "icono": "vela"},
-      {"evento": "IdleCO2Ceremony1Welcome", "nombre": "Ceremonia: dar la bienvenida", "categoria": "magia", "icono": "vela"},
-      {"evento": "pa_WW_CutWrist", "nombre": "Cortarse la muñeca", "categoria": "magia", "icono": "chispa"},
-      {"evento": "IdleMesmerizeStop", "nombre": "Dejar de hipnotizar", "categoria": "magia", "icono": "chispa"},
-      {"evento": "IdleNocturnal_Exit", "nombre": "Desaparecer", "categoria": "magia", "icono": "chispa"},
-      {"evento": "IdleTelvanniTowerFloatDown", "nombre": "Descender flotando", "categoria": "magia", "icono": "chispa"},
-      {"evento": "IdleRitualStart", "nombre": "Empezar un ritual", "categoria": "magia", "icono": "vela"},
-      {"evento": "IdleGreybeardWordTeach", "nombre": "Enseñar una Palabra", "categoria": "magia", "icono": "chispa"},
-      {"evento": "IdleDLC1BossExplosion1stP", "nombre": "Explosión (1ª persona)", "categoria": "magia", "icono": "chispa"},
-      {"evento": "pa_ExtractWerewolfSpirit", "nombre": "Extraer un espíritu", "categoria": "magia", "icono": "chispa"},
-      {"evento": "IdleMagic_01", "nombre": "Gesto de magia", "categoria": "magia", "icono": "chispa"},
-      {"evento": "IdleDLC02TentacleWordBurnBegin", "nombre": "Grabar la Palabra (empezar)", "categoria": "magia", "icono": "martillo"},
-      {"evento": "IdleDLC02TentacleWordBurnEnd", "nombre": "Grabar la Palabra (terminar)", "categoria": "magia", "icono": "martillo"},
-      {"evento": "IdleSnowElfPrinceBigSpell", "nombre": "Gran hechizo", "categoria": "magia", "icono": "chispa"},
-      {"evento": "IdleMesmerize", "nombre": "Hipnotizar", "categoria": "magia", "icono": "chispa"},
-      {"evento": "IdleSnowElfPrinceFireAndForget", "nombre": "Lanzar un hechizo sentado", "categoria": "magia", "icono": "chispa"},
-      {"evento": "IdleGreybeardMeditateEnter", "nombre": "Meditar", "categoria": "magia", "icono": "chispa"},
-      {"evento": "IdleNocturnal_IdleA", "nombre": "Pose solemne", "categoria": "magia", "icono": "vela"},
-      {"evento": "IdleNocturnal_IdleB", "nombre": "Pose solemne (2)", "categoria": "magia", "icono": "vela"},
-      {"evento": "IdleNocturnal_IdleAMirror", "nombre": "Pose solemne (reflejada)", "categoria": "magia", "icono": "vela"},
-      {"evento": "IdlePray", "nombre": "Rezar", "categoria": "magia", "destacada": true, "icono": "vela"},
-      {"evento": "IdlePrayCrouchedEnter", "nombre": "Rezar en cuclillas", "categoria": "magia", "icono": "vela"},
-      {"evento": "IdleBoyRitual", "nombre": "Ritual", "categoria": "magia", "icono": "vela"},
-      {"evento": "IdleRitualSkull1", "nombre": "Ritual con la calavera (1)", "categoria": "magia", "icono": "vela"},
-      {"evento": "IdleRitualSkull2", "nombre": "Ritual con la calavera (2)", "categoria": "magia", "icono": "vela"},
-      {"evento": "IdleRitualSkull3", "nombre": "Ritual con la calavera (3)", "categoria": "magia", "icono": "vela"},
-      {"evento": "IdleMQ206FelldirRitualEnter", "nombre": "Ritual con las manos en alto", "categoria": "magia", "icono": "vela"},
-      {"evento": "IdleSnowElfPrinceBigSpellRelease", "nombre": "Soltar el gran hechizo", "categoria": "magia", "icono": "chispa"},
-      {"evento": "IdleWerewolfTransformation", "nombre": "Transformarse", "categoria": "magia", "icono": "chispa"},
-      {"evento": "IdleVampireLordTransformation", "nombre": "Transformarse (2)", "categoria": "magia", "icono": "chispa"},
-      {"evento": "IdleApplaud2", "nombre": "Aplaudir", "categoria": "musica", "destacada": true, "icono": "mano"},
-      {"evento": "IdleApplaud3", "nombre": "Aplaudir (2)", "categoria": "musica", "icono": "mano"},
-      {"evento": "IdleApplaud4", "nombre": "Aplaudir (3)", "categoria": "musica", "icono": "mano"},
-      {"evento": "IdleApplaud5", "nombre": "Aplaudir (4)", "categoria": "musica", "icono": "mano"},
-      {"evento": "IdleApplaudSarcastic", "nombre": "Aplaudir con sorna", "categoria": "musica", "icono": "mano"},
-      {"evento": "IdleCiceroDance1", "nombre": "Baile (1)", "categoria": "musica", "destacada": true, "icono": "nota"},
-      {"evento": "IdleCiceroDance2", "nombre": "Baile (2)", "categoria": "musica", "icono": "nota"},
-      {"evento": "IdleCiceroDance3", "nombre": "Baile (3)", "categoria": "musica", "icono": "nota"},
-      {"evento": "SpectatorClap", "nombre": "Público: aplaudir", "categoria": "musica", "icono": "mano"},
-      {"evento": "SpectatorTalking", "nombre": "Público: cuchichear", "categoria": "musica", "icono": "bocadillo"},
-      {"evento": "SpectatorGawk", "nombre": "Público: quedarse boquiabierto", "categoria": "musica", "icono": "nota"},
-      {"evento": "SpectatorCheer", "nombre": "Público: vitorear", "categoria": "musica", "icono": "mano"},
-      {"evento": "IdleBlowHornStormcloak", "nombre": "Tocar el cuerno de los Capas de la Tormenta", "categoria": "musica", "icono": "nota"},
-      {"evento": "IdleBlowHornImperial", "nombre": "Tocar el cuerno imperial", "categoria": "musica", "icono": "nota"},
-      {"evento": "IdleLuteStart", "nombre": "Tocar el laúd", "categoria": "musica", "destacada": true, "icono": "nota"},
-      {"evento": "IdleDrumStart", "nombre": "Tocar el tambor", "categoria": "musica", "destacada": true, "icono": "nota"},
-      {"evento": "IdleFluteStart", "nombre": "Tocar la flauta", "categoria": "musica", "destacada": true, "icono": "nota"},
-      {"evento": "IdleCivilWarCheer", "nombre": "Vitorear", "categoria": "musica", "icono": "mano"},
-      {"evento": "IdleActivateCoffinPuzzle", "nombre": "Accionar el cuenco del ataúd", "categoria": "oficios", "icono": "cama"},
-      {"evento": "Lever_PlayerPush", "nombre": "Accionar una palanca", "categoria": "oficios", "icono": "martillo"},
-      {"evento": "IdleSharpeningWheelStart", "nombre": "Afilar en la muela", "categoria": "oficios", "icono": "martillo"},
-      {"evento": "IdleCartDriverExit", "nombre": "Bajarse del pescante", "categoria": "oficios", "icono": "caja"},
-      {"evento": "idleLooseSweepingStart", "nombre": "Barrer", "categoria": "oficios", "destacada": true, "icono": "martillo"},
-      {"evento": "IdleHoe", "nombre": "Cavar con la azada", "categoria": "oficios", "destacada": true, "icono": "martillo"},
-      {"evento": "IdleChiselStandingEnter", "nombre": "Cincelar de pie", "categoria": "oficios", "icono": "martillo"},
-      {"evento": "IdleChiselKneelingEnter", "nombre": "Cincelar de rodillas", "categoria": "oficios", "icono": "vela"},
-      {"evento": "IdleCraftingCookingPotTalkA", "nombre": "Cocinar y hablar (A)", "categoria": "oficios", "icono": "cubiertos"},
-      {"evento": "IdleCraftingCookingPotTalkB", "nombre": "Cocinar y hablar (B)", "categoria": "oficios", "icono": "cubiertos"},
-      {"evento": "IdleTake", "nombre": "Coger algo", "categoria": "oficios", "icono": "caja"},
-      {"evento": "IdleWoodChopStart", "nombre": "Cortar leña", "categoria": "oficios", "destacada": true, "icono": "martillo"},
-      {"evento": "IdleFeedChicken", "nombre": "Dar de comer a las gallinas", "categoria": "oficios", "icono": "cubiertos"},
-      {"evento": "IdlewoodputdownEnter", "nombre": "Dejar la leña", "categoria": "oficios", "icono": "martillo"},
-      {"evento": "IdleStonePutDownEnter", "nombre": "Dejar una piedra", "categoria": "oficios", "icono": "martillo"},
-      {"evento": "IdleCraftingCookingPotAddIngredient", "nombre": "Echar un ingrediente al puchero", "categoria": "oficios", "icono": "cubiertos"},
-      {"evento": "IdleLightSconce", "nombre": "Encender una antorcha de pared", "categoria": "oficios", "icono": "martillo"},
-      {"evento": "IdleGive", "nombre": "Entregar algo", "categoria": "oficios", "icono": "martillo"},
-      {"evento": "IdleGiveMQ105Horn", "nombre": "Entregar el cuerno", "categoria": "oficios", "icono": "nota"},
-      {"evento": "IdleWriteTableStandingEnter", "nombre": "Escribir de pie en la mesa", "categoria": "oficios", "icono": "libro"},
-      {"evento": "IdleWriteLedgerEnter", "nombre": "Escribir en el registro", "categoria": "oficios", "icono": "libro"},
-      {"evento": "IdleWriteLedgerWrite", "nombre": "Escribir en el registro (escribiendo)", "categoria": "oficios", "icono": "libro"},
-      {"evento": "IdleChairWrite", "nombre": "Escribir sentado", "categoria": "oficios", "sentado": true, "icono": "silla"},
-      {"evento": "IdleExamine", "nombre": "Examinar algo", "categoria": "oficios", "icono": "martillo"},
-      {"evento": "IdleLockPick", "nombre": "Forzar una cerradura", "categoria": "oficios", "icono": "martillo"},
-      {"evento": "IdleDLC02BoatRide", "nombre": "Ir en barca", "categoria": "oficios", "icono": "martillo"},
-      {"evento": "IdleWriteTableChairRightExit", "nombre": "Levantarse del escritorio por la derecha", "categoria": "oficios", "icono": "silla"},
-      {"evento": "IdleWriteTableChairLeftExit", "nombre": "Levantarse del escritorio por la izquierda", "categoria": "oficios", "icono": "silla"},
-      {"evento": "IdleBarCounterWipe", "nombre": "Limpiar la barra", "categoria": "oficios", "icono": "martillo"},
-      {"evento": "IdleCartDriverIdle", "nombre": "Llevar el carro", "categoria": "oficios", "andando": true, "icono": "caja"},
-      {"evento": "IdleCartDriverSway", "nombre": "Llevar el carro, con vaivén", "categoria": "oficios", "andando": true, "icono": "caja"},
-      {"evento": "OffsetFlowerBasketStart", "nombre": "Llevar el cesto de flores", "categoria": "oficios", "andando": true, "icono": "caja"},
-      {"evento": "OffsetCarryBasketStart", "nombre": "Llevar un cesto", "categoria": "oficios", "andando": true, "icono": "caja"},
-      {"evento": "OffsetCarryPotStart", "nombre": "Llevar un puchero", "categoria": "oficios", "andando": true, "icono": "cubiertos"},
-      {"evento": "IdleDwemerExtractorEnter", "nombre": "Manejar un extractor", "categoria": "oficios", "icono": "martillo"},
-      {"evento": "IdlePickaxeEnter", "nombre": "Picar con el pico", "categoria": "oficios", "destacada": true, "icono": "martillo"},
-      {"evento": "IdleWriteLedgerChargenEnter", "nombre": "Ponerse a escribir en el registro", "categoria": "oficios", "icono": "libro"},
-      {"evento": "IdleCounterStart", "nombre": "Ponerse tras el mostrador", "categoria": "oficios", "icono": "martillo"},
-      {"evento": "IdleSearchingChest", "nombre": "Rebuscando en el cofre", "categoria": "oficios", "icono": "martillo"},
-      {"evento": "IdleSearchingTable", "nombre": "Rebuscando en la mesa", "categoria": "oficios", "icono": "martillo"},
-      {"evento": "IdleSearchTableEnter", "nombre": "Rebuscar en la mesa", "categoria": "oficios", "icono": "martillo"},
-      {"evento": "IdleSearchChestEnter", "nombre": "Rebuscar en un cofre", "categoria": "oficios", "icono": "martillo"},
-      {"evento": "IdleWayShrineWaterScoopEnter", "nombre": "Recoger agua del santuario", "categoria": "oficios", "icono": "caja"},
-      {"evento": "IdleActivatePickUp", "nombre": "Recoger algo", "categoria": "oficios", "icono": "caja"},
-      {"evento": "IdlePickup_Ground", "nombre": "Recoger algo del suelo", "categoria": "oficios", "icono": "caja"},
-      {"evento": "OffsetCarryFlowerBasketPickStart", "nombre": "Recoger flores en el cesto", "categoria": "oficios", "andando": true, "icono": "caja"},
-      {"evento": "IdleWoodPickUpEnter", "nombre": "Recoger leña", "categoria": "oficios", "icono": "caja"},
-      {"evento": "IdleStonePickUpEnter", "nombre": "Recoger una piedra", "categoria": "oficios", "icono": "caja"},
-      {"evento": "IdleWriteTableChairRightEnter", "nombre": "Sentarse a escribir por la derecha", "categoria": "oficios", "icono": "silla"},
-      {"evento": "IdleWriteTableChairLeftEnter", "nombre": "Sentarse a escribir por la izquierda", "categoria": "oficios", "icono": "silla"},
-      {"evento": "IdleOffsetCarryPotServe", "nombre": "Servir del puchero", "categoria": "oficios", "andando": true, "icono": "cubiertos"},
-      {"evento": "IdleCartTravelPlayerEnter", "nombre": "Subirse al carro", "categoria": "oficios", "icono": "caja"},
-      {"evento": "IdleCartTravelDriverEnter", "nombre": "Subirse al pescante", "categoria": "oficios", "icono": "caja"},
-      {"evento": "IdlePullChain", "nombre": "Tirar de la cadena", "categoria": "oficios", "icono": "martillo"},
-      {"evento": "IdleBlackSmithingEnterStart", "nombre": "Trabajar en la forja", "categoria": "oficios", "destacada": true, "icono": "martillo"},
-      {"evento": "IdleSell", "nombre": "Vender algo", "categoria": "oficios", "icono": "martillo"},
-      {"evento": "IdleRailLeanEnter", "nombre": "Apoyarse en la baranda", "categoria": "sentarse", "destacada": true, "icono": "silla"},
-      {"evento": "IdleBarCounterEnter", "nombre": "Apoyarse en la barra", "categoria": "sentarse", "icono": "silla"},
-      {"evento": "IdleTableLeanPoint", "nombre": "Apoyarse en la mesa y señalar", "categoria": "sentarse", "icono": "silla"},
-      {"evento": "IdleWallLeanStart", "nombre": "Apoyarse en la pared", "categoria": "sentarse", "destacada": true, "icono": "silla"},
-      {"evento": "IdleRailLeanExit", "nombre": "Dejar de apoyarse en la baranda", "categoria": "sentarse", "icono": "silla"},
-      {"evento": "IdleLounge_Exit", "nombre": "Dejar de repantigarse", "categoria": "sentarse", "icono": "silla"},
-      {"evento": "IdleChairFrontExit", "nombre": "Levantarse de frente", "categoria": "sentarse", "icono": "silla"},
-      {"evento": "IdleChairFrontQuickExit", "nombre": "Levantarse de frente, rápido", "categoria": "sentarse", "icono": "silla"},
-      {"evento": "IdleTableBackExit", "nombre": "Levantarse de la mesa", "categoria": "sentarse", "icono": "silla"},
-      {"evento": "IdleChairExitStart", "nombre": "Levantarse de la silla", "categoria": "sentarse", "icono": "silla"},
-      {"evento": "IdleStoolBackExit", "nombre": "Levantarse del taburete", "categoria": "sentarse", "icono": "silla"},
-      {"evento": "idleChairRightExit", "nombre": "Levantarse por la derecha", "categoria": "sentarse", "icono": "silla"},
-      {"evento": "IdleChairRightQuickExit", "nombre": "Levantarse por la derecha, rápido", "categoria": "sentarse", "icono": "silla"},
-      {"evento": "idleChairLeftExit", "nombre": "Levantarse por la izquierda", "categoria": "sentarse", "icono": "silla"},
-      {"evento": "IdleChairLeftQuickExit", "nombre": "Levantarse por la izquierda, rápido", "categoria": "sentarse", "icono": "silla"},
-      {"evento": "IdleLounge", "nombre": "Repantigarse", "categoria": "sentarse", "destacada": true, "icono": "silla"},
-      {"evento": "idleChairArmsCrossedVar1", "nombre": "Sentado, brazos cruzados", "categoria": "sentarse", "sentado": true, "icono": "silla"},
-      {"evento": "idleChairArmsCrossedVar2", "nombre": "Sentado, brazos cruzados (2)", "categoria": "sentarse", "sentado": true, "icono": "silla"},
-      {"evento": "idleChairShoulderFlex", "nombre": "Sentado, estirar los hombros", "categoria": "sentarse", "sentado": true, "icono": "silla"},
-      {"evento": "idleChairLookDown", "nombre": "Sentado, mirando al suelo", "categoria": "sentarse", "sentado": true, "icono": "silla"},
-      {"evento": "IdleChairVar1", "nombre": "Sentado, quieto", "categoria": "sentarse", "sentado": true, "icono": "silla"},
-      {"evento": "idleChairVar2", "nombre": "Sentado, quieto (2)", "categoria": "sentarse", "sentado": true, "icono": "silla"},
-      {"evento": "IdleChildLegsOutStart", "nombre": "Sentarse con las piernas estiradas", "categoria": "sentarse", "icono": "silla"},
-      {"evento": "IdleChairFrontEnter", "nombre": "Sentarse de frente", "categoria": "sentarse", "destacada": true, "icono": "silla"},
-      {"evento": "IdleChildSitOnKnees", "nombre": "Sentarse de rodillas", "categoria": "sentarse", "icono": "silla"},
-      {"evento": "IdleStoolEnter", "nombre": "Sentarse en el taburete", "categoria": "sentarse", "destacada": true, "icono": "silla"},
-      {"evento": "IdleJarlChairEnter", "nombre": "Sentarse en el trono del jarl", "categoria": "sentarse", "icono": "silla"},
-      {"evento": "IdleChairRightEnter", "nombre": "Sentarse por la derecha", "categoria": "sentarse", "icono": "silla"},
-      {"evento": "IdleChairLeftEnter", "nombre": "Sentarse por la izquierda", "categoria": "sentarse", "icono": "silla"},
-      {"evento": "IdleWallSoldierEnter", "nombre": "Soldado apostado en la muralla", "categoria": "sentarse", "icono": "silla"}
+      {"evento": "SneakStart", "nombre": "Agacharse", "categoria": "combate", "salida": "SneakStop", "descripcion": "Animación básica del jugador para agacharse (usada al usar el cntrl)", "visible": false, "sincroniza": false, "motivo": "SkyMP lo usa para su propio sincronizado de agacharse"},
+      {"evento": "MRh_SpellAimedStart", "nombre": "Apuntar con un hechizo, derecha", "categoria": "combate", "descripcion": "Incrementa el efecto del hechizo derecho", "visible": false},
+      {"evento": "MLh_SpellAimedStart", "nombre": "Apuntar con un hechizo, izquierda", "categoria": "combate", "descripcion": "Incrementa el efecto del hechizo izquierdo", "visible": false},
+      {"evento": "attackStart", "nombre": "Atacar", "categoria": "combate", "salida": "attackStop", "descripcion": "Ataca con el arma equipada (Mano derecha)", "visible": false},
+      {"evento": "attackStartSprint", "nombre": "Atacar al correr a toda velocidad", "categoria": "combate", "descripcion": "Atacar al correr a toda velocidad. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "attackStartSprintLeftHand", "nombre": "Atacar al correr a toda velocidad con la izquierda", "categoria": "combate", "descripcion": "Atacar al correr a toda velocidad con la izquierda. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "attackPowerStart_Sprint", "nombre": "Atacar con fuerza al correr a toda velocidad", "categoria": "combate", "descripcion": "Atacar con fuerza al correr a toda velocidad. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "attackPowerStart_2HMSprint", "nombre": "Atacar con fuerza al correr a toda velocidad a dos manos", "categoria": "combate", "descripcion": "Atacar con fuerza al correr a toda velocidad a dos manos. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "attackPowerStart_2HWSprint", "nombre": "Atacar con fuerza al correr a toda velocidad con arma pesada", "categoria": "combate", "descripcion": "Atacar con fuerza al correr a toda velocidad con arma pesada. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "attackPowerStart_SprintLeftHand", "nombre": "Atacar con fuerza al correr a toda velocidad con la izquierda", "categoria": "combate", "descripcion": "Atacar con fuerza al correr a toda velocidad con la izquierda. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "attackPowerStartBackward", "nombre": "Atacar con fuerza hacia atrás", "categoria": "combate", "descripcion": "Atacar con fuerza hacia atrás. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "attackPowerStartForward", "nombre": "Atacar con fuerza hacia delante", "categoria": "combate", "descripcion": "Atacar con fuerza hacia delante. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "attackPowerStartForwardLeftHand", "nombre": "Atacar con fuerza hacia delante con la izquierda", "categoria": "combate", "descripcion": "Atacar con fuerza hacia delante con la izquierda. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "attackPowerStartRight", "nombre": "Atacar con fuerza hacia la derecha", "categoria": "combate", "descripcion": "Atacar con fuerza hacia la derecha. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "attackPowerStartInPlace", "nombre": "Atacar con fuerza sin moverse", "categoria": "combate", "descripcion": "Atacar con fuerza sin moverse. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "attackStart_MC_1HMRight", "nombre": "Atacar con la derecha (una mano)", "categoria": "combate", "descripcion": "Ataca con el arma equipada (Una mano, mano derecha)", "visible": false},
+      {"evento": "attackStartLeftHand", "nombre": "Atacar con la izquierda", "categoria": "combate", "descripcion": "Ataca con el arma equipada (Mano izquierda)", "visible": false},
+      {"evento": "attackStart_MC_1HMLeft", "nombre": "Atacar con la izquierda (una mano)", "categoria": "combate", "descripcion": "Ataca con el arma equipada (Una mano, mano izquierda)", "visible": false},
+      {"evento": "attackStartDualWield", "nombre": "Atacar con las dos armas", "categoria": "combate", "descripcion": "Ataca con el arma equipada (A dos manos)", "visible": false},
+      {"evento": "attackPowerStartRightLeftHand", "nombre": "Ataque potente a la derecha, con la izquierda", "categoria": "combate", "descripcion": "Ataque potente con arma equipada (Una mano, izquierda)", "visible": false},
+      {"evento": "attackPowerStartLeftLeftHand", "nombre": "Ataque potente a la izquierda, con la izquierda", "categoria": "combate", "descripcion": "Ataque potente con arma equipada (Una mano, derecha)", "visible": false},
+      {"evento": "attackPowerStart_MC_1HMRight", "nombre": "Ataque potente con la derecha (una mano)", "categoria": "combate", "descripcion": "Ataque potente con arma equipada", "visible": false},
+      {"evento": "attackPowerStart_MC_1HMLeft", "nombre": "Ataque potente con la izquierda (una mano)", "categoria": "combate", "descripcion": "Ataque potente con arma equipada", "visible": false},
+      {"evento": "attackPowerStartDualWield", "nombre": "Ataque potente con las dos armas", "categoria": "combate", "descripcion": "Ataque potente con arma equipada", "visible": false},
+      {"evento": "attackPowerStartInPlaceLeftHand", "nombre": "Ataque potente en el sitio, con la izquierda", "categoria": "combate", "descripcion": "Ataque potente con arma equipada", "visible": false},
+      {"evento": "attackPowerStartBackLeftHand", "nombre": "Ataque potente hacia atrás, con la izquierda", "categoria": "combate", "descripcion": "Ataque potente con arma equipada", "visible": false},
+      {"evento": "attackPowerStartLeft", "nombre": "Ataque potente hacia la izquierda", "categoria": "combate", "descripcion": "Ataque potente con arma equipada", "visible": false},
+      {"evento": "JumpLandEnd", "nombre": "Aterrizar", "categoria": "combate", "descripcion": "Animación de cierre al caer de un salto (No tiene movimiento)", "visible": false},
+      {"evento": "JumpSoftEnd", "nombre": "Aterrizar con suavidad", "categoria": "combate", "descripcion": "Aterrizar con suavidad. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "JumpLandDirectional", "nombre": "Aterrizar de lado", "categoria": "combate", "descripcion": "Animación de cierre al caer de un salto mientras te mueves (No tiene movimiento)", "visible": false},
+      {"evento": "JumpLand", "nombre": "Aterrizar de un salto", "categoria": "combate", "descripcion": "Aterrizar de un salto. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "JumpFall", "nombre": "Caer", "categoria": "combate", "descripcion": "Animación que se ejecuta automaticamente mientras cae el jugador (Aleteo mientras caes)", "visible": false},
+      {"evento": "bleedOutStart", "nombre": "Caer abatido", "categoria": "combate", "salida": "bleedOutStop", "descripcion": "Cae al suelo tocandose el estomago y en 4 patas derrotado"},
+      {"evento": "bleedOutStop", "nombre": "Caer abatido (Levantarse)", "categoria": "combate", "esSalida": true, "descripcion": "Fade-out animación de bleedOutStart (Se levanta de estar abatido)"},
+      {"evento": "JumpFallDirectional", "nombre": "Caer de lado", "categoria": "combate", "descripcion": "Caer de lado. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "MC_WeapOutRightReplaceForceEquip", "nombre": "Cambiar el arma de la derecha (2)", "categoria": "combate", "confirmado": false, "descripcion": "Desenfunda el arma equipada", "visible": false, "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
+      {"evento": "WeapOutLeftReplaceForceEquip", "nombre": "Cambiar el arma de la izquierda", "categoria": "combate", "descripcion": "Desenfunda el arma equipada izquierda", "visible": false, "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
+      {"evento": "ShoutSprintLongStart", "nombre": "Carrera del Torbellino, larga", "categoria": "combate", "descripcion": "Grito de torbellino arrollador Nivel 1", "visible": false},
+      {"evento": "ShoutSprintMediumStart", "nombre": "Carrera del Torbellino, media", "categoria": "combate", "descripcion": "Grito de torbellino arrollador Nivel 2", "visible": false},
+      {"evento": "ShoutSprintLongestStart", "nombre": "Carrera del Torbellino, muy larga", "categoria": "combate", "descripcion": "Grito de torbellino arrollador Nivel 3", "visible": false},
+      {"evento": "attackPowerStartH2HCombo", "nombre": "Combinación de puñetazos", "categoria": "combate", "descripcion": "Golpe cargado intercambiado entre ambos puños", "visible": false},
+      {"evento": "RitualSpellOut", "nombre": "Cortar el hechizo ritual", "categoria": "combate", "descripcion": "Corta la animación del hechizo de alto nivel (los que usan dos manos para cargar el hechizo)", "visible": false},
+      {"evento": "moveStop", "nombre": "Dejar de andar", "categoria": "combate", "esSalida": true, "descripcion": "Fade-outanimación de cuando caminas", "visible": false, "sincroniza": false, "motivo": "esta en la lista de eventos que SkyMP ignora"},
+      {"evento": "attackStop", "nombre": "Dejar de apuntar con el arco", "categoria": "combate", "esSalida": true, "descripcion": "Dejar de apuntar con el arco. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "blockStop", "nombre": "Dejar de bloquear", "categoria": "combate", "esSalida": true, "descripcion": "Fade-out animación de bloquear", "visible": false},
+      {"evento": "SprintStop", "nombre": "Dejar de correr", "categoria": "combate", "esSalida": true, "descripcion": "Fade-out animación de correr", "visible": false},
+      {"evento": "turnStop", "nombre": "Dejar de girar", "categoria": "combate", "descripcion": "Fade-out animación de girar", "visible": false, "sincroniza": false, "motivo": "esta en la lista de eventos que SkyMP ignora"},
+      {"evento": "SwimStop", "nombre": "Dejar de nadar", "categoria": "combate", "esSalida": true, "descripcion": "Fade-out animación de nadar", "visible": false},
+      {"evento": "WeapEquip", "nombre": "Desenvainar", "categoria": "combate", "descripcion": "Desenvaina el arma equipada", "visible": false, "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
+      {"evento": "WeapSoloEquip", "nombre": "Desenvainar (sin nada más)", "categoria": "combate", "descripcion": "Desenvaina el arma equipada", "visible": false, "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
+      {"evento": "bowAttackStart", "nombre": "Disparar el arco", "categoria": "combate", "descripcion": "Dispara con el arco equipado", "visible": false},
+      {"evento": "crossbowAttackStart", "nombre": "Disparar la ballesta", "categoria": "combate", "confirmado": false, "descripcion": "Dispara con la ballesta equipada", "visible": false},
+      {"evento": "crossbowDwarvenAttackStart", "nombre": "Disparar la ballesta mejorada", "categoria": "combate", "confirmado": false, "descripcion": "Dispara con la ballesta mejorada equipada", "visible": false},
+      {"evento": "moveStart", "nombre": "Echar a andar", "categoria": "combate", "salida": "moveStop", "descripcion": "Comienza la animación de caminar (varia la velocidad de la animación)", "visible": false, "sincroniza": false, "motivo": "esta en la lista de eventos que SkyMP ignora"},
+      {"evento": "SprintStart", "nombre": "Echar a correr", "categoria": "combate", "salida": "SprintStop", "descripcion": "Comienza la animación de correr", "visible": false},
+      {"evento": "shoutStart", "nombre": "Empezar un Grito", "categoria": "combate", "salida": "shoutStop", "descripcion": "Inicia grito (bucle)", "visible": false},
+      {"evento": "NPCshoutStart", "nombre": "Empezar un Grito (3)", "categoria": "combate", "descripcion": "Inicia grito (solo npcs)", "visible": false},
+      {"evento": "RitualSpellStart", "nombre": "Empezar un hechizo ritual", "categoria": "combate", "descripcion": "Usa las dos manos para cargar un hechizo/ritual y quedarse cargando", "visible": false},
+      {"evento": "idleRitualSpellStart", "nombre": "Empezar un hechizo ritual (pose)", "categoria": "combate", "confirmado": false, "descripcion": "Comenzar a cargar hechizo de 2 manos tipo ritual"},
+      {"evento": "UnequipNoAnim", "nombre": "Envainar sin animación", "categoria": "combate", "descripcion": "Envaina arma sin animación, envaine directo.", "visible": false, "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
+      {"evento": "IdleCombatStretchingStart", "nombre": "Estirar hombros (En guardia)", "categoria": "combate", "confirmado": false, "descripcion": "Estira tus brazos y hombros cuando estas en guardia"},
+      {"evento": "IdleCombatSpecialStart", "nombre": "Estirar hombros 2 (En guardia)", "categoria": "combate", "confirmado": false, "descripcion": "Estira tus brazos y hombros cuando estas en guardia"},
+      {"evento": "MT_BreathExhaleShort", "nombre": "Exhalar", "categoria": "combate", "descripcion": "Exhala nuestra respiración", "visible": false},
+      {"evento": "CombatReady_BreathExhaleShort", "nombre": "Exhalar (En guardia)", "categoria": "combate", "descripcion": "Exhala nuestra respiración", "visible": false},
+      {"evento": "BrakeStart", "nombre": "Frenar en seco", "categoria": "combate", "descripcion": "Frenar en seco. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "NPC_TurnRight180", "nombre": "Girar 180 grados a la derecha", "categoria": "combate", "descripcion": "Girar 180 grados a la derecha. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "NPC_TurnToWalkRight180", "nombre": "Girar 180 grados a la derecha y echar a andar", "categoria": "combate", "descripcion": "Girar 180 grados a la derecha y echar a andar. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "NPC_TurnLeft180", "nombre": "Girar 180 grados a la izquierda", "categoria": "combate", "descripcion": "Girar 180 grados a la izquierda. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "NPC_TurnToWalkLeft180", "nombre": "Girar 180 grados a la izquierda y echar a andar", "categoria": "combate", "descripcion": "Girar 180 grados a la izquierda y echar a andar. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "NPC_TurnRight90", "nombre": "Girar 90 grados a la derecha", "categoria": "combate", "descripcion": "Girar 90 grados a la derecha", "visible": false},
+      {"evento": "NPC_TurnLeft90", "nombre": "Girar 90 grados a la izquierda", "categoria": "combate", "descripcion": "Girar 90 grados a la izquierda. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "NPC_TurnToWalkLeft90", "nombre": "Girar 90 grados a la izquierda y echar a andar", "categoria": "combate", "descripcion": "Girar 90 grados a la izquierda y echar a andar. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "NPC_TurnToWalkRight90", "nombre": "Girar 90 grados y echar a andar", "categoria": "combate", "descripcion": "Girar 90 grados a la derecha y anda", "visible": false},
+      {"evento": "turnRight", "nombre": "Girar a la derecha", "categoria": "combate", "descripcion": "Inicia la animación de girar a la derecha", "visible": false},
+      {"evento": "turnLeft", "nombre": "Girar a la izquierda", "categoria": "combate", "descripcion": "Inicia la animación de girar a la izquierda", "visible": false},
+      {"evento": "bashFail", "nombre": "Golpe de escudo fallido", "categoria": "combate", "descripcion": "Arrazar con escudo y falla el golpe", "visible": false},
+      {"evento": "BashFail", "nombre": "Golpe de escudo fallido (2)", "categoria": "combate", "confirmado": false, "descripcion": "Arrazar con escudo y falla el golpe", "visible": false},
+      {"evento": "bashPowerStart", "nombre": "Golpe de escudo potente", "categoria": "combate", "descripcion": "Golpear con el escudo fuerte", "visible": false},
+      {"evento": "StaffBashRelease", "nombre": "Golpear con el bastón", "categoria": "combate", "descripcion": "Golpea con el bastón", "visible": false},
+      {"evento": "bashStart", "nombre": "Golpear con el escudo", "categoria": "combate", "descripcion": "Golpea con el escudo", "visible": false},
+      {"evento": "shoutReleaseSlowTime", "nombre": "Grito: Tiempo Lento", "categoria": "combate", "descripcion": "Comenzar grito de Relentizar tiempo", "visible": false},
+      {"evento": "torchUnequip", "nombre": "Guardar la antorcha", "categoria": "combate", "descripcion": "Guarda la antorcha equipada", "visible": false},
+      {"evento": "Unequip", "nombre": "Guardar lo que lleves en las manos", "categoria": "combate", "descripcion": "Guardar lo que lleves en las manos. Forma parte del combate normal del juego.", "visible": false, "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
+      {"evento": "MLh_SpellAimedConcentrationStart", "nombre": "Hechizo de concentración, izquierda", "categoria": "combate", "descripcion": "Carga hechizo", "visible": false},
+      {"evento": "MRh_Equipped_Event", "nombre": "Hechizo equipado en la derecha", "categoria": "combate", "descripcion": "Equipo hechizo", "visible": false, "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
+      {"evento": "MLh_Equipped_Event", "nombre": "Hechizo equipado en la izquierda", "categoria": "combate", "descripcion": "Equipo hechizo", "visible": false, "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
+      {"evento": "MRh_SpellReady_Event", "nombre": "Hechizo listo en la derecha", "categoria": "combate", "descripcion": "Equipo hechizo", "visible": false},
+      {"evento": "MLh_SpellReady_Event", "nombre": "Hechizo listo en la izquierda", "categoria": "combate", "descripcion": "Equipo hechizo", "visible": false},
+      {"evento": "RitualSpellAimConcentrationStart", "nombre": "Hechizo ritual de concentración", "categoria": "combate", "descripcion": "Misma animación que RitualSpellStart", "visible": false},
+      {"evento": "MRh_SpellSelfStart", "nombre": "Hechizo sobre uno mismo, derecha", "categoria": "combate", "descripcion": "Carga hechizo", "visible": false},
+      {"evento": "wardAbsorb", "nombre": "La protección absorbe un hechizo", "categoria": "combate", "confirmado": false, "descripcion": "Carga hechizo", "visible": false},
+      {"evento": "MLh_SpellSelfStart", "nombre": "Lanzarse un hechizo con la izquierda", "categoria": "combate", "descripcion": "Lanzarse un hechizo con la izquierda. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "MRh_WardStart", "nombre": "Levantar protección con la derecha", "categoria": "combate", "descripcion": "Carga hechizo", "visible": false},
+      {"evento": "MLh_WardStart", "nombre": "Levantar protección con la izquierda", "categoria": "combate", "descripcion": "Carga hechizo", "visible": false},
+      {"evento": "SneakStop", "nombre": "Levantarse de agacharse", "categoria": "combate", "esSalida": true, "descripcion": "Animación básica del jugador para salir de agacharse (usada al usar el cntrl)", "visible": false, "sincroniza": false, "motivo": "SkyMP lo usa para su propio sincronizado de agacharse"},
+      {"evento": "MRh_SpellAimedConcentrationStart", "nombre": "Mantener un hechizo apuntado con la derecha", "categoria": "combate", "descripcion": "Mantener un hechizo apuntado con la derecha. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "MRh_SpellSelfConcentrationStart", "nombre": "Mantenerse un hechizo con la derecha", "categoria": "combate", "descripcion": "Mantenerse un hechizo con la derecha. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "MLh_SpellSelfConcentrationStart", "nombre": "Mantenerse un hechizo con la izquierda", "categoria": "combate", "descripcion": "Mantenerse un hechizo con la izquierda. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "IdleCombatLookingAroundStart", "nombre": "Mirar alrededor (En guardia)", "categoria": "combate", "confirmado": false, "descripcion": "Mirar alrededor cuandoe stas en guardia"},
+      {"evento": "MagicForceEquipRight", "nombre": "Poner magia en la derecha", "categoria": "combate", "descripcion": "Equipo hechizo", "visible": false, "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
+      {"evento": "MagicForceEquipLeft", "nombre": "Poner magia en la izquierda", "categoria": "combate", "descripcion": "Equipo hechizo", "visible": false, "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
+      {"evento": "MagicWeap_ForceEquip", "nombre": "Poner magia y arma", "categoria": "combate", "descripcion": "Equipo hechizo y arma", "visible": false, "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
+      {"evento": "blockStart", "nombre": "Ponerse a bloquear", "categoria": "combate", "salida": "blockStop", "descripcion": "Comenzar animación de bloquear", "visible": false},
+      {"evento": "SwimStart", "nombre": "Ponerse a nadar", "categoria": "combate", "salida": "SwimStop", "descripcion": "Comenzar animación de nadar", "visible": false},
+      {"evento": "combatStanceStart", "nombre": "Ponerse en guardia", "categoria": "combate", "salida": "combatStanceStop", "descripcion": "Ponerse en guardia. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "IdleCombatStart", "nombre": "Postura de combate", "categoria": "combate", "descripcion": "Comenzar animación de postura de combate", "visible": false},
+      {"evento": "blockAnticipateStart", "nombre": "Prepararse para bloquear", "categoria": "combate", "descripcion": "Inicia la animación de bloquear", "visible": false},
+      {"evento": "IdleCombatShieldStart", "nombre": "Provocar golpeando armas (En guardia)", "categoria": "combate", "descripcion": "Golpea tus armas para provocar"},
+      {"evento": "AttackStartH2HRight", "nombre": "Puñetazo con la derecha", "categoria": "combate", "descripcion": "Golpear con puño con la derecha", "visible": false},
+      {"evento": "AttackStartH2HLeft", "nombre": "Puñetazo con la izquierda", "categoria": "combate", "descripcion": "Golpear con puño con la izquierda", "visible": false},
+      {"evento": "attackPowerStartForwardH2HRightHand", "nombre": "Puñetazo potente hacia delante, derecha", "categoria": "combate", "descripcion": "Golpear fuerte con el puño derecho", "visible": false},
+      {"evento": "attackPowerStartForwardH2HLeftHand", "nombre": "Puñetazo potente hacia delante, izquierda", "categoria": "combate", "descripcion": "Golpear fuerte con el puño izquierdo", "visible": false},
+      {"evento": "reloadStart", "nombre": "Recargar Ballesta", "categoria": "combate", "confirmado": false, "descripcion": "Recargar ballesta", "visible": false},
+      {"evento": "NPC_BumpedFromRight", "nombre": "Recibir un empujón por la derecha", "categoria": "combate", "descripcion": "Recibir un empujón por la derecha. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "NPC_BumpedFromBack", "nombre": "Recibir un empujón por la espalda", "categoria": "combate", "descripcion": "Recibir un empujón por la espalda. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "NPC_BumpedFromLeft", "nombre": "Recibir un empujón por la izquierda", "categoria": "combate", "descripcion": "Recibir un empujón por la izquierda. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "blockHitStart", "nombre": "Recibir un golpe con el bloqueo", "categoria": "combate", "descripcion": "Empieza la animación que detiene golpes con el escudo", "visible": false},
+      {"evento": "recoilLargeStart", "nombre": "Retroceder de un golpetazo", "categoria": "combate", "descripcion": "Retrocede de un golpe", "visible": false},
+      {"evento": "recoilStart", "nombre": "Retroceder por el golpe", "categoria": "combate", "descripcion": "Retrocede de un golpe rapido", "visible": false},
+      {"evento": "FlinchStart", "nombre": "Retroceder por golpe", "categoria": "combate", "descripcion": "Retrocede por un golpe en la parte superior del cuerpo"},
+      {"evento": "NPC_BumpFromFront", "nombre": "Retroceder por golpe 2", "categoria": "combate", "descripcion": "Eres empujado y retrocedes del golpe"},
+      {"evento": "StaggerPlayer", "nombre": "Retroceder por golpe 3", "categoria": "combate", "descripcion": "Retrocede al ser golpeado"},
+      {"evento": "staggerStart", "nombre": "Retroceder por golpe 3.2 (1)", "categoria": "combate", "descripcion": "Retrocede al ser golpeado", "visible": false},
+      {"evento": "WardBreak", "nombre": "Retroceder por golpe 3.2 (2)", "categoria": "combate", "descripcion": "Retrocede al ser golpeado", "visible": false},
+      {"evento": "IdleCombatWeaponCheckStart", "nombre": "Revisar arma (En guardia)", "categoria": "combate", "confirmado": false, "descripcion": "Revisa el arma desenvainada"},
+      {"evento": "SneakSprintStartRoll", "nombre": "Rodar por el suelo agachado", "categoria": "combate", "descripcion": "Rodar por el suelo agachado. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "WeapOutRightReplaceForceEquip", "nombre": "Sacar Arma", "categoria": "combate", "descripcion": "Desenfunda el arma equipada", "visible": false, "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
+      {"evento": "ShdEquip", "nombre": "Sacar el escudo", "categoria": "combate", "descripcion": "Saca el escudo equipado", "visible": false, "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
+      {"evento": "torchEquip", "nombre": "Sacar la antorcha", "categoria": "combate", "descripcion": "Saca una antorcha y se mantiene"},
+      {"evento": "torchForceEquip", "nombre": "Sacar la antorcha a la fuerza", "categoria": "combate", "descripcion": "Saca una antorcha y se mantiene", "visible": false},
+      {"evento": "Magic_Equip", "nombre": "Sacar la magia", "categoria": "combate", "descripcion": "Desenvaina la mano preparada para lelvar hechizo", "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
+      {"evento": "Magic_Solo_Equip", "nombre": "Sacar la magia (sin nada más)", "categoria": "combate", "descripcion": "Desenvaina la mano preparada para lelvar hechizo", "visible": false, "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
+      {"evento": "MagicForceEquip", "nombre": "Sacar la magia en las dos manos", "categoria": "combate", "descripcion": "Sacar la magia en las dos manos. Forma parte del combate normal del juego.", "visible": false, "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
+      {"evento": "combatStanceStop", "nombre": "Salir de la guardia", "categoria": "combate", "esSalida": true, "descripcion": "Salir de la guardia. Forma parte del combate normal del juego.", "visible": false},
+      {"evento": "JumpStandingStart", "nombre": "Saltar en el sitio", "categoria": "combate", "descripcion": "Salta en el sitio", "visible": false},
+      {"evento": "JumpDirectionalStart", "nombre": "Saltar hacia un lado", "categoria": "combate", "descripcion": "Salta hacia el lado derecho", "visible": false},
+      {"evento": "attackRelease", "nombre": "Soltar el ataque", "categoria": "combate", "descripcion": "Suelta el ataque que se va a efectuar", "visible": false},
+      {"evento": "attackReleaseL", "nombre": "Soltar el ataque con la izquierda", "categoria": "combate", "confirmado": false, "descripcion": "Suelta el ataque que se va a efectuar", "visible": false},
+      {"evento": "bashRelease", "nombre": "Soltar el golpe de escudo", "categoria": "combate", "descripcion": "Suelta el ataque que se va a efectuar", "visible": false},
+      {"evento": "MRh_SpellRelease_Event", "nombre": "Soltar el hechizo con la derecha", "categoria": "combate", "descripcion": "Suelta el ataque que se va a efectuar", "visible": false},
+      {"evento": "MLh_SpellRelease_Event", "nombre": "Soltar el hechizo con la izquierda", "categoria": "combate", "descripcion": "Suelta el ataque que se va a efectuar", "visible": false},
+      {"evento": "MLH_SpellRelease_event", "nombre": "Soltar el hechizo con la izquierda (2)", "categoria": "combate", "confirmado": false, "descripcion": "Suelta el ataque que se va a efectuar", "visible": false},
+      {"evento": "idleRitualSpellRelease", "nombre": "Soltar el hechizo ritual (pose)", "categoria": "combate", "confirmado": false, "descripcion": "Suelta el ataque que se va a efectuar", "visible": false},
+      {"evento": "swimForceEquip", "nombre": "Soltar lo que llevas al nadar", "categoria": "combate", "descripcion": "Fuerza soltar lo que lleves al nadar", "sincroniza": false, "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip"},
+      {"evento": "MRh_SpellTelekinesisStart", "nombre": "Telequinesis con la derecha", "categoria": "combate", "descripcion": "Estira el brazo para mover con telequinesis", "visible": false},
+      {"evento": "MLh_SpellTelekinesisStart", "nombre": "Telequinesis con la izquierda", "categoria": "combate", "descripcion": "Estira el brazo para mover con telequinesis", "visible": false},
+      {"evento": "bowEnd", "nombre": "Terminar con el arco", "categoria": "combate", "confirmado": false, "descripcion": "Termina al lanzar una flecha", "visible": false},
+      {"evento": "shoutStop", "nombre": "Terminar el Grito", "categoria": "combate", "esSalida": true, "descripcion": "Terminar de gritar", "visible": false},
+      {"evento": "VampireFeedingBedRollRight", "nombre": "Alimentarse en el saco de dormir, por la derecha", "categoria": "comer", "descripcion": "Alimentarse en el saco de dormir, por la derecha. Necesita: estar acostado en la cama o en un saco de dormir."},
+      {"evento": "VampireFeedingBedRollLeft", "nombre": "Alimentarse en el saco de dormir, por la izquierda", "categoria": "comer", "descripcion": "Alimentarse en el saco de dormir, por la izquierda. Necesita: estar acostado en la cama o en un saco de dormir."},
+      {"evento": "VampireFeedingBedRight", "nombre": "Alimentarse en la cama, por la derecha", "categoria": "comer", "descripcion": "Alimentarse en la cama, por la derecha."},
+      {"evento": "VampireFeedingBedLeft", "nombre": "Alimentarse en la cama, por la izquierda", "categoria": "comer", "descripcion": "Alimentarse en la cama, por la izquierda."},
+      {"evento": "IdleDrink", "nombre": "Beber", "categoria": "comer", "destacada": true, "descripcion": "Beber."},
+      {"evento": "IdleDrinkFromFountain", "nombre": "Beber de la fuente", "categoria": "comer", "descripcion": "Beber de la fuente."},
+      {"evento": "idleDrinkingStandingStart", "nombre": "Beber de pie", "categoria": "comer", "destacada": true, "descripcion": "Beber de pie."},
+      {"evento": "idleBarDrinkingStart", "nombre": "Beber en el mostrador", "categoria": "comer", "confirmado": false, "descripcion": "Beber en el mostrador."},
+      {"evento": "IdleMQ201Drink", "nombre": "Beber en la fiesta", "categoria": "comer", "descripcion": "Beber en la fiesta."},
+      {"evento": "ChairVampireEatingStart", "nombre": "Beber sangre sentado", "categoria": "comer", "sentado": true, "descripcion": "Beber sangre sentado. Necesita: estar sentado en una silla, banco o taburete."},
+      {"evento": "ChairDrinkingStart", "nombre": "Beber sentado", "categoria": "comer", "sentado": true, "descripcion": "Beber sentado. Necesita: estar sentado en una silla, banco o taburete."},
+      {"evento": "IdleDrinkPotion", "nombre": "Beberse una poción", "categoria": "comer", "descripcion": "Beber una poción."},
+      {"evento": "IdleMQ201ToastStart", "nombre": "Brindar", "categoria": "comer", "descripcion": "Brindar."},
+      {"evento": "idleEatingStandingStart_DLC1Vampire", "nombre": "Comer carne cruda de pie", "categoria": "comer", "descripcion": "Comer carne cruda de pie."},
+      {"evento": "ChairEatingStart_VampireMeat", "nombre": "Comer carne cruda sentado", "categoria": "comer", "sentado": true, "descripcion": "Comer carne cruda sentado. Necesita: estar sentado en una silla, banco o taburete."},
+      {"evento": "idleEatingStandingStart", "nombre": "Comer de pie", "categoria": "comer", "destacada": true, "descripcion": "Comer de pie."},
+      {"evento": "ChairEatingStart", "nombre": "Comer sentado", "categoria": "comer", "sentado": true, "descripcion": "Comer sentado. Necesita: estar sentado en una silla, banco o taburete."},
+      {"evento": "DrunkStop", "nombre": "Dejar de tambalearse", "categoria": "comer", "esSalida": true, "descripcion": "Dejar de tambalearse. Necesita: haber ejecutado antes: Ponerse a tambalearse."},
+      {"evento": "IdleTablePassOutEnter", "nombre": "Desplomarse sobre la mesa", "categoria": "comer", "descripcion": "Desplomarse sobre la mesa. Necesita: estar delante de la mesa de trabajo.", "visible": false},
+      {"evento": "IdleCannibalFeedStanding", "nombre": "Devorar de pie", "categoria": "comer", "descripcion": "Devorar de pie."},
+      {"evento": "IdleCannibalFeedCrouching", "nombre": "Devorar en cuclillas", "categoria": "comer", "descripcion": "Devorar en cuclillas. Necesita: estar agachado."},
+      {"evento": "pa_VampireFeedStanding_Front", "nombre": "Morder el cuello de frente", "categoria": "comer", "descripcion": "Morder el cuello de frente. Necesita: necesita un arma desenvainada, de cualquier tipo."},
+      {"evento": "pa_VampireFeedStanding_Back", "nombre": "Morder el cuello por la espalda", "categoria": "comer", "descripcion": "Morder el cuello por la espalda. Necesita: necesita un arma desenvainada, de cualquier tipo."},
+      {"evento": "DrunkStart", "nombre": "Ponerse a tambalearse", "categoria": "comer", "salida": "DrunkStop", "descripcion": "Ponerse a tambalearse. Necesita: termina con: Dejar de tambalearse."},
+      {"evento": "IdleTableDrinkEnter", "nombre": "Sentarse a la mesa a beber", "categoria": "comer", "descripcion": "Sentarse a la mesa a beber. Necesita: estar delante de la mesa de trabajo.", "visible": false},
+      {"evento": "IdleTableDrinkAndMugEnter", "nombre": "Sentarse a la mesa con jarra y bebida", "categoria": "comer", "descripcion": "Sentarse a la mesa con jarra y bebida. Necesita: estar delante de la mesa de trabajo.", "visible": false},
+      {"evento": "IdleTableMugEnter", "nombre": "Sentarse a la mesa con una jarra", "categoria": "comer", "descripcion": "Sentarse a la mesa con una jarra. Necesita: estar delante de la mesa de trabajo.", "visible": false},
+      {"evento": "IdleTG03UseMeadBarrel", "nombre": "Servirse del barril de hidromiel", "categoria": "comer", "descripcion": "Servirse del barril de hidromiel."},
+      {"evento": "IdleMQ201HoldingDrinkTray", "nombre": "Sostener una bandeja de bebidas", "categoria": "comer", "descripcion": "Sostener una bandeja de bebidas."},
+      {"evento": "IdleEatSoup", "nombre": "Tomar sopa", "categoria": "comer", "sentado": true, "descripcion": "Tomar sopa. Necesita: estar sentado en una silla, banco o taburete."},
+      {"evento": "ChairEatingSoupStart", "nombre": "Tomar sopa sentado", "categoria": "comer", "sentado": true, "descripcion": "Tomar sopa sentado. Necesita: estar sentado en una silla, banco o taburete."},
+      {"evento": "IdleFurnitureExit", "nombre": "Levantarse del mueble", "categoria": "control", "busqueda": "levantarse salir silla cama mueble", "esSalida": true, "descripcion": "Levantarse del mueble. Necesita: haber ejecutado antes: Acostarse (Ataúd), Acostarse en el suelo, Apoyarse en el mostrador.", "visible": false},
+      {"evento": "IdleStop", "nombre": "Parar la animación", "categoria": "control", "descripcion": "Parar la animación. Necesita: estar ya haciendo esa animación."},
+      {"evento": "IdleForceDefaultState", "nombre": "Parar y volver a la postura normal", "categoria": "control", "busqueda": "parar detener cancelar normal quieto", "destacada": true, "descripcion": "Parar y volver a la postura normal."},
+      {"evento": "OffsetStop", "nombre": "Soltar lo que lleva en las manos", "categoria": "control", "busqueda": "soltar dejar manos", "esSalida": true, "descripcion": "Soltar lo que lleva en las manos. Necesita: haber ejecutado antes: Llevar un cesto, Llevar una olla, Recoger flores en el cesto."},
+      {"evento": "RF_OpenStart", "nombre": "Actitud: cercana", "categoria": "dialogo", "descripcion": "Actitud: cercana."},
+      {"evento": "RF_GuardedStart", "nombre": "Actitud: distante", "categoria": "dialogo", "descripcion": "Actitud: distante."},
+      {"evento": "RF_PlayfulStart", "nombre": "Actitud: juguetona", "categoria": "dialogo", "descripcion": "Actitud: juguetona."},
+      {"evento": "RF_SeriousStart", "nombre": "Actitud: seria", "categoria": "dialogo", "descripcion": "Actitud: seria."},
+      {"evento": "RF_MoodChangeOpen", "nombre": "Cambiar a actitud cercana", "categoria": "dialogo", "descripcion": "Cambiar a actitud cercana."},
+      {"evento": "RF_MoodChangeGuarded", "nombre": "Cambiar a actitud distante", "categoria": "dialogo", "descripcion": "Cambiar a actitud distante."},
+      {"evento": "RF_MoodChangePlayful", "nombre": "Cambiar a actitud juguetona", "categoria": "dialogo", "descripcion": "Cambiar a actitud juguetona."},
+      {"evento": "RF_MoodChangeSerious", "nombre": "Cambiar a actitud seria", "categoria": "dialogo", "descripcion": "Cambiar a actitud seria."},
+      {"evento": "RF_OpenDismissive_In", "nombre": "Cercana: desdén", "categoria": "dialogo", "descripcion": "Cercana: desdén."},
+      {"evento": "RF_OpenInterested_In", "nombre": "Cercana: interés", "categoria": "dialogo", "descripcion": "Cercana: interés."},
+      {"evento": "RF_OpenThrowHands_In", "nombre": "Cercana: manos al aire", "categoria": "dialogo", "descripcion": "Cercana: manos al aire."},
+      {"evento": "RF_Shock_Open", "nombre": "Cercana: sobresalto", "categoria": "dialogo", "descripcion": "Cercana: sobresalto."},
+      {"evento": "RF_OpenPleading_In", "nombre": "Cercana: súplica", "categoria": "dialogo", "descripcion": "Cercana: súplica."},
+      {"evento": "RF_GuardedDismissive_In", "nombre": "Distante: desdén", "categoria": "dialogo", "descripcion": "Distante: desdén."},
+      {"evento": "RF_GuardedInterested_In", "nombre": "Distante: interés", "categoria": "dialogo", "descripcion": "Distante: interés."},
+      {"evento": "RF_GuardedThrowHands_In", "nombre": "Distante: manos al aire", "categoria": "dialogo", "descripcion": "Distante: manos al aire."},
+      {"evento": "RF_Shock_Guarded", "nombre": "Distante: sobresalto", "categoria": "dialogo", "descripcion": "Distante: sobresalto."},
+      {"evento": "RF_GuardedPleading_In", "nombre": "Distante: súplica", "categoria": "dialogo", "descripcion": "Distante: súplica."},
+      {"evento": "IdleDialogueHappyStart", "nombre": "Empezar a hablar contento", "categoria": "dialogo", "descripcion": "Empezar a hablar contento. Necesita: estar en una conversación."},
+      {"evento": "PairEnd", "nombre": "Fin de la escena en pareja", "categoria": "dialogo", "descripcion": "Fin de la escena en pareja."},
+      {"evento": "IdleDialogueDefensiveHandGesture", "nombre": "Gesto a la defensiva", "categoria": "dialogo", "descripcion": "Hacer un gesto a la defensiva. Necesita: estar en una conversación."},
+      {"evento": "IdleDialogueWelcomeHandGesture", "nombre": "Gesto de bienvenida", "categoria": "dialogo", "descripcion": "Hacer un gesto de bienvenida. Necesita: estar en una conversación."},
+      {"evento": "IdleDialogueStart", "nombre": "Hablar", "categoria": "dialogo", "descripcion": "Hablar. Necesita: estar en una conversación."},
+      {"evento": "IdleDialogueMovingTalkA", "nombre": "Hablar andando (A)", "categoria": "dialogo", "andando": true, "descripcion": "Hablar andando (A). Necesita: estar en una conversación."},
+      {"evento": "IdleDialogueMovingTalkB", "nombre": "Hablar andando (B)", "categoria": "dialogo", "andando": true, "descripcion": "Hablar andando (B). Necesita: estar en una conversación."},
+      {"evento": "IdleDialogueMovingTalkC", "nombre": "Hablar andando (C)", "categoria": "dialogo", "andando": true, "descripcion": "Hablar andando (C). Necesita: estar en una conversación."},
+      {"evento": "IdleDialogueMovingTalkD", "nombre": "Hablar andando (D)", "categoria": "dialogo", "andando": true, "descripcion": "Hablar andando (D). Necesita: estar en una conversación."},
+      {"evento": "DialogueNeutral", "nombre": "Hablar con naturalidad", "categoria": "dialogo", "descripcion": "Hablar con naturalidad. Necesita: estar en una conversación."},
+      {"evento": "DialogueGeneric", "nombre": "Hablar con normalidad", "categoria": "dialogo", "descripcion": "Hablar con normalidad. Necesita: estar en una conversación."},
+      {"evento": "DialogueHappy", "nombre": "Hablar contento", "categoria": "dialogo", "descripcion": "Hablar contento. Necesita: estar en una conversación."},
+      {"evento": "IdleDialogueAngryStart", "nombre": "Hablar enojado", "categoria": "dialogo", "descripcion": "Hablar enojado. Necesita: estar en una conversación."},
+      {"evento": "DialogueAngry", "nombre": "Hablar enojado (1)", "categoria": "dialogo", "descripcion": "Hablar enojado (1). Necesita: estar en una conversación."},
+      {"evento": "MotionDrivenDialogueAngry", "nombre": "Hablar enojado mientras te mueves", "categoria": "dialogo", "andando": true, "confirmado": false, "descripcion": "Hablar enojado mientras te mueves. Necesita: estar en una conversación."},
+      {"evento": "IdleDialogueExpressiveStart", "nombre": "Hablar gesticulando", "categoria": "dialogo", "descripcion": "Hablar gesticulando. Necesita: estar en una conversación."},
+      {"evento": "MotionDrivenDialogueGeneric", "nombre": "Hablar mientras te mueves", "categoria": "dialogo", "andando": true, "confirmado": false, "descripcion": "Hablar mientras te mueves. Necesita: estar en una conversación."},
+      {"evento": "IdleSnowElfPrinceChairDialogue", "nombre": "Hablar sentado con gesto solemne", "categoria": "dialogo", "sentado": true, "descripcion": "Hablar sentado con gesto solemne. Necesita: estar sentado en una silla, banco o taburete."},
+      {"evento": "MotionDrivenDialogueNextClip", "nombre": "Hablar: cambiar de gesto", "categoria": "dialogo", "andando": true, "confirmado": false, "descripcion": "Hablar: cambiar de gesto. Necesita: estar en una conversación."},
+      {"evento": "RF_PlayfulDismissive_In", "nombre": "Juguetona: desdén", "categoria": "dialogo", "descripcion": "Juguetona: desdén."},
+      {"evento": "RF_PlayfulInterested_In", "nombre": "Juguetona: interés", "categoria": "dialogo", "descripcion": "Juguetona: interés."},
+      {"evento": "RF_PlayfulThrowHands_In", "nombre": "Juguetona: manos al aire", "categoria": "dialogo", "descripcion": "Juguetona: manos al aire."},
+      {"evento": "RF_Shock_Playful", "nombre": "Juguetona: sobresalto", "categoria": "dialogo", "descripcion": "Juguetona: sobresalto."},
+      {"evento": "RF_PlayfulPleading_In", "nombre": "Juguetona: súplica", "categoria": "dialogo", "descripcion": "Juguetona: súplica."},
+      {"evento": "IdleDialogueHandOnChinGesture", "nombre": "Mano en la barbilla", "categoria": "dialogo", "descripcion": "Mano en la barbilla. Necesita: estar en una conversación."},
+      {"evento": "RF_Talk_In", "nombre": "Ponerse a hablar", "categoria": "dialogo", "descripcion": "Ponerse a hablar. Necesita: estar en una conversación."},
+      {"evento": "MotionDrivenIdle", "nombre": "Quedarse quieto al hablar", "categoria": "dialogo", "descripcion": "Quedarse quieto al hablar."},
+      {"evento": "LooseDialogueResponseNegative", "nombre": "Responder que no", "categoria": "dialogo", "descripcion": "Responder que no. Necesita: estar en una conversación."},
+      {"evento": "LooseDialogueResponsePositive", "nombre": "Responder que sí", "categoria": "dialogo", "descripcion": "Responder que sí. Necesita: estar en una conversación."},
+      {"evento": "RF_SeriousDismissive_In", "nombre": "Seria: desdén", "categoria": "dialogo", "descripcion": "Seria: desdén."},
+      {"evento": "RF_SeriousInterested_In", "nombre": "Seria: interés", "categoria": "dialogo", "descripcion": "Seria: interés."},
+      {"evento": "RF_SeriousThrowHands_In", "nombre": "Seria: manos al aire", "categoria": "dialogo", "descripcion": "Seria: manos al aire."},
+      {"evento": "RF_Shock_Serious", "nombre": "Seria: sobresalto", "categoria": "dialogo", "descripcion": "Seria: sobresalto."},
+      {"evento": "RF_SeriousPleading_In", "nombre": "Seria: súplica", "categoria": "dialogo", "descripcion": "Seria: súplica."},
+      {"evento": "RF_Idle_Out", "nombre": "Volver a la actitud normal", "categoria": "dialogo", "descripcion": "Volver a la actitud normal."},
+      {"evento": "IdleCoffinEnter", "nombre": "Acostarse (Ataúd)", "categoria": "dormir", "salida": "IdleFurnitureExit", "descripcion": "Se acuesta con manos en el abdomen y cerrando los ojos"},
+      {"evento": "IdleBedRollFrontEnterStart", "nombre": "Acostarse (Saco)", "categoria": "dormir", "salida": "IdleBedExitStart", "descripcion": "Se acuesta en un saco de dormir"},
+      {"evento": "IdleCoffinHorzEnter", "nombre": "Acostarse 2 (Ataúd)", "categoria": "dormir", "descripcion": "Se acuesta en un ataúd con manos a los lados"},
+      {"evento": "IdleLayDownEnter", "nombre": "Acostarse en el suelo", "categoria": "dormir", "salida": "IdleFurnitureExit", "descripcion": "Acostarse en el suelo. Necesita: termina con: Levantarse del mueble."},
+      {"evento": "IdleBedRightEnterStart", "nombre": "Acostarse por la derecha (Cama)", "categoria": "dormir", "salida": "IdleBedExitStart", "descripcion": "Acostarse en una cama por la derecha", "visible": false},
+      {"evento": "IdleBedRollRightEnterStart", "nombre": "Acostarse por la derecha (Saco)", "categoria": "dormir", "salida": "IdleBedExitStart", "descripcion": "Se acuesta en un saco de dormir por la derecha"},
+      {"evento": "IdleBedLeftEnterStart", "nombre": "Acostarse por la izquierda (Cama)", "categoria": "dormir", "destacada": true, "salida": "IdleBedExitStart", "descripcion": "Acostarse en una cama por la izquierda", "visible": false},
+      {"evento": "IdleBedRollLeftEnterStart", "nombre": "Acostarse por la izquierda (Saco)", "categoria": "dormir", "salida": "IdleBedExitStart", "descripcion": "Se acuesta en un saco de dormir por la izquierda"},
+      {"evento": "DLC01CoffinEnterInstant", "nombre": "Acostarse verticalmente (Ataúd)", "categoria": "dormir", "descripcion": "Se acuesta en un ataúd vertical con brazos cruzados"},
+      {"evento": "IdleCoffinVertEnter", "nombre": "Acostarse verticalmente 2 (Ataúd)", "categoria": "dormir", "descripcion": "Se mete en el ataúd vertical para acostarse con brazos abajos"},
+      {"evento": "IdleSleepNod", "nombre": "Dar cabezadas", "categoria": "dormir", "descripcion": "Dar cabezadas del sueño"},
+      {"evento": "IdleBedExitStart", "nombre": "Levantarse (Cama)", "categoria": "dormir", "esSalida": true, "descripcion": "Levantarse de una cama", "visible": false},
+      {"evento": "Idle_1stPersonWoozyGetUpFromBed", "nombre": "Levantarse de la cama aturdido (1ª persona)", "categoria": "dormir", "descripcion": "Levantarse de una cama aturdido", "visible": false},
+      {"evento": "IdleBedQuickExitStart", "nombre": "Levantarse rápido (Cama)", "categoria": "dormir", "descripcion": "Levantarse de una cama rapidamente", "visible": false},
+      {"evento": "IdleChildLayOnFloor", "nombre": "Tumbarse boca abajo", "categoria": "dormir", "descripcion": "Tumbarse en el suelo con cabeza apoyada en los brazos y piernas juguetonas"},
+      {"evento": "pa_HugA", "nombre": "Abrazar a alguien", "categoria": "gestos", "descripcion": "Abrazar a alguien. Necesita: necesita un arma desenvainada, de cualquier tipo."},
+      {"evento": "IdleMT_DoorBang", "nombre": "Aporrear una puerta", "categoria": "gestos", "descripcion": "Aporrear una puerta."},
+      {"evento": "IdleKneelingEnter", "nombre": "Arrodillarse (1)", "categoria": "gestos", "destacada": true, "descripcion": "Arrodillarse."},
+      {"evento": "IdleKneeling", "nombre": "Arrodillarse junto a un cadáver", "categoria": "gestos", "descripcion": "Arrodillarse junto a un cadáver."},
+      {"evento": "IdleWallCornerPeekREnter", "nombre": "Asomarse por la esquina, a la derecha", "categoria": "gestos", "descripcion": "Asomarse por la esquina, a la derecha."},
+      {"evento": "IdleWallCornerPeekLEnter", "nombre": "Asomarse por la esquina, a la izquierda", "categoria": "gestos", "descripcion": "Asomarse por la esquina, a la izquierda."},
+      {"evento": "idle_A_sway_fastTrans", "nombre": "Balancearse", "categoria": "gestos", "descripcion": "Balancearse."},
+      {"evento": "IdleChildTaunt1", "nombre": "Burlarse (1)", "categoria": "gestos", "descripcion": "Burlarse (1)."},
+      {"evento": "IdleChildTaunt2", "nombre": "Burlarse (2)", "categoria": "gestos", "descripcion": "Burlarse (2)."},
+      {"evento": "IdleChildTaunt3", "nombre": "Burlarse (3)", "categoria": "gestos", "descripcion": "Burlarse (3)."},
+      {"evento": "IdleChildTaunt4", "nombre": "Burlarse (4)", "categoria": "gestos", "descripcion": "Burlarse (4)."},
+      {"evento": "IdleWarmHands", "nombre": "Calentarse las manos", "categoria": "gestos", "descripcion": "Calentarse las manos."},
+      {"evento": "IdleWarmHandsStanding", "nombre": "Calentarse las manos de pie", "categoria": "gestos", "destacada": true, "descripcion": "Calentarse las manos de pie."},
+      {"evento": "IdleWarmHandsCrouched", "nombre": "Calentarse las manos en cuclillas", "categoria": "gestos", "descripcion": "Calentarse las manos en cuclillas. Necesita: estar agachado."},
+      {"evento": "IdleWarmArms", "nombre": "Calentarse los brazos", "categoria": "gestos", "descripcion": "Calentarse los brazos."},
+      {"evento": "idle_A_leg_shift", "nombre": "Cambiar el peso de pierna", "categoria": "gestos", "descripcion": "Cambiar el peso de pierna."},
+      {"evento": "IdleValericaWalkForward", "nombre": "Caminar hacia delante", "categoria": "gestos", "andando": true, "descripcion": "Caminar hacia delante."},
+      {"evento": "idle_A_left_longTrans", "nombre": "Cargar el peso a la izquierda", "categoria": "gestos", "descripcion": "Cargar el peso a la izquierda."},
+      {"evento": "OffsetArmsCrossedStart", "nombre": "Cruzarse de brazos", "categoria": "gestos", "destacada": true, "andando": true, "descripcion": "Cruzarse de brazos. Necesita: necesita llevar el objeto en las manos."},
+      {"evento": "IdleCiceroHappy", "nombre": "Dar saltos de alegría", "categoria": "gestos", "descripcion": "Dar saltos de alegría."},
+      {"evento": "IdleChildCryingEnd", "nombre": "Dejar de llorar", "categoria": "gestos", "esSalida": true, "descripcion": "Dejar de llorar. Necesita: haber ejecutado antes: Llorar."},
+      {"evento": "IdleCowering", "nombre": "Encogerse de miedo", "categoria": "gestos", "destacada": true, "descripcion": "Encogerse de miedo."},
+      {"evento": "IdleCowerEnter", "nombre": "Encogerse de miedo (empezar)", "categoria": "gestos", "descripcion": "Encogerse de miedo (empezar)."},
+      {"evento": "IdleHideREnter", "nombre": "Esconderse a la derecha", "categoria": "gestos", "descripcion": "Esconderse a la derecha."},
+      {"evento": "idle_A_swat_flies", "nombre": "Espantar moscas", "categoria": "gestos", "descripcion": "Espantar moscas."},
+      {"evento": "idle_A_shoulders", "nombre": "Estirar los hombros", "categoria": "gestos", "descripcion": "Estirar los hombros."},
+      {"evento": "idle_A_shouldersVar1", "nombre": "Estirar los hombros (2)", "categoria": "gestos", "descripcion": "Estirar los hombros (2)."},
+      {"evento": "IdleWalkingCameraEnd", "nombre": "Fin del paseo de cámara", "categoria": "gestos", "esSalida": true, "descripcion": "Fin del paseo de cámara. Necesita: haber ejecutado antes: Paseo de cámara."},
+      {"evento": "IdleCiceroAgitated", "nombre": "Gesticular alterado", "categoria": "gestos", "descripcion": "Gesticular alterado."},
+      {"evento": "IdleHDRight", "nombre": "Gesto hacia la derecha (variante HD)", "categoria": "gestos", "confirmado": false, "descripcion": "Hacer un gesto hacia la derecha (variante HD)."},
+      {"evento": "IdleHHRight", "nombre": "Gesto hacia la derecha (variante HH)", "categoria": "gestos", "confirmado": false, "descripcion": "Hacer un gesto hacia la derecha (variante HH)."},
+      {"evento": "IdleTalkAndUseItem", "nombre": "Hablar manejando algo", "categoria": "gestos", "descripcion": "Hablar manejando algo. Necesita: estar en una conversación."},
+      {"evento": "IdleComeThisWay", "nombre": "Hacer señas para que te sigan", "categoria": "gestos", "destacada": true, "descripcion": "Hacer señas para que te sigan."},
+      {"evento": "IdleGrave_01", "nombre": "Inclinar la cabeza ante una tumba", "categoria": "gestos", "descripcion": "Inclinar la cabeza ante una tumba."},
+      {"evento": "IdleGrave_02", "nombre": "Inclinar la cabeza ante una tumba (2)", "categoria": "gestos", "descripcion": "Inclinar la cabeza ante una tumba (2)."},
+      {"evento": "IdleSilentBow", "nombre": "Inclinarse en silencio", "categoria": "gestos", "descripcion": "Inclinarse en silencio. Necesita: necesita un arco equipado."},
+      {"evento": "idleDisbelief01Start", "nombre": "Incredulidad", "categoria": "gestos", "salida": "idleDisbelief01Exit", "descripcion": "Mostrar incredulidad. Necesita: termina con: Salir de la incredulidad."},
+      {"evento": "idleDisbelief02Start", "nombre": "Incredulidad (2)", "categoria": "gestos", "salida": "idleDisbelief02Exit", "descripcion": "Mostrar incredulidad (2). Necesita: termina con: Salir de la incredulidad (2)."},
+      {"evento": "idleFreaReactionStart", "nombre": "Incredulidad (3)", "categoria": "gestos", "descripcion": "Mostrar incredulidad (3)."},
+      {"evento": "IdleFreaReaction2Start", "nombre": "Incredulidad (4)", "categoria": "gestos", "descripcion": "Mostrar incredulidad (4)."},
+      {"evento": "IdleChildPlayDirt", "nombre": "Jugar con la tierra", "categoria": "gestos", "descripcion": "Jugar con la tierra."},
+      {"evento": "IdleChildPlayDoll", "nombre": "Jugar con una muñeca", "categoria": "gestos", "descripcion": "Jugar con una muñeca."},
+      {"evento": "idle_A_soft_rightTrans", "nombre": "Ladearse a la derecha", "categoria": "gestos", "descripcion": "Ladearse a la derecha."},
+      {"evento": "IdleCleanSword", "nombre": "Limpiar la espada", "categoria": "gestos", "descripcion": "Limpiar la espada."},
+      {"evento": "IdleGetAttention", "nombre": "Llamar la atención", "categoria": "gestos", "descripcion": "Llamar la atención."},
+      {"evento": "IdleChildCryingStart", "nombre": "Llorar", "categoria": "gestos", "salida": "IdleChildCryingEnd", "descripcion": "Llorar. Necesita: termina con: Dejar de llorar."},
+      {"evento": "IdleHandsBehindBack", "nombre": "Manos a la espalda", "categoria": "gestos", "destacada": true, "descripcion": "Manos a la espalda."},
+      {"evento": "IdlePresentSkeletonKey", "nombre": "Mostrar la Llave Maestra", "categoria": "gestos", "descripcion": "Mostrar la Llave Maestra."},
+      {"evento": "IdleChildFidget", "nombre": "Moverse inquieto", "categoria": "gestos", "descripcion": "Moverse inquieto."},
+      {"evento": "IdleNervous", "nombre": "Nerviosismo", "categoria": "gestos", "destacada": true, "descripcion": "Ponerse nervioso."},
+      {"evento": "IdleLookFar", "nombre": "Otear el horizonte", "categoria": "gestos", "descripcion": "Otear el horizonte."},
+      {"evento": "IdleWalkingCameraStart", "nombre": "Paseo de cámara", "categoria": "gestos", "salida": "IdleWalkingCameraEnd", "descripcion": "Paseo de cámara. Necesita: termina con: Fin del paseo de cámara."},
+      {"evento": "IdleChildApologize", "nombre": "Pedir perdón", "categoria": "gestos", "descripcion": "Pedir perdón."},
+      {"evento": "idleFreaSorrowLoopEnter", "nombre": "Pena", "categoria": "gestos", "salida": "idleFreaSorrowExit", "descripcion": "Pena. Necesita: termina con: Salir de la pena."},
+      {"evento": "IdleSnapToAttention", "nombre": "Ponerse firme", "categoria": "gestos", "destacada": true, "descripcion": "Ponerse firme."},
+      {"evento": "IdleAstridEnter", "nombre": "Pose de espera", "categoria": "gestos", "descripcion": "Adoptar la pose de espera."},
+      {"evento": "IdleStaticPoseAStart", "nombre": "Pose fija A", "categoria": "gestos", "descripcion": "Adoptar la pose fija A."},
+      {"evento": "IdleStaticPoseBStart", "nombre": "Pose fija B", "categoria": "gestos", "descripcion": "Adoptar la pose fija B."},
+      {"evento": "IdleStaticPoseCStart", "nombre": "Pose fija C", "categoria": "gestos", "descripcion": "Adoptar la pose fija C."},
+      {"evento": "IdlePlayer", "nombre": "Postura del jugador", "categoria": "gestos", "descripcion": "Adoptar la postura del jugador."},
+      {"evento": "IdleChildWhineKick", "nombre": "Rabieta a patadas", "categoria": "gestos", "descripcion": "Rabieta a patadas."},
+      {"evento": "IdleChildWhineStompFeet", "nombre": "Rabieta pataleando", "categoria": "gestos", "descripcion": "Rabieta pataleando."},
+      {"evento": "idle_A_scratch_back", "nombre": "Rascarse la espalda", "categoria": "gestos", "descripcion": "Rascarse la espalda."},
+      {"evento": "IdleSurrender", "nombre": "Rendirse", "categoria": "gestos", "destacada": true, "descripcion": "Rendirse."},
+      {"evento": "IdleLaugh", "nombre": "Reírse", "categoria": "gestos", "destacada": true, "descripcion": "Reírse."},
+      {"evento": "idle_A_shakeout", "nombre": "Sacudirse", "categoria": "gestos", "descripcion": "Sacudirse."},
+      {"evento": "idleDisbelief01Exit", "nombre": "Salir de la incredulidad", "categoria": "gestos", "esSalida": true, "descripcion": "Salir de la incredulidad. Necesita: haber ejecutado antes: Incredulidad."},
+      {"evento": "idleDisbelief02Exit", "nombre": "Salir de la incredulidad (2)", "categoria": "gestos", "esSalida": true, "descripcion": "Salir de la incredulidad (2). Necesita: haber ejecutado antes: Incredulidad (2)."},
+      {"evento": "idleFreaDisbeliefLoopStop", "nombre": "Salir de la incredulidad (3)", "categoria": "gestos", "descripcion": "Salir de la incredulidad (3). Necesita: estar ya haciendo esa animación."},
+      {"evento": "IdleFreaDisbelief2LoopStop", "nombre": "Salir de la incredulidad (4)", "categoria": "gestos", "descripcion": "Salir de la incredulidad (4). Necesita: estar ya haciendo esa animación."},
+      {"evento": "idleFreaSorrowExit", "nombre": "Salir de la pena", "categoria": "gestos", "esSalida": true, "descripcion": "Salir de la pena. Necesita: haber ejecutado antes: Pena."},
+      {"evento": "IdleWave", "nombre": "Saludar con la mano", "categoria": "gestos", "destacada": true, "descripcion": "Saludar con la mano."},
+      {"evento": "IdleSalute", "nombre": "Saludo militar", "categoria": "gestos", "destacada": true, "descripcion": "Saludar al modo militar."},
+      {"evento": "IdleWipeBrow", "nombre": "Secarse la frente", "categoria": "gestos", "descripcion": "Secarse la frente."},
+      {"evento": "IdlePointFar_01", "nombre": "Señalar a lo lejos", "categoria": "gestos", "destacada": true, "descripcion": "Señalar a lo lejos."},
+      {"evento": "IdlePointFar_02", "nombre": "Señalar a lo lejos (2)", "categoria": "gestos", "descripcion": "Señalar a lo lejos (2)."},
+      {"evento": "IdlePointClose", "nombre": "Señalar algo cerca", "categoria": "gestos", "descripcion": "Señalar algo cerca."},
+      {"evento": "idle_A_pull_pants", "nombre": "Subirse los pantalones", "categoria": "gestos", "descripcion": "Subirse los pantalones."},
+      {"evento": "idle_A_sigh_var1Trans", "nombre": "Suspirar", "categoria": "gestos", "descripcion": "Suspirar."},
+      {"evento": "idle_A_sigh_var2Trans", "nombre": "Suspirar (2)", "categoria": "gestos", "descripcion": "Suspirar (2)."},
+      {"evento": "IdleChildShy", "nombre": "Timidez", "categoria": "gestos", "descripcion": "Timidez."},
+      {"evento": "IdleNocturnal_LookRight", "nombre": "Volver la mirada a la derecha", "categoria": "gestos", "descripcion": "Volver la mirada a la derecha."},
+      {"evento": "IdleNocturnal_LookLeft", "nombre": "Volver la mirada a la izquierda", "categoria": "gestos", "descripcion": "Volver la mirada a la izquierda."},
+      {"evento": "IdleBracedPain", "nombre": "Aguantar el dolor", "categoria": "herido", "descripcion": "Aguantar el dolor."},
+      {"evento": "IdlePrisonerBeat", "nombre": "Apalear a un preso", "categoria": "herido", "descripcion": "Apalear a un preso. Necesita: estar maniatado o preso."},
+      {"evento": "TG05_StabPlayer", "nombre": "Apuñalar al jugador", "categoria": "herido", "descripcion": "Apuñalar al jugador."},
+      {"evento": "IdleBoundKneesStart", "nombre": "Arrodillarse maniatado", "categoria": "herido", "descripcion": "Arrodillarse maniatado. Necesita: estar maniatado o preso."},
+      {"evento": "IdleDLC02FallOnKnees", "nombre": "Caer de rodillas", "categoria": "herido", "descripcion": "Caer de rodillas. Necesita: estar ya en movimiento."},
+      {"evento": "BoundStandingCut", "nombre": "Cortar las ataduras", "categoria": "herido", "descripcion": "Cortar las ataduras. Necesita: estar maniatado o preso."},
+      {"evento": "BoundStandingCutNPC", "nombre": "Cortarle las ataduras a alguien", "categoria": "herido", "descripcion": "Cortarle las ataduras a alguien. Necesita: estar maniatado o preso."},
+      {"evento": "IdleHandCut", "nombre": "Cortarse la mano", "categoria": "herido", "descripcion": "Cortarse la mano."},
+      {"evento": "IdleBoundKneesEnterInstant", "nombre": "De rodillas y maniatado", "categoria": "herido", "descripcion": "De rodillas y maniatado. Necesita: estar maniatado o preso."},
+      {"evento": "IdleExecutionerChop_Player", "nombre": "Decapitar al jugador", "categoria": "herido", "descripcion": "Decapitar al jugador."},
+      {"evento": "IdleExecutionerChop", "nombre": "Decapitar con el hacha", "categoria": "herido", "descripcion": "Decapitar con el hacha."},
+      {"evento": "IdleVampireFeastVictim", "nombre": "Dejarse morder el cuello", "categoria": "herido", "descripcion": "Dejarse morder el cuello."},
+      {"evento": "Ragdoll", "nombre": "Desplomarse como un muñeco", "categoria": "herido", "descripcion": "Desplomarse como un muñeco. Necesita: estar muerto o abatido."},
+      {"evento": "IdleExecutioneeIdle", "nombre": "Esperar como condenado", "categoria": "herido", "descripcion": "Esperar como condenado."},
+      {"evento": "IdleExecutionerIdle", "nombre": "Esperar como verdugo", "categoria": "herido", "descripcion": "Esperar como verdugo."},
+      {"evento": "IdleWebThrashShort", "nombre": "Forcejear en la telaraña", "categoria": "herido", "descripcion": "Forcejear en la telaraña."},
+      {"evento": "IdleWebThrashShort2", "nombre": "Forcejear en la telaraña (2)", "categoria": "herido", "descripcion": "Forcejear en la telaraña (2)."},
+      {"evento": "IdleExecutionGuardIdle", "nombre": "Guardia de la ejecución", "categoria": "herido", "descripcion": "Guardia de la ejecución."},
+      {"evento": "IdleInjured", "nombre": "Herido", "categoria": "herido", "destacada": true, "descripcion": "Quedar herido."},
+      {"evento": "IdleWounded_01", "nombre": "Herido (1)", "categoria": "herido", "destacada": true, "descripcion": "Quedar herido (1)."},
+      {"evento": "IdleWounded_02", "nombre": "Herido (2)", "categoria": "herido", "descripcion": "Quedar herido (2)."},
+      {"evento": "IdleWounded_03", "nombre": "Herido (3)", "categoria": "herido", "descripcion": "Quedar herido (3)."},
+      {"evento": "TG05_GetUp", "nombre": "Levantarse aturdido", "categoria": "herido", "descripcion": "Levantarse aturdido. Necesita: estar ya haciendo esa animación."},
+      {"evento": "GetUpBegin", "nombre": "Levantarse del suelo", "categoria": "herido", "descripcion": "Levantarse del suelo. Necesita: estar ya haciendo esa animación."},
+      {"evento": "OffsetBoundStandingStart", "nombre": "Maniatado de pie", "categoria": "herido", "andando": true, "descripcion": "Maniatado de pie. Necesita: estar maniatado o preso."},
+      {"evento": "DeathAnim", "nombre": "Morir", "categoria": "herido", "descripcion": "Morir. Necesita: estar muerto o abatido."},
+      {"evento": "IdleDLC02MiraakDeath", "nombre": "Morir despacio", "categoria": "herido", "descripcion": "Morir despacio. Necesita: estar muerto o abatido."},
+      {"evento": "MS12BedDeath", "nombre": "Morir en la cama", "categoria": "herido", "descripcion": "Morir en la cama. Necesita: estar muerto o abatido."},
+      {"evento": "IdleSoupDeath", "nombre": "Morir sobre el plato", "categoria": "herido", "descripcion": "Morir sobre el plato. Necesita: estar muerto o abatido."},
+      {"evento": "IdleCartPrisonerAExit", "nombre": "Preso A: bajarse del carro", "categoria": "herido", "esSalida": true, "descripcion": "Preso A: bajarse del carro. Necesita: haber ejecutado antes: Subirse al carro.", "visible": false},
+      {"evento": "IdleCartPrisonerAIdle", "nombre": "Preso A: en el carro", "categoria": "herido", "descripcion": "Preso A: en el carro. Necesita: estar subido en el carro."},
+      {"evento": "IdleCartPrisonerASway", "nombre": "Preso A: vaivén del carro", "categoria": "herido", "descripcion": "Preso A: vaivén del carro. Necesita: estar subido en el carro."},
+      {"evento": "IdleCartPrisonerBExit", "nombre": "Preso B: bajarse del carro", "categoria": "herido", "descripcion": "Preso B: bajarse del carro. Necesita: estar subido en el carro.", "visible": false},
+      {"evento": "IdleCartPrisonerBIdle", "nombre": "Preso B: en el carro", "categoria": "herido", "descripcion": "Preso B: en el carro. Necesita: estar subido en el carro."},
+      {"evento": "IdleCartPrisonerBSway", "nombre": "Preso B: vaivén del carro", "categoria": "herido", "descripcion": "Preso B: vaivén del carro. Necesita: estar subido en el carro."},
+      {"evento": "IdleCartPrisonerCExit", "nombre": "Preso C: bajarse del carro", "categoria": "herido", "descripcion": "Preso C: bajarse del carro. Necesita: estar subido en el carro.", "visible": false},
+      {"evento": "IdleCartPrisonerCIdle", "nombre": "Preso C: en el carro", "categoria": "herido", "descripcion": "Preso C: en el carro. Necesita: estar subido en el carro."},
+      {"evento": "IdleCartPrisonerCSway", "nombre": "Preso C: vaivén del carro", "categoria": "herido", "descripcion": "Preso C: vaivén del carro. Necesita: estar subido en el carro."},
+      {"evento": "IdleCartPrisonerDExit", "nombre": "Preso D: bajarse del carro", "categoria": "herido", "descripcion": "Preso D: bajarse del carro. Necesita: estar subido en el carro.", "visible": false},
+      {"evento": "IdleCartPrisonerDIdle", "nombre": "Preso D: en el carro", "categoria": "herido", "descripcion": "Preso D: en el carro. Necesita: estar subido en el carro."},
+      {"evento": "IdleCartPrisonerDSway", "nombre": "Preso D: vaivén del carro", "categoria": "herido", "descripcion": "Preso D: vaivén del carro. Necesita: estar subido en el carro."},
+      {"evento": "IdleWebEnterInstant", "nombre": "Quedar atrapado en la telaraña", "categoria": "herido", "descripcion": "Quedar atrapado en la telaraña."},
+      {"evento": "TG05_KnockOut", "nombre": "Quedar inconsciente", "categoria": "herido", "descripcion": "Quedar inconsciente."},
+      {"evento": "IdleExecutionerAlduinReaction", "nombre": "Reaccionar con espanto", "categoria": "herido", "descripcion": "Reaccionar con espanto."},
+      {"evento": "IdleExecutionerAlduinReactionDeath", "nombre": "Reaccionar con espanto y morir", "categoria": "herido", "descripcion": "Reaccionar con espanto y morir. Necesita: estar muerto o abatido."},
+      {"evento": "IdleExecutioneeChop", "nombre": "Recibir el golpe de hacha del verdugo", "categoria": "herido", "descripcion": "Recibir el golpe de hacha del verdugo."},
+      {"evento": "IdleFurnitureExitTriggered", "nombre": "Salir del mueble (forzado)", "categoria": "herido", "descripcion": "Salir del mueble (forzado). Necesita: estar en el mueble o la mesa de trabajo.", "visible": false},
+      {"evento": "IdleWebExit", "nombre": "Soltarse de la telaraña", "categoria": "herido", "descripcion": "Soltarse de la telaraña. Necesita: estar ya haciendo esa animación."},
+      {"evento": "IdleWebExitQuickTurn", "nombre": "Soltarse de la telaraña y girarse", "categoria": "herido", "descripcion": "Soltarse de la telaraña y girarse."},
+      {"evento": "IdleDLC02MiraakDeathFinish", "nombre": "Terminar de morir despacio", "categoria": "herido", "descripcion": "Terminar de morir despacio. Necesita: estar muerto o abatido."},
+      {"evento": "IdleUncontrollableCough", "nombre": "Tos incontrolable", "categoria": "herido", "descripcion": "Tos incontrolable."},
+      {"evento": "IdleMQ203EsbernBookEnter", "nombre": "Consultar un libro", "categoria": "leer", "descripcion": "Consultar un libro."},
+      {"evento": "IdleStudy", "nombre": "Estudiar", "categoria": "leer", "destacada": true, "descripcion": "Estudiar."},
+      {"evento": "IdleReadElderScroll", "nombre": "Leer el Pergamino Ancestral", "categoria": "leer", "descripcion": "Leer el Pergamino Ancestral."},
+      {"evento": "IdleReadElderScroll3rdP", "nombre": "Leer el Pergamino Ancestral (3ª persona)", "categoria": "leer", "descripcion": "Leer el Pergamino Ancestral (3ª persona)."},
+      {"evento": "IdleReadElderScrollLonger", "nombre": "Leer el Pergamino Ancestral (largo)", "categoria": "leer", "descripcion": "Leer el Pergamino Ancestral (largo)."},
+      {"evento": "ChairReadingStart", "nombre": "Leer sentado", "categoria": "leer", "sentado": true, "descripcion": "Leer sentado. Necesita: estar sentado en una silla, banco o taburete."},
+      {"evento": "ChairReadingIdles", "nombre": "Leer sentado: pasar páginas", "categoria": "leer", "sentado": true, "descripcion": "Leer sentado: pasar páginas. Necesita: estar sentado en una silla, banco o taburete."},
+      {"evento": "IdleBook_Read", "nombre": "Leer un libro", "categoria": "leer", "destacada": true, "descripcion": "Leer un libro."},
+      {"evento": "IdleBook_ReadTG06", "nombre": "Leer un libro (traducción)", "categoria": "leer", "descripcion": "Leer un libro (traducción)."},
+      {"evento": "IdleNoteRead", "nombre": "Leer una nota", "categoria": "leer", "destacada": true, "descripcion": "Leer una nota."},
+      {"evento": "IdleMQ206FelldirShowScroll", "nombre": "Mostrar el pergamino", "categoria": "leer", "descripcion": "Mostrar el pergamino."},
+      {"evento": "IdleTG06FlipPage", "nombre": "Pasar la página", "categoria": "leer", "descripcion": "Pasar la página."},
+      {"evento": "IdleBook_PageTurn", "nombre": "Pasar páginas", "categoria": "leer", "descripcion": "Pasar páginas."},
+      {"evento": "IdleBook_OnePage", "nombre": "Pasar una página", "categoria": "leer", "descripcion": "Pasar una página."},
+      {"evento": "IdleReadElderScrollEnd", "nombre": "Terminar de leer el Pergamino Ancestral", "categoria": "leer", "descripcion": "Terminar de leer el Pergamino Ancestral."},
+      {"evento": "IdleTG06TranslationEnter", "nombre": "Traducir un texto", "categoria": "leer", "descripcion": "Traducir un texto."},
+      {"evento": "IdleDLC2TentacleWarpBook", "nombre": "Abrir el libro que te transporta", "categoria": "magia", "descripcion": "Abrir el libro que te transporta. Forma parte de lanzar hechizos."},
+      {"evento": "IdleBloodPortalActivate", "nombre": "Activar el portal de sangre", "categoria": "magia", "descripcion": "Activar el portal de sangre. Forma parte de lanzar hechizos."},
+      {"evento": "DualMagic_WardStart", "nombre": "Alzar una protección con las dos manos", "categoria": "magia", "descripcion": "Alzar una protección con las dos manos. Forma parte de lanzar hechizos.", "visible": false},
+      {"evento": "IdleNocturnal_Rise", "nombre": "Alzarse", "categoria": "magia", "descripcion": "Levantarse. Forma parte de lanzar hechizos."},
+      {"evento": "IdleTGFalmerStatueEnter", "nombre": "Ante una estatua", "categoria": "magia", "descripcion": "Ante una estatua. Forma parte de lanzar hechizos."},
+      {"evento": "IdleNocturnalEnter", "nombre": "Aparecer", "categoria": "magia", "salida": "IdleNocturnal_Exit", "descripcion": "Aparecer. Forma parte de lanzar hechizos."},
+      {"evento": "IdleBlessingKneelEnter", "nombre": "Arrodillarse a recibir la bendición", "categoria": "magia", "destacada": true, "descripcion": "Arrodillarse a recibir la bendición. Forma parte de lanzar hechizos."},
+      {"evento": "IdleAltarEnter", "nombre": "Arrodillarse en el altar", "categoria": "magia", "descripcion": "Arrodillarse en el altar. Forma parte de lanzar hechizos.", "visible": false},
+      {"evento": "IdleT02AscendMale", "nombre": "Ascender (hombre)", "categoria": "magia", "descripcion": "Ascender (hombre). Forma parte de lanzar hechizos."},
+      {"evento": "IdleT02AscendFemale", "nombre": "Ascender (mujer)", "categoria": "magia", "descripcion": "Ascender (mujer). Forma parte de lanzar hechizos."},
+      {"evento": "IdleTelvanniTowerFloatUp", "nombre": "Ascender flotando", "categoria": "magia", "descripcion": "Ascender flotando. Forma parte de lanzar hechizos."},
+      {"evento": "IdleSnowElfPrinceAscensionBurning", "nombre": "Ascensión en llamas", "categoria": "magia", "descripcion": "Ascensión en llamas. Forma parte de lanzar hechizos."},
+      {"evento": "IdleDA02BoethiahPostEnter", "nombre": "Atado a un poste", "categoria": "magia", "descripcion": "Atado a un poste. Forma parte de lanzar hechizos."},
+      {"evento": "IdleWalkThroughWallEnter", "nombre": "Atravesar la pared", "categoria": "magia", "descripcion": "Atravesar la pared. Forma parte de lanzar hechizos."},
+      {"evento": "IdleTG08_Phase1", "nombre": "Ceremonia del Gremio: fase 1", "categoria": "magia", "descripcion": "Celebrar la ceremonia del Gremio: fase 1. Forma parte de lanzar hechizos."},
+      {"evento": "IdleTG08_Phase2", "nombre": "Ceremonia del Gremio: fase 2", "categoria": "magia", "descripcion": "Celebrar la ceremonia del Gremio: fase 2. Forma parte de lanzar hechizos."},
+      {"evento": "IdleTG08_Phase3", "nombre": "Ceremonia del Gremio: fase 3", "categoria": "magia", "descripcion": "Celebrar la ceremonia del Gremio: fase 3. Forma parte de lanzar hechizos."},
+      {"evento": "IdleTG08_Phase4", "nombre": "Ceremonia del Gremio: fase 4", "categoria": "magia", "descripcion": "Celebrar la ceremonia del Gremio: fase 4. Forma parte de lanzar hechizos."},
+      {"evento": "IdleTG08_Phase5", "nombre": "Ceremonia del Gremio: fase 5", "categoria": "magia", "descripcion": "Celebrar la ceremonia del Gremio: fase 5. Forma parte de lanzar hechizos."},
+      {"evento": "IdleCO2Ceremony3Chest", "nombre": "Ceremonia: abrir el cofre", "categoria": "magia", "descripcion": "Ceremonia: abrir el cofre. Forma parte de lanzar hechizos."},
+      {"evento": "IdleCO2Ceremony2Blessing", "nombre": "Ceremonia: bendecir", "categoria": "magia", "descripcion": "Ceremonia: bendecir. Forma parte de lanzar hechizos."},
+      {"evento": "IdleCO2Ceremony1Welcome", "nombre": "Ceremonia: dar la bienvenida", "categoria": "magia", "descripcion": "Ceremonia: dar la bienvenida. Forma parte de lanzar hechizos."},
+      {"evento": "pa_WW_CutWrist", "nombre": "Cortarse la muñeca", "categoria": "magia", "confirmado": false, "descripcion": "Cortarse la muñeca. Forma parte de lanzar hechizos."},
+      {"evento": "IdleMesmerizeStop", "nombre": "Dejar de hipnotizar", "categoria": "magia", "descripcion": "Dejar de hipnotizar. Forma parte de lanzar hechizos."},
+      {"evento": "IdleNocturnal_Exit", "nombre": "Desaparecer", "categoria": "magia", "esSalida": true, "descripcion": "Desaparecer. Forma parte de lanzar hechizos."},
+      {"evento": "IdleTelvanniTowerFloatDown", "nombre": "Descender flotando", "categoria": "magia", "descripcion": "Descender flotando. Forma parte de lanzar hechizos."},
+      {"evento": "IdleRitualStart", "nombre": "Empezar un ritual", "categoria": "magia", "descripcion": "Empezar un ritual. Forma parte de lanzar hechizos."},
+      {"evento": "IdleGreybeardWordTeach", "nombre": "Enseñar una Palabra", "categoria": "magia", "descripcion": "Enseñar una Palabra. Forma parte de lanzar hechizos."},
+      {"evento": "IdleDLC1BossExplosion1stP", "nombre": "Explosión (1ª persona)", "categoria": "magia", "descripcion": "Explosión (1ª persona). Forma parte de lanzar hechizos."},
+      {"evento": "pa_ExtractWerewolfSpirit", "nombre": "Extraer un espíritu", "categoria": "magia", "descripcion": "Extraer un espíritu. Forma parte de lanzar hechizos."},
+      {"evento": "IdleMagic_01", "nombre": "Gesto de magia", "categoria": "magia", "descripcion": "Hacer un gesto de magia. Forma parte de lanzar hechizos."},
+      {"evento": "IdleDLC02TentacleWordBurnBegin", "nombre": "Grabar la Palabra (empezar)", "categoria": "magia", "descripcion": "Grabar la Palabra (empezar). Forma parte de lanzar hechizos."},
+      {"evento": "IdleDLC02TentacleWordBurnEnd", "nombre": "Grabar la Palabra (terminar)", "categoria": "magia", "esSalida": true, "descripcion": "Grabar la Palabra (terminar). Forma parte de lanzar hechizos."},
+      {"evento": "IdleDLC02TentacleWordBurnStart", "nombre": "Grabar la Palabra en la piedra negra", "categoria": "magia", "salida": "IdleDLC02TentacleWordBurnEnd", "descripcion": "Grabar la Palabra en la piedra negra. Forma parte de lanzar hechizos."},
+      {"evento": "IdleSnowElfPrinceBigSpell", "nombre": "Gran hechizo", "categoria": "magia", "descripcion": "Gran hechizo. Forma parte de lanzar hechizos."},
+      {"evento": "IdleMesmerize", "nombre": "Hipnotizar", "categoria": "magia", "descripcion": "Hipnotizar. Forma parte de lanzar hechizos."},
+      {"evento": "DualMagic_SpellAimedStart", "nombre": "Lanzar un hechizo con las dos manos", "categoria": "magia", "descripcion": "Lanzar un hechizo con las dos manos. Forma parte de lanzar hechizos.", "visible": false},
+      {"evento": "IdleSnowElfPrinceFireAndForget", "nombre": "Lanzar un hechizo sentado", "categoria": "magia", "descripcion": "Lanzar un hechizo sentado. Forma parte de lanzar hechizos."},
+      {"evento": "DualMagic_SpellSelfStart", "nombre": "Lanzarse un hechizo con las dos manos", "categoria": "magia", "descripcion": "Lanzarse un hechizo con las dos manos. Forma parte de lanzar hechizos.", "visible": false},
+      {"evento": "DualMagic_SpellAimedConcentrationStart", "nombre": "Mantener un hechizo con las dos manos", "categoria": "magia", "descripcion": "Mantener un hechizo con las dos manos. Forma parte de lanzar hechizos.", "visible": false},
+      {"evento": "DualMagic_SpellSelfConcentrationStart", "nombre": "Mantenerse un hechizo con las dos manos", "categoria": "magia", "descripcion": "Mantenerse un hechizo con las dos manos. Forma parte de lanzar hechizos.", "visible": false},
+      {"evento": "IdleGreybeardMeditateEnter", "nombre": "Meditar", "categoria": "magia", "descripcion": "Meditar. Forma parte de lanzar hechizos."},
+      {"evento": "IdleNocturnal_IdleA", "nombre": "Pose solemne", "categoria": "magia", "descripcion": "Adoptar la pose solemne. Forma parte de lanzar hechizos."},
+      {"evento": "IdleNocturnal_IdleB", "nombre": "Pose solemne (2)", "categoria": "magia", "descripcion": "Adoptar la pose solemne (2). Forma parte de lanzar hechizos."},
+      {"evento": "IdleNocturnal_IdleAMirror", "nombre": "Pose solemne (reflejada)", "categoria": "magia", "descripcion": "Adoptar la pose solemne (reflejada). Forma parte de lanzar hechizos."},
+      {"evento": "IdleWayShrineWaterScoopEnter", "nombre": "Recoger agua del santuario", "categoria": "magia", "descripcion": "Recoger agua del santuario. Forma parte de lanzar hechizos."},
+      {"evento": "IdlePray", "nombre": "Rezar", "categoria": "magia", "destacada": true, "descripcion": "Rezar. Forma parte de lanzar hechizos."},
+      {"evento": "IdlePrayCrouchedEnter", "nombre": "Rezar en cuclillas", "categoria": "magia", "descripcion": "Rezar en cuclillas. Forma parte de lanzar hechizos."},
+      {"evento": "IdleBoyRitual", "nombre": "Ritual", "categoria": "magia", "descripcion": "Celebrar el ritual. Forma parte de lanzar hechizos."},
+      {"evento": "IdleRitualSkull1", "nombre": "Ritual con la calavera (1)", "categoria": "magia", "descripcion": "Celebrar el ritual con la calavera (1). Forma parte de lanzar hechizos."},
+      {"evento": "IdleRitualSkull2", "nombre": "Ritual con la calavera (2)", "categoria": "magia", "descripcion": "Celebrar el ritual con la calavera (2). Forma parte de lanzar hechizos."},
+      {"evento": "IdleRitualSkull3", "nombre": "Ritual con la calavera (3)", "categoria": "magia", "descripcion": "Celebrar el ritual con la calavera (3). Forma parte de lanzar hechizos."},
+      {"evento": "IdleMQ206FelldirRitualEnter", "nombre": "Ritual con las manos en alto", "categoria": "magia", "descripcion": "Celebrar el ritual con las manos en alto. Forma parte de lanzar hechizos."},
+      {"evento": "IdleSnowElfPrinceBigSpellRelease", "nombre": "Soltar el gran hechizo", "categoria": "magia", "descripcion": "Soltar el gran hechizo. Forma parte de lanzar hechizos."},
+      {"evento": "SpellRelease", "nombre": "Soltar el hechizo", "categoria": "magia", "descripcion": "Soltar el hechizo. Forma parte de lanzar hechizos.", "visible": false},
+      {"evento": "IdleWerewolfTransformation", "nombre": "Transformarse", "categoria": "magia", "descripcion": "Transformarse. Forma parte de lanzar hechizos."},
+      {"evento": "IdleVampireLordTransformation", "nombre": "Transformarse (2)", "categoria": "magia", "descripcion": "Transformarse (2). Forma parte de lanzar hechizos."},
+      {"evento": "IdleWayShrineWaterPourEnter", "nombre": "Verter agua en el santuario", "categoria": "magia", "descripcion": "Verter agua en el santuario. Forma parte de lanzar hechizos."},
+      {"evento": "DragonMountExit", "nombre": "Bajar del dragón", "categoria": "montar", "esSalida": true, "descripcion": "Animación de bajarse de dragón", "visible": false},
+      {"evento": "Ground_Dismount_Dragon", "nombre": "Bajar del dragón en tierra", "categoria": "montar", "descripcion": "Animación de bajarse de dragón mientras el dragón está en el suelo", "visible": false},
+      {"evento": "MountedSwimStop", "nombre": "Dejar de nadar montado", "categoria": "montar", "esSalida": true, "descripcion": "Fade-out animación de montar", "visible": false},
+      {"evento": "HorseExit", "nombre": "Desmontar del caballo", "categoria": "montar", "esSalida": true, "descripcion": "Bajarse del caballo", "visible": false},
+      {"evento": "HorseExitSwim", "nombre": "Desmontar del caballo en el agua", "categoria": "montar", "descripcion": "Bajarse del caballo estando en el agua", "visible": false},
+      {"evento": "MC_shoutStart", "nombre": "Empezar un Grito (2)", "categoria": "montar", "descripcion": "Inicia grito (bucle)", "visible": false},
+      {"evento": "HorseEnter", "nombre": "Montar a caballo", "categoria": "montar", "salida": "HorseExit", "descripcion": "Montarse en un caballo", "visible": false},
+      {"evento": "DragonMountEnter", "nombre": "Montar en el dragón", "categoria": "montar", "salida": "DragonMountExit", "descripcion": "Montarse en un dragón", "visible": false},
+      {"evento": "MountedSwimStart", "nombre": "Nadar montado", "categoria": "montar", "salida": "MountedSwimStop", "descripcion": "Nadar mientras estás montado", "visible": false},
+      {"evento": "MountedStaggerStart", "nombre": "Retroceder por golpe (Montado)", "categoria": "montar", "descripcion": "Retrocede al ser golpeado mientras vas montado", "visible": false},
+      {"evento": "StrafeReverseLeft", "nombre": "Cambiar el paso de lado a la derecha", "categoria": "moverse", "descripcion": "Cambiar el paso de lado a la derecha. Es parte del movimiento normal del personaje.", "visible": false},
+      {"evento": "StrafeReverseRight", "nombre": "Cambiar el paso de lado a la izquierda", "categoria": "moverse", "descripcion": "Cambiar el paso de lado a la izquierda. Es parte del movimiento normal del personaje.", "visible": false},
+      {"evento": "StrafeStopRunRight", "nombre": "Dejar de correr de lado a la derecha", "categoria": "moverse", "descripcion": "Dejar de correr de lado a la derecha. Es parte del movimiento normal del personaje.", "visible": false},
+      {"evento": "StrafeStopRunLeft", "nombre": "Dejar de correr de lado a la izquierda", "categoria": "moverse", "descripcion": "Dejar de correr de lado a la izquierda. Es parte del movimiento normal del personaje.", "visible": false},
+      {"evento": "StrafeStopRight", "nombre": "Dejar de moverse de lado a la derecha", "categoria": "moverse", "descripcion": "Dejar de moverse de lado a la derecha. Es parte del movimiento normal del personaje.", "visible": false},
+      {"evento": "StrafeStopLeft", "nombre": "Dejar de moverse de lado a la izquierda", "categoria": "moverse", "descripcion": "Dejar de moverse de lado a la izquierda. Es parte del movimiento normal del personaje.", "visible": false},
+      {"evento": "BlockBashSprint", "nombre": "Embestir con el escudo al correr a toda velocidad", "categoria": "moverse", "descripcion": "Embestir con el escudo al correr a toda velocidad. Es parte del movimiento normal del personaje.", "visible": false},
+      {"evento": "StrafeStartWalkRight", "nombre": "Empezar a andar de lado a la derecha", "categoria": "moverse", "descripcion": "Empezar a andar de lado a la derecha. Es parte del movimiento normal del personaje.", "visible": false},
+      {"evento": "StrafeStartRunRight", "nombre": "Empezar a correr de lado a la derecha", "categoria": "moverse", "descripcion": "Empezar a correr de lado a la derecha. Es parte del movimiento normal del personaje.", "visible": false},
+      {"evento": "StrafeStartRunLeft", "nombre": "Empezar a correr de lado a la izquierda", "categoria": "moverse", "descripcion": "Empezar a correr de lado a la izquierda. Es parte del movimiento normal del personaje.", "visible": false},
+      {"evento": "StrafeStartRight", "nombre": "Empezar a moverse de lado a la derecha", "categoria": "moverse", "descripcion": "Empezar a moverse de lado a la derecha. Es parte del movimiento normal del personaje.", "visible": false},
+      {"evento": "StrafeStartLeft", "nombre": "Empezar a moverse de lado a la izquierda", "categoria": "moverse", "descripcion": "Empezar a moverse de lado a la izquierda. Es parte del movimiento normal del personaje.", "visible": false},
+      {"evento": "StrafeStartTrotRight", "nombre": "Empezar a trotar de lado a la derecha", "categoria": "moverse", "descripcion": "Empezar a trotar de lado a la derecha. Es parte del movimiento normal del personaje.", "visible": false},
+      {"evento": "StrafeStartTrotLeft", "nombre": "Empezar a trotar de lado a la izquierda", "categoria": "moverse", "descripcion": "Empezar a trotar de lado a la izquierda. Es parte del movimiento normal del personaje.", "visible": false},
+      {"evento": "cannedTurnRight180", "nombre": "Girar 180 grados a la derecha en el sitio", "categoria": "moverse", "descripcion": "Girar 180 grados a la derecha en el sitio. Es parte del movimiento normal del personaje.", "visible": false},
+      {"evento": "cannedTurnLeft180", "nombre": "Girar 180 grados a la izquierda en el sitio", "categoria": "moverse", "descripcion": "Girar 180 grados a la izquierda en el sitio. Es parte del movimiento normal del personaje.", "visible": false},
+      {"evento": "cannedTurnRight90", "nombre": "Girar 90 grados a la derecha en el sitio", "categoria": "moverse", "descripcion": "Girar 90 grados a la derecha en el sitio. Es parte del movimiento normal del personaje.", "visible": false},
+      {"evento": "cannedTurnLeft90", "nombre": "Girar 90 grados a la izquierda en el sitio", "categoria": "moverse", "descripcion": "Girar 90 grados a la izquierda en el sitio. Es parte del movimiento normal del personaje.", "visible": false},
+      {"evento": "StrafeBackRight", "nombre": "Moverse de lado hacia atrás por la derecha", "categoria": "moverse", "descripcion": "Moverse de lado hacia atrás por la derecha. Es parte del movimiento normal del personaje.", "visible": false},
+      {"evento": "StrafeBackLeft", "nombre": "Moverse de lado hacia atrás por la izquierda", "categoria": "moverse", "descripcion": "Moverse de lado hacia atrás por la izquierda. Es parte del movimiento normal del personaje.", "visible": false},
+      {"evento": "IdleApplaud2", "nombre": "Aplaudir", "categoria": "musica", "destacada": true, "descripcion": "Aplaudir."},
+      {"evento": "IdleApplaud3", "nombre": "Aplaudir (2)", "categoria": "musica", "descripcion": "Aplaudir (2)."},
+      {"evento": "IdleApplaud4", "nombre": "Aplaudir (3)", "categoria": "musica", "descripcion": "Aplaudir (3)."},
+      {"evento": "IdleApplaud5", "nombre": "Aplaudir (4)", "categoria": "musica", "descripcion": "Aplaudir (4)."},
+      {"evento": "IdleApplaudSarcastic", "nombre": "Aplaudir con sorna", "categoria": "musica", "descripcion": "Aplaudir con sorna."},
+      {"evento": "IdleCiceroDance1", "nombre": "Baile (1)", "categoria": "musica", "destacada": true, "descripcion": "Bailar (1)."},
+      {"evento": "IdleCiceroDance2", "nombre": "Baile (2)", "categoria": "musica", "descripcion": "Bailar (2)."},
+      {"evento": "IdleCiceroDance3", "nombre": "Baile (3)", "categoria": "musica", "descripcion": "Bailar (3)."},
+      {"evento": "SpectatorClap", "nombre": "Público: aplaudir", "categoria": "musica", "descripcion": "Público: aplaudir."},
+      {"evento": "SpectatorTalking", "nombre": "Público: cuchichear", "categoria": "musica", "descripcion": "Público: cuchichear. Necesita: estar en una conversación."},
+      {"evento": "SpectatorGawk", "nombre": "Público: quedarse boquiabierto", "categoria": "musica", "descripcion": "Público: quedarse boquiabierto."},
+      {"evento": "SpectatorCheer", "nombre": "Público: vitorear", "categoria": "musica", "descripcion": "Público: vitorear."},
+      {"evento": "IdleBlowHornStormcloak", "nombre": "Tocar el cuerno de los Capas de la Tormenta", "categoria": "musica", "descripcion": "Tocar el cuerno de los Capas de la Tormenta."},
+      {"evento": "IdleBlowHornImperial", "nombre": "Tocar el cuerno imperial", "categoria": "musica", "descripcion": "Tocar el cuerno imperial."},
+      {"evento": "IdleLuteStart", "nombre": "Tocar el laúd", "categoria": "musica", "destacada": true, "descripcion": "Tocar el laúd."},
+      {"evento": "IdleDrumStart", "nombre": "Tocar el tambor", "categoria": "musica", "destacada": true, "descripcion": "Tocar el tambor."},
+      {"evento": "IdleFluteStart", "nombre": "Tocar la flauta", "categoria": "musica", "destacada": true, "descripcion": "Tocar la flauta."},
+      {"evento": "IdleCivilWarCheer", "nombre": "Vitorear", "categoria": "musica", "descripcion": "Vitorear."},
+      {"evento": "IdleActivateDoor", "nombre": "Abrir una puerta", "categoria": "oficios", "descripcion": "Abrir una puerta."},
+      {"evento": "IdleActivateCoffinPuzzle", "nombre": "Accionar el cuenco del ataúd", "categoria": "oficios", "descripcion": "Accionar botón con pincho del ataúd", "visible": false},
+      {"evento": "Lever_PlayerPush", "nombre": "Accionar una palanca", "categoria": "oficios", "descripcion": "Acciona palanca", "visible": false},
+      {"evento": "IdleSharpeningWheelStart", "nombre": "Afilar arma", "categoria": "oficios", "descripcion": "Sentarse a afilar el arma", "visible": false},
+      {"evento": "IdleTake", "nombre": "Agarrar algo", "categoria": "oficios", "descripcion": "Agarrar algo."},
+      {"evento": "IdleHoe", "nombre": "Arar suelo", "categoria": "oficios", "destacada": true, "descripcion": "Ara el suelo con una azada"},
+      {"evento": "IdleCartDriverExit", "nombre": "Bajarse de la carreta", "categoria": "oficios", "esSalida": true, "descripcion": "Bajarse de la carreta", "visible": false},
+      {"evento": "idleLooseSweepingStart", "nombre": "Barrer", "categoria": "oficios", "destacada": true, "descripcion": "Barre el suelo con una escoba"},
+      {"evento": "IdleMillLoadStart", "nombre": "Cargar grano en el molino", "categoria": "oficios", "descripcion": "Cargar grano en el molino. Necesita: estar delante de la mesa de trabajo."},
+      {"evento": "IdleChiselStandingEnter", "nombre": "Cincelar de pie", "categoria": "oficios", "descripcion": "Cincela con martillo y cincel hacia adelante"},
+      {"evento": "IdleChiselKneelingEnter", "nombre": "Cincelar de rodillas", "categoria": "oficios", "descripcion": "Cincela con martillo y cincel en el suelo"},
+      {"evento": "IdleCraftingCookingPotTalkA", "nombre": "Cocinar y hablar (A)", "categoria": "oficios", "descripcion": "Habla mientras cocinas en el cookingpot", "visible": false},
+      {"evento": "IdleCraftingCookingPotTalkB", "nombre": "Cocinar y hablar (B)", "categoria": "oficios", "descripcion": "Habla mientras cocinas en el cookingpot", "visible": false},
+      {"evento": "IdleWoodChopStart", "nombre": "Cortar leña", "categoria": "oficios", "destacada": true, "descripcion": "Cortar leña."},
+      {"evento": "IdleFeedChicken", "nombre": "Dar de comer a las gallinas", "categoria": "oficios", "descripcion": "Dar de comer a las gallinas."},
+      {"evento": "IdlewoodputdownEnter", "nombre": "Dejar la leña", "categoria": "oficios", "confirmado": false, "esSalida": true, "descripcion": "Dejar la leña. Necesita: haber ejecutado antes: Recoger leña."},
+      {"evento": "IdleStonePutDownEnter", "nombre": "Dejar una piedra", "categoria": "oficios", "esSalida": true, "descripcion": "Dejar una piedra. Necesita: haber ejecutado antes: Recoger una piedra."},
+      {"evento": "IdleCraftingCookingPotAddIngredient", "nombre": "Echar un ingrediente a la olla", "categoria": "oficios", "descripcion": "Echar un ingrediente a la olla. Necesita: estar delante de la mesa de trabajo."},
+      {"evento": "IdleLeverPushStart", "nombre": "Empujar una palanca", "categoria": "oficios", "descripcion": "Empujar una palanca."},
+      {"evento": "IdleLightSconce", "nombre": "Encender una antorcha de pared", "categoria": "oficios", "descripcion": "Encender una antorcha de pared."},
+      {"evento": "IdleGive", "nombre": "Entregar algo", "categoria": "oficios", "descripcion": "Entregar algo."},
+      {"evento": "IdleGiveMQ105Horn", "nombre": "Entregar el cuerno", "categoria": "oficios", "descripcion": "Entregar el cuerno."},
+      {"evento": "IdleWriteTableStandingEnter", "nombre": "Escribir de pie en la mesa", "categoria": "oficios", "descripcion": "Escribir de pie en la mesa. Necesita: estar delante de la mesa de trabajo.", "visible": false},
+      {"evento": "IdleWriteLedgerEnter", "nombre": "Escribir en el registro", "categoria": "oficios", "descripcion": "Escribir en el registro.", "visible": false},
+      {"evento": "IdleWriteLedgerWrite", "nombre": "Escribir en el registro (escribiendo)", "categoria": "oficios", "descripcion": "Escribir en el registro (escribiendo)."},
+      {"evento": "IdleChairWrite", "nombre": "Escribir sentado", "categoria": "oficios", "sentado": true, "descripcion": "Escribir sentado. Necesita: estar sentado en una silla, banco o taburete."},
+      {"evento": "IdleExamine", "nombre": "Examinar algo", "categoria": "oficios", "descripcion": "Examinar algo."},
+      {"evento": "IdleLockPick", "nombre": "Forzar una cerradura", "categoria": "oficios", "descripcion": "Forzar una cerradura."},
+      {"evento": "IdleDLC02BoatRide", "nombre": "Ir en barca", "categoria": "oficios", "descripcion": "Ir en barca."},
+      {"evento": "IdleWriteTableChairRightExit", "nombre": "Levantarse del escritorio por la derecha", "categoria": "oficios", "esSalida": true, "descripcion": "Levantarse del escritorio por la derecha. Necesita: haber ejecutado antes: Sentarse a escribir por la derecha.", "visible": false},
+      {"evento": "IdleWriteTableChairLeftExit", "nombre": "Levantarse del escritorio por la izquierda", "categoria": "oficios", "esSalida": true, "descripcion": "Levantarse del escritorio por la izquierda. Necesita: haber ejecutado antes: Sentarse a escribir por la izquierda.", "visible": false},
+      {"evento": "IdleFurnitureExitSlow", "nombre": "Levantarse despacio del mueble", "categoria": "oficios", "descripcion": "Levantarse despacio del mueble. Necesita: estar en el mueble o la mesa de trabajo.", "visible": false},
+      {"evento": "IdleBarCounterWipe", "nombre": "Limpiar el mostrador", "categoria": "oficios", "descripcion": "Limpiar el mostrador. Necesita: estar en el mostrador o el mostrador."},
+      {"evento": "IdleCarryBucketFillEnter", "nombre": "Llenar una cubeta", "categoria": "oficios", "descripcion": "Llenar una cubeta. Necesita: necesita llevar el objeto en las manos."},
+      {"evento": "IdleCartDriverIdle", "nombre": "Llevar el carro", "categoria": "oficios", "andando": true, "descripcion": "Llevar el carro. Necesita: estar subido en el carro."},
+      {"evento": "IdleCartDriverSway", "nombre": "Llevar el carro, con vaivén", "categoria": "oficios", "andando": true, "descripcion": "Llevar el carro, con vaivén. Necesita: estar subido en el carro."},
+      {"evento": "OffsetFlowerBasketStart", "nombre": "Llevar el cesto de flores", "categoria": "oficios", "andando": true, "descripcion": "Llevar el cesto de flores. Necesita: necesita llevar el objeto en las manos."},
+      {"evento": "OffsetCarryBasketStart", "nombre": "Llevar un cesto", "categoria": "oficios", "andando": true, "salida": "OffsetStop", "descripcion": "Llevar un cesto. Necesita: necesita llevar el objeto en las manos. Termina con: Soltar lo que lleva en las manos."},
+      {"evento": "OffsetCarryMQ201DrinkTray", "nombre": "Llevar una bandeja de bebidas", "categoria": "oficios", "andando": true, "descripcion": "Llevar una bandeja de bebidas. Necesita: necesita llevar el objeto en las manos."},
+      {"evento": "OffsetCarryMQ201DrinkR", "nombre": "Llevar una copa en la mano", "categoria": "oficios", "andando": true, "descripcion": "Llevar una copa en la mano. Necesita: necesita llevar el objeto en las manos."},
+      {"evento": "OffsetCarryPotStart", "nombre": "Llevar una olla", "categoria": "oficios", "andando": true, "salida": "OffsetStop", "descripcion": "Llevar una olla. Necesita: necesita llevar el objeto en las manos. Termina con: Soltar lo que lleva en las manos."},
+      {"evento": "IdleDwemerExtractorEnter", "nombre": "Manejar un extractor", "categoria": "oficios", "descripcion": "Manejar un extractor."},
+      {"evento": "IdlePickaxeEnter", "nombre": "Picar con el pico", "categoria": "oficios", "destacada": true, "descripcion": "Picar con el pico.", "visible": false},
+      {"evento": "IdleCookingSpitEnter", "nombre": "Ponerse a cocinar en el asador", "categoria": "oficios", "salida": "IdleFurnitureExit", "descripcion": "Ponerse a cocinar en el asador. Necesita: estar delante de la mesa de trabajo.", "visible": false},
+      {"evento": "IdleCookingPotEnter", "nombre": "Ponerse a cocinar en la olla", "categoria": "oficios", "salida": "IdleFurnitureExit", "descripcion": "Ponerse a cocinar en la olla. Necesita: estar delante de la mesa de trabajo.", "visible": false},
+      {"evento": "IdleWriteLedgerChargenEnter", "nombre": "Ponerse a escribir en el registro", "categoria": "oficios", "descripcion": "Ponerse a escribir en el registro.", "visible": false},
+      {"evento": "IdleAlchemyEnter", "nombre": "Ponerse a la mesa de alquimia", "categoria": "oficios", "salida": "IdleFurnitureExit", "descripcion": "Ponerse a la mesa de alquimia. Necesita: estar delante de la mesa de trabajo.", "visible": false},
+      {"evento": "IdleEnchantingEnter", "nombre": "Ponerse a la mesa de encantamiento", "categoria": "oficios", "salida": "IdleFurnitureExit", "descripcion": "Ponerse a la mesa de encantamiento. Necesita: estar delante de la mesa de trabajo.", "visible": false},
+      {"evento": "IdleHammerCarpenterTableEnter", "nombre": "Ponerse a martillear en el banco de carpintero", "categoria": "oficios", "salida": "IdleFurnitureExit", "descripcion": "Ponerse a martillear en el banco de carpintero. Necesita: estar delante de la mesa de trabajo.", "visible": false},
+      {"evento": "IdleHammerTableEnter", "nombre": "Ponerse a martillear en la mesa", "categoria": "oficios", "salida": "IdleFurnitureExit", "descripcion": "Ponerse a martillear en la mesa. Necesita: estar delante de la mesa de trabajo.", "visible": false},
+      {"evento": "IdleHammerWallEnter", "nombre": "Ponerse a martillear en la pared", "categoria": "oficios", "salida": "IdleFurnitureExit", "descripcion": "Ponerse a martillear en la pared.", "visible": false},
+      {"evento": "IdleDLC2PickaxeEnter", "nombre": "Ponerse a picar con el pico", "categoria": "oficios", "salida": "IdleFurnitureExit", "descripcion": "Ponerse a picar con el pico.", "visible": false},
+      {"evento": "IdlePickaxeFloorEnter", "nombre": "Ponerse a picar en el suelo", "categoria": "oficios", "salida": "IdleFurnitureExit", "descripcion": "Ponerse a picar en el suelo. Necesita: termina con: Levantarse del mueble."},
+      {"evento": "IdleDLC2PickaxeFloorEnter", "nombre": "Ponerse a picar en el suelo (Solstheim)", "categoria": "oficios", "salida": "IdleFurnitureExit", "descripcion": "Ponerse a picar en el suelo (Solstheim). Necesita: termina con: Levantarse del mueble."},
+      {"evento": "IdlePickaxeTableEnter", "nombre": "Ponerse a picar en la mesa", "categoria": "oficios", "salida": "IdleFurnitureExit", "descripcion": "Ponerse a picar en la mesa. Necesita: estar delante de la mesa de trabajo.", "visible": false},
+      {"evento": "IdleDLC2PickaxeTableEnter", "nombre": "Ponerse a picar en la mesa (Solstheim)", "categoria": "oficios", "salida": "IdleFurnitureExit", "descripcion": "Ponerse a picar en la mesa (Solstheim). Necesita: estar delante de la mesa de trabajo.", "visible": false},
+      {"evento": "IdleOvenEnter", "nombre": "Ponerse al horno", "categoria": "oficios", "salida": "IdleFurnitureExit", "descripcion": "Ponerse al horno. Necesita: estar delante de la mesa de trabajo.", "visible": false},
+      {"evento": "IdleTanningEnter", "nombre": "Ponerse en el banco de curtido", "categoria": "oficios", "salida": "IdleFurnitureExit", "descripcion": "Ponerse en el banco de curtido. Necesita: estar delante de la mesa de trabajo.", "visible": false},
+      {"evento": "IdleGrainMillEnter", "nombre": "Ponerse en el molino", "categoria": "oficios", "salida": "IdleFurnitureExit", "descripcion": "Ponerse en el molino. Necesita: estar delante de la mesa de trabajo.", "visible": false},
+      {"evento": "IdleSmelterEnter", "nombre": "Ponerse en la fundición", "categoria": "oficios", "salida": "IdleFurnitureExit", "descripcion": "Ponerse en la fundición. Necesita: estar delante de la mesa de trabajo.", "visible": false},
+      {"evento": "IdleCounterStart", "nombre": "Ponerse tras el mostrador", "categoria": "oficios", "salida": "IdleFurnitureExit", "descripcion": "Ponerse tras el mostrador. Necesita: estar en el mostrador o el mostrador. Termina con: Levantarse del mueble."},
+      {"evento": "IdleScrapeTreeBark", "nombre": "Raspar la corteza de un árbol", "categoria": "oficios", "descripcion": "Raspar la corteza de un árbol."},
+      {"evento": "IdleSearchingChest", "nombre": "Rebuscando en el cofre", "categoria": "oficios", "descripcion": "Rebuscando en el cofre."},
+      {"evento": "IdleSearchingTable", "nombre": "Rebuscando en la mesa", "categoria": "oficios", "descripcion": "Rebuscando en la mesa. Necesita: estar delante de la mesa de trabajo."},
+      {"evento": "IdleSearchTableEnter", "nombre": "Rebuscar en la mesa", "categoria": "oficios", "descripcion": "Rebuscar en la mesa. Necesita: estar delante de la mesa de trabajo.", "visible": false},
+      {"evento": "IdleSearchChestEnter", "nombre": "Rebuscar en un cofre", "categoria": "oficios", "descripcion": "Rebuscar en un cofre."},
+      {"evento": "IdleActivatePickUp", "nombre": "Recoger algo", "categoria": "oficios", "descripcion": "Recoger algo. Necesita: necesita llevar el objeto en las manos."},
+      {"evento": "IdlePickup_Ground", "nombre": "Recoger algo del suelo", "categoria": "oficios", "descripcion": "Recoger algo del suelo."},
+      {"evento": "IdleActivatePickUpLow", "nombre": "Recoger algo del suelo (1)", "categoria": "oficios", "descripcion": "Recoger algo del suelo (1). Necesita: necesita llevar el objeto en las manos."},
+      {"evento": "OffsetCarryFlowerBasketPickStart", "nombre": "Recoger flores en el cesto", "categoria": "oficios", "andando": true, "salida": "OffsetStop", "descripcion": "Recoger flores en el cesto. Necesita: necesita llevar el objeto en las manos. Termina con: Soltar lo que lleva en las manos."},
+      {"evento": "IdleWoodPickUpEnter", "nombre": "Recoger leña", "categoria": "oficios", "salida": "IdlewoodputdownEnter", "descripcion": "Recoger leña. Necesita: necesita llevar el objeto en las manos. Termina con: Dejar la leña."},
+      {"evento": "IdleRFPickUpScroll", "nombre": "Recoger un pergamino", "categoria": "oficios", "descripcion": "Recoger un pergamino. Necesita: necesita llevar el objeto en las manos."},
+      {"evento": "IdleStonePickUpEnter", "nombre": "Recoger una piedra", "categoria": "oficios", "salida": "IdleStonePutDownEnter", "descripcion": "Recoger una piedra. Necesita: necesita llevar el objeto en las manos. Termina con: Dejar una piedra."},
+      {"evento": "IdleWriteTableChairRightEnter", "nombre": "Sentarse a escribir por la derecha", "categoria": "oficios", "salida": "IdleWriteTableChairRightExit", "descripcion": "Sentarse a escribir por la derecha. Necesita: estar sentado en una silla, banco o taburete.", "visible": false},
+      {"evento": "IdleWriteTableChairLeftEnter", "nombre": "Sentarse a escribir por la izquierda", "categoria": "oficios", "salida": "IdleWriteTableChairLeftExit", "descripcion": "Sentarse a escribir por la izquierda. Necesita: estar sentado en una silla, banco o taburete.", "visible": false},
+      {"evento": "IdleOffsetCarryPotServe", "nombre": "Servir de la olla", "categoria": "oficios", "andando": true, "salida": "OffsetStop", "descripcion": "Servir de la olla. Necesita: necesita llevar el objeto en las manos. Termina con: Soltar lo que lleva en las manos."},
+      {"evento": "IdleLadderEnter", "nombre": "Subir por una escalera", "categoria": "oficios", "salida": "IdleFurnitureExit", "descripcion": "Subir por una escalera.", "visible": false},
+      {"evento": "IdleCartTravelPlayerEnter", "nombre": "Subirse al carro", "categoria": "oficios", "salida": "IdleCartPrisonerAExit", "descripcion": "Subirse al carro. Necesita: estar subido en el carro.", "visible": false},
+      {"evento": "IdleCartTravelDriverEnter", "nombre": "Subirse al pescante", "categoria": "oficios", "salida": "IdleCartDriverExit", "descripcion": "Subirse al pescante. Necesita: estar subido en el carro.", "visible": false},
+      {"evento": "IdlePullChain", "nombre": "Tirar de la cadena", "categoria": "oficios", "descripcion": "Tirar de la cadena."},
+      {"evento": "IdleBlackSmithingEnterStart", "nombre": "Trabajar en la forja", "categoria": "oficios", "destacada": true, "descripcion": "Trabajar en la forja. Necesita: estar delante de la mesa de trabajo.", "visible": false},
+      {"evento": "IdleCarryBucketPourEnter", "nombre": "Vaciar una cubeta", "categoria": "oficios", "descripcion": "Vaciar una cubeta. Necesita: necesita llevar el objeto en las manos."},
+      {"evento": "IdleSell", "nombre": "Vender algo", "categoria": "oficios", "descripcion": "Vender algo."},
+      {"evento": "pa_OffsetBoundStandingCut", "nombre": "Cortar las ataduras (A ti)", "categoria": "remates", "descripcion": "Se cortan las ataduras de las manos por alguien más (hace un pequeño movimiento de manos como que alguien le corta la atadura de las manos)", "visible": false},
+      {"evento": "ExecutionNextClip", "nombre": "Ejecución: siguiente parte", "categoria": "remates", "descripcion": "Siguiente paso de la animación de ejecución", "visible": false},
+      {"evento": "pa_KillingBlow", "nombre": "Golpe de gracia", "categoria": "remates", "descripcion": "Toma su espada de una mano y la clava rematando", "visible": false},
+      {"evento": "pa_2HWKillMoveA", "nombre": "Rematar", "categoria": "remates", "descripcion": "No funciona", "visible": false},
+      {"evento": "pa_KillMoveB", "nombre": "Rematar (12)", "categoria": "remates", "descripcion": "Rematar (12). Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados.", "visible": false},
+      {"evento": "pa_KillMove", "nombre": "Rematar (13)", "categoria": "remates", "descripcion": "Rematar (13). Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados.", "visible": false},
+      {"evento": "pa_KillMoveI", "nombre": "Rematar (2)", "categoria": "remates", "descripcion": "Rematar (2). Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados.", "visible": false},
+      {"evento": "pa_KillMoveE", "nombre": "Rematar (3)", "categoria": "remates", "descripcion": "Rematar (3). Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados.", "visible": false},
+      {"evento": "pa_KillMoveM", "nombre": "Rematar (5)", "categoria": "remates", "descripcion": "Rematar (5). Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados.", "visible": false},
+      {"evento": "pa_KillMoveL", "nombre": "Rematar (6)", "categoria": "remates", "descripcion": "Rematar (6). Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados.", "visible": false},
+      {"evento": "pa_KillMoveK", "nombre": "Rematar (7)", "categoria": "remates", "descripcion": "Rematar (7). Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados.", "visible": false},
+      {"evento": "pa_KillMoveH", "nombre": "Rematar (8)", "categoria": "remates", "descripcion": "Rematar (8). Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados.", "visible": false},
+      {"evento": "pa_KillMoveG", "nombre": "Rematar (9)", "categoria": "remates", "descripcion": "Rematar (9). Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados.", "visible": false},
+      {"evento": "pa_KillMoveSneakBackA", "nombre": "Rematar a hurtadillas y degollado (Una mano)", "categoria": "remates", "descripcion": "Remata agarrando y degollando", "visible": false},
+      {"evento": "pa_KillMoveH2HComboA", "nombre": "Rematar a puñetazos (Puños)", "categoria": "remates", "confirmado": false, "descripcion": "Remata agarrando y golpeando con los puños", "visible": false},
+      {"evento": "pa_KillMove1HMGrappleStab", "nombre": "Rematar agarrando y apuñalando con un arma de una mano", "categoria": "remates", "descripcion": "Rematar agarrando y apuñalando con un arma de una mano. Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados.", "visible": false},
+      {"evento": "pa_KillMove2HMStabA", "nombre": "Rematar apuñalada (Dos manos)", "categoria": "remates", "descripcion": "Remata apuñalando en el centro hacia arriba con dos manos", "visible": false},
+      {"evento": "pa_KillMove2HMChaurusFlyerStabDown", "nombre": "Rematar apuñalada baja (Dos manos)", "categoria": "remates", "confirmado": false, "descripcion": "Remata preparando el arma y apuñalando hacia abajo dos manos", "visible": false},
+      {"evento": "pa_KillMove1HMSpiderStabA", "nombre": "Rematar apuñalada baja (Una mano)", "categoria": "remates", "confirmado": false, "descripcion": "Remata apuñalando hacia abajo con una mano", "visible": false},
+      {"evento": "pa_KillMove1HMStabDownChest", "nombre": "Rematar apuñalando en el pecho con un arma de una mano", "categoria": "remates", "descripcion": "Rematar apuñalando en el pecho con un arma de una mano. Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados.", "visible": false},
+      {"evento": "pa_KillMove1HMStabUpFace", "nombre": "Rematar apuñalando en la cara con un arma de una mano", "categoria": "remates", "descripcion": "Rematar apuñalando en la cara con un arma de una mano. Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados.", "visible": false},
+      {"evento": "pa_KillMove1HMRepeatStabDown", "nombre": "Rematar apuñalando varias veces con un arma de una mano", "categoria": "remates", "descripcion": "Rematar apuñalando varias veces con un arma de una mano. Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados.", "visible": false},
+      {"evento": "pa_KillMove1HMBackStab", "nombre": "Rematar apuñalar por la espalda (Una mano)", "categoria": "remates", "confirmado": false, "descripcion": "Remata agarrando y apuñalando", "visible": false},
+      {"evento": "pa_KillMoveDLC02RipHeartOut", "nombre": "Rematar arrancando corazón", "categoria": "remates", "descripcion": "Remata agarrandolo en el aire y arrancando el corazón", "visible": false},
+      {"evento": "pa_KillMoveC", "nombre": "Rematar cargando (Una mano)", "categoria": "remates", "descripcion": "Remata cargando al enemigo hacia atrás y lo remata con espada", "visible": false},
+      {"evento": "pa_KillMove2HMFalmerA", "nombre": "Rematar clavando desde abajo (Dos manos)", "categoria": "remates", "confirmado": false, "descripcion": "Remata clavando el arma desde abajo", "visible": false},
+      {"evento": "pa_KillMove2HMWolfA", "nombre": "Rematar clavando desde abajo 2 (Dos manos)", "categoria": "remates", "confirmado": false, "descripcion": "Remata clavando el arma desde abajo", "visible": false},
+      {"evento": "pa_KillMove1HMFalmerA", "nombre": "Rematar con agarre (Una mano)", "categoria": "remates", "confirmado": false, "descripcion": "Remata agarrando y haciendo un tajo horizontal arriba", "visible": false},
+      {"evento": "pa_KillMove1HMHagravenB", "nombre": "Rematar con agarre 2 (Una mano)", "categoria": "remates", "confirmado": false, "descripcion": "Remata agarrando y dando un tjao horizontal", "visible": false},
+      {"evento": "pa_KillMoveF", "nombre": "Rematar con altura (Una mano)", "categoria": "remates", "descripcion": "Remata cargando hacia adelante y subirse para rematar", "visible": false},
+      {"evento": "pa_KillMove2HMSteamCenturionA", "nombre": "Rematar con dificultad (Dos manos) (1)", "categoria": "remates", "confirmado": false, "descripcion": "Remata tajando arriba horizontalmente, pero se queda atascado", "visible": false},
+      {"evento": "pa_KillMove2HWVBBackBreaker", "nombre": "Rematar con dificultad (Dos manos) (2)", "categoria": "remates", "confirmado": false, "descripcion": "Remata con dificultad con dos golpes", "visible": false},
+      {"evento": "pa_KillMove2HMVBBlockAndSlash", "nombre": "Rematar con doble bloqueo (Dos manos)", "categoria": "remates", "confirmado": false, "descripcion": "Remata bloqueando dos veces y luego tajando", "visible": false},
+      {"evento": "pa_KillMove2HWWolfA", "nombre": "Rematar con doble golpe (Dos manos) (1)", "categoria": "remates", "confirmado": false, "descripcion": "Remata con dos golpes", "visible": false},
+      {"evento": "pa_KillMove2HWTrollA", "nombre": "Rematar con doble golpe (Dos manos) (2)", "categoria": "remates", "confirmado": false, "descripcion": "Remata con dos golpes", "visible": false},
+      {"evento": "pa_KillMove2HMWolfB", "nombre": "Rematar con doble tajo (Dos manos) (1)", "categoria": "remates", "confirmado": false, "descripcion": "Remata tajando 2 veces", "visible": false},
+      {"evento": "pa_KillMove2HMTrollB", "nombre": "Rematar con doble tajo (Dos manos) (2)", "categoria": "remates", "confirmado": false, "descripcion": "Remata tajando 2 veces", "visible": false},
+      {"evento": "pa_KillMove1HMTrollB", "nombre": "Rematar con doble tajo (Una mano)", "categoria": "remates", "confirmado": false, "descripcion": "Remata con dos tajos rapidos", "visible": false},
+      {"evento": "pa_KillMove1HMHagravenA", "nombre": "Rematar con doble tajo 2 (Una mano)", "categoria": "remates", "confirmado": false, "descripcion": "Remata con dos tajos rapidos", "visible": false},
+      {"evento": "pa_KillMove1HMSteamCenturionB", "nombre": "Rematar con doble tajo lento (Una mano)", "categoria": "remates", "confirmado": false, "descripcion": "Remata con dos tajos lentos", "visible": false},
+      {"evento": "pa_KillMoveDualWieldA", "nombre": "Rematar con dos armas (Una mano Doble)", "categoria": "remates", "descripcion": "Remata perforando desde abajo con las dos armas de una mano", "visible": false},
+      {"evento": "pa_KillMove2HMSprigganA", "nombre": "Rematar con estilo (Dos manos)", "categoria": "remates", "confirmado": false, "descripcion": "Remata con un salto y tajo hacia abajo", "visible": false},
+      {"evento": "pa_KillMoveD", "nombre": "Rematar con estilo (Una mano)", "categoria": "remates", "descripcion": "Remata con un salto y tajo hacia adelante", "visible": false},
+      {"evento": "pa_KillMove2HMHagravenA", "nombre": "Rematar con estilo 2 (Dos manos)", "categoria": "remates", "confirmado": false, "descripcion": "Remata con un salto y tajo hacia abajo", "visible": false},
+      {"evento": "pa_KillMoveBearA", "nombre": "Rematar con fuerza (Una mano)", "categoria": "remates", "descripcion": "Remata haciendo 2 tajos, el último en el centro", "visible": false},
+      {"evento": "pa_KillMoveShortA", "nombre": "Rematar con fuerza desde abajo (Una mano)", "categoria": "remates", "descripcion": "Remata haciendo un corte diagonal desde abajo hacia arriba", "visible": false},
+      {"evento": "pa_KillMoveSabreCatShortB", "nombre": "Rematar con fuerza desde arriba (Una mano)", "categoria": "remates", "descripcion": "Remata haciendo un corte diagonal desde arriba pero se queda atascado", "visible": false},
+      {"evento": "pa_KillMove1HMWolfA", "nombre": "Rematar con golpe (Una mano)", "categoria": "remates", "confirmado": false, "descripcion": "Remata dando un golpe contundente", "visible": false},
+      {"evento": "pa_KillMove1HMVBSoccerKick", "nombre": "Rematar con patada (Una mano)", "categoria": "remates", "confirmado": false, "descripcion": "Remata con un tajo alto y patada de Rematar", "visible": false},
+      {"evento": "pa_KillMove1HMWolfB", "nombre": "Rematar con patada y tajo (Una mano)", "categoria": "remates", "confirmado": false, "descripcion": "Remata dando una patada y luego un tajo vertical", "visible": false},
+      {"evento": "pa_KillMove1HMSprigganB", "nombre": "Rematar con perforante superior (Una mano)", "categoria": "remates", "confirmado": false, "descripcion": "Remata perforando desde arriba hacia abajo", "visible": false},
+      {"evento": "pa_KillMoveJ", "nombre": "Rematar con pierna", "categoria": "remates", "descripcion": "Remata aplastando lo que está en el suelo", "visible": false},
+      {"evento": "pa_KillMove2HWSprigganA", "nombre": "Rematar con salto y golpe (Dos manos)", "categoria": "remates", "confirmado": false, "descripcion": "Remata con un salto y golpe tajante vertical", "visible": false},
+      {"evento": "pa_KillMove2HMSpiderSlamA", "nombre": "Rematar con salto y tajo (Dos manos)", "categoria": "remates", "confirmado": false, "descripcion": "Remata con un salto y cae tajando", "visible": false},
+      {"evento": "pa_KillMove2HWSpiderSlamA", "nombre": "Rematar con salto y tajo 2 (Dos manos)", "categoria": "remates", "confirmado": false, "descripcion": "Remata con un salto y cae tajando", "visible": false},
+      {"evento": "pa_KillMove1HMFalmerB", "nombre": "Rematar con tajo doble (Una mano)", "categoria": "remates", "confirmado": false, "descripcion": "Remata con 2 tajos rapidos", "visible": false},
+      {"evento": "pa_KillMove1HMFalmerC", "nombre": "Rematar con tajo fuerte (Una mano)", "categoria": "remates", "confirmado": false, "descripcion": "Remata dando un tajo que se queda atascado", "visible": false},
+      {"evento": "pa_KillMove1HMBearB", "nombre": "Rematar con tajo fuerte 2 (Una mano)", "categoria": "remates", "descripcion": "Remata dando un tajo que se queda atascado", "visible": false},
+      {"evento": "pa_KillMoveDraugrShortA", "nombre": "Rematar con un golpe (Una mano)", "categoria": "remates", "descripcion": "Remata golpeando con el arma contundentemente", "visible": false},
+      {"evento": "pa_KillMove1HMChaurusFlyerKick", "nombre": "Rematar con una patada", "categoria": "remates", "confirmado": false, "descripcion": "Remata dando una patada fuerte", "visible": false},
+      {"evento": "pa_KillMove1HMSprigganA", "nombre": "Rematar con voltereta y tajo vertical (Una mano)", "categoria": "remates", "confirmado": false, "descripcion": "Remata dando una vuelta a la izquierda y tajando verticalmente", "visible": false},
+      {"evento": "pa_KillMove2HMBearB", "nombre": "Rematar con vuelta (Dos manos)", "categoria": "remates", "descripcion": "Remata dando una vuelta y tajando horizontalmente", "visible": false},
+      {"evento": "pa_KillMove2HMSabreCatB", "nombre": "Rematar con vuelta 2 (Dos manos)", "categoria": "remates", "descripcion": "Remata dando una vuelta y tajando horizontalmente", "visible": false},
+      {"evento": "pa_KillMove2HMGiantA", "nombre": "Rematar con vuelta 3 (Dos manos)", "categoria": "remates", "confirmado": false, "descripcion": "Remata dando una vuelta y tajando horizontalmente", "visible": false},
+      {"evento": "pa_KillMove1HMDecap", "nombre": "Rematar con vuelta y decapitando (Una mano)", "categoria": "remates", "confirmado": false, "descripcion": "Remata dando una vuelta y decapitando", "visible": false},
+      {"evento": "pa_KillMove2HWSabreCatA", "nombre": "Rematar con vuelta y golpe al centro (Dos manos)", "categoria": "remates", "descripcion": "Remata con una vuelta y golpe en el centro", "visible": false},
+      {"evento": "pa_KillMove2HWGiantA", "nombre": "Rematar con vuelta y golpe al centro 2 (Dos manos)", "categoria": "remates", "confirmado": false, "descripcion": "Remata con una vuelta y golpe en el centro", "visible": false},
+      {"evento": "pa_KillMove2HWBearA", "nombre": "Rematar con vuelta y golpe al centro 3 (Dos manos)", "categoria": "remates", "descripcion": "Remata con una vuelta y golpe en el centro", "visible": false},
+      {"evento": "pa_KillMove1HMSteamCenturionA", "nombre": "Rematar con vuelta y tajo (Una mano) (1)", "categoria": "remates", "confirmado": false, "descripcion": "Remata con una vuelt ay tajo alto horizontal que se traba", "visible": false},
+      {"evento": "pa_KillMove1HMGiantBleedOutA", "nombre": "Rematar con vuelta y tajo (Una mano) (2)", "categoria": "remates", "confirmado": false, "descripcion": "Remata dando una vuelta y tajando verticalmente", "visible": false},
+      {"evento": "pa_KillMove1HMGiantB", "nombre": "Rematar con vuelta y tajo hacia arriba (Una mano)", "categoria": "remates", "confirmado": false, "descripcion": "Remata dando una vuelta y haciendo un pequeño salto para tajar arriba", "visible": false},
+      {"evento": "pa_KillMoveGiantA", "nombre": "Rematar cortando y punzando arriba (Una mano)", "categoria": "remates", "confirmado": false, "descripcion": "Remata cortando en horizontal y posteriormente punzar hacia arriba", "visible": false},
+      {"evento": "pa_KillMove1HMDecapBleedOut", "nombre": "Rematar corte circular bajo (Una mano)", "categoria": "remates", "confirmado": false, "descripcion": "Remata haciendo un movimiento circular hacia abajo", "visible": false},
+      {"evento": "pa_KillMove2HM3Slash", "nombre": "Rematar de tres tajos con un arma a dos manos", "categoria": "remates", "descripcion": "Rematar de tres tajos con un arma a dos manos. Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados.", "visible": false},
+      {"evento": "pa_KillMoveDWDualSlash", "nombre": "Rematar de un tajo con las dos armas", "categoria": "remates", "descripcion": "Rematar de un tajo con las dos armas. Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados.", "visible": false},
+      {"evento": "pa_KillMove2HMSlash", "nombre": "Rematar de un tajo con un arma a dos manos", "categoria": "remates", "descripcion": "Rematar de un tajo con un arma a dos manos. Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados.", "visible": false},
+      {"evento": "pa_KillMove2HWChaurusFlyerPullDownSlash", "nombre": "Rematar debilitando y golpe (Dos manos)", "categoria": "remates", "confirmado": false, "descripcion": "Remata de forma pezada con un primer golpe y otro fulminante", "visible": false},
+      {"evento": "pa_KillMove2HMDecapBleedOut", "nombre": "Rematar decapitando (Dos manos)", "categoria": "remates", "confirmado": false, "descripcion": "Remata decapitando lo que haya debilitado en el suelo", "visible": false},
+      {"evento": "pa_KillMoveDWDecap", "nombre": "Rematar decapitando (Una mano Doble)", "categoria": "remates", "confirmado": false, "descripcion": "Remata decapitando con dos armas de una mano", "visible": false},
+      {"evento": "pa_KillMove2HMDecap", "nombre": "Rematar decapitando 2 (Dos manos)", "categoria": "remates", "confirmado": false, "descripcion": "Remata decapitando lo que haya debilitado en el suelo", "visible": false},
+      {"evento": "pa_KillMove2HWDecapBleedOut", "nombre": "Rematar decapitando fuertemente (Dos manos)", "categoria": "remates", "confirmado": false, "descripcion": "Remata decapitando lo que haya debilitado en el suelo", "visible": false},
+      {"evento": "pa_KillMove1HMDecapKnife", "nombre": "Rematar degollando con cuchillo", "categoria": "remates", "confirmado": false, "descripcion": "Remata degollando con el cuchillo", "visible": false},
+      {"evento": "pa_KillMoveShortB", "nombre": "Rematar desde abajo (Una mano)", "categoria": "remates", "descripcion": "Remata perforando desde abajo hacia arriba", "visible": false},
+      {"evento": "pa_KillMoveShortD", "nombre": "Rematar desde arriba (Una mano)", "categoria": "remates", "descripcion": "Remata perforando desde arriba hacia abajo", "visible": false},
+      {"evento": "pa_KillMoveDraugrShortB", "nombre": "Rematar en corto (7)", "categoria": "remates", "descripcion": "Rematar en corto (7). Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados.", "visible": false},
+      {"evento": "pa_KillMoveDWXSlash", "nombre": "Rematar en cruz con las dos armas", "categoria": "remates", "descripcion": "Rematar en cruz con las dos armas. Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados.", "visible": false},
+      {"evento": "pa_KillMoveSabreCatShortA", "nombre": "Rematar en el suelo (Una mano)", "categoria": "remates", "descripcion": "Remata perforando desde arriba hacia abajo", "visible": false},
+      {"evento": "pa_KillMoveH2HSneakSleeper", "nombre": "Rematar estrangulando por sorpresa", "categoria": "remates", "descripcion": "Rematar estrangulando por sorpresa. Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados.", "visible": false},
+      {"evento": "pa_KillMoveH2HSlamA", "nombre": "Rematar estrellando al suelo (Puños)", "categoria": "remates", "descripcion": "Remata cargando y estrellandolo al suelo", "visible": false},
+      {"evento": "pa_KillMoveH2HBodySlam", "nombre": "Rematar estrellándolo contra el suelo", "categoria": "remates", "descripcion": "Rematar estrellándolo contra el suelo. Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados.", "visible": false},
+      {"evento": "pa_KillMoveDraugrB", "nombre": "Rematar girando (Una mano)", "categoria": "remates", "descripcion": "Remata haciendo una rotación 360 grados", "visible": false},
+      {"evento": "pa_KillMoveTrollA", "nombre": "Rematar hacia arriba (Una mano)", "categoria": "remates", "descripcion": "Remata agarrando y cortando hacia arriba horizontalmente", "visible": false},
+      {"evento": "pa_KillMoveSabreCat", "nombre": "Rematar hacia la izquierda (Una mano)", "categoria": "remates", "descripcion": "Remata hacia la izquierda perforando con nuestra arma", "visible": false},
+      {"evento": "pa_KillMove1HMVBSlowBackStab", "nombre": "Rematar largo (Una mano)", "categoria": "remates", "confirmado": false, "descripcion": "Remata apuñalando y luego corte de garganta", "visible": false},
+      {"evento": "pa_KillMoveH2HSneakNeckBreak", "nombre": "Rematar partiendo el cuello por sorpresa", "categoria": "remates", "descripcion": "Rematar partiendo el cuello por sorpresa. Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados.", "visible": false},
+      {"evento": "pa_KillMove2HMBearA", "nombre": "Rematar perforante (Dos manos)", "categoria": "remates", "descripcion": "Remata perforando en el centro el arma", "visible": false},
+      {"evento": "pa_KillMove2HMSabreCatA", "nombre": "Rematar perforante 2 (Dos manos)", "categoria": "remates", "descripcion": "Remata perforando en el centro el arma", "visible": false},
+      {"evento": "pa_KillMove2HMTrollA", "nombre": "Rematar perforante 3 (Dos manos)", "categoria": "remates", "confirmado": false, "descripcion": "Remata perforando en el centro el arma", "visible": false},
+      {"evento": "pa_KillMoveDraugr", "nombre": "Rematar repetidamente (Una mano)", "categoria": "remates", "descripcion": "Remata haciendo 3 tajos diagonales", "visible": false},
+      {"evento": "pa_KillMove1HMSpiderSmashA", "nombre": "Rematar sencillo (Una mano)", "categoria": "remates", "confirmado": false, "descripcion": "Remata con impacto rápido en el suelo", "visible": false},
+      {"evento": "pa_KillMoveShortC", "nombre": "Rematar tajando desde arriba (Una mano)", "categoria": "remates", "descripcion": "Remata haciendo un tajo verticalmente", "visible": false},
+      {"evento": "pa_KillMove2HMDraugrA", "nombre": "Rematar tajante doble (Dos manos)", "categoria": "remates", "confirmado": false, "descripcion": "Remata tajano dos veces", "visible": false},
+      {"evento": "pa_KillMove2HMFalmerB", "nombre": "Rematar tajante doble 2 (Dos manos)", "categoria": "remates", "confirmado": false, "descripcion": "Remata tajano dos veces", "visible": false},
+      {"evento": "pa_KillMove2HWDragonRodeoSlash", "nombre": "Rematar tajo y montarse (Dos manos)", "categoria": "remates", "confirmado": false, "descripcion": "Remata dando un tajo y se sube en algo grande", "visible": false},
+      {"evento": "pa_KillMove1HMDragonRodeoStabShort", "nombre": "Rematar tajo y montarse (Una mano)", "categoria": "remates", "confirmado": false, "descripcion": "Remata dando un tajo y se sube en algo grande", "visible": false},
+      {"evento": "pa_KillMove2HMDragonSlash", "nombre": "Rematar tajo y montarse 2 (Dos manos)", "categoria": "remates", "confirmado": false, "descripcion": "Remata dando un tajo y se sube en algo grande", "visible": false},
+      {"evento": "pa_KillMove1HMDragonRodeoSlash", "nombre": "Rematar tajo y montarse 2 (Una mano)", "categoria": "remates", "confirmado": false, "descripcion": "Remata dando un tajo y se sube en algo grande", "visible": false},
+      {"evento": "pa_KillMove2HWDragonSlash", "nombre": "Rematar tajo y montarse 3 (Dos manos)", "categoria": "remates", "confirmado": false, "descripcion": "Remata dando un tajo y se sube en algo grande", "visible": false},
+      {"evento": "pa_DLC1SeranaHoldsVyrthur", "nombre": "Sujetar a alguien y soltarlo", "categoria": "remates", "descripcion": "Levantar a alguien para despues de unos segundos soltarlo", "visible": false},
+      {"evento": "IdleBarCounterEnter", "nombre": "Apoyarse en el mostrador", "categoria": "sentarse", "salida": "IdleFurnitureExit", "descripcion": "Apoya en el mostrador de bar, a veces limpia"},
+      {"evento": "IdleRailLeanEnter", "nombre": "Apoyarse en la baranda", "categoria": "sentarse", "destacada": true, "salida": "IdleRailLeanExit", "descripcion": "Avanza un poco y apoyate en la baranda"},
+      {"evento": "IdleLeanTableEnter", "nombre": "Apoyarse en la mesa", "categoria": "sentarse", "salida": "IdleFurnitureExit", "descripcion": "Apoyarse en la mesa. Necesita: estar delante de la mesa de trabajo.", "visible": false},
+      {"evento": "IdleTableLeanPoint", "nombre": "Apoyarse en la mesa y señalar", "categoria": "sentarse", "descripcion": "Apoyarse en la mesa para señalar", "visible": false},
+      {"evento": "IdleWallLeanStart", "nombre": "Apoyarse en la pared", "categoria": "sentarse", "destacada": true, "descripcion": "Voltea y te apoyas con brazos cruzados"},
+      {"evento": "IdleChildSitOnKnees", "nombre": "Arrodillarse (2)", "categoria": "sentarse", "descripcion": "Sentarse sobre las rodillas y hace un pequeño balanceo"},
+      {"evento": "idleChairArmsCrossedVar1", "nombre": "Brazos cruzados (Sentado)", "categoria": "sentarse", "sentado": true, "descripcion": "Cruzar los brazos mientras estás sentado en una silla"},
+      {"evento": "idleChairArmsCrossedVar2", "nombre": "Brazos cruzados 2 (Sentado)", "categoria": "sentarse", "sentado": true, "descripcion": "Cruzar los brazos mientras estás sentado en una silla"},
+      {"evento": "IdleChairVar1", "nombre": "Cambio de pose (Sentado)", "categoria": "sentarse", "sentado": true, "descripcion": "Pose de estar centado"},
+      {"evento": "idleChairVar2", "nombre": "Cambio de pose 2 (Sentado)", "categoria": "sentarse", "sentado": true, "descripcion": "Pose de estar centado"},
+      {"evento": "IdleRailLeanExit", "nombre": "Dejar de apoyarse en la baranda", "categoria": "sentarse", "esSalida": true, "descripcion": "Retrocede un poco y sale de apoyate en la baranda"},
+      {"evento": "IdleLounge_Exit", "nombre": "Dejar de repantigarse", "categoria": "sentarse", "descripcion": "Bajarse de mueble alto.", "visible": false},
+      {"evento": "IdleHideLEnter", "nombre": "Esconderse contra la pared", "categoria": "sentarse", "salida": "IdleFurnitureExit", "descripcion": "Esconderse contra la pared. Necesita: termina con: Levantarse del mueble."},
+      {"evento": "IdleWallSoldierEnter", "nombre": "Esperar atento", "categoria": "sentarse", "descripcion": "Quedarse quieto esperando con diferentes poses intercaladas"},
+      {"evento": "idleChairShoulderFlex", "nombre": "Estirarse (Sentado)", "categoria": "sentarse", "sentado": true, "descripcion": "Estirar los brazos mientras estás sentado en una silla"},
+      {"evento": "IdleChairFrontExit", "nombre": "Levantarse de frente", "categoria": "sentarse", "esSalida": true, "descripcion": "Levantarse de la silla de frente", "visible": false},
+      {"evento": "IdleChairFrontQuickExit", "nombre": "Levantarse de frente, rápido", "categoria": "sentarse", "descripcion": "Levantarse de la silla de frente rapido", "visible": false},
+      {"evento": "IdleTableBackExit", "nombre": "Levantarse de la mesa", "categoria": "sentarse", "esSalida": true, "descripcion": "Levantarse de mesa hacia atras", "visible": false},
+      {"evento": "IdleChairExitStart", "nombre": "Levantarse de la silla", "categoria": "sentarse", "descripcion": "Levantarse de la silla de lado", "visible": false},
+      {"evento": "IdleStoolBackExit", "nombre": "Levantarse del taburete", "categoria": "sentarse", "esSalida": true, "descripcion": "Levantarse de taburete de bar", "visible": false},
+      {"evento": "idleChairRightExit", "nombre": "Levantarse por la derecha", "categoria": "sentarse", "esSalida": true, "descripcion": "Levantarse de la silla del lado derecho", "visible": false},
+      {"evento": "IdleChairRightQuickExit", "nombre": "Levantarse por la derecha, rápido", "categoria": "sentarse", "descripcion": "Levantarse de la silla del lado derecho rapido", "visible": false},
+      {"evento": "idleChairLeftExit", "nombre": "Levantarse por la izquierda", "categoria": "sentarse", "esSalida": true, "descripcion": "Levantarse de la silla del lado izquierdo", "visible": false},
+      {"evento": "IdleChairLeftQuickExit", "nombre": "Levantarse por la izquierda, rápido", "categoria": "sentarse", "descripcion": "Levantarse de la silla del lado izquierdo rapido", "visible": false},
+      {"evento": "idleChairLookDown", "nombre": "Mirar al suelo (Sentado)", "categoria": "sentarse", "sentado": true, "descripcion": "Mirar alrededor y luego mirar al suelo mientras estás sentado en una silla"},
+      {"evento": "IdleLounge", "nombre": "Repantigarse", "categoria": "sentarse", "destacada": true, "descripcion": "Subirse a mueble alto", "visible": false},
+      {"evento": "IdleTableEnter", "nombre": "Sentarse a la mesa", "categoria": "sentarse", "salida": "IdleTableBackExit", "descripcion": "Sentarse a la mesa. Necesita: estar delante de la mesa de trabajo.", "visible": false},
+      {"evento": "IdleTableEnterPlayer", "nombre": "Sentarse a la mesa (jugador)", "categoria": "sentarse", "salida": "IdleTableBackExit", "descripcion": "Sentarse a la mesa (jugador). Necesita: estar delante de la mesa de trabajo.", "visible": false},
+      {"evento": "IdleSitCrossLeggedEnter", "nombre": "Sentarse con las piernas cruzadas", "categoria": "sentarse", "salida": "IdleFurnitureExit", "descripcion": "Sentarse con las piernas cruzadas. Necesita: estar sentado en una silla, banco o taburete. Termina con: Levantarse del mueble."},
+      {"evento": "IdleChildLegsOutStart", "nombre": "Sentarse con las piernas estiradas", "categoria": "sentarse", "descripcion": "Sentarse con piernas cruzadas", "visible": false},
+      {"evento": "IdleChairFrontEnter", "nombre": "Sentarse de frente", "categoria": "sentarse", "destacada": true, "salida": "IdleChairFrontExit", "descripcion": "Sentarse de frente en silla", "visible": false},
+      {"evento": "IdleStoolEnter", "nombre": "Sentarse en el taburete", "categoria": "sentarse", "destacada": true, "salida": "IdleStoolBackExit", "descripcion": "Sentarse en taburete de bar", "visible": false},
+      {"evento": "IdleStoolEnterPlayer", "nombre": "Sentarse en el taburete (jugador)", "categoria": "sentarse", "salida": "IdleStoolBackExit", "descripcion": "Sentarse en el taburete (jugador). Necesita: estar sentado en una silla, banco o taburete.", "visible": false},
+      {"evento": "IdleJarlChairEnter", "nombre": "Sentarse en el trono del jarl", "categoria": "sentarse", "descripcion": "Sentarse en trono de jarl", "visible": false},
+      {"evento": "IdleSnowElfPrinceChairEnter", "nombre": "Sentarse en el trono élfico", "categoria": "sentarse", "descripcion": "Sentarse en el trono élfico. Necesita: estar sentado en una silla, banco o taburete.", "visible": false},
+      {"evento": "IdleSitLedgeEnter", "nombre": "Sentarse en una repisa", "categoria": "sentarse", "salida": "IdleFurnitureExit", "descripcion": "Sentarse en una repisa. Necesita: estar sentado en una silla, banco o taburete.", "visible": false},
+      {"evento": "IdleChairRightEnter", "nombre": "Sentarse por la derecha", "categoria": "sentarse", "salida": "idleChairRightExit", "descripcion": "Sentarse por la derecha en silla", "visible": false},
+      {"evento": "IdleChairLeftEnter", "nombre": "Sentarse por la izquierda", "categoria": "sentarse", "salida": "idleChairLeftExit", "descripcion": "Sentarse por la izquierda en silla", "visible": false}
     ]
   };
 // <<< CATALOGO GENERADO <<<
@@ -853,7 +941,16 @@
         destacada: !!ficha.destacada,
         andando: !!ficha.andando,
         sentado: !!ficha.sentado,
-        icono: iconoDe(ficha),
+        /* Lo que hace, en una linea. Se escribe en la hoja de revision y sale
+           en la ficha que asoma al pasar el raton por la lista. Sin esto el
+           panel recibia las animaciones sin descripcion y la ficha salia
+           siempre con "Sin descripcion", aunque estuviera escrita. */
+        descripcion: ficha.descripcion || '',
+        /* La animacion que termina esta, si es de las de dos piezas. */
+        salida: ficha.salida || '',
+        /* Y si ESTA es la salida de otra: entonces no se ensena en la lista,
+           porque no es una pose que uno elija (ver laRueda y filtrar). */
+        esSalida: !!ficha.esSalida,
         /* Se ve o no se ve. Por ahora todas se ven; el servidor podra esconder
            las que quiera, por jugador, con ap.ocultar(). Ver pedirOcultar. */
         visible: ficha.visible === false ? false : true,
@@ -1810,7 +1907,26 @@
     return hecho;
   }
 
+  /**
+   * La animacion que termina la que esta puesta, si tiene una.
+   *
+   * Las poses de dos piezas —recoger y soltar, sentarse y levantarse— no se
+   * cortan bien con el corte generico: la piedra se desvanece de la mano. Con
+   * su salida, el personaje la suelta como debe.
+   */
+  function salidaDeLoPuesto() {
+    if (!enMarcha) return '';
+    var ficha = porEvento[enMarcha];
+    if (!ficha || !ficha.salida) return '';
+    return porEvento[ficha.salida] ? ficha.salida : '';
+  }
+
   function pedirParar(origen, quien) {
+    /* Lo PRIMERO, antes de tocar nada: cual es la salida de lo que hay puesto.
+       Mas abajo enMarcha se pone a null, y entonces ya no habria forma de
+       saberlo. */
+    var laSalida = salidaDeLoPuesto();
+
     Bucle.quitar();          // parar es parar: si habia bucle, se acaba
     esperandoParaCambiar = null;  // y si habia una esperando su turno, tambien
     enMarcha = null;
@@ -1820,6 +1936,17 @@
        se hace un momento despues, cuando el corte ya ha pasado. */
     var memoria = memoriaDelEstado;
     memoriaDelEstado = null;
+
+    /* La salida va ANTES del corte: es la animacion que termina la pose como
+       debe. El corte va detras igual, por si la salida no basta para devolver
+       el control. */
+    if (laSalida) {
+      var actorSalida = Reproductor.actorDe(peticion);
+      if (actorSalida) {
+        enviarAlGrafo(actorSalida, laSalida);
+        apuntar('salida de la animacion: ' + laSalida);
+      }
+    }
 
     var hecho = Reproductor.parar(peticion, memoria);
     if (hecho && memoria && (memoria.armaFuera || memoria.mueble)) {
@@ -1866,10 +1993,10 @@
    * asi que se piden por nombre con una alternativa por si no estan.
    * ======================================================================= */
 
-  function panelEnLaPagina(datos, favoritosGuardados, losDibujos) {
+  function panelEnLaPagina(datos, favoritosGuardados) {
     // Si ya estaba puesto, solo se le pasan los datos nuevos y no se duplica.
     if (window.__animplayer) {
-      window.__animplayer.cargar(datos, favoritosGuardados, losDibujos);
+      window.__animplayer.cargar(datos, favoritosGuardados);
       return;
     }
 
@@ -1892,50 +2019,106 @@
          texto   #e9e1cf, y #b9ae94 para lo secundario
          letras  Bankir-Retro en titulos, Din-pro en el resto             */
     var css = [
+      /* La paleta del inventario del servidor, estilo "Sin marcos", que es el
+         que trae puesto de fabrica: su propio codigo dice
+         AJUSTES_INICIALES = { estilo: 'limpio' }, y a ese estilo lo llama
+         "Sin marcos" en la lista de ajustes.
+         Nada de molduras: fondo casi negro, un borde finisimo, esquinas
+         redondeadas y un velo que lo funde con el juego por un lado.
+         Si el servidor cambia su tema, se cambian estos valores y el panel
+         entero le sigue. */
+      '#' + ID + '{',
+      '  --ap-txt:#ece6da;',
+      '  --ap-tenue:#9a958c;',
+      '  --ap-acento:#ece6da;',
+      '  --ap-acento2:#e4c789;',
+      '  --ap-linea:rgba(255,255,255,.12);',
+      '  --ap-hueco:rgba(0,0,0,.18);',
+      '  --ap-hueco-borde:rgba(255,255,255,.1);',
+      '  --ap-sel:rgba(255,255,255,.55);',
+      '  --ap-sel-fondo:rgba(255,255,255,.08);',
+      '  --ap-caja-fondo:rgba(10,11,13,.92);',
+      '  --ap-caja-borde:1px solid rgba(255,255,255,.1);',
+      '  --ap-caja-radio:10px;',
+      '  --ap-caja-sombra:0 10px 28px rgba(0,0,0,.5);',
+      '  --ap-boton-fondo:transparent;',
+      '  --ap-boton-borde:rgba(255,255,255,.35);',
+      '  --ap-boton-radio:999px;',
+      /* Las fuentes del servidor. Van incrustadas en su propia pagina, asi que
+         aqui solo hay que nombrarlas; los respaldos son por si el panel acaba
+         en otra pagina que no las tenga. */
+      '  --ap-fuente-titulo:"Aes Barlow","Din-pro",sans-serif;',
+      '  --ap-fuente-nombre:"Din-pro",sans-serif;',
+      '  --ap-fuente-etiqueta:"Aes Barlow","Din-pro",sans-serif}',
+
       /* La capa ocupa toda la pantalla porque ahora hay dos cosas en sitios
          distintos: la rueda en el centro y la ventana de la lista arriba a la
          derecha. No deja pasar el raton salvo donde hay algo. */
       '#' + ID + '{position:fixed;inset:0;z-index:9000;',
-      '  font-family:"Din-pro",sans-serif;font-size:15px;color:#e9e1cf;',
+      '  font-family:var(--ap-fuente-nombre);font-size:15px;color:var(--ap-txt);',
       '  pointer-events:none;user-select:none}',
       '#' + ID + ' *{box-sizing:border-box}',
 
-      /* El panel, descolgado del borde de arriba. No hay pestana ni nada que
-         pulsar antes: con la tecla aparece esto directamente. Por eso no lleva
-         borde arriba, para que se vea pegado al canto de la pantalla. */
-      /* Mas ancha que antes, pero sin pasarse de la pantalla en un portatil:
-         el min() se encarga. Y alta hasta donde quepa, que con 611 animaciones
-         cuanta mas lista se vea, menos hay que desplazar. */
-      '#' + ID + ' .ap-panel{pointer-events:auto;position:absolute;top:0;',
-      '  right:min(24px,2vw);width:min(520px,46vw);',
-      '  max-height:92vh;display:none;flex-direction:column;',
-      '  background:linear-gradient(180deg,rgba(42,33,24,.97) 0%,rgba(20,16,12,.97) 100%);',
-      '  border:2px solid #6b5a3a;border-top:none;border-radius:0 0 4px 4px;',
-      '  box-shadow:0 0 0 1px rgba(0,0,0,.6),0 12px 32px rgba(0,0,0,.55),',
-      '    inset 0 0 40px rgba(0,0,0,.5);padding:12px 14px 10px}',
-      '#' + ID + '.ap-abierto .ap-panel{display:flex}',
-      /* Los dos remaches de las esquinas, como el inventario. */
-      '#' + ID + ' .ap-panel::before,#' + ID + ' .ap-panel::after{content:"";',
-      '  position:absolute;top:8px;width:8px;height:8px;border-radius:50%;',
-      '  background:radial-gradient(circle at 35% 35%,#e8c987,#4a3f2f 70%);',
-      '  box-shadow:0 1px 2px rgba(0,0,0,.8)}',
-      '#' + ID + ' .ap-panel::before{left:8px}',
-      '#' + ID + ' .ap-panel::after{right:8px}',
+      /* El velo. Copiado tal cual del inventario del servidor, que lo hace
+         asi:
+             .inventory-container__velo{position:absolute;inset:0;
+               background:linear-gradient(90deg,transparent 25%,
+                                          rgba(5,6,8,.92) 62%);
+               opacity:var(--fondo)}
+         Lo importante es que ocupa la PANTALLA ENTERA, no el panel. Por eso no
+         se le ve el canto: la transicion mide mas de un tercio del ancho de la
+         pantalla. El mismo degradado metido dentro de un panel de 500px daria
+         un desvanecido de 150px, que se ve como una raya. */
+      '#' + ID + ' .ap-velo{position:absolute;inset:0;pointer-events:none;',
+      '  display:none;',
+      '  background:linear-gradient(90deg,transparent 25%,rgba(5,6,8,.92) 62%);',
+      '  opacity:.85}',
+      '#' + ID + '.ap-abierto.ap-modo-lista .ap-velo{display:block;',
+      '  animation:ap-asoma .22s ease-out}',
+      '@keyframes ap-asoma{from{opacity:0}to{opacity:.85}}',
+      /* VARIANTE B: la rueda no lleva velo detras. El degradado lo pone cada
+         sector por su cuenta (ver armarCorro). */
 
-      '#' + ID + ' .ap-cabecera{display:flex;align-items:center;gap:8px;',
-      '  padding:2px 14px 9px;margin-bottom:9px;',
-      '  border-bottom:1px solid rgba(107,90,58,.6)}',
-      '#' + ID + ' .ap-titulo{font-family:"Bankir-Retro",serif;font-size:17px;',
-      '  letter-spacing:2px;text-transform:uppercase;color:#e8c987;',
-      '  text-shadow:0 1px 2px rgba(0,0,0,.8)}',
-      /* A la derecha del titulo, en pequeno: que parte de la lista se esta
-         viendo. Antes esto ocupaba el titulo entero, pero sin la pestana
-         encima ya no habia nada que dijera de que va esta ventana. */
-      '#' + ID + ' .ap-donde{flex:1;font-size:12.5px;color:#b9ae94;',
-      '  text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
-      '#' + ID + ' .ap-cerrar{cursor:pointer;color:#b9ae94;font-size:15px;',
+      /* El panel, pegado al lado derecho y de arriba abajo. Sin fondo propio:
+         en este estilo el inventario apaga el suyo (__panel::before{display:
+         none}) y deja el texto encima del velo. Aqui igual. */
+      '#' + ID + ' .ap-panel{pointer-events:auto;position:absolute;top:0;right:0;',
+      '  width:min(500px,34vw);height:100vh;',
+      '  display:none;flex-direction:column;',
+      /* Aire arriba y abajo: el panel llega de un canto al otro de la
+         pantalla, y sin esto el titulo y los mandos quedan pegados al borde.
+         Abajo mas que arriba, porque abajo hay que acertarles con el raton. */
+      '  background:none;padding:34px 26px 30px}',
+      /* Entra deslizandose desde el canto derecho. Tiene que ser una ANIMACION
+         y no una transicion: el panel pasa de display:none a display:flex, y
+         una transicion no corre sobre algo que acaba de aparecer. */
+      '#' + ID + '.ap-abierto .ap-panel{display:flex;',
+      '  animation:ap-entra .18s ease-out}',
+      '@keyframes ap-entra{from{transform:translateX(100%);opacity:0}',
+      '  to{transform:none;opacity:1}}',
+
+      /* La cabecera, como la del inventario: sin raya debajo, solo aire. */
+      '#' + ID + ' .ap-cabecera{display:flex;align-items:center;gap:12px;',
+      '  margin-bottom:12px}',
+      /* Y el titulo igual que el suyo en este estilo: del color del texto —no
+         dorado—, en mayusculas y muy espaciado. */
+      '#' + ID + ' .ap-titulo{display:flex;align-items:center;',
+      '  font-family:var(--ap-fuente-titulo);font-weight:600;font-size:20px;',
+      '  line-height:1.1;letter-spacing:.2em;text-transform:uppercase;',
+      '  color:var(--ap-txt);text-shadow:0 1px 6px rgba(0,0,0,.8);',
+      '  white-space:nowrap}',
+      /* El rombo de delante: un cuadrado girado, tal cual el suyo. */
+      '#' + ID + ' .ap-rombo{display:inline-block;flex:none;width:9px;height:9px;',
+      '  margin-right:12px;border:1.5px solid var(--ap-acento);',
+      '  transform:rotate(45deg)}',
+      /* Al lado del boton de filtro, en pequeno: que se esta viendo ahora
+         mismo. Antes iba en la cabecera, pero su sitio es junto al mando que
+         lo cambia. */
+      '#' + ID + ' .ap-donde{flex:1;font-size:12.5px;color:var(--ap-tenue);',
+      '  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
+      '#' + ID + ' .ap-cerrar{cursor:pointer;color:var(--ap-tenue);font-size:15px;',
       '  line-height:1;padding:2px 4px}',
-      '#' + ID + ' .ap-cerrar:hover{color:#e8c987}',
+      '#' + ID + ' .ap-cerrar:hover{color:var(--ap-acento2)}',
 
       /* ------------------------------------------------------------ la rueda
          Los favoritos, en corro. Es lo que se usa sin pensar: no hace falta
@@ -1952,22 +2135,23 @@
 
       '#' + ID + ' .ap-cambio,#' + ID + ' .ap-volver{display:flex;align-items:center;justify-content:center;',
       '  gap:6px;margin-top:2px;padding:7px 0;cursor:pointer;font-size:13px;',
-      '  letter-spacing:.5px;color:#b9ae94;',
-      '  border:1px solid rgba(107,90,58,.5);border-radius:3px;',
-      '  background:rgba(0,0,0,.25)}',
+      '  letter-spacing:.5px;color:#fff;text-shadow:0 1px 3px #000;',
+      '  border:none;border-radius:var(--ap-boton-radio);',
+      '  background:rgba(5,6,8,.6)}',
       '#' + ID + ' .ap-cambio:hover,#' + ID + ' .ap-volver:hover{',
-      '  color:#e8c987;border-color:#c9a35a}',
+      '  color:var(--ap-acento2)}',
       '#' + ID + ' .ap-cambio i,#' + ID + ' .ap-volver i{font-style:normal;',
-      '  font-size:9px;color:#c9a35a}',
-      '#' + ID + ' .ap-cambio{white-space:nowrap;padding:6px 12px}',
+      '  font-size:9px;color:var(--ap-acento)}',
+      '#' + ID + ' .ap-cambio{white-space:nowrap;padding:9px 18px;font-size:14px}',
 
       /* El de reiniciar va mas discreto que los demas: hace falta tenerlo a
          mano, pero no es algo que se pulse a diario. */
-      '#' + ID + ' .ap-reiniciar{cursor:pointer;font-size:12.5px;color:#8a7f68;',
-      '  padding:4px 10px;border:1px solid transparent;border-radius:3px;',
+      '#' + ID + ' .ap-reiniciar{cursor:pointer;font-size:13.5px;color:#fff;',
+      '  text-shadow:0 1px 4px #000,0 0 10px #000;padding:7px 14px;',
+      '  padding:4px 10px;border:1px solid transparent;border-radius:8px;',
       '  white-space:nowrap}',
-      '#' + ID + ' .ap-reiniciar:hover{color:#c9a35a;',
-      '  border-color:rgba(107,90,58,.7);background:rgba(0,0,0,.28)}',
+      '#' + ID + ' .ap-reiniciar:hover{color:var(--ap-acento);',
+      '  border-color:var(--ap-linea);background:rgba(0,0,0,.28)}',
 
       /* La rueda no lleva marco ni fondo: se ve el juego por debajo y solo
          destaca el corro. Es lo que sale al pulsar la tecla, asi que tiene que
@@ -1993,11 +2177,34 @@
       '#' + ID + ' .ap-corro-caja{position:absolute;top:50%;left:50%;',
       '  transform:translate(-50%,-50%);width:min(72vmin,720px);',
       '  height:min(72vmin,720px);pointer-events:auto}',
+      /* El hueco del centro se oscurece el solo. Los sectores llevan el oscuro
+         pegado al centro, pero el hueco no es un sector: es el agujero, y
+         encima de un cielo blanco el texto se perdia.
+         Va colgado de ESTA caja y no de la del texto porque esta es cuadrada.
+         Un radial-gradient dibuja un circulo, pero la caja lo recorta: en una
+         caja mas ancha que alta se ve el circulo con el arriba y el abajo
+         cortados, o sea un rectangulo. Aqui sale redondo entero.
+         El hueco tiene un radio del 24% de esta caja. El oscuro aguanta
+         hasta el 22% —o sea, casi todo el hueco— y no se ha ido del todo
+         hasta el 44%, ya bien metido en el anillo, donde se junta con el
+         oscuro que los sectores llevan en su borde de dentro. Es a proposito
+         que sobre tanto: cuanto mas largo el desvanecido, menos se nota donde
+         acaba. */
+      '#' + ID + ' .ap-corro-caja::before{content:"";position:absolute;',
+      '  inset:0;z-index:-1;pointer-events:none;',
+      '  background:radial-gradient(circle,rgba(5,6,8,.92) 0%,',
+      '    rgba(5,6,8,.88) 22%,rgba(5,6,8,.5) 33%,transparent 44%)}',
       '#' + ID + ' .ap-rueda svg{display:block;width:100%;height:100%}',
 
-      /* Un relleno oscuro y translucido: suficiente para leer el rotulo y para
-         que el sector se pueda pulsar, sin tapar el juego. */
-      '#' + ID + ' .ap-sector{fill:rgba(12,9,6,.62);stroke:#6b5a3a;stroke-width:1;',
+      /* El relleno de los huecos del inventario: apenas un tinte y un borde
+         finisimo. Antes era un negro al 62% porque el sector tenia que hacer
+         legible su rotulo el solo; ahora de eso se encarga el velo que hay
+         detras, y el sector solo tiene que verse y poder pulsarse. */
+      /* Casi entero, con un desvanecido suave hacia fuera: de .9 a .62, lo
+         justo para que el sector no acabe en un canto duro. El de antes se iba
+         a transparente del todo y dejaba sin fondo los rotulos largos, que son
+         los que caen en el borde de fuera. */
+      '#' + ID + ' .ap-sector{fill:url(#ap-degradado);stroke:none;',
       '  cursor:pointer;transition:fill .12s,stroke .12s}',
 
       /* El sitio entero (sector y rotulo) crece un poco cuando el cursor esta
@@ -2006,31 +2213,46 @@
          en vez de moverse de sitio. */
       /* La transicion de la opacidad es la que hace que, al girar, los de la
          cola se vayan aclarando en vez de cambiar de golpe. */
-      '#' + ID + ' .ap-sitio{transform-origin:280px 280px;',
+      '#' + ID + ' .ap-sitio{transform-origin:310px 310px;',
       '  transition:transform .12s ease-out,opacity .28s ease-out}',
       '#' + ID + ' .ap-sitio.ap-mirando{transform:scale(1.06)}',
-      '#' + ID + ' .ap-sitio.ap-mirando .ap-sector{fill:rgba(201,163,90,.3);',
-      '  stroke:#e8c987;stroke-width:2}',
+      /* El que se mira se marca aclarando el relleno, no dibujandole una
+         linea alrededor. */
+      /* El que se mira se marca OSCURECIENDOLO, no aclarandolo: encima de un
+         cielo blanco aclarar no destaca, se confunde con el fondo. Oscurecer
+         funciona contra cualquier cosa que haya detras. */
+      /* Y ademas una linea alrededor: oscurecerlo no se nota contra un fondo
+         ya oscuro —de noche, en una cueva—, y el borde si. */
+      '#' + ID + ' .ap-sitio.ap-mirando .ap-sector{fill:rgba(3,4,6,.95);',
+      '  stroke:var(--ap-sel);stroke-width:2}',
+      /* El rotulo del que se mira va en blanco, como los demas. Lo que dice
+         cual es no es el color de la letra: es que el sector se oscurece y
+         crece. El dorado ahi se leia peor que el blanco. */
+      '#' + ID + ' .ap-sitio.ap-mirando .ap-rotulo{fill:#fff}',
 
-      '#' + ID + ' .ap-rotulo{font-size:13px;fill:#e9e1cf;pointer-events:none;',
-      '  text-anchor:middle;paint-order:stroke;stroke:rgba(0,0,0,.85);',
-      '  stroke-width:3px;stroke-linejoin:round}',
+      /* Blanco puro, no el hueso del inventario: estos rotulos caen encima
+         del juego, y sobre nieve o piedra clara un hueso roto se mezcla. El
+         contorno negro es lo que los despega de lo que haya detras. */
+      '#' + ID + ' .ap-rotulo{font-size:13px;fill:#fff;pointer-events:none;',
+      '  text-anchor:middle;paint-order:stroke;stroke:rgba(0,0,0,.92);',
+      '  stroke-width:3.5px;stroke-linejoin:round}',
 
       /* El hueco del centro dice, entera, la que estas mirando. En un sector
          no cabe "Calentarse las manos de pie". */
       /* El hueco del centro: el nombre entero —en un sector no cabria— y
          debajo los dos mandos que hacen falta sin salir de la rueda. */
       '#' + ID + ' .ap-centro{position:absolute;top:50%;left:50%;',
-      '  transform:translate(-50%,-50%);width:46%;text-align:center;',
+      '  transform:translate(-50%,-50%);width:42%;text-align:center;',
       '  pointer-events:none;text-shadow:0 2px 6px #000,0 0 14px #000}',
+
       /* Se mide en vmin, igual que el corro: si no, la letra se queda
          pequenaja dentro de un hueco que en pantalla grande es enorme. El tope
          en pixeles evita que en un 4K se desmadre. */
-      '#' + ID + ' .ap-centro b{display:block;font-family:"Bankir-Retro",serif;',
-      '  font-size:min(2.2vmin,24px);letter-spacing:1px;color:#e8c987;',
+      '#' + ID + ' .ap-centro b{display:block;font-family:var(--ap-fuente-titulo);',
+      '  font-size:min(2.2vmin,24px);letter-spacing:1px;color:var(--ap-txt);',
       '  line-height:1.3}',
       '#' + ID + ' .ap-centro small{display:block;margin-top:5px;',
-      '  font-size:min(1.45vmin,16px);color:#b9ae94}',
+      '  font-size:min(1.45vmin,16px);color:var(--ap-tenue)}',
       '#' + ID + ' .ap-mandos{display:flex;flex-direction:column;',
       '  align-items:center;gap:10px;margin-top:14px;pointer-events:auto}',
 
@@ -2046,11 +2268,11 @@
       '#' + ID + ' .ap-gira{position:absolute;top:50%;',
       '  transform:translateY(-50%);width:26px;height:46px;display:none;',
       '  align-items:center;justify-content:center;cursor:pointer;',
-      '  color:#b9ae94;font-size:17px;background:rgba(0,0,0,.3);',
-      '  border:1px solid rgba(107,90,58,.8);border-radius:3px}',
+      '  color:var(--ap-tenue);font-size:17px;background:rgba(0,0,0,.3);',
+      '  border:none;border-radius:var(--ap-boton-radio)}',
       '#' + ID + '.ap-girable .ap-gira{display:flex}',
-      '#' + ID + ' .ap-gira:hover{color:#e8c987;border-color:#c9a35a;',
-      '  background:rgba(201,163,90,.14)}',
+      '#' + ID + ' .ap-gira:hover{color:var(--ap-txt);',
+      '  background:var(--ap-sel-fondo)}',
       '#' + ID + ' .ap-gira-izq{left:-40px}',
       '#' + ID + ' .ap-gira-der{right:-40px}',
 
@@ -2059,7 +2281,7 @@
          por encima, el sitio crece un 6% hacia fuera, y un SVG recorta por su
          borde. Con el lienzo justo, el sector crecido se cortaba por la mitad.
          overflow visible ademas por si alguna vez crece mas. */
-      '#' + ID + ' .ap-corro svg{transform-origin:280px 280px;overflow:visible}',
+      '#' + ID + ' .ap-corro svg{transform-origin:310px 310px;overflow:visible}',
       '#' + ID + ' .ap-corro.ap-vuelta-der svg{animation:ap-vuelta-der .22s ease-out}',
       '#' + ID + ' .ap-corro.ap-vuelta-izq svg{animation:ap-vuelta-izq .22s ease-out}',
       '@keyframes ap-vuelta-der{from{transform:rotate(calc(-1 * var(--paso)))}',
@@ -2076,52 +2298,65 @@
       '  align-items:center;gap:8px;pointer-events:auto;',
       '  text-shadow:0 1px 4px #000;white-space:nowrap}',
 
-      '#' + ID + ' .ap-buscar{width:100%;padding:7px 9px;margin-bottom:8px;',
-      '  background:rgba(0,0,0,.45);border:1px solid #6b5a3a;border-radius:3px;',
-      '  color:#e9e1cf;font-family:inherit;font-size:15px;outline:none}',
-      '#' + ID + ' .ap-buscar:focus{border-color:#c9a35a;',
-      '  box-shadow:0 0 6px rgba(201,163,90,.3)}',
-      '#' + ID + ' .ap-buscar::placeholder{color:#8a7f68}',
+      '#' + ID + ' .ap-buscar{width:100%;padding:8px 11px;margin-bottom:9px;',
+      '  background:var(--ap-hueco);border:1px solid var(--ap-hueco-borde);',
+      '  border-radius:6px;',
+      '  color:var(--ap-txt);font-family:inherit;font-size:15px;outline:none}',
+      '#' + ID + ' .ap-buscar:focus{border-color:var(--ap-acento);',
+      '  box-shadow:0 0 0 2px var(--ap-sel-fondo)}',
+      '#' + ID + ' .ap-buscar::placeholder{color:var(--ap-tenue)}',
 
-      '#' + ID + ' .ap-categorias{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}',
+      /* La fila del filtro: el boton que abre el cajon, y al lado lo que se
+         esta viendo. */
+      '#' + ID + ' .ap-filtro{display:flex;align-items:center;gap:9px;',
+      '  margin-bottom:8px}',
+      '#' + ID + ' .ap-filtro-boton{cursor:pointer;flex:none;padding:4px 13px;',
+      '  font-size:12.5px;color:var(--ap-tenue);background:var(--ap-boton-fondo);',
+      '  border:1px solid var(--ap-boton-borde);border-radius:var(--ap-boton-radio);',
+      '  transition:color .12s,border-color .12s,background .12s}',
+      '#' + ID + ' .ap-filtro-boton:hover{color:var(--ap-txt);',
+      '  border-color:var(--ap-acento)}',
+      /* Con el cajon abierto, o con un filtro puesto que no sea "todas", el
+         boton se queda encendido: asi se ve de un vistazo que la lista no
+         esta entera. */
+      '#' + ID + '.ap-filtrando .ap-filtro-boton,',
+      '#' + ID + '.ap-filtrado .ap-filtro-boton{color:var(--ap-acento2);',
+      '  border-color:var(--ap-acento);background:var(--ap-sel-fondo)}',
+      '#' + ID + ' .ap-filtro-boton i{font-style:normal;font-size:9px;',
+      '  margin-left:5px;opacity:.75}',
+
+      /* El cajon de las categorias: cerrado de normal. Trece botones siempre
+         puestos se comian un tercio de la ventana antes de la primera fila. */
+      '#' + ID + ' .ap-categorias{display:none;flex-wrap:wrap;gap:4px;',
+      '  margin-bottom:9px;padding-bottom:9px;',
+      '  border-bottom:1px solid var(--ap-linea)}',
+      '#' + ID + '.ap-filtrando .ap-categorias{display:flex}',
       '#' + ID + ' .ap-chip{cursor:pointer;padding:4px 9px;font-size:12.5px;',
-      '  color:#b9ae94;background:rgba(0,0,0,.3);border:1px solid rgba(107,90,58,.55);',
-      '  border-radius:2px;white-space:nowrap}',
-      '#' + ID + ' .ap-chip:hover{color:#e9e1cf;border-color:#6b5a3a}',
-      '#' + ID + ' .ap-chip.ap-puesto{color:#e8c987;border-color:#c9a35a;',
-      '  background:rgba(201,163,90,.14)}',
+      '  color:var(--ap-tenue);background:var(--ap-hueco);',
+      '  border:1px solid var(--ap-hueco-borde);',
+      '  border-radius:999px;white-space:nowrap}',
+      '#' + ID + ' .ap-chip:hover{color:var(--ap-txt);border-color:var(--ap-hueco-borde)}',
+      '#' + ID + ' .ap-chip.ap-puesto{color:var(--ap-acento2);border-color:var(--ap-acento);',
+      '  background:var(--ap-sel-fondo)}',
 
       '#' + ID + ' .ap-lista{flex:1;overflow-y:auto;overflow-x:hidden;',
       '  margin:0 -4px;padding:0 4px}',
       '#' + ID + ' .ap-lista::-webkit-scrollbar{width:8px}',
       '#' + ID + ' .ap-lista::-webkit-scrollbar-track{background:rgba(0,0,0,.35)}',
-      '#' + ID + ' .ap-lista::-webkit-scrollbar-thumb{background:#6b5a3a;border-radius:2px}',
-      '#' + ID + ' .ap-lista::-webkit-scrollbar-thumb:hover{background:#c9a35a}',
+      '#' + ID + ' .ap-lista::-webkit-scrollbar-thumb{background:var(--ap-hueco-borde);border-radius:2px}',
+      '#' + ID + ' .ap-lista::-webkit-scrollbar-thumb:hover{background:var(--ap-acento)}',
 
-      '#' + ID + ' .ap-grupo{font-family:"Bankir-Retro",serif;font-size:11.5px;',
-      '  letter-spacing:2px;text-transform:uppercase;color:#c9a35a;',
-      '  padding:9px 2px 4px;border-bottom:1px solid rgba(107,90,58,.35);',
+      '#' + ID + ' .ap-grupo{font-family:var(--ap-fuente-titulo);font-size:11.5px;',
+      '  letter-spacing:2px;text-transform:uppercase;color:var(--ap-acento);',
+      '  padding:9px 2px 4px;border-bottom:1px solid var(--ap-linea);',
       '  margin-bottom:3px}',
-
-      /* El icono de cada fila. Va del color del texto para que se apague y
-         se encienda con la fila, sin tener que repetir colores. */
-      '#' + ID + ' .ap-icono{width:15px;height:15px;flex:none;',
-      '  align-self:center;fill:currentColor;opacity:.75}',
-      '#' + ID + ' .ap-fila:hover .ap-icono,',
-      '#' + ID + ' .ap-fila.ap-elegida .ap-icono{opacity:1}',
-
-      /* Y el de la rueda, dentro del sector. */
-      '#' + ID + ' .ap-simbolo{fill:#e9e1cf;opacity:.85;pointer-events:none}',
-      '#' + ID + ' .ap-sitio.ap-mirando .ap-simbolo{fill:#e8c987;opacity:1}',
 
       '#' + ID + ' .ap-fila{display:flex;align-items:baseline;gap:8px;cursor:pointer;',
       '  padding:5px 7px;border:1px solid transparent;border-radius:2px}',
       '#' + ID + ' .ap-fila:hover,#' + ID + ' .ap-fila.ap-elegida{',
-      '  background:rgba(201,163,90,.12);border-color:#6b5a3a}',
+      '  background:var(--ap-sel-fondo);border-color:transparent}',
       '#' + ID + ' .ap-nombre{flex:1;min-width:0;overflow:hidden;',
       '  text-overflow:ellipsis;white-space:nowrap}',
-      '#' + ID + ' .ap-evento{font-size:11.5px;color:#8a7f68;max-width:33%;',
-      '  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
 
       /* La estrella de favorito. Gris apagada cuando no lo es, dorada cuando
          si. Se queda siempre en su sitio, tambien apagada, para que se vea
@@ -2131,8 +2366,8 @@
       '#' + ID + ' .ap-estrella{flex:none;width:26px;margin:-5px -4px -5px 2px;',
       '  padding:5px 0;text-align:center;font-size:18px;line-height:1;',
       '  color:#4a4034;cursor:pointer}',
-      '#' + ID + ' .ap-estrella:hover{color:#b9ae94}',
-      '#' + ID + ' .ap-estrella.ap-puesta{color:#e8c987;',
+      '#' + ID + ' .ap-estrella:hover{color:var(--ap-tenue)}',
+      '#' + ID + ' .ap-estrella.ap-puesta{color:var(--ap-acento2);',
       '  text-shadow:0 0 5px rgba(232,201,135,.45)}',
       '#' + ID + ' .ap-estrella.ap-puesta:hover{color:#fff0cd}',
       '#' + ID + ' .ap-fila.ap-sinsinc .ap-nombre::after{content:" ·solo tu";',
@@ -2147,40 +2382,67 @@
       '#' + ID + ' .ap-fila.ap-sentado .ap-nombre::after{content:" ·sentado";',
       '  font-size:10px;color:#8a93b0}',
 
-      '#' + ID + ' .ap-vacio{padding:18px 4px;text-align:center;color:#b9ae94}',
+      '#' + ID + ' .ap-vacio{padding:18px 4px;text-align:center;color:var(--ap-tenue)}',
 
-      /* El pie lleva solo los dos mandos, centrados. Antes tenia delante el
-         nombre de lo que sonaba; ya no se dice. */
+      /* La ficha de la animacion que estas mirando. Es el tooltip del
+         inventario del servidor: misma caja, mismas medidas, mismos colores.
+         Va por fuera del panel —a su izquierda— para no estrechar la lista. */
+      '#' + ID + ' .ap-ficha{position:absolute;display:none;width:260px;',
+      '  padding:10px 12px 12px;font-size:12px;line-height:1.45;',
+      '  pointer-events:none;background:var(--ap-caja-fondo);',
+      '  border:var(--ap-caja-borde);border-radius:var(--ap-caja-radio);',
+      '  box-shadow:var(--ap-caja-sombra)}',
+      '#' + ID + '.ap-abierto.ap-modo-lista .ap-ficha.ap-puesta{display:block}',
+      '#' + ID + ' .ap-ficha b{display:block;font-family:var(--ap-fuente-etiqueta);',
+      '  font-size:15px;font-weight:600;color:var(--ap-acento2)}',
+      /* El id, debajo y en gris: es dato tecnico, no el nombre de la cosa. */
+      '#' + ID + ' .ap-ficha i{display:block;margin-top:2px;font-style:normal;',
+      '  font-size:11px;color:var(--ap-tenue);word-break:break-all}',
+      '#' + ID + ' .ap-ficha hr{margin:8px 0;border:none;',
+      '  border-top:1px solid var(--ap-linea)}',
+      '#' + ID + ' .ap-ficha p{margin:0;color:var(--ap-txt)}',
+      /* Cuando no hay descripcion escrita se dice, en gris y en cursiva: una
+         ficha que lo calla parece rota. */
+      '#' + ID + ' .ap-ficha p.ap-sinnada{color:var(--ap-tenue);font-style:italic}',
+
+      /* El pie lleva los mandos, centrados. Antes tenia delante el nombre de
+         lo que sonaba; ya no se dice. */
       '#' + ID + ' .ap-pie{display:flex;align-items:center;gap:12px;',
       '  justify-content:center;margin-top:9px;padding-top:8px;',
-      '  border-top:1px solid rgba(107,90,58,.6);font-size:12.5px;color:#b9ae94}',
+      '  border-top:1px solid var(--ap-linea);font-size:12.5px;color:var(--ap-tenue)}',
       /* Un boton de contorno, sin relleno ni mayusculas.
          El degradado y el TODO EN MAYUSCULAS pesaban demasiado encima de una
          rueda que no tiene marco: parecia el boton mas importante de la
          pantalla cuando es el que menos se usa. Asi se ve, se pulsa, y no
          grita. */
-      '#' + ID + ' .ap-boton{cursor:pointer;padding:6px 16px;font-size:14px;',
-      '  letter-spacing:.3px;color:#cdbb90;background:rgba(0,0,0,.3);',
-      '  border:1px solid rgba(107,90,58,.8);border-radius:3px;',
+      /* Con fondo oscuro y el color del texto, no el tenue: este boton sale
+         encima del juego, y encima de nieve un gris claro sobre gris claro no
+         se ve. Y mas grande, que antes costaba acertarle. */
+      '#' + ID + ' .ap-boton{cursor:pointer;padding:9px 22px;font-size:15px;',
+      '  letter-spacing:.3px;color:#fff;',
+      '  border:1px solid var(--ap-boton-borde);',
+      '  border-radius:var(--ap-boton-radio);background:rgba(5,6,8,.6);',
+      '  text-shadow:0 1px 3px #000;',
       '  transition:color .12s,border-color .12s,background .12s}',
-      '#' + ID + ' .ap-boton:hover{color:#e8c987;border-color:#c9a35a;',
-      '  background:rgba(201,163,90,.14)}',
+      '#' + ID + ' .ap-boton:hover{color:var(--ap-acento2);border-color:var(--ap-acento);',
+      '  background:var(--ap-sel-fondo)}',
 
       /* La casilla del bucle es nuestra, no un <input type=checkbox>. En el
          navegador que Skyrim dibuja por encima del juego los controles nativos
          se ven como quieren, no como uno les dice, asi que se pinta a mano: un
          cuadrado con una marca dentro. */
       '#' + ID + ' .ap-bucle{display:flex;align-items:center;gap:6px;',
-      '  cursor:pointer;white-space:nowrap;color:#b9ae94}',
-      '#' + ID + ' .ap-bucle:hover{color:#e9e1cf}',
+      '  color:#fff;text-shadow:0 1px 3px #000;',
+      '  cursor:pointer;white-space:nowrap}',
+      '#' + ID + ' .ap-bucle:hover{color:var(--ap-acento2)}',
       '#' + ID + ' .ap-casilla{width:13px;height:13px;flex:none;position:relative;',
-      '  background:rgba(0,0,0,.45);border:1px solid #6b5a3a;border-radius:2px}',
-      '#' + ID + ' .ap-bucle:hover .ap-casilla{border-color:#c9a35a}',
-      '#' + ID + ' .ap-bucle.ap-puesto{color:#e8c987}',
-      '#' + ID + ' .ap-bucle.ap-puesto .ap-casilla{border-color:#c9a35a;',
-      '  background:rgba(201,163,90,.18)}',
+      '  background:rgba(0,0,0,.45);border:1px solid var(--ap-hueco-borde);border-radius:2px}',
+      '#' + ID + ' .ap-bucle:hover .ap-casilla{border-color:var(--ap-acento)}',
+      '#' + ID + ' .ap-bucle.ap-puesto{color:var(--ap-acento2)}',
+      '#' + ID + ' .ap-bucle.ap-puesto .ap-casilla{border-color:var(--ap-acento);',
+      '  background:var(--ap-sel-fondo)}',
       '#' + ID + ' .ap-bucle.ap-puesto .ap-casilla::after{content:"";position:absolute;',
-      '  left:3px;top:0;width:5px;height:9px;border:solid #e8c987;',
+      '  left:3px;top:0;width:5px;height:9px;border:solid var(--ap-acento2);',
       '  border-width:0 2px 2px 0;transform:rotate(42deg)}'
     ].join('');
 
@@ -2199,6 +2461,7 @@
        dos; la casilla es un solo estado y refrescarBucle() pone las dos copias
        al dia. */
     raiz.innerHTML =
+      '<div class="ap-velo"></div>' +
       '<div class="ap-rueda">' +
       '  <div class="ap-corro-caja">' +
       '    <div class="ap-corro"></div>' +
@@ -2212,13 +2475,19 @@
       '  </div>' +
       '</div>' +
       '<div class="ap-panel">' +
-      '  <div class="ap-cabecera"><div class="ap-titulo">Animaciones</div>' +
-      '    <div class="ap-donde">Recomendadas</div>' +
+      '  <div class="ap-cabecera">' +
+      '    <div class="ap-titulo"><span class="ap-rombo"></span>Animaciones</div>' +
+      '    <div style="flex:1"></div>' +
       '    <div class="ap-cerrar" title="Cerrar (Esc)">&#10005;</div></div>' +
       '  <input class="ap-buscar" type="text" spellcheck="false"' +
       '         placeholder="Buscar por nombre o por id: rezar, IdleWave...">' +
+      '  <div class="ap-filtro">' +
+      '    <div class="ap-filtro-boton" title="Ver solo una categoría">' +
+      'Filtro<i>&#9660;</i></div>' +
+      '    <div class="ap-donde">Todas</div></div>' +
       '  <div class="ap-categorias"></div>' +
       '  <div class="ap-lista"></div>' +
+      '  <div class="ap-ficha"></div>' +
       '  <div class="ap-volver"></div>' +
       '  <div class="ap-reiniciar" style="text-align:center;margin-top:4px"' +
       '       title="Si una animación se queda colgada: te saca del mueble, ' +
@@ -2238,6 +2507,8 @@
     var lista = raiz.querySelector('.ap-lista');
 
     var donde = raiz.querySelector('.ap-donde');
+    var ficha = raiz.querySelector('.ap-ficha');
+    var botonFiltro = raiz.querySelector('.ap-filtro-boton');
     var corro = raiz.querySelector('.ap-corro');
     var cambio = raiz.querySelector('.ap-cambio');
     var volver = raiz.querySelector('.ap-volver');
@@ -2245,12 +2516,13 @@
 
 
     /* ------------------------------------------------------------------ estado */
-    /* Los dibujos de los iconos, tal como los manda el plugin: nombre del
-       icono -> el atributo d de su <path>. Aqui no se dibuja nada a mano. */
-    var dibujos = {};
     var animaciones = [];
+    var porEvento = {};        // para sacar la ficha de una fila por su id
     var categorias = [];
-    var categoria = '';        // '' es "todas"
+    /* Con que filtro se abre. Vacio es "Recomendadas"; se empieza por
+       "todas" porque la lista completa es lo que se espera ver al abrir, y
+       recomendadas se elige si se quiere. */
+    var categoria = 'todas';
     var elegida = 0;           // para moverse con las flechas
     var abierto = false;
     var enBucle = false;       // la casilla del pie
@@ -2292,10 +2564,9 @@
         .replace(/[óòö]/g, 'o').replace(/[úùü]/g, 'u').replace(/ñ/g, 'n');
     }
 
-    function cargar(d, favs, losDibujos) {
+    function cargar(d, favs) {
       animaciones = (d && d.animaciones) || [];
       categorias = (d && d.categorias) || [];
-      if (losDibujos) dibujos = losDibujos;
       if (favs) {
         favorito = {};
         for (var f = 0; f < favs.length; f++) favorito[favs[f]] = true;
@@ -2304,8 +2575,10 @@
       /* El texto de busqueda de cada ficha se calcula UNA vez, aqui, y no en
          cada tecla que se escribe: son setecientas fichas y la busqueda tiene
          que ir instantanea. */
+      porEvento = {};
       for (var i = 0; i < animaciones.length; i++) {
         animaciones[i]._busca = palabrasDe(animaciones[i]);
+        porEvento[animaciones[i].evento] = animaciones[i];
       }
       pintarCategorias();
       pintarRueda();
@@ -2333,9 +2606,10 @@
 
       for (var i = 0; i < animaciones.length; i++) {
         var a = animaciones[i];
-        /* Escondida: ni en la lista, ni en la rueda, ni en el buscador. El
-           servidor decide quien ve que; aqui solo se obedece. */
-        if (a.visible === false) continue;
+        /* Ni en la lista, ni en la rueda, ni en el buscador: las escondidas
+           porque el servidor lo ha decidido, y las de salida porque no son
+           poses que uno elija. Ver seVe. */
+        if (!seVe(a)) continue;
         if (soloFavoritos) {
           if (!favorito[a.evento]) continue;
         } else if (categoria && categoria !== 'todas' && a.categoria !== categoria) {
@@ -2384,7 +2658,7 @@
     function laRueda() {
       var fuera = [];
       for (var i = 0; i < animaciones.length; i++) {
-        if (animaciones[i].visible === false) continue;   // escondida
+        if (!seVe(animaciones[i])) continue;
         if (favorito[animaciones[i].evento]) fuera.push(animaciones[i]);
       }
       return fuera;
@@ -2438,7 +2712,11 @@
 
     /* Las medidas del corro. Tienen que ir a la par con el ancho de
        .ap-corro-caja y con los transform-origin del CSS. */
-    var CORRO = 560, CENTRO = 280, DENTRO = 150, AFUERA = 254;
+    /* El anillo va de DENTRO a AFUERA. Es mas largo de lo que era (medía de
+       150 a 254) porque el degradado vive DENTRO de cada sector: cuanto mas
+       largo el sector, mas recorrido tiene el desvanecido y mas suave queda.
+       AFUERA casi toca el borde del dibujo; el SVG lleva overflow visible. */
+    var CORRO = 620, CENTRO = 310, DENTRO = 150, AFUERA = 292;
 
     /** Cuantos sitios hay dibujados ahora mismo, para no rehacerlos por nada. */
     var dibujados = -1;
@@ -2446,8 +2724,20 @@
     /** Arma los sitios vacios. Solo hace falta si cambia cuantos hay. */
     function armarCorro(cuantos) {
       var paso = 360 / cuantos;
+      /* El degradado de los sectores: uno para todos, centrado en el centro
+         del corro y medido en las coordenadas del dibujo, asi que a cada uno
+         le toca el tramo que le corresponde por su distancia. Empieza donde
+         empieza el anillo. */
+      var dentro = (DENTRO / AFUERA).toFixed(3);
       var trozos = ['<svg width="' + CORRO + '" height="' + CORRO +
-                    '" viewBox="0 0 ' + CORRO + ' ' + CORRO + '">'];
+                    '" viewBox="0 0 ' + CORRO + ' ' + CORRO + '">',
+                    '<defs>',
+                    '<radialGradient id="ap-degradado" gradientUnits="userSpaceOnUse"',
+                    ' cx="' + CENTRO + '" cy="' + CENTRO + '" r="' + AFUERA + '">',
+                    '<stop offset="' + dentro + '" stop-color="#050608" stop-opacity=".9"/>',
+                    '<stop offset="1" stop-color="#050608" stop-opacity=".62"/>',
+                    '</radialGradient>',
+                    '</defs>'];
       for (var i = 0; i < cuantos; i++) {
         var g1 = i * paso - paso / 2 + 1;     // el +1 deja la rendija entre sitios
         var g2 = (i + 1) * paso - paso / 2 - 1;
@@ -2478,21 +2768,8 @@
 
         var medio = enElCorro(CENTRO, CENTRO, (DENTRO + AFUERA) / 2, i * paso);
         var lineas = repartir(acortar(a.nombre, 38), 15, 3);
-        /* El icono va encima del rotulo, y el texto baja para hacerle sitio.
-           Se dibuja con un <svg> anidado y no con el <path> suelto: anidado se
-           coloca por x/y con su propio viewBox, y asi el dibujo no hereda la
-           escala del corro ni hay que recalcular cada coordenada. */
-        var alto = lineas.length * 14;
-        var arribaIcono = medio[1] - alto / 2 - 20;
-        var arriba = medio[1] - (lineas.length - 1) * 7 + 10;
+        var arriba = medio[1] - (lineas.length - 1) * 7 + 4;
         var textos = '';
-        var d = dibujos[a.icono];
-        if (d) {
-          textos += '<svg class="ap-simbolo" x="' + (medio[0] - 11).toFixed(0) +
-                    '" y="' + arribaIcono.toFixed(0) + '" width="22" height="22"' +
-                    ' viewBox="0 0 24 24"><path fill-rule="evenodd" d="' + d +
-                    '"/></svg>';
-        }
         for (var L = 0; L < lineas.length; L++) {
           textos += '<text class="ap-rotulo" x="' + medio[0].toFixed(0) +
                     '" y="' + (arriba + L * 14).toFixed(0) + '">' +
@@ -2542,11 +2819,15 @@
       var cabeza;
       if (mirando >= 0) {
         var a = favs[(mirando + giro) % favs.length];
+        /* Sin el id: es dato tecnico y aqui no pinta nada. Solo los avisos,
+           que esos si cambian lo que pasa al pulsar. */
+        var avisos = [];
+        if (a.andando) avisos.push('se puede andar');
+        if (a.sentado) avisos.push('hay que estar sentado');
+        if (a.sincroniza === false) avisos.push('solo tú');
         cabeza = '<b>' + escapar(a.nombre) + '</b>' +
-                 '<small>' + escapar(a.evento) +
-                 (a.andando ? ' · se puede andar' : '') +
-                 (a.sentado ? ' · hay que estar sentado' : '') +
-                 (a.sincroniza === false ? ' · solo tú' : '') + '</small>';
+                 (avisos.length
+                   ? '<small>' + escapar(avisos.join(' · ')) + '</small>' : '');
       } else {
         cabeza = '<b>\u2605 Favoritos</b><small>' +
                  (favs.length > SITIOS
@@ -2651,7 +2932,7 @@
       raiz.classList.toggle('ap-modo-lista', modo === 'lista');
 
       cambio.innerHTML = '<i>\u25be</i> Ver todas las animaciones (' +
-                         animaciones.length + ')';
+                         cuantasSeVen() + ')';
       volver.innerHTML = hayRueda
         ? '<i>\u25b4</i> Volver a la rueda'
         : '<i>\u2605</i> Marca animaciones con la estrella y saldrán en la rueda';
@@ -2668,7 +2949,8 @@
       var r = filtrar();
       donde.textContent = caja.value.trim()
         ? r.lista.length + (r.lista.length === 1 ? ' resultado' : ' resultados')
-        : (categoria ? nombreDe(categoria) : 'Recomendadas');
+        : (categoria ? nombreDe(categoria) : 'Recomendadas') +
+          ' \u00b7 ' + r.lista.length;
     }
 
     cambio.addEventListener('click', function () { ponerModo('lista'); });
@@ -2677,31 +2959,61 @@
       ponerModo('rueda');
     });
 
+    /** Si esta animacion se ensena al jugador.
+     *
+     * Solo quedan fuera las escondidas: las que el servidor ha quitado a este
+     * jugador con ap.ocultar(). Las de SALIDA si se ensenan, aunque el mod las
+     * lance solo al detener; esconderlas quitaba la opcion de lanzarlas a mano
+     * y no daba nada a cambio.
+     *
+     * Todo lo que ensena el panel —lista, rueda, chips, contadores— pasa por
+     * aqui, para que no vuelva a pasar que un numero diga una cosa y en la
+     * lista se vea otra.
+     */
+    function seVe(a) {
+      return a.visible !== false;
+    }
+
+    /** Cuantas animaciones se pueden elegir ahora mismo: las que pasan seVe. */
+    function cuantasSeVen() {
+      var n = 0;
+      for (var i = 0; i < animaciones.length; i++) {
+        if (seVe(animaciones[i])) n++;
+      }
+      return n;
+    }
+
     function pintarCategorias() {
       var html = ['<div class="ap-chip' + (categoria ? '' : ' ap-puesto') +
                   '" data-cat="">Recomendadas</div>'];
 
       /* Todas: el catalogo entero, sin recortar por recomendadas ni por
          categoria. Es la que hay que pulsar para rebuscar a mano, y con ella
-         puesta la barra busca en las 674. */
+         puesta la barra busca en todas las que se ven. */
       html.push('<div class="ap-chip' + (categoria === 'todas' ? ' ap-puesto' : '') +
                 '" data-cat="todas">Todas ' +
-                '<span style="color:#8a7f68">' + animaciones.length + '</span></div>');
+                '<span style="color:var(--ap-tenue)">' + cuantasSeVen() +
+                '</span></div>');
 
       /* La de favoritos solo sale si tienes alguno: una categoria vacia y
          permanente seria un boton que no hace nada. */
       var cuantosFav = 0;
       for (var f = 0; f < animaciones.length; f++) {
+        if (!seVe(animaciones[f])) continue;
         if (favorito[animaciones[f].evento]) cuantosFav++;
       }
       if (cuantosFav) {
         html.push('<div class="ap-chip' +
                   (categoria === 'favoritos' ? ' ap-puesto' : '') +
                   '" data-cat="favoritos">\u2605 Favoritos ' +
-                  '<span style="color:#8a7f68">' + cuantosFav + '</span></div>');
+                  '<span style="color:var(--ap-tenue)">' + cuantosFav + '</span></div>');
       }
+      /* La cuenta de cada categoria es de lo que SE VE, no del total: si una
+         categoria dice 109 y al pulsarla salen 0 porque estan todas
+         escondidas, el numero miente. Lo mismo vale para "Todas". */
       var cuenta = {};
       for (var i = 0; i < animaciones.length; i++) {
+        if (!seVe(animaciones[i])) continue;
         cuenta[animaciones[i].categoria] = (cuenta[animaciones[i].categoria] || 0) + 1;
       }
       for (var j = 0; j < categorias.length; j++) {
@@ -2709,47 +3021,60 @@
         if (!cuenta[c.clave]) continue;              // categoria sin nada dentro
         html.push('<div class="ap-chip' + (categoria === c.clave ? ' ap-puesto' : '') +
                   '" data-cat="' + c.clave + '">' + c.nombre +
-                  ' <span style="color:#8a7f68">' + cuenta[c.clave] + '</span></div>');
+                  ' <span style="color:var(--ap-tenue)">' + cuenta[c.clave] + '</span></div>');
       }
       chips.innerHTML = html.join('');
     }
 
-    function pintar() {
-      var r = filtrar();
-      if (elegida >= r.lista.length) elegida = Math.max(0, r.lista.length - 1);
+    /* Cuantos renglones se pintan de una vez. Son 384 los que se pueden ver,
+       y pintarlos todos de golpe se nota en el navegador que SkyrimPlatform
+       monta encima del juego: comparte maquina con Skyrim. Se pintan 60 y se
+       van anadiendo segun bajas. */
+    var TANDA = 60;
+    var pintadas = 0;          // cuantos renglones hay puestos ahora mismo
 
-      if (!r.lista.length) {
-        lista.innerHTML = '<div class="ap-vacio">Nada con eso</div>';
-        donde.textContent = 'sin resultados';
-        return;
+    /**
+     * Si este renglon lleva rotulo de grupo encima, y cual.
+     *
+     * Mira el renglon ANTERIOR en vez de llevar la cuenta segun se recorre la
+     * lista. Esa es la diferencia que permite anadir por tramos: para pintar
+     * del 120 al 180 no hace falta haber pasado por los 120 de antes.
+     */
+    function rotuloDe(r, i) {
+      var a = r.lista[i];
+      var esFav = !!favorito[a.evento] && categoria !== 'favoritos';
+      var antes = i > 0 ? r.lista[i - 1] : null;
+      var favAntes = antes && !!favorito[antes.evento] && categoria !== 'favoritos';
+
+      /* Los favoritos van arriba y con su propia cabecera. */
+      if (esFav) return i === 0 ? '\u2605 Favoritos' : '';
+
+      /* El primero que no es favorito abre "el resto". */
+      if (i === 0 || favAntes) {
+        if (r.soloLoDeSiempre) {
+          return 'Recomendadas &nbsp;·&nbsp; escribe o elige una categoría ' +
+                 'para ver las ' + cuantasSeVen();
+        }
+        if (r.favoritos) return 'Las demas';
       }
 
+      /* Y dentro del resto, un rotulo cada vez que cambia la categoria. Sale
+         tambien con el filtro en "todas": son casi cuatrocientas y de corrido
+         no hay por donde cogerla. */
+      if (!r.soloLoDeSiempre && (!categoria || categoria === 'todas') &&
+          (i === 0 || favAntes || antes.categoria !== a.categoria)) {
+        return nombreDe(a.categoria);
+      }
+      return '';
+    }
+
+    /** El HTML de los renglones [desde, hasta). */
+    function filasDe(r, desde, hasta) {
       var html = [];
-      var grupo = null;
-      var yaSalioElResto = false;
-      for (var i = 0; i < r.lista.length; i++) {
+      for (var i = desde; i < hasta; i++) {
         var a = r.lista[i];
-        var esFav = !!favorito[a.evento] && categoria !== 'favoritos';
-
-        /* Los favoritos van arriba y con su propia cabecera; el resto empieza
-           donde se acaban ellos. */
-        if (esFav && i === 0) {
-          html.push('<div class="ap-grupo">\u2605 Favoritos</div>');
-        } else if (!esFav && !yaSalioElResto) {
-          yaSalioElResto = true;
-          if (r.soloLoDeSiempre) {
-            html.push('<div class="ap-grupo">Recomendadas &nbsp;·&nbsp; escribe o ' +
-                      'elige una categoría para ver las ' + animaciones.length +
-                      '</div>');
-          } else if (r.favoritos) {
-            html.push('<div class="ap-grupo">Las demas</div>');
-          }
-        }
-
-        if (!esFav && !r.soloLoDeSiempre && !categoria && a.categoria !== grupo) {
-          grupo = a.categoria;
-          html.push('<div class="ap-grupo">' + nombreDe(grupo) + '</div>');
-        }
+        var rotulo = rotuloDe(r, i);
+        if (rotulo) html.push('<div class="ap-grupo">' + rotulo + '</div>');
         html.push(
           '<div class="ap-fila' + (i === elegida ? ' ap-elegida' : '') +
           (a.sincroniza === false ? ' ap-sinsinc' : '') +
@@ -2758,19 +3083,71 @@
           '" data-evento="' + a.evento + '" data-i="' + i + '"' +
           (a.sincroniza === false && a.motivo
             ? ' title="Los demas no la veran: ' + escapar(a.motivo) + '"' : '') + '>' +
-          iconoSvg(a, 'ap-icono') +
           '<span class="ap-nombre">' + escapar(a.nombre) + '</span>' +
-          '<span class="ap-evento">' + escapar(a.evento) + '</span>' +
           '<span class="ap-estrella' + (favorito[a.evento] ? ' ap-puesta' : '') +
           '" data-fav="' + a.evento + '" title="' +
           (favorito[a.evento] ? 'Quitar de favoritos' : 'Guardar en favoritos') +
           '">\u2605</span></div>');
       }
-      lista.innerHTML = html.join('');
+      return html.join('');
+    }
+
+    /** Anade la siguiente tanda al final, sin tocar lo que ya esta puesto. */
+    function masFilas() {
+      var r = filtrar();
+      if (pintadas >= r.lista.length) return;
+      var hasta = Math.min(pintadas + TANDA, r.lista.length);
+      lista.insertAdjacentHTML('beforeend', filasDe(r, pintadas, hasta));
+      pintadas = hasta;
+    }
+
+    function pintar() {
+      var r = filtrar();
+      if (elegida >= r.lista.length) elegida = Math.max(0, r.lista.length - 1);
+
+      if (!r.lista.length) {
+        lista.innerHTML = '<div class="ap-vacio">Nada con eso</div>';
+        pintadas = 0;
+        donde.textContent = 'sin resultados';
+        return;
+      }
+
+      /* Si lo senalado cae mas abajo de la primera tanda —se ha bajado con las
+         flechas, o se vuelve a una posicion guardada— se pinta hasta ahi. */
+      var hasta = Math.min(Math.max(TANDA, elegida + 1), r.lista.length);
+      lista.innerHTML = filasDe(r, 0, hasta);
+      pintadas = hasta;
       pintarTitulo();
       var viva = lista.querySelector('.ap-elegida');
       if (viva && viva.scrollIntoView) viva.scrollIntoView({ block: 'nearest' });
     }
+
+    /** Ensena la ficha de una fila, a su altura y a la izquierda del panel. */
+    function ensenarFicha(fila) {
+      var a = porEvento[fila.getAttribute('data-evento')];
+      if (!a) return;
+      var texto = (a.descripcion || '').trim();
+      ficha.innerHTML =
+        '<b>' + escapar(a.nombre) + '</b>' +
+        '<i>' + escapar(a.evento) + '</i>' +
+        '<hr>' +
+        '<p' + (texto ? '' : ' class="ap-sinnada"') + '>' +
+        escapar(texto || 'Sin descripción') + '</p>';
+      ficha.classList.add('ap-puesta');
+
+      /* Se coloca despues de meter el texto, porque hasta que no esta puesto
+         no se sabe lo que mide. A la izquierda del panel, a la altura del
+         renglon, y subida lo justo si se saldria por abajo. */
+      var r = fila.getBoundingClientRect();
+      var caja = raiz.querySelector('.ap-panel').getBoundingClientRect();
+      var alto = ficha.offsetHeight;
+      var arriba = Math.min(Math.max(8, r.top - 4),
+                            window.innerHeight - alto - 8);
+      ficha.style.top = arriba + 'px';
+      ficha.style.right = (window.innerWidth - caja.left + 12) + 'px';
+    }
+
+    function esconderFicha() { ficha.classList.remove('ap-puesta'); }
 
     function nombreDe(clave) {
       if (clave === 'favoritos') return '\u2605 Favoritos';
@@ -2779,16 +3156,6 @@
         if (categorias[i].clave === clave) return categorias[i].nombre;
       }
       return clave;
-    }
-
-    /* Un <svg> con el dibujo del icono. Los dibujos llegan del plugin al
-       inyectar el panel; si faltara alguno se devuelve cadena vacia y la fila
-       sale sin icono, que es mejor que salir rota. */
-    function iconoSvg(a, clase) {
-      var d = dibujos[a.icono];
-      if (!d) return '';
-      return '<svg class="' + clase + '" viewBox="0 0 24 24" aria-hidden="true">' +
-             '<path fill-rule="evenodd" d="' + d + '"/></svg>';
     }
 
     function escapar(t) {
@@ -2869,13 +3236,54 @@
       if (ultima) avisar('bucle', { activo: enBucle, evento: ultima });
     });
 
-    caja.addEventListener('input', function () { elegida = 0; pintar(); });
+    /* La ficha sigue al raton por la lista. Se escucha en la lista entera y
+       no fila a fila: las filas se rehacen enteras en cada pintada, y atar
+       cuatrocientos oyentes para volver a quitarlos es trabajo de balde. */
+    lista.addEventListener('mouseover', function (e) {
+      var fila = e.target.closest ? e.target.closest('.ap-fila') : null;
+      if (fila) ensenarFicha(fila);
+    });
+    lista.addEventListener('mouseleave', esconderFicha);
+    /* Y se quita al desplazar: la lista se mueve debajo y la ficha se quedaria
+       senalando un renglon que ya no esta ahi. */
+    lista.addEventListener('scroll', function () {
+      esconderFicha();
+      /* Un poco antes de llegar al fondo, no justo al llegar: asi la tanda
+         siguiente ya esta puesta cuando el final entra en pantalla. */
+      if (lista.scrollTop + lista.clientHeight >= lista.scrollHeight - 320) {
+        masFilas();
+      }
+    });
+
+    caja.addEventListener('input', function () {
+      elegida = 0;
+      lista.scrollTop = 0;     // otra busqueda, otra lista: se empieza arriba
+      esconderFicha();
+      pintar();
+    });
+
+    /* El cajon de las categorias se abre y se cierra con el boton. Abierto o
+       con un filtro puesto, el boton se queda encendido. */
+    function pintarFiltro() {
+      var filtrando = raiz.classList.contains('ap-filtrando');
+      raiz.classList.toggle('ap-filtrado', categoria !== 'todas' && !filtrando);
+    }
+
+    botonFiltro.addEventListener('click', function () {
+      raiz.classList.toggle('ap-filtrando');
+      pintarFiltro();
+    });
 
     chips.addEventListener('click', function (e) {
       var chip = e.target.closest ? e.target.closest('.ap-chip') : null;
       if (!chip) return;
       categoria = chip.getAttribute('data-cat') || '';
       elegida = 0;
+      lista.scrollTop = 0;
+      /* Elegida una, el cajon se cierra: ya has dicho lo que querias ver y lo
+         que hace falta ahora es sitio para la lista. */
+      raiz.classList.remove('ap-filtrando');
+      pintarFiltro();
       pintarCategorias();
       pintar();
     });
@@ -2898,12 +3306,20 @@
         return;
       }
 
+      /* Pulsar una fila la SENALA, no la lanza. Para lanzarla esta el boton
+         de Ejecutar. Antes un clic de mas sobre la lista te ponia al personaje
+         a hacer cualquier cosa delante de la gente. */
+      /* Pulsar la fila la lanza. Lo que hace que esto no sea un disparo a
+         ciegas es la ficha: al pasar el raton ya sale el nombre, el id y lo
+         que hace, asi que cuando pulsas sabes lo que va a salir. */
       var fila = e.target.closest ? e.target.closest('.ap-fila') : null;
       if (!fila) return;
       elegida = parseInt(fila.getAttribute('data-i'), 10) || 0;
       pintar();
       reproducir(fila.getAttribute('data-evento'));
     });
+
+
 
     /* Las flechas y el Enter dentro de la caja: escribir "laud" y dar a Enter
        tiene que reproducirla sin tocar el raton. */
@@ -2953,7 +3369,7 @@
       enBucle: function () { return enBucle; }
     };
 
-    cargar(datos, favoritosGuardados || [], losDibujos || {});
+    cargar(datos, favoritosGuardados || []);
     avisar('listo', { animaciones: animaciones.length,
                       favoritos: (favoritosGuardados || []).length });
   }
@@ -3016,8 +3432,7 @@
     try {
       sp.browser.executeJavaScript(
         '(' + panelEnLaPagina.toString() + ')(' + JSON.stringify(catalogo) +
-        ',' + JSON.stringify(listaFavoritos()) +
-        ',' + JSON.stringify(DIBUJOS) + ');');
+        ',' + JSON.stringify(listaFavoritos()) + ');');
       puesto = true;
       apuntar('panel puesto en la pagina, ' + catalogo.animaciones.length + ' animaciones');
     } catch (e) {
@@ -3655,7 +4070,6 @@
           categoria: String(f.categoria || 'mods'),
           busqueda: String(f.busqueda || ''),
           destacada: !!f.destacada,
-          icono: iconoDe(f),
           visible: f.visible === false ? false : true,
           sincroniza: f.sincroniza === false ? false : true,
           motivo: f.motivo || '',

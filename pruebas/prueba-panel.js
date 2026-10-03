@@ -69,8 +69,19 @@ app.whenReady().then(async () => {
      lo que no pida resultado, y asi el valor clonado es siempre un booleano. */
   const js = (src) => win.webContents.executeJavaScript(src);
   const jsMudo = (src) => win.webContents.executeJavaScript('(function(){' + src + '})(); true;');
+  /* La ventana va oculta (show:false) y Chromium congela el pintado de las
+     ventanas que no se ven: capturePage devolvia el fotograma de ANTES del
+     ultimo cambio, y salian capturas que no correspondian con lo que la pagina
+     tenia en ese momento —la lista en vez de la rueda, por ejemplo—.
+
+     Se arregla invalidando para forzar un repintado y tirando una captura de
+     descarte: la primera despierta el compositor y la segunda ya sale bien. */
   const captura = async (n) => {
-    await esperar(350);          // que le de tiempo a pintar lo ultimo
+    await esperar(350);
+    try { win.webContents.invalidate(); } catch (e) { /* da igual si no esta */ }
+    await esperar(150);
+    await win.webContents.capturePage();     // la de descarte
+    await esperar(150);
     fs.mkdirSync(SALIDA, { recursive: true });
     fs.writeFileSync(path.join(SALIDA, n + '.png'),
                      (await win.webContents.capturePage()).toPNG());
@@ -253,24 +264,79 @@ app.whenReady().then(async () => {
   comprobar(tapan === 0, 'cerrado no dibuja nada encima del juego',
             tapan + ' cosas visibles');
 
-  console.log('\n=== abierto sale arriba a la derecha, de una vez ===');
+  console.log('\n=== abierto sale por la derecha, de una vez ===');
   await js('window.__animplayer.abrir()');
   await esperar(250);
   comprobar(await panelVisible(), 'el panel se ve');
   const sitio = await js(`(() => {
     const p = document.querySelector('#animplayer .ap-panel').getBoundingClientRect();
-    return { top: p.top, derecha: innerWidth - p.right, alto: p.height };
+    return { top: p.top, derecha: innerWidth - p.right, alto: p.height,
+             alto2: innerHeight };
   })()`);
   comprobar(sitio.top < 2, 'pegado al borde de arriba', 'top=' + sitio.top);
-  comprobar(sitio.derecha > 18 && sitio.derecha < 30,
-            'y a la derecha', 'a ' + sitio.derecha + 'px del borde');
-  comprobar(sitio.alto > 200, 'con la lista ya desplegada', 'alto=' + Math.round(sitio.alto));
+  comprobar(sitio.derecha < 2, 'y pegado al borde derecho',
+            'a ' + sitio.derecha + 'px del borde');
+  /* De arriba abajo: es lo que hace que no parezca una caja puesta encima del
+     juego, sino un lateral del propio juego. */
+  comprobar(sitio.alto >= sitio.alto2 - 2, 'y de arriba abajo',
+            Math.round(sitio.alto) + ' de ' + sitio.alto2);
+  /* El velo es lo que hace que el panel no tenga canto: una capa a pantalla
+     completa, por detras, con el degradado. Es como lo hace el inventario del
+     servidor, y por eso la transicion es mas ancha que el propio panel. */
+  const velo = await js(`(() => {
+    const v = document.querySelector('#animplayer .ap-velo');
+    if (!v || v.offsetParent === null) return null;
+    const r = v.getBoundingClientRect();
+    const e = getComputedStyle(v);
+    return { ancho: r.width, pantalla: innerWidth, fondo: e.backgroundImage,
+             panel: getComputedStyle(
+               document.querySelector('#animplayer .ap-panel')).backgroundImage };
+  })()`);
+  comprobar(velo && velo.ancho >= velo.pantalla - 2,
+            'el velo ocupa la pantalla entera, no solo el panel',
+            velo && Math.round(velo.ancho) + ' de ' + velo.pantalla);
+  comprobar(velo && /linear-gradient/.test(velo.fondo), 'y lleva el degradado');
+  comprobar(velo && velo.panel === 'none',
+            'y el panel no tiene fondo propio: va encima del velo',
+            velo && velo.panel);
   comprobar(await js(`document.getElementById('animplayer').classList.contains('ap-modo-lista')`),
             'sin favoritos todavia, abre directo en la lista');
   comprobar(await js(`document.activeElement === document.querySelector('#animplayer .ap-buscar')`),
             'con el cursor ya en la barra: se puede escribir directo');
   comprobar(await js(`/ANIMACIONES/i.test(document.querySelector('#animplayer .ap-titulo').textContent)`),
             'la cabecera dice de que va la ventana');
+  /* La ficha de la animacion que se mira: nombre, id en gris, una raya y la
+     descripcion. Se saca una captura con ella puesta, que es como se ve de
+     verdad el panel mientras se usa. */
+  await js(`(() => { const f = document.querySelector('#animplayer .ap-fila');
+            f.dispatchEvent(new MouseEvent('mouseover', { bubbles: true })); })()`);
+  await esperar(140);
+  const laFicha = await js(`(() => {
+    const f = document.querySelector('#animplayer .ap-ficha');
+    if (!f || !f.classList.contains('ap-puesta')) return null;
+    return { nombre: f.querySelector('b').textContent,
+             id: f.querySelector('i').textContent,
+             raya: !!f.querySelector('hr'),
+             texto: f.querySelector('p').textContent };
+  })()`);
+  comprobar(laFicha && laFicha.nombre && laFicha.id,
+            'al pasar el raton sale la ficha, con nombre e id',
+            laFicha && laFicha.nombre + ' / ' + laFicha.id);
+  comprobar(laFicha && laFicha.raya && laFicha.texto.length > 0,
+            'y debajo de una raya, la descripcion',
+            laFicha && laFicha.texto.slice(0, 60));
+  /* Y que sea la de verdad, no el "Sin descripcion" de respaldo: el panel
+     recibia las animaciones sin ese campo y la ficha salia siempre vacia
+     aunque la descripcion estuviera escrita en la hoja. */
+  comprobar(laFicha && !/^Sin descripci/.test(laFicha.texto),
+            'y es la escrita, no el respaldo', laFicha && laFicha.texto.slice(0, 60));
+  const sinTexto = falso.sp.storage.AnimPlayer.lista().animaciones
+    .filter((a) => !a.descripcion);
+  comprobar(sinTexto.length === 0, 'todas las animaciones traen descripcion',
+            sinTexto.length + ' sin ella');
+  /* El id ya no se ve en el renglon: ocupaba un tercio y se cortaba. */
+  comprobar(!(await js(`!!document.querySelector('#animplayer .ap-fila .ap-evento')`)),
+            'y el id no se repite en la lista: solo esta en la ficha');
   await captura('2-abierto');
 
   console.log('\n=== si SkyMP le quita el foco al navegador, se cierra ===');
@@ -286,21 +352,73 @@ app.whenReady().then(async () => {
   await esperar(150);
   await pasarMensajesAlPlugin(falso);
 
-  console.log('\n=== de entrada solo las recomendadas ===');
+  console.log('\n=== de entrada se ven todas, por categorias ===');
   await verLista();
   const dentro = await js(`(() => {
     const filas = document.querySelectorAll('#animplayer .ap-fila');
     const grupo = document.querySelector('#animplayer .ap-grupo');
     return { filas: filas.length, grupo: grupo ? grupo.textContent : '' };
   })()`);
-  comprobar(dentro.filas > 20 && dentro.filas < 80,
-            'la lista no empieza con setecientas', dentro.filas + ' filas');
-  comprobar(/Recomendadas/.test(dentro.grupo) && /\d{3}/.test(dentro.grupo),
-            'y dice como ver el resto', dentro.grupo.replace(/\s+/g, ' ').trim());
+  /* Se abre sin filtro —se ven todas— pero NO se pintan todas de golpe:
+     pintar 384 renglones de una vez se nota en el navegador que va encima del
+     juego. Se pinta una tanda y el resto llega al bajar. */
+  comprobar(dentro.filas > 20 && dentro.filas < 120,
+            'la lista empieza por una tanda, no con las 384',
+            dentro.filas + ' filas');
+  comprobar(dentro.grupo.length > 0 && !/Recomendadas/.test(dentro.grupo),
+            'y repartida por categorias', dentro.grupo.replace(/\s+/g, ' ').trim());
+
+  /* Y al bajar llegan las demas. Sin esto media lista seria inalcanzable. */
+  const creciendo = await js(`(async () => {
+    const l = document.querySelector('#animplayer .ap-lista');
+    const antes = document.querySelectorAll('#animplayer .ap-fila').length;
+    for (let v = 0; v < 6; v++) {
+      l.scrollTop = l.scrollHeight;
+      l.dispatchEvent(new Event('scroll'));
+      await new Promise((r) => setTimeout(r, 30));
+    }
+    return { antes: antes,
+             ahora: document.querySelectorAll('#animplayer .ap-fila').length };
+  })()`);
+  comprobar(creciendo.ahora > creciendo.antes,
+            'y al bajar se van anadiendo las que faltan',
+            creciendo.antes + ' -> ' + creciendo.ahora);
+  /* Las que ya estaban no se repiten: se ANADEN al final, no se rehace la
+     lista entera cada vez. */
+  const repetidas = await js(`(() => {
+    const e = [...document.querySelectorAll('#animplayer .ap-fila')]
+      .map((f) => f.dataset.evento);
+    return e.length - new Set(e).size;
+  })()`);
+  comprobar(repetidas === 0, 'y ninguna sale dos veces', repetidas + ' repetidas');
+  await js(`(() => { const l = document.querySelector('#animplayer .ap-lista');
+            l.scrollTop = 0; })()`);
+  await esperar(120);
 
   await verLista();
-  comprobar(await js(`document.querySelector('#animplayer .ap-donde').textContent === 'Recomendadas'`),
-            'y al lado pone que parte de la lista se esta viendo');
+  comprobar(/^Todas/.test(await js(`document.querySelector('#animplayer .ap-donde').textContent`)),
+            'y al lado pone que parte de la lista se esta viendo',
+            await js(`document.querySelector('#animplayer .ap-donde').textContent`));
+
+  console.log('\n=== el filtro empieza cerrado y se abre con su boton ===');
+  /* Trece botones de categoria siempre puestos se comian un tercio de la
+     ventana antes de llegar a la primera animacion. Ahora estan detras de un
+     boton. */
+  comprobar(!(await seVe('.ap-categorias')),
+            'las categorias no estan a la vista de entrada');
+  await js(`document.querySelector('#animplayer .ap-filtro-boton').click()`);
+  await esperar(140);
+  comprobar(await seVe('.ap-categorias'), 'el boton de filtro las saca');
+  await js(`document.querySelector('#animplayer .ap-chip[data-cat="musica"]').click()`);
+  await esperar(160);
+  comprobar(!(await seVe('.ap-categorias')),
+            'y al elegir una, el cajon se cierra solo');
+  comprobar(/sica/.test(await js(`document.querySelector('#animplayer .ap-donde').textContent`)),
+            'y queda dicho cual esta puesta',
+            await js(`document.querySelector('#animplayer .ap-donde').textContent`));
+  await js(`document.querySelector('#animplayer .ap-filtro-boton').click();
+            document.querySelector('#animplayer .ap-chip[data-cat="todas"]').click()`);
+  await esperar(160);
 
   console.log('\n=== los nombres estan en espanol ===');
   const nombres = await js(`[...document.querySelectorAll('#animplayer .ap-fila')]
@@ -323,8 +441,11 @@ app.whenReady().then(async () => {
   /* Los remates se montan con reglas y NO nombran a la criatura: los nombres
      son de la accion. Los que quedan iguales se numeran solos. */
   const unRemate = apCat.ficha('pa_KillMove2HMFalmerA');
-  comprobar(unRemate && unRemate.nombre.indexOf('Remate') === 0,
+  comprobar(unRemate && /^Remat/.test(unRemate.nombre),
             'los remates se montan solos', unRemate && unRemate.nombre);
+  comprobar(unRemate && !/falmer/i.test(unRemate.nombre),
+            'y no nombran a la criatura contra la que son',
+            unRemate && unRemate.nombre);
   comprobar(unRemate && !/falmer|oso|lobo|trol|dragón/i.test(unRemate.nombre),
             'y no nombran a la criatura', unRemate && unRemate.nombre);
   const todosLosNombres = apCat.lista().animaciones.map((a) => a.nombre);
@@ -332,7 +453,7 @@ app.whenReady().then(async () => {
             'y ningun nombre se repite en todo el catalogo',
             todosLosNombres.length + ' animaciones, ' +
             new Set(todosLosNombres).size + ' nombres');
-  comprobar(todosLosNombres.some((n) => /^Remate con un arma de una mano \(\d+\)$/.test(n)),
+  comprobar(todosLosNombres.filter((n) => /\(\d+\)$/.test(n)).length > 20,
             'los que coincidirian se numeran',
             todosLosNombres.filter((n) => /^Remate con un arma de una mano \(\d/.test(n))[0]);
 
@@ -388,7 +509,10 @@ app.whenReady().then(async () => {
   console.log('\n  --- sin la categoria puesta, salen los primeros ---');
   /* Se marca algo que en la lista de sentarse queda muy abajo, y se comprueba
      que al buscar aparece el primero de todos. */
-  await buscar('sentarse');
+  /* "sentado" y no "sentarse": sentarse y levantarse son transiciones de
+     mueble y la hoja las descarta, asi que ya no salen. Las expresiones
+     estando sentado si siguen. */
+  await buscar('sentado');
   const antes = await js(`[...document.querySelectorAll('#animplayer .ap-fila')]
     .map(f => f.dataset.evento)`);
   const tardon = antes[antes.length - 1];
@@ -503,8 +627,15 @@ app.whenReady().then(async () => {
   await captura('9-rueda-sola');
 
   console.log('\n=== la rueda de favoritos ===');
+  /* Marca un favorito. Si la animacion no esta en la lista lo dice con su
+     nombre: puede estar oculta por la hoja de revision (Descartado) o ser la
+     salida de otra, y un "Script failed to execute" a secas no ayuda nada. */
   const marcar = async (evento) => {
     await buscar(evento);
+    const hay = await js(`!!document.querySelector(
+      '#animplayer .ap-fila[data-evento="${evento}"] .ap-estrella')`);
+    if (!hay) throw new Error('marcar: ' + evento + ' no esta en la lista ' +
+                              '(oculta, descartada, o es salida de otra)');
     await js(`document.querySelector('#animplayer .ap-fila[data-evento="${evento}"] .ap-estrella').click()`);
     await esperar(90);
   };
@@ -523,8 +654,11 @@ app.whenReady().then(async () => {
             'y el boton dice como conseguirla',
             await js(`document.querySelector('#animplayer .ap-volver').textContent`));
 
+  /* Seis que se ven. "Sentarse de frente" estaba aqui y la hoja de revision la
+     marco como descartada, asi que ya no sale en la lista: se cambio por otra
+     visible en vez de tocar la hoja. */
   const seis = ['IdleLuteStart', 'IdleWave', 'IdleSalute', 'IdlePray',
-                'IdleLaugh', 'IdleChairFrontEnter'];
+                'IdleLaugh', 'IdleStudy'];
   for (const e of seis) await marcar(e);
   await pasarMensajesAlPlugin(falso);
   await buscar('');
@@ -706,20 +840,22 @@ app.whenReady().then(async () => {
   const porId = await buscar('IdleWave');
   comprobar(porId.includes('IdleWave'), 'por el id entero, pegado tal cual');
 
+  /* Se busca una que la hoja de revision NO haya descartado: las descartadas
+     no salen en la lista, y antes esta prueba usaba una que si lo esta. */
   const porTrozoDeId = await buscar('chair');
-  comprobar(porTrozoDeId.length > 20 && porTrozoDeId.includes('IdleChairFrontEnter'),
+  comprobar(porTrozoDeId.length > 8 && porTrozoDeId.includes('ChairReadingStart'),
             'y por un trozo del id, que se parte por sus mayusculas',
             porTrozoDeId.length + ' resultados');
 
-  const porEspanol = await buscar('sentarse');
-  comprobar(porEspanol.length > 10 && porEspanol.includes('IdleChairFrontEnter'),
+  const porEspanol = await buscar('sentado');
+  comprobar(porEspanol.length > 5 && porEspanol.includes('ChairReadingStart'),
             'por el nombre en espanol: sentarse',
             porEspanol.length + ' resultados');
 
   const conAcento = await buscar('laúd');
   comprobar(conAcento.includes('IdleLuteStart'), 'con acentos y todo: laúd');
 
-  const dosPalabras = await buscar('chair front');
+  const dosPalabras = await buscar('chair reading');
   comprobar(dosPalabras.length > 0 && dosPalabras.every((e) => /chair/i.test(e)),
             'con dos palabras, y tienen que cumplirse las dos',
             dosPalabras.join(', '));
@@ -729,7 +865,7 @@ app.whenReady().then(async () => {
   comprobar(/Nada con eso/.test(await js(`document.querySelector('#animplayer .ap-lista').textContent`)),
             'con un mensaje, no una lista vacia');
 
-  console.log('\n=== pulsar una fila reproduce ===');
+  console.log('\n=== pulsar una fila la reproduce ===');
   await verLista();
   await buscar('wave');
   await js(`document.querySelector('#animplayer .ap-fila[data-evento="IdleWave"]').click()`);
@@ -791,12 +927,16 @@ app.whenReady().then(async () => {
   await js(`document.querySelector('#animplayer .ap-chip[data-cat="todas"]').click()`);
   await esperar(200);
   const todasLasFilas = await js(`document.querySelectorAll('#animplayer .ap-fila').length`);
-  /* El tope va holgado a proposito: el catalogo adelgaza cada vez que se
-     limpia (las "al instante", las de nino, los remates contra bichos), y la
-     prueba no tiene por que romperse por eso. Lo que importa es que salgan
-     todas y no solo las recomendadas. */
-  comprobar(todasLasFilas > 400, 'y al pulsarla sale el catalogo entero',
-            todasLasFilas + ' filas');
+  /* Ya no se mira cuantos renglones hay pintados —la lista va por tandas y
+     empieza por 60— sino lo que dice que hay. El tope va holgado a proposito:
+     el catalogo adelgaza cada vez que se limpia (las "al instante", las de
+     nino, los remates contra bichos), y la prueba no tiene por que romperse
+     por eso. Lo que importa es que sean todas y no solo las recomendadas. */
+  const cuantasDice = await js(
+    `document.querySelector('#animplayer .ap-donde').textContent`);
+  comprobar(parseInt(String(cuantasDice).replace(/\D+/g, ''), 10) > 300,
+            'y al pulsarla sale el catalogo entero',
+            cuantasDice + ' / ' + todasLasFilas + ' pintadas');
   const buscandoEnTodas = await js(`(() => {
     const c = document.querySelector('#animplayer .ap-buscar');
     c.value = 'rezar'; c.dispatchEvent(new Event('input', { bubbles: true }));
@@ -823,7 +963,9 @@ app.whenReady().then(async () => {
   console.log('\n=== las que los demas no veran se avisan ===');
   const aviso = await js(`(() => {
     const c = document.querySelector('#animplayer .ap-buscar');
-    c.value = 'WeapEquip'; c.dispatchEvent(new Event('input', { bubbles: true }));
+    /* Magic_Equip y no WeapEquip: esta ultima la descarta la hoja de revision
+       y ya no sale en la lista. Las dos son de las que SkyMP no sincroniza. */
+    c.value = 'Magic_Equip'; c.dispatchEvent(new Event('input', { bubbles: true }));
     const f = document.querySelector('#animplayer .ap-fila');
     return f ? { sinSinc: f.classList.contains('ap-sinsinc'), titulo: f.title } : null;
   })()`);
@@ -2032,46 +2174,55 @@ app.whenReady().then(async () => {
             'y el plugin quedo sabiendo que estaba cerrado, no abierto',
             seguidos.registro.movimientoQuitado + ' quitado');
 
-  console.log('\n=== los iconos ===');
-  /* Un dibujo por tipo de accion, no por categoria: sentarse y tumbarse no son
-     lo mismo, ni una espada y un escudo. El reparto lo hace
-     herramientas/iconos.py y el dibujo herramientas/dibujos.py; los dos entran
-     en el plugin generados, como el catalogo. */
-  await asegurarAbierto();
+  console.log('\n=== las poses de dos piezas ===');
+  /* Recoger una piedra y soltarla son dos animaciones. Detener tiene que
+     mandar la de soltar, que si no la piedra se desvanece de la mano. */
+  const dosPiezas = falsoSp.cargarPlugin(PLUGIN, {});
+  dosPiezas.tic();
+  const apDos = dosPiezas.sp.storage.AnimPlayer;
+
+  const fichaPiedra = apDos.ficha('IdleStonePickUpEnter');
+  comprobar(fichaPiedra && fichaPiedra.salida === 'IdleStonePutDownEnter',
+            'recoger una piedra sabe cual es su salida',
+            fichaPiedra && fichaPiedra.salida);
+
+  apDos.reproducir('IdleStonePickUpEnter');
+  dosPiezas.tic();
+  dejarPasarLaEspera(dosPiezas);
+  dosPiezas.registro.animaciones.length = 0;
+  apDos.parar();
+  dosPiezas.tic();
+  const alSoltar = dosPiezas.registro.animaciones.map((a) => a.evento);
+  comprobar(alSoltar[0] === 'IdleStonePutDownEnter',
+            'al detener se manda PRIMERO la salida', alSoltar.join(' -> '));
+  comprobar(alSoltar.indexOf('IdleStop') !== -1,
+            'y detras el corte, por si la salida no basta',
+            alSoltar.join(' -> '));
+
+  console.log('  --- y una sin salida se corta como siempre ---');
+  apDos.reproducir('IdleWave');
+  dosPiezas.tic();
+  dejarPasarLaEspera(dosPiezas);
+  dosPiezas.registro.animaciones.length = 0;
+  apDos.parar();
+  dosPiezas.tic();
+  comprobar(dosPiezas.registro.animaciones[0].evento === 'OffsetStop',
+            'sin salida, el corte de siempre',
+            dosPiezas.registro.animaciones.map((a) => a.evento).join(' -> '));
+
+  console.log('  --- las salidas no salen en la lista ---');
   await verLista();
-
-  /* El catalogo se mira del lado del PLUGIN, que es quien lo tiene: la pagina
-     solo recibe las fichas para pintarlas y no expone lista(). */
-  const todasLas = falso.sp.storage.AnimPlayer.lista().animaciones;
-  const conIcono = {
-    total: todasLas.length,
-    sin: todasLas.filter((a) => !a.icono).length,
-    cuantos: new Set(todasLas.map((a) => a.icono)).size
-  };
-  comprobar(conIcono.sin === 0, 'todas las animaciones llevan icono',
-            conIcono.sin + ' sin icono de ' + conIcono.total);
-  comprobar(conIcono.cuantos >= 8 && conIcono.cuantos <= 40,
-            'y son unos cuantos iconos distintos, no uno por animacion',
-            String(conIcono.cuantos));
-
-  await buscar('wave');
-  comprobar(await js(`!!document.querySelector(
-    '#animplayer .ap-fila[data-evento="IdleWave"] svg.ap-icono path')`),
-            'la fila de la lista pinta su icono');
-  comprobar(await js(`(document.querySelector(
-    '#animplayer .ap-fila[data-evento="IdleWave"] svg.ap-icono path')
-      .getAttribute('d') || '').length > 20`),
-            'y el dibujo tiene contenido, no es un hueco');
-
-  console.log('  --- y tambien en la rueda ---');
-  await limpiarFavoritos(falso);
-  await js(`document.querySelector(
-    '#animplayer .ap-fila[data-evento="IdleWave"] .ap-estrella').click()`);
-  await esperar(150);
-  await verRueda();
-  comprobar(await js(`!!document.querySelector(
-    '#animplayer .ap-sitio[data-evento="IdleWave"] svg.ap-simbolo path')`),
-            'el sector de la rueda pinta su icono');
+  await buscar('piedra');
+  const conPiedra = await js(`[...document.querySelectorAll(
+    '#animplayer .ap-fila')].map((f) => f.getAttribute('data-evento'))`);
+  comprobar(conPiedra.indexOf('IdleStonePickUpEnter') !== -1,
+            'recoger una piedra si esta en la lista', conPiedra.join(', '));
+  /* Soltarla TAMBIEN sale en la lista: se decidio dejarlas a la vista. Lo que
+     hace el mod es lanzarla sola al detener, que es lo util; esconderla no
+     aportaba nada y quitaba la opcion de lanzarla a mano. */
+  comprobar(conPiedra.indexOf('IdleStonePutDownEnter') !== -1,
+            'y soltarla tambien: las salidas se dejan a la vista',
+            conPiedra.join(', '));
 
   console.log('\n=== esconder animaciones ===');
   /* Para que el servidor pueda repartirlas por jugador: unas las ve todo el
@@ -2080,16 +2231,24 @@ app.whenReady().then(async () => {
   oculto.tic();
   const apOculto = oculto.sp.storage.AnimPlayer;
 
-  comprobar(apOculto.ocultas().length === 0, 'de entrada no hay ninguna escondida',
-            String(apOculto.ocultas().length));
-  comprobar(apOculto.visible('IdleWave') === true, 'y todas se ven');
+  /* De partida YA hay escondidas: la hoja de revision descarta las de
+     jugabilidad y los remates. Asi que se mide contra ese punto de partida y
+     no contra cero. */
+  const ocultasAlEmpezar = apOculto.ocultas().length;
+  comprobar(ocultasAlEmpezar > 0,
+            'de entrada ya hay escondidas: las que descarta la hoja',
+            String(ocultasAlEmpezar));
+  comprobar(apOculto.visible('IdleLuteStart') === true,
+            'pero las aceptadas se ven');
 
-  comprobar(apOculto.ocultar('IdleWave') === 1, 'esconder una devuelve cuantas toco');
-  comprobar(apOculto.visible('IdleWave') === false, 'y deja de verse');
-  comprobar(apOculto.ocultas().join(',') === 'IdleWave',
-            'y sale en la lista de escondidas', apOculto.ocultas().join(','));
+  comprobar(apOculto.ocultar('IdleLuteStart') === 1,
+            'esconder una devuelve cuantas toco');
+  comprobar(apOculto.visible('IdleLuteStart') === false, 'y deja de verse');
+  comprobar(apOculto.ocultas().length === ocultasAlEmpezar + 1,
+            'y se suma a la lista de escondidas',
+            apOculto.ocultas().length + ' de ' + (ocultasAlEmpezar + 1));
 
-  comprobar(apOculto.ocultar('IdleWave') === 0,
+  comprobar(apOculto.ocultar('IdleLuteStart') === 0,
             'esconder la misma otra vez no cuenta');
   comprobar(apOculto.ocultar('NoExisteEstaAnimacion') === 0,
             'ni esconder una que no existe');
@@ -2100,15 +2259,17 @@ app.whenReady().then(async () => {
   /* A proposito: el servidor puede querer lanzarte una animacion que tu no
      tienes en el menu. Lo que se quita es su sitio en la lista, no la orden. */
   oculto.registro.animaciones.length = 0;
-  apOculto.reproducir('IdleWave');
+  apOculto.reproducir('IdleLuteStart');
   oculto.tic();
-  comprobar(oculto.registro.animaciones.some((a) => a.evento === 'IdleWave'),
+  comprobar(oculto.registro.animaciones.some((a) => a.evento === 'IdleLuteStart'),
             'una escondida se sigue pudiendo reproducir',
             oculto.registro.animaciones.map((a) => a.evento).join(', '));
 
-  comprobar(apOculto.mostrar(['IdleWave']) === 1, 'mostrar la devuelve');
-  comprobar(apOculto.visible('IdleWave') === true, 'y vuelve a verse');
-  comprobar(apOculto.ocultas().length === 0, 'y la lista de escondidas se vacia');
+  comprobar(apOculto.mostrar(['IdleLuteStart']) === 1, 'mostrar la devuelve');
+  comprobar(apOculto.visible('IdleLuteStart') === true, 'y vuelve a verse');
+  comprobar(apOculto.ocultas().length === ocultasAlEmpezar,
+            'y la lista de escondidas vuelve a como estaba',
+            apOculto.ocultas().length + ' de ' + ocultasAlEmpezar);
 
   console.log('  --- y el panel se entera, sin reiniciar nada ---');
   await verLista();
