@@ -2071,7 +2071,7 @@
       /* La capa ocupa toda la pantalla porque ahora hay dos cosas en sitios
          distintos: la rueda en el centro y la ventana de la lista arriba a la
          derecha. No deja pasar el raton salvo donde hay algo. */
-      '#' + ID + '{position:fixed;inset:0;z-index:9000;',
+      '#' + ID + '{position:fixed;top:0;right:0;bottom:0;left:0;z-index:9000;',
       '  font-family:var(--ap-fuente-nombre);font-size:15px;color:var(--ap-txt);',
       '  pointer-events:none;user-select:none}',
       '#' + ID + ' *{box-sizing:border-box}',
@@ -2086,7 +2086,7 @@
          se le ve el canto: la transicion mide mas de un tercio del ancho de la
          pantalla. El mismo degradado metido dentro de un panel de 500px daria
          un desvanecido de 150px, que se ve como una raya. */
-      '#' + ID + ' .ap-velo{position:absolute;inset:0;pointer-events:none;',
+      '#' + ID + ' .ap-velo{position:absolute;top:0;right:0;bottom:0;left:0;pointer-events:none;',
       '  display:none;',
       '  background:linear-gradient(90deg,transparent 25%,rgba(5,6,8,.92) 62%);',
       '  opacity:.85}',
@@ -2100,7 +2100,7 @@
          en este estilo el inventario apaga el suyo (__panel::before{display:
          none}) y deja el texto encima del velo. Aqui igual. */
       '#' + ID + ' .ap-panel{pointer-events:auto;position:absolute;top:0;right:0;',
-      '  width:min(500px,34vw);height:100vh;',
+      '  width:34vw;max-width:500px;height:100vh;',
       '  display:none;flex-direction:column;',
       /* Aire arriba y abajo: el panel llega de un canto al otro de la
          pantalla, y sin esto el titulo y los mandos quedan pegados al borde.
@@ -2174,7 +2174,7 @@
       /* La rueda no lleva marco ni fondo: se ve el juego por debajo y solo
          destaca el corro. Es lo que sale al pulsar la tecla, asi que tiene que
          tapar lo menos posible. */
-      '#' + ID + ' .ap-rueda{position:absolute;inset:0;display:none}',
+      '#' + ID + ' .ap-rueda{position:absolute;top:0;right:0;bottom:0;left:0;display:none}',
       /* Con .ap-abierto delante, y no es un detalle: sin eso la rueda se
          quedaba en mitad de la pantalla con el panel cerrado. Antes no podia
          pasar porque la rueda vivia dentro de la ventana y se iba con ella;
@@ -2193,8 +2193,8 @@
          que le de la caja. Por eso aqui ya no hace falta cuadrar numeros con
          los del dibujo. */
       '#' + ID + ' .ap-corro-caja{position:absolute;top:50%;left:50%;',
-      '  transform:translate(-50%,-50%);width:min(72vmin,720px);',
-      '  height:min(72vmin,720px);pointer-events:auto}',
+      '  transform:translate(-50%,-50%);width:72vmin;height:72vmin;',
+      '  max-width:720px;max-height:720px;pointer-events:auto}',
       /* El hueco del centro se oscurece el solo. Los sectores llevan el oscuro
          pegado al centro, pero el hueco no es un sector: es el agujero, y
          encima de un cielo blanco el texto se perdia.
@@ -2269,10 +2269,10 @@
          pequenaja dentro de un hueco que en pantalla grande es enorme. El tope
          en pixeles evita que en un 4K se desmadre. */
       '#' + ID + ' .ap-centro b{display:block;font-family:var(--ap-fuente-titulo);',
-      '  font-size:min(2.2vmin,24px);letter-spacing:1px;color:var(--ap-txt);',
+      '  font-size:2.2vmin;letter-spacing:1px;color:var(--ap-txt);',
       '  line-height:1.3}',
       '#' + ID + ' .ap-centro small{display:block;margin-top:5px;',
-      '  font-size:min(1.45vmin,16px);color:var(--ap-tenue)}',
+      '  font-size:1.45vmin;color:var(--ap-tenue)}',
       '#' + ID + ' .ap-mandos{display:flex;flex-direction:column;',
       '  align-items:center;gap:10px;margin-top:14px;pointer-events:auto}',
 
