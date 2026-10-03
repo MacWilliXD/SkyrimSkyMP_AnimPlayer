@@ -146,6 +146,6 @@
     "url": "",
     "soloServidor": false
   },
-  "margenTrasPantallaDeCarga": 15000,
+  "margenTrasPantallaDeCarga": 5000,
   "animaciones": []
 }

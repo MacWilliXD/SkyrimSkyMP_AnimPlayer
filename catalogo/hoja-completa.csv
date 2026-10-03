@@ -1,8 +1,8 @@
 ﻿id,nombre,descripción,estado,nota,dependencia,editorId
-SneakStart,Agacharse,Animación básica del jugador para agacharse (usada al usar el cntrl),Descartado,No usable para rueda de animaciones,Estar agachado. Termina con: Levantarse de agacharse,SneakStart
+SneakStart,Agacharse,Animación básica del jugador para agacharse (usada al usar el cntrl),Descartado,No usable para rueda de animaciones,Estar agachado,SneakStart
 MRh_SpellAimedStart,"Apuntar con un hechizo, derecha",Incrementa el efecto del hechizo derecho,Descartado,Animación cuando inicias a lanzar un hechizo,Necesita un hechizo preparado en la mano derecha,CastRightFireForgetTargetActor
 MLh_SpellAimedStart,"Apuntar con un hechizo, izquierda",Incrementa el efecto del hechizo izquierdo,Descartado,Animación cuando inicias a lanzar un hechizo,Necesita un hechizo preparado en la mano izquierda,BleedOutCastLeftFireForgetTargetActor
-attackStart,Atacar,Ataca con el arma equipada (Mano derecha),Descartado,Usada al hacer click izquierdo,"Necesita un arma desenvainada, de cualquier tipo. Termina con: Dejar de apuntar con el arco",NormalAttack
+attackStart,Atacar,Ataca con el arma equipada (Mano derecha),Descartado,Usada al hacer click izquierdo,"Necesita un arma desenvainada, de cualquier tipo",NormalAttack
 attackStart_MC_1HMRight,Atacar con la derecha (una mano),"Ataca con el arma equipada (Una mano, mano derecha)",Descartado,,Necesita un arma de una mano desenvainada,AttackRightSide
 attackStartLeftHand,Atacar con la izquierda,Ataca con el arma equipada (Mano izquierda),Descartado,Usada al hacer click derecho,"Necesita un arma desenvainada, de cualquier tipo",LeftHandAttack
 attackStart_MC_1HMLeft,Atacar con la izquierda (una mano),"Ataca con el arma equipada (Una mano, mano izquierda)",Descartado,,Necesita un arma de una mano desenvainada,AttackLeftSide
@@ -18,8 +18,8 @@ attackPowerStartLeft,Atacar con fuerza hacia la izquierda,Ataque potente con arm
 JumpLandEnd,Aterrizar,Cierre al caer de un salto (No tiene movimiento),Descartado,,Estar ya en movimiento,JumpSoftEndFailSafe
 JumpLandDirectional,Aterrizar de lado,Cierre al caer de un salto mientras te mueves (No tiene movimiento),Descartado,,Estar ya en movimiento,WerewolfJumpLandDirectional
 JumpFall,Caer,Se ejecuta automaticamente mientras cae el jugador (Aleteo mientras caes),Descartado,,Estar ya en movimiento,JumpFall
-bleedOutStart,Caer abatido,Cae al suelo tocandose el estomago y en 4 patas derrotado,Modificado,"Animación ejecutada por npc inmortales cuando caen derrotados, se arrastran en el piso abatidos",Termina con: Caer abatido (Levantarse),BleedoutStart
-bleedOutStop,Caer abatido (Levantarse),Fade-out animación de bleedOutStart (Se levanta de estar abatido),Modificado,Transición de animación de estar abatido a levantarse,Haber ejecutado antes: Caer abatido,BleedoutStop
+bleedOutStart,Caer abatido,Cae al suelo tocandose el estomago y en 4 patas derrotado,Modificado,"Animación ejecutada por npc inmortales cuando caen derrotados, se arrastran en el piso abatidos",,BleedoutStart
+bleedOutStop,Caer abatido (Levantarse),Fade-out animación de bleedOutStart (Se levanta de estar abatido),Modificado,Transición de animación de estar abatido a levantarse,Estar ya haciendo esa animación,BleedoutStop
 MC_WeapOutRightReplaceForceEquip,Cambiar el arma de la derecha (2),Desenfunda el arma equipada,Descartado,Hace lo mismo que la anterior pero no ejecuta animación,"Necesita un arma desenvainada, de cualquier tipo",MC_WeaponRightHandEquip
 WeapOutLeftReplaceForceEquip,Cambiar el arma de la izquierda,Desenfunda el arma equipada izquierda,Descartado,Saca el arma equipada sin discreción (Aunque su animación es más bruta y las saca de inmediato sin transición),"Necesita un arma desenvainada, de cualquier tipo",StaffMagicShieldTorchANDWeapEquip
 ShoutSprintLongStart,"Carrera del Torbellino, larga",Grito de torbellino arrollador Nivel 1,Descartado,Requiere y solo ejecutable con el grito y sue fecto,Necesita un grito aprendido,VoiceWhirlwindSprintMedium
@@ -27,19 +27,19 @@ ShoutSprintMediumStart,"Carrera del Torbellino, media",Grito de torbellino arrol
 ShoutSprintLongestStart,"Carrera del Torbellino, muy larga",Grito de torbellino arrollador Nivel 3,Descartado,Requiere y solo ejecutable con el grito y sue fecto,Necesita un grito aprendido,VoiceWhirlwindSprintLong
 attackPowerStartH2HCombo,Combinación de puñetazos,Golpe cargado intercambiado entre ambos puños,Descartado,Animación que se ejecuta al hacer el ataque cargado con ambos golpes (clicks) al mismo tiempo,"Necesita tener los puños libres, sin arma",RightH2HComboPowerAttack
 RitualSpellOut,Cortar el hechizo ritual,Corta la animación del hechizo de alto nivel (los que usan dos manos para cargar el hechizo),Descartado,"Solo corta la animación, no hace nada en si",Necesita un hechizo preparado en la mano,InterruptRightRitualSpell
-moveStop,Dejar de andar,Fade-outanimación de cuando caminas,Descartado,"Sin animación, es un stop",Haber ejecutado antes: Echar a andar,CharacterMoveStop
-blockStop,Dejar de bloquear,Fade-out animación de bloquear,Descartado,"Sin animación, es un stop",Haber ejecutado antes: Ponerse a bloquear,FalmerBlockStop
-SprintStop,Dejar de correr,Fade-out animación de correr,Descartado,"Sin animación, es un stop",Haber ejecutado antes: Echar a correr,SprintRootStop
+moveStop,Dejar de andar,Fade-outanimación de cuando caminas,Descartado,"Sin animación, es un stop",Estar ya haciendo esa animación,CharacterMoveStop
+blockStop,Dejar de bloquear,Fade-out animación de bloquear,Descartado,"Sin animación, es un stop",Estar ya haciendo esa animación,FalmerBlockStop
+SprintStop,Dejar de correr,Fade-out animación de correr,Descartado,"Sin animación, es un stop",Estar ya haciendo esa animación,SprintRootStop
 turnStop,Dejar de girar,Fade-out animación de girar,Descartado,"Sin animación, es un stop",Estar ya haciendo esa animación,CharacterTurnStop
-SwimStop,Dejar de nadar,Fade-out animación de nadar,Descartado,"Sin animación, es un stop",Haber ejecutado antes: Ponerse a nadar,SwimStop
+SwimStop,Dejar de nadar,Fade-out animación de nadar,Descartado,"Sin animación, es un stop",Estar ya haciendo esa animación,SwimStop
 WeapEquip,Desenvainar,Desenvaina el arma equipada,Descartado,Misma animación de la R del juego base,"Necesita un arma desenvainada, de cualquier tipo",DefaultDrawWeapon
 WeapSoloEquip,Desenvainar (sin nada más),Desenvaina el arma equipada,Descartado,Misma animación de la R del juego base,"Necesita un arma desenvainada, de cualquier tipo",LeftH2HEquip
 bowAttackStart,Disparar el arco,Dispara con el arco equipado,Descartado,Se necesita tener equipado y desenvainado un arco con munición,Necesita un arco equipado,BowAttack
 crossbowAttackStart,Disparar la ballesta,Dispara con la ballesta equipada,Descartado,Se necesita tener equipado y desenvainado una ballesta con munición,Necesita un arco equipado,crossbowAttackStart
 crossbowDwarvenAttackStart,Disparar la ballesta mejorada,Dispara con la ballesta mejorada equipada,Descartado,Se necesita tener equipado y desenvainado una ballesta mejorada con munición,Necesita un arco equipado,crossbowDwarvenAttackStart
-moveStart,Echar a andar,Comienza la animación de caminar (varia la velocidad de la animación),Descartado,Se requiere estar idle para ejecutar y dependiendo de la velocidad del jugador es la velocidad de la animación,Estar ya en movimiento. Termina con: Dejar de andar,CharacterMoveStart
-SprintStart,Echar a correr,Comienza la animación de correr,Descartado,Se requiere estar haciendola animación de caminar para ejecutarse.,Estar ya en movimiento. Termina con: Dejar de correr,SprintStart
-shoutStart,Empezar un Grito,Inicia grito (bucle),Descartado,Comienza la animación al momento de lanzar un grito. Se repite en bucle.,Necesita un grito aprendido. Termina con: Terminar el Grito,VoiceStart
+moveStart,Echar a andar,Comienza la animación de caminar (varia la velocidad de la animación),Descartado,Se requiere estar idle para ejecutar y dependiendo de la velocidad del jugador es la velocidad de la animación,Estar ya en movimiento,CharacterMoveStart
+SprintStart,Echar a correr,Comienza la animación de correr,Descartado,Se requiere estar haciendola animación de caminar para ejecutarse.,Estar ya en movimiento,SprintStart
+shoutStart,Empezar un Grito,Inicia grito (bucle),Descartado,Comienza la animación al momento de lanzar un grito. Se repite en bucle.,Necesita un grito aprendido,VoiceStart
 NPCshoutStart,Empezar un Grito (3),Inicia grito (solo npcs),Descartado,Comienza la animación al momento de lanzar un grito. Se repite en bucle. Solo para Npcs,Necesita un grito aprendido,NPCVoiceStart
 RitualSpellStart,Empezar un hechizo ritual,Usa las dos manos para cargar un hechizo/ritual y quedarse cargando,Descartado,"Animación usada para hechizos de dos manos cargados o spells grandes, carga con las dos manos y se queda idle en la animación de carga con las manos abiertas.",Necesita un hechizo preparado en la mano,CastLeftRitualFireAndForgetSelf
 idleRitualSpellStart,Empezar un hechizo ritual (pose),Comenzar a cargar hechizo de 2 manos tipo ritual,Modificado,"Se queda porque se mantiene la animación. Animación usada para hechizos de dos manos cargados o spells grandes, carga con las dos manos y se queda idle en la animación de carga con las manos abiertas.",Necesita un hechizo preparado en la mano,idleRitualSpellStart
@@ -69,13 +69,13 @@ MRh_SpellSelfStart,"Hechizo sobre uno mismo, derecha",Carga hechizo,Descartado,,
 wardAbsorb,La protección absorbe un hechizo,Carga hechizo,Descartado,,,WardAbsorbed
 MRh_WardStart,Levantar protección con la derecha,Carga hechizo,Descartado,,Necesita un hechizo preparado en la mano derecha,BleedOutCastRightWard
 MLh_WardStart,Levantar protección con la izquierda,Carga hechizo,Descartado,,Necesita un hechizo preparado en la mano izquierda,BleedOutCastLeftWard
-SneakStop,Levantarse de agacharse,Animación básica del jugador para salir de agacharse (usada al usar el cntrl),Descartado,Necesita estar Agachado para ejecutarse. No usable para rueda de animaciones,Haber ejecutado antes: Agacharse,SneakStop
+SneakStop,Levantarse de agacharse,Animación básica del jugador para salir de agacharse (usada al usar el cntrl),Descartado,Necesita estar Agachado para ejecutarse. No usable para rueda de animaciones,Estar ya haciendo esa animación,SneakStop
 IdleCombatLookingAroundStart,Mirar alrededor (En guardia),Mirar alrededor cuandoe stas en guardia,Modificado,Animación que requiere tener las armas desenvainadas. Mira alrededor,"Necesita un arma desenvainada, de cualquier tipo",CombatIdleLookingAround
 MagicForceEquipRight,Poner magia en la derecha,Equipo hechizo,Descartado,,Necesita un hechizo preparado en la mano,OnlyRightHandChangesMagicOut
 MagicForceEquipLeft,Poner magia en la izquierda,Equipo hechizo,Descartado,,Necesita un hechizo preparado en la mano,LeftMagicForceEquip
 MagicWeap_ForceEquip,Poner magia y arma,Equipo hechizo y arma,Descartado,,"Necesita un arma desenvainada, de cualquier tipo",MagicWeaponForceEquip
-blockStart,Ponerse a bloquear,Comenzar animación de bloquear,Descartado,,Necesita un escudo equipado. Termina con: Dejar de bloquear,BowZoom
-SwimStart,Ponerse a nadar,Comenzar animación de nadar,Descartado,,Estar dentro del agua. Termina con: Dejar de nadar,JumpLandSwimming
+blockStart,Ponerse a bloquear,Comenzar animación de bloquear,Descartado,,Necesita un escudo equipado,BowZoom
+SwimStart,Ponerse a nadar,Comenzar animación de nadar,Descartado,,Estar dentro del agua,JumpLandSwimming
 IdleCombatStart,Adoptar la postura de combate,Comenzar animación de postura de combate,Descartado,,"Necesita un arma desenvainada, de cualquier tipo",CombatIdleStagger_Regular
 blockAnticipateStart,Prepararse para bloquear,Inicia la animación de bloquear,Descartado,,Necesita un escudo equipado,BlockAnticipate
 IdleCombatShieldStart,Provocar golpeando armas (En guardia),Golpea tus armas para provocar,Modificado,Animación del escudo que golpea para hacer ruido (meme del esqueleto golpeando escudo),Necesita un escudo equipado,IdleCivilWarShieldCheer
@@ -112,7 +112,7 @@ swimForceEquip,Soltar lo que llevas al nadar,Fuerza soltar lo que lleves al nada
 MRh_SpellTelekinesisStart,Telequinesis con la derecha,Estira el brazo para mover con telequinesis,Descartado,No funciona sin el hechizo equipado,Necesita un hechizo preparado en la mano derecha,CastRightTelekinesis
 MLh_SpellTelekinesisStart,Telequinesis con la izquierda,Estira el brazo para mover con telequinesis,Descartado,No funciona sin el hechizo equipado,Necesita un hechizo preparado en la mano izquierda,CastLeftTelekinesis
 bowEnd,Terminar con el arco,Termina al lanzar una flecha,Descartado,Animación ejecutada al terminar de lanzar una flecha con el arco,Necesita un arco equipado,CrossbowReleaseDuringReload
-shoutStop,Terminar el Grito,Terminar de gritar,Descartado,Animación ejecutada al finalizar un grito,Haber ejecutado antes: Empezar un Grito,VoiceInterruptRoot
+shoutStop,Terminar el Grito,Terminar de gritar,Descartado,Animación ejecutada al finalizar un grito,Estar ya haciendo esa animación,VoiceInterruptRoot
 VampireFeedingBedRollRight,"Alimentarse en el saco de dormir, por la derecha","Alimentarse en el saco de dormir, por la derecha. Necesita: estar acostado en la cama o en un saco de dormir.",,,Estar acostado en la cama o en un saco de dormir,IdleVampireBedrollRight
 VampireFeedingBedRollLeft,"Alimentarse en el saco de dormir, por la izquierda","Alimentarse en el saco de dormir, por la izquierda. Necesita: estar acostado en la cama o en un saco de dormir.",,,Estar acostado en la cama o en un saco de dormir,IdleVampireBedrollLeft
 VampireFeedingBedRight,"Alimentarse en la cama, por la derecha","Alimentarse en la cama, por la derecha.",,,,IdleVampireBedRight
@@ -130,13 +130,13 @@ idleEatingStandingStart_DLC1Vampire,Comer carne cruda de pie,Comer carne cruda d
 ChairEatingStart_VampireMeat,Comer carne cruda sentado,"Comer carne cruda sentado. Necesita: estar sentado en una silla, banco o taburete.",,,"Estar sentado en una silla, banco o taburete",ChairEating_VampireMeat
 idleEatingStandingStart,Comer de pie,Comer de pie.,,,,IdleEatingStandingStart
 ChairEatingStart,Comer sentado,"Comer sentado. Necesita: estar sentado en una silla, banco o taburete.",,,"Estar sentado en una silla, banco o taburete",ChairEatingStart
-DrunkStop,Dejar de tambalearse,Dejar de tambalearse. Necesita: haber ejecutado antes: Ponerse a tambalearse.,Descartado,Es la animacion de salida de Ponerse a tambalearse; el mod la lanza solo al detener,Haber ejecutado antes: Ponerse a tambalearse,IdleDrunkStop
+DrunkStop,Dejar de tambalearse,Dejar de tambalearse. Necesita: estar ya haciendo esa animación.,,,Estar ya haciendo esa animación,IdleDrunkStop
 IdleTablePassOutEnter,Desplomarse sobre la mesa,Desplomarse sobre la mesa. Necesita: estar delante de la mesa de trabajo.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de la mesa de trabajo,IdleTablePassOutEnterLoose
 IdleCannibalFeedStanding,Devorar de pie,Devorar de pie.,,,,IdleCannibalFeedStanding
 IdleCannibalFeedCrouching,Devorar en cuclillas,Devorar en cuclillas. Necesita: estar agachado.,,,Estar agachado,IdleCannibalFeedCrouching
 pa_VampireFeedStanding_Front,Morder el cuello de frente,"Morder el cuello de frente. Necesita: necesita un arma desenvainada, de cualquier tipo.",,,"Necesita un arma desenvainada, de cualquier tipo",IdleVampireStandingFeedFront_Loose
 pa_VampireFeedStanding_Back,Morder el cuello por la espalda,"Morder el cuello por la espalda. Necesita: necesita un arma desenvainada, de cualquier tipo.",,,"Necesita un arma desenvainada, de cualquier tipo",IdleVampireStandingBack
-DrunkStart,Ponerse a tambalearse,Ponerse a tambalearse. Necesita: termina con: Dejar de tambalearse.,,,Termina con: Dejar de tambalearse,IdleDrunkStart
+DrunkStart,Ponerse a tambalearse,Ponerse a tambalearse.,,,,IdleDrunkStart
 IdleTableDrinkEnter,Sentarse a la mesa a beber,Sentarse a la mesa a beber. Necesita: estar delante de la mesa de trabajo.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de la mesa de trabajo,IdleTableDrinkEnterLoose
 IdleTableDrinkAndMugEnter,Sentarse a la mesa con jarra y bebida,Sentarse a la mesa con jarra y bebida. Necesita: estar delante de la mesa de trabajo.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de la mesa de trabajo,IdleTableDrinkAndMugEnterLoose
 IdleTableMugEnter,Sentarse a la mesa con una jarra,Sentarse a la mesa con una jarra. Necesita: estar delante de la mesa de trabajo.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de la mesa de trabajo,IdleTableMugEnterLoose
@@ -144,28 +144,28 @@ IdleTG03UseMeadBarrel,Servirse del barril de hidromiel,Servirse del barril de hi
 IdleMQ201HoldingDrinkTray,Sostener una bandeja de bebidas,Sostener una bandeja de bebidas.,,,,IdleMQ201HoldingDrinkTray
 IdleEatSoup,Tomar sopa,"Tomar sopa. Necesita: estar sentado en una silla, banco o taburete.",,,"Estar sentado en una silla, banco o taburete",IdleEatSoup
 ChairEatingSoupStart,Tomar sopa sentado,"Tomar sopa sentado. Necesita: estar sentado en una silla, banco o taburete.",,,"Estar sentado en una silla, banco o taburete",ChairEatingSoupStart
-IdleFurnitureExit,Levantarse del mueble,"Levantarse del mueble. Necesita: haber ejecutado antes: Acostarse (Ataúd), Acostarse en el suelo, Apoyarse en el mostrador.",Descartado,Es la animacion de salida de Acostarse (Ataúd); el mod la lanza solo al detener,"Haber ejecutado antes: Acostarse (Ataúd), Acostarse en el suelo, Apoyarse en el mostrador",IdleMQ203EsbernBookExit
+IdleFurnitureExit,Levantarse del mueble,Levantarse del mueble. Necesita: estar en el mueble o la mesa de trabajo.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar en el mueble o la mesa de trabajo,IdleMQ203EsbernBookExit
 IdleStop,Parar la animación,Parar la animación. Necesita: estar ya haciendo esa animación.,,,Estar ya haciendo esa animación,IdleStop_Loose
 IdleForceDefaultState,Parar y volver a la postura normal,Parar y volver a la postura normal.,,,,ResetRoot
-OffsetStop,Soltar lo que lleva en las manos,"Soltar lo que lleva en las manos. Necesita: haber ejecutado antes: Llevar un cesto, Llevar una olla, Recoger flores en el cesto.",Descartado,Es la animacion de salida de Llevar un cesto; el mod la lanza solo al detener,"Haber ejecutado antes: Llevar un cesto, Llevar una olla, Recoger flores en el cesto",OffsetStop
-RF_OpenStart,Actitud: cercana,Actitud: cercana.,,,,Caring
-RF_GuardedStart,Actitud: distante,Actitud: distante.,,,,Standoffish
-RF_PlayfulStart,Actitud: juguetona,Actitud: juguetona.,,,,Flirty
-RF_SeriousStart,Actitud: seria,Actitud: seria.,,,,Sarcastic
-RF_MoodChangeOpen,Cambiar a actitud cercana,Cambiar a actitud cercana.,,,,RF_MoodChangeOpen
-RF_MoodChangeGuarded,Cambiar a actitud distante,Cambiar a actitud distante.,,,,RF_MoodChangeGuarded
-RF_MoodChangePlayful,Cambiar a actitud juguetona,Cambiar a actitud juguetona.,,,,RF_MoodChangePlayful
-RF_MoodChangeSerious,Cambiar a actitud seria,Cambiar a actitud seria.,,,,RF_MoodChangeSerious
-RF_OpenDismissive_In,Cercana: desdén,Cercana: desdén.,,,,RF_OpenDismissive
-RF_OpenInterested_In,Cercana: interés,Cercana: interés.,,,,RF_OpenInterested
-RF_OpenThrowHands_In,Cercana: manos al aire,Cercana: manos al aire.,,,,RF_OpenThrowHands
-RF_Shock_Open,Cercana: sobresalto,Cercana: sobresalto.,,,,RF_ShockOpen
-RF_OpenPleading_In,Cercana: súplica,Cercana: súplica.,,,,RF_OpenPleading
-RF_GuardedDismissive_In,Distante: desdén,Distante: desdén.,,,,RF_GuardedDismissive
-RF_GuardedInterested_In,Distante: interés,Distante: interés.,,,,RF_GuardedInterested
-RF_GuardedThrowHands_In,Distante: manos al aire,Distante: manos al aire.,,,,RF_GuardedThrowHands
-RF_Shock_Guarded,Distante: sobresalto,Distante: sobresalto.,,,,RF_ShockGuarded
-RF_GuardedPleading_In,Distante: súplica,Distante: súplica.,,,,RF_GuardedPleading
+OffsetStop,Soltar lo que lleva en las manos,Soltar lo que lleva en las manos. Necesita: estar ya haciendo esa animación.,,,Estar ya haciendo esa animación,OffsetStop
+RF_OpenStart,Actitud: cercana,Actitud: cercana.,Descartado,"Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada",,Caring
+RF_GuardedStart,Actitud: distante,Actitud: distante.,Descartado,"Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada",,Standoffish
+RF_PlayfulStart,Actitud: juguetona,Actitud: juguetona.,Descartado,"Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada",,Flirty
+RF_SeriousStart,Actitud: seria,Actitud: seria.,Descartado,"Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada",,Sarcastic
+RF_MoodChangeOpen,Cambiar a actitud cercana,Cambiar a actitud cercana.,Descartado,"Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada",,RF_MoodChangeOpen
+RF_MoodChangeGuarded,Cambiar a actitud distante,Cambiar a actitud distante.,Descartado,"Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada",,RF_MoodChangeGuarded
+RF_MoodChangePlayful,Cambiar a actitud juguetona,Cambiar a actitud juguetona.,Descartado,"Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada",,RF_MoodChangePlayful
+RF_MoodChangeSerious,Cambiar a actitud seria,Cambiar a actitud seria.,Descartado,"Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada",,RF_MoodChangeSerious
+RF_OpenDismissive_In,Cercana: desdén,Cercana: desdén.,Descartado,"Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada",,RF_OpenDismissive
+RF_OpenInterested_In,Cercana: interés,Cercana: interés.,Descartado,"Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada",,RF_OpenInterested
+RF_OpenThrowHands_In,Cercana: manos al aire,Cercana: manos al aire.,Descartado,"Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada",,RF_OpenThrowHands
+RF_Shock_Open,Cercana: sobresalto,Cercana: sobresalto.,Descartado,"Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada",,RF_ShockOpen
+RF_OpenPleading_In,Cercana: súplica,Cercana: súplica.,Descartado,"Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada",,RF_OpenPleading
+RF_GuardedDismissive_In,Distante: desdén,Distante: desdén.,Descartado,"Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada",,RF_GuardedDismissive
+RF_GuardedInterested_In,Distante: interés,Distante: interés.,Descartado,"Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada",,RF_GuardedInterested
+RF_GuardedThrowHands_In,Distante: manos al aire,Distante: manos al aire.,Descartado,"Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada",,RF_GuardedThrowHands
+RF_Shock_Guarded,Distante: sobresalto,Distante: sobresalto.,Descartado,"Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada",,RF_ShockGuarded
+RF_GuardedPleading_In,Distante: súplica,Distante: súplica.,Descartado,"Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada",,RF_GuardedPleading
 PairEnd,Fin de la escena en pareja,Fin de la escena en pareja.,,,,DLC1PairEnd
 IdleDialogueDefensiveHandGesture,Hacer un gesto a la defensiva,Hacer un gesto a la defensiva. Necesita: estar en una conversación.,,,Estar en una conversación,IdleDialogueDefensiveHandGesture
 IdleDialogueWelcomeHandGesture,Hacer un gesto de bienvenida,Hacer un gesto de bienvenida. Necesita: estar en una conversación.,,,Estar en una conversación,IdleDialogueWelcomeHandGesture
@@ -174,13 +174,13 @@ IdleDialogueMovingTalkA,Hablar andando (A),Hablar andando (A). Necesita: estar e
 IdleDialogueMovingTalkB,Hablar andando (B),Hablar andando (B). Necesita: estar en una conversación.,,,Estar en una conversación,IdleDialogueMovingTalkB
 IdleDialogueMovingTalkC,Hablar andando (C),Hablar andando (C). Necesita: estar en una conversación.,,,Estar en una conversación,IdleDialogueMovingTalkC
 IdleDialogueMovingTalkD,Hablar andando (D),Hablar andando (D). Necesita: estar en una conversación.,,,Estar en una conversación,IdleDialogueMovingTalkD
-DialogueNeutral,Hablar con naturalidad,Hablar con naturalidad. Necesita: estar en una conversación.,,,Estar en una conversación,DialogueNeutralExpressive
-IdleDialogueAngryStart,Hablar enojado,Hablar enojado. Necesita: estar en una conversación.,,,Estar en una conversación,TalkingAngry
-MotionDrivenDialogueAngry,Hablar enojado mientras te mueves,Hablar enojado mientras te mueves. Necesita: estar en una conversación.,,,Estar en una conversación,DialogueAngryMotionDriven
-IdleDialogueExpressiveStart,Hablar gesticulando,Hablar gesticulando. Necesita: estar en una conversación.,,,Estar en una conversación,TalkingExpressive
-MotionDrivenDialogueGeneric,Hablar mientras te mueves,Hablar mientras te mueves. Necesita: estar en una conversación.,,,Estar en una conversación,DialogueGenericMotionDriven
-IdleSnowElfPrinceChairDialogue,Hablar sentado con gesto solemne,"Hablar sentado con gesto solemne. Necesita: estar sentado en una silla, banco o taburete.",,,"Estar sentado en una silla, banco o taburete",SnowElfPrinceDialogue
-MotionDrivenDialogueNextClip,Hablar: cambiar de gesto,Hablar: cambiar de gesto. Necesita: estar en una conversación.,,,Estar en una conversación,DialogueNeutralShiftMotionDriven
+DialogueNeutral,Hablar con naturalidad,Hablar con naturalidad. Necesita: estar en una conversación.,Descartado,"Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada",Estar en una conversación,DialogueNeutralExpressive
+IdleDialogueAngryStart,Hablar enojado,Hablar enojado. Necesita: estar en una conversación.,Descartado,"Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada",Estar en una conversación,TalkingAngry
+MotionDrivenDialogueAngry,Hablar enojado mientras te mueves,Hablar enojado mientras te mueves. Necesita: estar en una conversación.,Descartado,"Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada",Estar en una conversación,DialogueAngryMotionDriven
+IdleDialogueExpressiveStart,Hablar gesticulando,Hablar gesticulando. Necesita: estar en una conversación.,Descartado,"Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada",Estar en una conversación,TalkingExpressive
+MotionDrivenDialogueGeneric,Hablar mientras te mueves,Hablar mientras te mueves. Necesita: estar en una conversación.,Descartado,"Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada",Estar en una conversación,DialogueGenericMotionDriven
+IdleSnowElfPrinceChairDialogue,Hablar sentado con gesto solemne,"Hablar sentado con gesto solemne. Necesita: estar sentado en una silla, banco o taburete.",Descartado,"Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada","Estar sentado en una silla, banco o taburete",SnowElfPrinceDialogue
+MotionDrivenDialogueNextClip,Hablar: cambiar de gesto,Hablar: cambiar de gesto. Necesita: estar en una conversación.,Descartado,"Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada",Estar en una conversación,DialogueNeutralShiftMotionDriven
 RF_PlayfulDismissive_In,Juguetona: desdén,Juguetona: desdén.,,,,RF_PlayfulDismissive
 RF_PlayfulInterested_In,Juguetona: interés,Juguetona: interés.,,,,RF_PlayfulInterested
 RF_PlayfulThrowHands_In,Juguetona: manos al aire,Juguetona: manos al aire.,,,,RF_PlayfulThrowHands
@@ -196,17 +196,17 @@ RF_SeriousThrowHands_In,Seria: manos al aire,Seria: manos al aire.,,,,RF_Serious
 RF_Shock_Serious,Seria: sobresalto,Seria: sobresalto.,,,,RF_ShockSerious
 RF_SeriousPleading_In,Seria: súplica,Seria: súplica.,,,,RF_SeriousPleading
 RF_Idle_Out,Volver a la actitud normal,Volver a la actitud normal.,,,,IdleRomanticFollowerStop
-IdleCoffinEnter,Acostarse (Ataúd),Se acuesta con manos en el abdomen y cerrando los ojos,Aceptado,,Estar dentro de un ataúd. Termina con: Levantarse del mueble,IdleCoffinEnter
-IdleBedRollFrontEnterStart,Acostarse (Saco),Se acuesta en un saco de dormir,Aceptado,,Estar acostado en la cama o en un saco de dormir. Termina con: Levantarse (Cama),FrontBedRollEnter
+IdleCoffinEnter,Acostarse (Ataúd),Se acuesta con manos en el abdomen y cerrando los ojos,Aceptado,,Estar dentro de un ataúd,IdleCoffinEnter
+IdleBedRollFrontEnterStart,Acostarse (Saco),Se acuesta en un saco de dormir,Aceptado,,Estar acostado en la cama o en un saco de dormir,FrontBedRollEnter
 IdleCoffinHorzEnter,Acostarse 2 (Ataúd),Se acuesta en un ataúd con manos a los lados,Aceptado,,Estar dentro de un ataúd,DLC1IdleCoffinHorzEnter
-IdleBedRightEnterStart,Acostarse por la derecha (Cama),Acostarse en una cama por la derecha,Descartado,"Te acuestas en horizontal donde estés viendo, te quedas en el aire porque simula estar dormido en cama",Termina con: Levantarse (Cama),RightBedEnter
-IdleBedRollRightEnterStart,Acostarse por la derecha (Saco),Se acuesta en un saco de dormir por la derecha,Aceptado,,Estar acostado en la cama o en un saco de dormir. Termina con: Levantarse (Cama),RightBedRollEnter
-IdleBedLeftEnterStart,Acostarse por la izquierda (Cama),Acostarse en una cama por la izquierda,Descartado,"Te acuestas en horizontal donde estés viendo, te quedas en el aire porque simula estar dormido en cama",Termina con: Levantarse (Cama),LeftBedEnter
-IdleBedRollLeftEnterStart,Acostarse por la izquierda (Saco),Se acuesta en un saco de dormir por la izquierda,Aceptado,,Estar acostado en la cama o en un saco de dormir. Termina con: Levantarse (Cama),LeftBedRollEnter
+IdleBedRightEnterStart,Acostarse por la derecha (Cama),Acostarse en una cama por la derecha,Descartado,"Te acuestas en horizontal donde estés viendo, te quedas en el aire porque simula estar dormido en cama",,RightBedEnter
+IdleBedRollRightEnterStart,Acostarse por la derecha (Saco),Se acuesta en un saco de dormir por la derecha,Aceptado,,Estar acostado en la cama o en un saco de dormir,RightBedRollEnter
+IdleBedLeftEnterStart,Acostarse por la izquierda (Cama),Acostarse en una cama por la izquierda,Descartado,"Te acuestas en horizontal donde estés viendo, te quedas en el aire porque simula estar dormido en cama",,LeftBedEnter
+IdleBedRollLeftEnterStart,Acostarse por la izquierda (Saco),Se acuesta en un saco de dormir por la izquierda,Aceptado,,Estar acostado en la cama o en un saco de dormir,LeftBedRollEnter
 DLC01CoffinEnterInstant,Acostarse verticalmente (Ataúd),Se acuesta en un ataúd vertical con brazos cruzados,Revisión,Coloca la espalda donde mires,Estar dentro de un ataúd,DLC1SeranaCoffinEnterInstant
 IdleCoffinVertEnter,Acostarse verticalmente 2 (Ataúd),Se mete en el ataúd vertical para acostarse con brazos abajos,Revisión,Coloca la espalda donde mires,Estar dentro de un ataúd,DLC1IdleCoffinVert
 IdleSleepNod,Dar cabezadas,Dar cabezadas del sueño,Aceptado,,Estar acostado en la cama o en un saco de dormir,IdleSleepNod
-IdleBedExitStart,Levantarse (Cama),Levantarse de una cama,Descartado,Se requiere estar acostado en la cama,"Haber ejecutado antes: Acostarse (Saco), Acostarse por la derecha (Cama), Acostarse por la derecha (Saco)",ExitBed
+IdleBedExitStart,Levantarse (Cama),Levantarse de una cama,Descartado,Se requiere estar acostado en la cama,Estar acostado en la cama,ExitBed
 Idle_1stPersonWoozyGetUpFromBed,Levantarse de la cama aturdido (1ª persona),Levantarse de una cama aturdido,Descartado,"No se ejecuta con normalidad, no descubrí su condición",Estar ya haciendo esa animación,Idle_1stPersonWoozyGetUpFromBed
 IdleBedQuickExitStart,Levantarse rápido (Cama),Levantarse de una cama rapidamente,Descartado,Se requiere estar acostado en la cama,Estar acostado en la cama,BedQuickExit
 IdleChildLayOnFloor,Acostarse boca abajo,Acostarse en el suelo con cabeza apoyada en los brazos y piernas juguetonas,Aceptado,,,ChildLayOnFloorEnter
@@ -214,8 +214,8 @@ pa_HugA,Abrazar a alguien,"Abrazar a alguien. Necesita: necesita un arma desenva
 IdleMT_DoorBang,Aporrear una puerta,Aporrear una puerta.,,,,IdleMT_DoorBang
 IdleKneelingEnter,Arrodillarse,Arrodillarse.,,,,IdleKneelingEnter
 IdleKneeling,Arrodillarse junto a un cadáver,Arrodillarse junto a un cadáver.,,,,CheckCorpse
-IdleWallCornerPeekREnter,"Asomarse por la esquina, a la derecha","Asomarse por la esquina, a la derecha.",,,,IdleWallCornerPeekREnter
-IdleWallCornerPeekLEnter,"Asomarse por la esquina, a la izquierda","Asomarse por la esquina, a la izquierda.",,,,IdleWallCornerPeekLEnter
+IdleWallCornerPeekREnter,"Asomarse por la esquina, a la derecha","Asomarse por la esquina, a la derecha.",Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,IdleWallCornerPeekREnter
+IdleWallCornerPeekLEnter,"Asomarse por la esquina, a la izquierda","Asomarse por la esquina, a la izquierda.",Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,IdleWallCornerPeekLEnter
 idle_A_sway_fastTrans,Balancearse,Balancearse.,,,,idle_A_sway_fastTrans
 IdleChildTaunt1,Burlarse (1),Burlarse (1).,,,,IdleChildTaunt1
 IdleChildTaunt2,Burlarse (2),Burlarse (2).,,,,IdleChildTaunt2
@@ -225,19 +225,19 @@ IdleWarmHands,Calentarse las manos,Calentarse las manos.,,,,IdleWarmHands
 IdleWarmHandsStanding,Calentarse las manos de pie,Calentarse las manos de pie.,,,,IdleWarmHandsStanding
 IdleWarmHandsCrouched,Calentarse las manos en cuclillas,Calentarse las manos en cuclillas. Necesita: estar agachado.,,,Estar agachado,IdleWarmHandsCrouched
 IdleWarmArms,Calentarse los brazos,Calentarse los brazos.,,,,IdleWarmArms
-idle_A_leg_shift,Cambiar el peso de pierna,Cambiar el peso de pierna.,,,,idle_A_leg_shift
-IdleValericaWalkForward,Caminar hacia delante,Caminar hacia delante.,,,,IdleValericaWalkForward
-idle_A_left_longTrans,Cargar el peso a la izquierda,Cargar el peso a la izquierda.,,,,Idle_A_left_longTrans
+idle_A_leg_shift,Cambiar el peso de pierna,Cambiar el peso de pierna.,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,idle_A_leg_shift
+IdleValericaWalkForward,Caminar hacia delante,Caminar hacia delante.,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,IdleValericaWalkForward
+idle_A_left_longTrans,Cargar el peso a la izquierda,Cargar el peso a la izquierda.,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,Idle_A_left_longTrans
 OffsetArmsCrossedStart,Cruzarse de brazos,Cruzarse de brazos. Necesita: necesita llevar el objeto en las manos.,,,Necesita llevar el objeto en las manos,IdleOffsetArmsCrossedStart
 IdleCiceroHappy,Dar saltos de alegría,Dar saltos de alegría.,,,,IdleCiceroHappy
-IdleChildCryingEnd,Dejar de llorar,Dejar de llorar. Necesita: haber ejecutado antes: Llorar.,Descartado,Es la animacion de salida de Llorar; el mod la lanza solo al detener,Haber ejecutado antes: Llorar,IdleChildCryingEnd
+IdleChildCryingEnd,Dejar de llorar,Dejar de llorar.,,,,IdleChildCryingEnd
 IdleCowering,Encogerse de miedo,Encogerse de miedo.,,,,IdleCower
 IdleCowerEnter,Encogerse de miedo (empezar),Encogerse de miedo (empezar).,,,,IdleCowerEnter
-IdleHideREnter,Esconderse a la derecha,Esconderse a la derecha.,,,,HideREnter
+IdleHideREnter,Esconderse a la derecha,Esconderse a la derecha.,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,HideREnter
 idle_A_swat_flies,Espantar moscas,Espantar moscas.,,,,idle_A_swat_flies
 idle_A_shoulders,Estirar los hombros,Estirar los hombros.,,,,idle_A_shoulders
 idle_A_shouldersVar1,Estirar los hombros (2),Estirar los hombros (2).,,,,idle_A_shouldersVar1
-IdleWalkingCameraEnd,Fin del paseo de cámara,Fin del paseo de cámara. Necesita: haber ejecutado antes: Paseo de cámara.,Descartado,Es la animacion de salida de Paseo de cámara; el mod la lanza solo al detener,Haber ejecutado antes: Paseo de cámara,IdleWalkingCameraEnd
+IdleWalkingCameraEnd,Fin del paseo de cámara,Fin del paseo de cámara.,,,,IdleWalkingCameraEnd
 IdleCiceroAgitated,Gesticular alterado,Gesticular alterado.,,,,IdleCiceroAgitated
 IdleHDRight,Hacer un gesto hacia la derecha (variante HD),Hacer un gesto hacia la derecha (variante HD).,,,,IdleHDRight
 IdleHHRight,Hacer un gesto hacia la derecha (variante HH),Hacer un gesto hacia la derecha (variante HH).,,,,IdleHHRight
@@ -246,8 +246,8 @@ IdleComeThisWay,Hacer señas para que te sigan,Hacer señas para que te sigan.,,
 IdleGrave_01,Inclinar la cabeza ante una tumba,Inclinar la cabeza ante una tumba.,,,,IdleBowHeadAtGrave_01
 IdleGrave_02,Inclinar la cabeza ante una tumba (2),Inclinar la cabeza ante una tumba (2).,,,,IdleBowHeadAtGrave_02
 IdleSilentBow,Inclinarse en silencio,Inclinarse en silencio. Necesita: necesita un arco equipado.,,,Necesita un arco equipado,MQPhantomUnsummon
-idleDisbelief01Start,Mostrar incredulidad,Mostrar incredulidad. Necesita: termina con: Salir de la incredulidad.,,,Termina con: Salir de la incredulidad,DLC2StornReaction1Start
-idleDisbelief02Start,Mostrar incredulidad (2),Mostrar incredulidad (2). Necesita: termina con: Salir de la incredulidad (2).,,,Termina con: Salir de la incredulidad (2),DLC2StornReaction2Start
+idleDisbelief01Start,Mostrar incredulidad,Mostrar incredulidad.,,,,DLC2StornReaction1Start
+idleDisbelief02Start,Mostrar incredulidad (2),Mostrar incredulidad (2).,,,,DLC2StornReaction2Start
 idleFreaReactionStart,Mostrar incredulidad (3),Mostrar incredulidad (3).,,,,DLC2FreaDisbeliefStart
 IdleFreaReaction2Start,Mostrar incredulidad (4),Mostrar incredulidad (4).,,,,DLC2IdleFreaDisbelief2Start
 IdleChildPlayDirt,Jugar con la tierra,Jugar con la tierra.,,,,IdleChildPlayDirt
@@ -255,20 +255,20 @@ IdleChildPlayDoll,Jugar con una muñeca,Jugar con una muñeca.,,,,IdleChildPlayD
 idle_A_soft_rightTrans,Ladearse a la derecha,Ladearse a la derecha.,,,,idle_A_soft_right_trans
 IdleCleanSword,Limpiar la espada,Limpiar la espada.,,,,IdleCleanSword
 IdleGetAttention,Llamar la atención,Llamar la atención.,,,,IdleGetAttention
-IdleChildCryingStart,Llorar,Llorar. Necesita: termina con: Dejar de llorar.,,,Termina con: Dejar de llorar,IdleChildCryingStart
+IdleChildCryingStart,Llorar,Llorar.,,,,IdleChildCryingStart
 IdleHandsBehindBack,Manos a la espalda,Manos a la espalda.,,,,IdleHandsBehindBack
 IdlePresentSkeletonKey,Mostrar la Llave Maestra,Mostrar la Llave Maestra.,,,,IdlePresentSkeletonKey
 IdleChildFidget,Moverse inquieto,Moverse inquieto.,,,,IdleChildFidget
 IdleNervous,Ponerse nervioso,Ponerse nervioso.,,,,IdleNervous
 IdleLookFar,Otear el horizonte,Otear el horizonte.,,,,IdleLookFar
-IdleWalkingCameraStart,Paseo de cámara,Paseo de cámara. Necesita: termina con: Fin del paseo de cámara.,,,Termina con: Fin del paseo de cámara,IdleWalkingCameraStart
+IdleWalkingCameraStart,Paseo de cámara,Paseo de cámara.,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,IdleWalkingCameraStart
 IdleChildApologize,Pedir perdón,Pedir perdón.,,,,IdleChildApologize
-idleFreaSorrowLoopEnter,Pena,Pena. Necesita: termina con: Salir de la pena.,,,Termina con: Salir de la pena,DLC2FreaSorrowEnter
+idleFreaSorrowLoopEnter,Pena,Pena.,,,,DLC2FreaSorrowEnter
 IdleSnapToAttention,Ponerse firme,Ponerse firme.,,,,IdleSnapToAttention
-IdleAstridEnter,Adoptar la pose de espera,Adoptar la pose de espera.,,,,IdleAstrid
-IdleStaticPoseAStart,Adoptar la pose fija A,Adoptar la pose fija A.,,,,IdleStaticPoseA
-IdleStaticPoseBStart,Adoptar la pose fija B,Adoptar la pose fija B.,,,,IdleStaticPoseB
-IdleStaticPoseCStart,Adoptar la pose fija C,Adoptar la pose fija C.,,,,IdleStaticPoseC
+IdleAstridEnter,Adoptar la pose de espera,Adoptar la pose de espera.,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,IdleAstrid
+IdleStaticPoseAStart,Adoptar la pose fija A,Adoptar la pose fija A.,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,IdleStaticPoseA
+IdleStaticPoseBStart,Adoptar la pose fija B,Adoptar la pose fija B.,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,IdleStaticPoseB
+IdleStaticPoseCStart,Adoptar la pose fija C,Adoptar la pose fija C.,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,IdleStaticPoseC
 IdlePlayer,Adoptar la postura del jugador,Adoptar la postura del jugador.,,,,PlayOnceThenPickNewIdle
 IdleChildWhineKick,Rabieta a patadas,Rabieta a patadas.,,,,IdleChildWhineKick
 IdleChildWhineStompFeet,Rabieta pataleando,Rabieta pataleando.,,,,IdleChildWhineStomp
@@ -276,27 +276,27 @@ idle_A_scratch_back,Rascarse la espalda,Rascarse la espalda.,,,,idle_A_scratch_b
 IdleSurrender,Rendirse,Rendirse.,,,,IdleSurrender
 IdleLaugh,Reírse,Reírse.,,,,IdleLaugh
 idle_A_shakeout,Sacudirse,Sacudirse.,,,,idle_A_shakeout
-idleDisbelief01Exit,Salir de la incredulidad,Salir de la incredulidad. Necesita: haber ejecutado antes: Incredulidad.,Descartado,Es la animacion de salida de Incredulidad; el mod la lanza solo al detener,Haber ejecutado antes: Incredulidad,DLC2StornReaction1Stop
-idleDisbelief02Exit,Salir de la incredulidad (2),Salir de la incredulidad (2). Necesita: haber ejecutado antes: Incredulidad (2).,Descartado,Es la animacion de salida de Incredulidad (2); el mod la lanza solo al detener,Haber ejecutado antes: Incredulidad (2),DLC2StornReaction2Stop
-idleFreaDisbeliefLoopStop,Salir de la incredulidad (3),Salir de la incredulidad (3). Necesita: estar ya haciendo esa animación.,,,Estar ya haciendo esa animación,DLC2FreaReactionStop
-IdleFreaDisbelief2LoopStop,Salir de la incredulidad (4),Salir de la incredulidad (4). Necesita: estar ya haciendo esa animación.,,,Estar ya haciendo esa animación,DLC2IdleFreaDisbelief2Stop
-idleFreaSorrowExit,Salir de la pena,Salir de la pena. Necesita: haber ejecutado antes: Pena.,Descartado,Es la animacion de salida de Pena; el mod la lanza solo al detener,Haber ejecutado antes: Pena,DLC2FreaSorrowExit
+idleDisbelief01Exit,Salir de la incredulidad,Salir de la incredulidad. Necesita: estar ya haciendo esa animación.,,,Estar ya haciendo esa animación,DLC2StornReaction1Stop
+idleDisbelief02Exit,Salir de la incredulidad (2),Salir de la incredulidad (2). Necesita: estar ya haciendo esa animación.,,,Estar ya haciendo esa animación,DLC2StornReaction2Stop
+idleFreaDisbeliefLoopStop,Salir de la incredulidad (3),Salir de la incredulidad (3). Necesita: estar ya haciendo esa animación.,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,Estar ya haciendo esa animación,DLC2FreaReactionStop
+IdleFreaDisbelief2LoopStop,Salir de la incredulidad (4),Salir de la incredulidad (4). Necesita: estar ya haciendo esa animación.,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,Estar ya haciendo esa animación,DLC2IdleFreaDisbelief2Stop
+idleFreaSorrowExit,Salir de la pena,Salir de la pena. Necesita: estar ya haciendo esa animación.,,,Estar ya haciendo esa animación,DLC2FreaSorrowExit
 IdleWave,Saludar con la mano,Saludar con la mano.,,,,IdleWave
 IdleSalute,Saludar al modo militar,Saludar al modo militar.,,,,IdleSalute
 IdleWipeBrow,Secarse la frente,Secarse la frente.,,,,IdleWipeBrow
 IdlePointFar_01,Señalar a lo lejos,Señalar a lo lejos.,,,,IdlePointFar_01
 IdlePointFar_02,Señalar a lo lejos (2),Señalar a lo lejos (2).,,,,IdlePointFar_02
 IdlePointClose,Señalar algo cerca,Señalar algo cerca.,,,,IdlePointClose
-idle_A_pull_pants,Subirse los pantalones,Subirse los pantalones.,,,,idle_A_pull_pants
-idle_A_sigh_var1Trans,Suspirar,Suspirar.,,,,idle_A_sigh_var1Trans
-idle_A_sigh_var2Trans,Suspirar (2),Suspirar (2).,,,,idle_A_sigh_var2Trans
+idle_A_pull_pants,Subirse los pantalones,Subirse los pantalones.,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,idle_A_pull_pants
+idle_A_sigh_var1Trans,Suspirar,Suspirar.,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,idle_A_sigh_var1Trans
+idle_A_sigh_var2Trans,Suspirar (2),Suspirar (2).,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,idle_A_sigh_var2Trans
 IdleChildShy,Timidez,Timidez.,,,,IdleChildShy
-IdleNocturnal_LookRight,Volver la mirada a la derecha,Volver la mirada a la derecha.,,,,IdleNocturnal_LookRight
-IdleNocturnal_LookLeft,Volver la mirada a la izquierda,Volver la mirada a la izquierda.,,,,IdleNocturnal_LookLeft
+IdleNocturnal_LookRight,Volver la mirada a la derecha,Volver la mirada a la derecha.,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,IdleNocturnal_LookRight
+IdleNocturnal_LookLeft,Volver la mirada a la izquierda,Volver la mirada a la izquierda.,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,IdleNocturnal_LookLeft
 IdleBracedPain,Aguantar el dolor,Aguantar el dolor.,,,,IdleBracedPain
 IdlePrisonerBeat,Apalear a un preso,Apalear a un preso. Necesita: estar maniatado o preso.,,,Estar maniatado o preso,IdlePrisonerBeat
 TG05_StabPlayer,Apuñalar al jugador,Apuñalar al jugador.,,,,TG05_StabPlayer
-IdleDLC02FallOnKnees,Caer de rodillas,Caer de rodillas. Necesita: estar ya en movimiento.,,,Estar ya en movimiento,IdleDLC02FallOnKnees
+IdleDLC02FallOnKnees,Caer de rodillas,Caer de rodillas. Necesita: estar ya en movimiento.,Descartado,Deja al personaje tirado en el suelo y hace falta Reiniciar para levantarlo,Estar ya en movimiento,IdleDLC02FallOnKnees
 BoundStandingCut,Cortar las ataduras,Cortar las ataduras. Necesita: estar maniatado o preso.,,,Estar maniatado o preso,BoundStandingCut
 BoundStandingCutNPC,Cortarle las ataduras a alguien,Cortarle las ataduras a alguien. Necesita: estar maniatado o preso.,,,Estar maniatado o preso,BoundStandingCutNPC
 IdleHandCut,Cortarse la mano,Cortarse la mano.,,,,IdleHandCut
@@ -304,41 +304,41 @@ IdleBoundKneesEnterInstant,De rodillas y maniatado,De rodillas y maniatado. Nece
 IdleExecutionerChop_Player,Decapitar al jugador,Decapitar al jugador.,,,,IdleExecutionerChop_Player
 IdleExecutionerChop,Decapitar con el hacha,Decapitar con el hacha.,,,,IdleHeadChop
 IdleVampireFeastVictim,Dejarse morder el cuello,Dejarse morder el cuello.,,,,IdleVampireFeastVictimEnter
-Ragdoll,Desplomarse como un muñeco,Desplomarse como un muñeco. Necesita: estar muerto o abatido.,,,Estar muerto o abatido,NPCKnockDown
-IdleWebThrashShort,Forcejear en la telaraña,Forcejear en la telaraña.,,,,IdleWebThrashShort
-IdleWebThrashShort2,Forcejear en la telaraña (2),Forcejear en la telaraña (2).,,,,IdleWebThrashShort2
+Ragdoll,Desplomarse como un muñeco,Desplomarse como un muñeco. Necesita: estar muerto o abatido.,Descartado,Deja al personaje tirado en el suelo y hace falta Reiniciar para levantarlo,Estar muerto o abatido,NPCKnockDown
+IdleWebThrashShort,Forcejear en la telaraña,Forcejear en la telaraña.,Descartado,Necesita la telaraña delante; sin ella el personaje forcejea contra el aire,,IdleWebThrashShort
+IdleWebThrashShort2,Forcejear en la telaraña (2),Forcejear en la telaraña (2).,Descartado,Necesita la telaraña delante; sin ella el personaje forcejea contra el aire,,IdleWebThrashShort2
 IdleExecutionGuardIdle,Guardia de la ejecución,Guardia de la ejecución.,,,,IdleExecutionerGuardEnter
 IdleInjured,Quedar herido,Quedar herido.,,,,IdleInjured
 IdleWounded_01,Quedar herido (1),Quedar herido (1).,,,,IdleWounded01EnterInstant
 IdleWounded_02,Quedar herido (2),Quedar herido (2).,,,,IdleWounded02EnterInstant
 IdleWounded_03,Quedar herido (3),Quedar herido (3).,,,,IdleWounded03EnterInstant
 TG05_GetUp,Levantarse aturdido,Levantarse aturdido. Necesita: estar ya haciendo esa animación.,,,Estar ya haciendo esa animación,TG05_GetUp
-GetUpBegin,Levantarse del suelo,Levantarse del suelo. Necesita: estar ya haciendo esa animación.,,,Estar ya haciendo esa animación,NPCGetUp
+GetUpBegin,Levantarse del suelo,Levantarse del suelo. Necesita: estar ya haciendo esa animación.,Descartado,Deja al personaje tirado en el suelo y hace falta Reiniciar para levantarlo,Estar ya haciendo esa animación,NPCGetUp
 OffsetBoundStandingStart,Maniatado de pie,Maniatado de pie. Necesita: estar maniatado o preso.,,,Estar maniatado o preso,OffsetBoundStandingStart
-DeathAnim,Morir,Morir. Necesita: estar muerto o abatido.,,,Estar muerto o abatido,DeathAnimationStart
-IdleDLC02MiraakDeath,Morir despacio,Morir despacio. Necesita: estar muerto o abatido.,,,Estar muerto o abatido,IdleDLC02MiraakDeathStart
-MS12BedDeath,Morir en la cama,Morir en la cama. Necesita: estar muerto o abatido.,,,Estar muerto o abatido,MS12BedDeath
-IdleSoupDeath,Morir sobre el plato,Morir sobre el plato. Necesita: estar muerto o abatido.,,,Estar muerto o abatido,IdleSoupDeath
-IdleCartPrisonerAExit,Preso A: bajarse del carro,Preso A: bajarse del carro. Necesita: haber ejecutado antes: Subirse al carro.,Descartado,Es la animacion de salida de Subirse al carro; el mod la lanza solo al detener,Haber ejecutado antes: Subirse al carro,IdleCartPrisonerAExit
-IdleCartPrisonerAIdle,Preso A: en el carro,Preso A: en el carro. Necesita: estar subido en el carro.,,,Estar subido en el carro,IdleCartPrisonerAIdle
-IdleCartPrisonerASway,Preso A: vaivén del carro,Preso A: vaivén del carro. Necesita: estar subido en el carro.,,,Estar subido en el carro,IdleCartPrisonerASway
-IdleCartPrisonerBExit,Preso B: bajarse del carro,Preso B: bajarse del carro. Necesita: estar subido en el carro.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar subido en el carro,IdleCartPrisonerBExit
-IdleCartPrisonerBIdle,Preso B: en el carro,Preso B: en el carro. Necesita: estar subido en el carro.,,,Estar subido en el carro,IdleCartPrisonerBIdle
-IdleCartPrisonerBSway,Preso B: vaivén del carro,Preso B: vaivén del carro. Necesita: estar subido en el carro.,,,Estar subido en el carro,IdleCartPrisonerBSway
-IdleCartPrisonerCExit,Preso C: bajarse del carro,Preso C: bajarse del carro. Necesita: estar subido en el carro.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar subido en el carro,IdleCartPrisonerCExit
-IdleCartPrisonerCIdle,Preso C: en el carro,Preso C: en el carro. Necesita: estar subido en el carro.,,,Estar subido en el carro,IdleCartPrisonerCIdle
-IdleCartPrisonerCSway,Preso C: vaivén del carro,Preso C: vaivén del carro. Necesita: estar subido en el carro.,,,Estar subido en el carro,IdleCartPrisonerCSway
-IdleCartPrisonerDExit,Preso D: bajarse del carro,Preso D: bajarse del carro. Necesita: estar subido en el carro.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar subido en el carro,IdleCartPrisonerDExit
-IdleCartPrisonerDIdle,Preso D: en el carro,Preso D: en el carro. Necesita: estar subido en el carro.,,,Estar subido en el carro,IdleCartPrisonerDIdle
-IdleCartPrisonerDSway,Preso D: vaivén del carro,Preso D: vaivén del carro. Necesita: estar subido en el carro.,,,Estar subido en el carro,IdleCartPrisonerDSway
-IdleWebEnterInstant,Quedar atrapado en la telaraña,Quedar atrapado en la telaraña.,,,,EnterWebInstant
+DeathAnim,Morir,Morir. Necesita: estar muerto o abatido.,Descartado,Deja al personaje tirado en el suelo y hace falta Reiniciar para levantarlo,Estar muerto o abatido,DeathAnimationStart
+IdleDLC02MiraakDeath,Morir despacio,Morir despacio. Necesita: estar muerto o abatido.,Descartado,Deja al personaje tirado en el suelo y hace falta Reiniciar para levantarlo,Estar muerto o abatido,IdleDLC02MiraakDeathStart
+MS12BedDeath,Morir en la cama,Morir en la cama. Necesita: estar muerto o abatido.,Descartado,Deja al personaje tirado en el suelo y hace falta Reiniciar para levantarlo,Estar muerto o abatido,MS12BedDeath
+IdleSoupDeath,Morir sobre el plato,Morir sobre el plato. Necesita: estar muerto o abatido.,Descartado,Deja al personaje tirado en el suelo y hace falta Reiniciar para levantarlo,Estar muerto o abatido,IdleSoupDeath
+IdleCartPrisonerAExit,Preso A: bajarse del carro,Preso A: bajarse del carro. Necesita: estar subido en el carro.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar subido en el carro,IdleCartPrisonerAExit
+IdleCartPrisonerAIdle,Preso A: en el carro,Preso A: en el carro. Necesita: estar subido en el carro.,Descartado,Sin el carro delante el jugador aparece flotando en el aire,Estar subido en el carro,IdleCartPrisonerAIdle
+IdleCartPrisonerASway,Preso A: vaivén del carro,Preso A: vaivén del carro. Necesita: estar subido en el carro.,Descartado,Sin el carro delante el jugador aparece flotando en el aire,Estar subido en el carro,IdleCartPrisonerASway
+IdleCartPrisonerBExit,Preso B: bajarse del carro,Preso B: bajarse del carro. Necesita: estar subido en el carro.,Descartado,Sin el carro delante el jugador aparece flotando en el aire,Estar subido en el carro,IdleCartPrisonerBExit
+IdleCartPrisonerBIdle,Preso B: en el carro,Preso B: en el carro. Necesita: estar subido en el carro.,Descartado,Sin el carro delante el jugador aparece flotando en el aire,Estar subido en el carro,IdleCartPrisonerBIdle
+IdleCartPrisonerBSway,Preso B: vaivén del carro,Preso B: vaivén del carro. Necesita: estar subido en el carro.,Descartado,Sin el carro delante el jugador aparece flotando en el aire,Estar subido en el carro,IdleCartPrisonerBSway
+IdleCartPrisonerCExit,Preso C: bajarse del carro,Preso C: bajarse del carro. Necesita: estar subido en el carro.,Descartado,Sin el carro delante el jugador aparece flotando en el aire,Estar subido en el carro,IdleCartPrisonerCExit
+IdleCartPrisonerCIdle,Preso C: en el carro,Preso C: en el carro. Necesita: estar subido en el carro.,Descartado,Sin el carro delante el jugador aparece flotando en el aire,Estar subido en el carro,IdleCartPrisonerCIdle
+IdleCartPrisonerCSway,Preso C: vaivén del carro,Preso C: vaivén del carro. Necesita: estar subido en el carro.,Descartado,Sin el carro delante el jugador aparece flotando en el aire,Estar subido en el carro,IdleCartPrisonerCSway
+IdleCartPrisonerDExit,Preso D: bajarse del carro,Preso D: bajarse del carro. Necesita: estar subido en el carro.,Descartado,Sin el carro delante el jugador aparece flotando en el aire,Estar subido en el carro,IdleCartPrisonerDExit
+IdleCartPrisonerDIdle,Preso D: en el carro,Preso D: en el carro. Necesita: estar subido en el carro.,Descartado,Sin el carro delante el jugador aparece flotando en el aire,Estar subido en el carro,IdleCartPrisonerDIdle
+IdleCartPrisonerDSway,Preso D: vaivén del carro,Preso D: vaivén del carro. Necesita: estar subido en el carro.,Descartado,Sin el carro delante el jugador aparece flotando en el aire,Estar subido en el carro,IdleCartPrisonerDSway
+IdleWebEnterInstant,Quedar atrapado en la telaraña,Quedar atrapado en la telaraña.,Descartado,Necesita la telaraña delante; sin ella el personaje forcejea contra el aire,,EnterWebInstant
 TG05_KnockOut,Quedar inconsciente,Quedar inconsciente.,,,,TG05_KnockOut
 IdleExecutionerAlduinReaction,Reaccionar con espanto,Reaccionar con espanto.,,,,IdleExecutionerAlduinReaction
 IdleExecutionerAlduinReactionDeath,Reaccionar con espanto y morir,Reaccionar con espanto y morir. Necesita: estar muerto o abatido.,,,Estar muerto o abatido,IdleExecutionerAlduinReactionDeath
 IdleFurnitureExitTriggered,Salir del mueble (forzado),Salir del mueble (forzado). Necesita: estar en el mueble o la mesa de trabajo.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar en el mueble o la mesa de trabajo,IdleExecutionerGuardExit
-IdleWebExit,Soltarse de la telaraña,Soltarse de la telaraña. Necesita: estar ya haciendo esa animación.,,,Estar ya haciendo esa animación,WebIdleExit
-IdleWebExitQuickTurn,Soltarse de la telaraña y girarse,Soltarse de la telaraña y girarse.,,,,WebIdleExitQuickTurn
-IdleDLC02MiraakDeathFinish,Terminar de morir despacio,Terminar de morir despacio. Necesita: estar muerto o abatido.,,,Estar muerto o abatido,IdleDLC02MiraakDeathFinish
+IdleWebExit,Soltarse de la telaraña,Soltarse de la telaraña. Necesita: estar ya haciendo esa animación.,Descartado,Necesita la telaraña delante; sin ella el personaje forcejea contra el aire,Estar ya haciendo esa animación,WebIdleExit
+IdleWebExitQuickTurn,Soltarse de la telaraña y girarse,Soltarse de la telaraña y girarse.,Descartado,Necesita la telaraña delante; sin ella el personaje forcejea contra el aire,,WebIdleExitQuickTurn
+IdleDLC02MiraakDeathFinish,Terminar de morir despacio,Terminar de morir despacio. Necesita: estar muerto o abatido.,Descartado,Deja al personaje tirado en el suelo y hace falta Reiniciar para levantarlo,Estar muerto o abatido,IdleDLC02MiraakDeathFinish
 IdleUncontrollableCough,Tos incontrolable,Tos incontrolable.,,,,IdleUncontrollableCough
 IdleMQ203EsbernBookEnter,Consultar un libro,Consultar un libro.,,,,IdleMQ203EsbernBookEnter
 IdleStudy,Estudiar,Estudiar.,,,,IdleStudy
@@ -358,17 +358,17 @@ IdleReadElderScrollEnd,Terminar de leer el Pergamino Ancestral,Terminar de leer 
 IdleTG06TranslationEnter,Traducir un texto,Traducir un texto.,,,,IdleTG06TranslateEnter
 IdleDLC2TentacleWarpBook,Abrir el libro que te transporta,Abrir el libro que te transporta. Forma parte de lanzar hechizos.,,,,IdleDLC2TentacleWarpBook
 IdleBloodPortalActivate,Activar el portal de sangre,Activar el portal de sangre. Forma parte de lanzar hechizos.,,,,IdleBloodPortalActivate
-IdleNocturnal_Rise,Levantarse,Levantarse. Forma parte de lanzar hechizos.,,,,IdleNocturnal_Rise
+IdleNocturnal_Rise,Levantarse,Levantarse. Forma parte de lanzar hechizos.,Descartado,"Es un efecto de guion, no una pose: mueve o cambia al personaje y lo deja donde no debe",,IdleNocturnal_Rise
 IdleTGFalmerStatueEnter,Ante una estatua,Ante una estatua. Forma parte de lanzar hechizos.,,,,IdleTGFalmerStatueEnter
-IdleNocturnalEnter,Aparecer,Aparecer. Forma parte de lanzar hechizos.,,,Termina con: Desaparecer,IdleNocturnalEnterDUPLICATE000
+IdleNocturnalEnter,Aparecer,Aparecer. Forma parte de lanzar hechizos.,Descartado,"Es un efecto de guion, no una pose: mueve o cambia al personaje y lo deja donde no debe",,IdleNocturnalEnterDUPLICATE000
 IdleBlessingKneelEnter,Arrodillarse a recibir la bendición,Arrodillarse a recibir la bendición. Forma parte de lanzar hechizos.,,,Estar delante de un altar o un santuario,IdleBlessingKneelEnter
-IdleAltarEnter,Arrodillarse en el altar,Arrodillarse en el altar. Forma parte de lanzar hechizos.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de un altar o un santuario,IdleAltarEnterLeft
+IdleAltarEnter,Arrodillarse en el altar,Arrodillarse en el altar. Forma parte de lanzar hechizos.,Aceptado,,Estar delante de un altar o un santuario,IdleAltarEnterLeft
 IdleT02AscendMale,Ascender (hombre),Ascender (hombre). Forma parte de lanzar hechizos.,,,,IdleT02AscendMale
 IdleT02AscendFemale,Ascender (mujer),Ascender (mujer). Forma parte de lanzar hechizos.,,,,IdleT02AscendFemale
-IdleTelvanniTowerFloatUp,Ascender flotando,Ascender flotando. Forma parte de lanzar hechizos.,,,,IdleTelvanniTowerFloatUpEnter
+IdleTelvanniTowerFloatUp,Ascender flotando,Ascender flotando. Forma parte de lanzar hechizos.,Descartado,"Es un efecto de guion, no una pose: mueve o cambia al personaje y lo deja donde no debe",,IdleTelvanniTowerFloatUpEnter
 IdleSnowElfPrinceAscensionBurning,Ascensión en llamas,Ascensión en llamas. Forma parte de lanzar hechizos.,,,,IdleSnowElfPrinceAscension
 IdleDA02BoethiahPostEnter,Atado a un poste,Atado a un poste. Forma parte de lanzar hechizos.,,,,IdleDA02BoethiahPostEnter
-IdleWalkThroughWallEnter,Atravesar la pared,Atravesar la pared. Forma parte de lanzar hechizos.,,,,IdleWalkThroughWallEnter
+IdleWalkThroughWallEnter,Atravesar la pared,Atravesar la pared. Forma parte de lanzar hechizos.,Descartado,"Es un efecto de guion, no una pose: mueve o cambia al personaje y lo deja donde no debe",,IdleWalkThroughWallEnter
 IdleTG08_Phase1,Celebrar la ceremonia del Gremio: fase 1,Celebrar la ceremonia del Gremio: fase 1. Forma parte de lanzar hechizos.,,,,TG08_CeremonyEnter
 IdleTG08_Phase2,Celebrar la ceremonia del Gremio: fase 2,Celebrar la ceremonia del Gremio: fase 2. Forma parte de lanzar hechizos.,,,,IdleTG08_Phase2
 IdleTG08_Phase3,Celebrar la ceremonia del Gremio: fase 3,Celebrar la ceremonia del Gremio: fase 3. Forma parte de lanzar hechizos.,,,,IdleTG08_Phase3
@@ -379,15 +379,15 @@ IdleCO2Ceremony2Blessing,Ceremonia: bendecir,Ceremonia: bendecir. Forma parte de
 IdleCO2Ceremony1Welcome,Ceremonia: dar la bienvenida,Ceremonia: dar la bienvenida. Forma parte de lanzar hechizos.,,,,IdleCO2Ceremony1Welcome
 pa_WW_CutWrist,Cortarse la muñeca,Cortarse la muñeca. Forma parte de lanzar hechizos.,,,"Necesita un arma desenvainada, de cualquier tipo",pa_WereWolf_CutWrist
 IdleMesmerizeStop,Dejar de hipnotizar,Dejar de hipnotizar. Forma parte de lanzar hechizos.,,,Estar ya haciendo esa animación,IdleMesmerizeStop
-IdleNocturnal_Exit,Desaparecer,Desaparecer. Forma parte de lanzar hechizos.,Descartado,Es la animacion de salida de Aparecer; el mod la lanza solo al detener,Haber ejecutado antes: Aparecer,IdleNocturnalExit
+IdleNocturnal_Exit,Desaparecer,Desaparecer. Forma parte de lanzar hechizos.,,,Estar ya haciendo esa animación,IdleNocturnalExit
 IdleTelvanniTowerFloatDown,Descender flotando,Descender flotando. Forma parte de lanzar hechizos.,,,,IdleTelvanniTowerFloatDownEnter
 IdleRitualStart,Empezar un ritual,Empezar un ritual. Forma parte de lanzar hechizos.,,,,IdleRitualStart
 IdleGreybeardWordTeach,Enseñar una Palabra,Enseñar una Palabra. Forma parte de lanzar hechizos.,,,,IdleGreybeardWordTeach
-IdleDLC1BossExplosion1stP,Explosión (1ª persona),Explosión (1ª persona). Forma parte de lanzar hechizos.,,,,IdleDLC1BossExplosion1stP
+IdleDLC1BossExplosion1stP,Explosión (1ª persona),Explosión (1ª persona). Forma parte de lanzar hechizos.,Descartado,"Es un efecto de guion, no una pose: mueve o cambia al personaje y lo deja donde no debe",,IdleDLC1BossExplosion1stP
 pa_ExtractWerewolfSpirit,Extraer un espíritu,Extraer un espíritu. Forma parte de lanzar hechizos.,,,"Necesita un arma desenvainada, de cualquier tipo",pa_ExtractWerewolfSpirit
 IdleMagic_01,Hacer un gesto de magia,Hacer un gesto de magia. Forma parte de lanzar hechizos.,,,,IdleMagic_01
 IdleDLC02TentacleWordBurnBegin,Grabar la Palabra (empezar),Grabar la Palabra (empezar). Forma parte de lanzar hechizos.,,,,IdleDLC02TentacleWordBurnBegin
-IdleDLC02TentacleWordBurnEnd,Grabar la Palabra (terminar),Grabar la Palabra (terminar). Forma parte de lanzar hechizos.,Descartado,Es la animacion de salida de Grabar la Palabra en la piedra negra; el mod la lanza solo al detener,Haber ejecutado antes: Grabar la Palabra en la piedra negra,IdleDLC02TentacleWordBurnEnd
+IdleDLC02TentacleWordBurnEnd,Grabar la Palabra (terminar),Grabar la Palabra (terminar). Forma parte de lanzar hechizos.,,,,IdleDLC02TentacleWordBurnEnd
 IdleSnowElfPrinceBigSpell,Gran hechizo,Gran hechizo. Forma parte de lanzar hechizos.,,,Necesita un hechizo preparado en la mano,IdleSnowElfPrinceBigSpell
 IdleMesmerize,Hipnotizar,Hipnotizar. Forma parte de lanzar hechizos.,,,,IdleMesmerize
 IdleSnowElfPrinceFireAndForget,Lanzar un hechizo sentado,Lanzar un hechizo sentado. Forma parte de lanzar hechizos.,,,Estar delante de la mesa de trabajo,IdleSnowElfPrinceChairFireAndForget
@@ -404,17 +404,17 @@ IdleRitualSkull2,Celebrar el ritual con la calavera (2),Celebrar el ritual con l
 IdleRitualSkull3,Celebrar el ritual con la calavera (3),Celebrar el ritual con la calavera (3). Forma parte de lanzar hechizos.,,,,IdleRitualSkull3
 IdleMQ206FelldirRitualEnter,Celebrar el ritual con las manos en alto,Celebrar el ritual con las manos en alto. Forma parte de lanzar hechizos.,,,,IdleMQ206FelldirRitualEnter
 IdleSnowElfPrinceBigSpellRelease,Soltar el gran hechizo,Soltar el gran hechizo. Forma parte de lanzar hechizos.,,,Necesita un hechizo preparado en la mano,IdleSnowElfPrinceBigSpellRelease
-IdleWerewolfTransformation,Transformarse,Transformarse. Forma parte de lanzar hechizos.,,,,IdleWerewolfTransformation
-IdleVampireLordTransformation,Transformarse (2),Transformarse (2). Forma parte de lanzar hechizos.,,,,IdleVampireLordTransformation
-DragonMountExit,Bajar del dragón,Bajarse de dragón,Descartado,Requiere estar subido en un dragón para ejecutarse,Haber ejecutado antes: Montar en el dragón,DragonDismount
+IdleWerewolfTransformation,Transformarse,Transformarse. Forma parte de lanzar hechizos.,Descartado,"Es un efecto de guion, no una pose: mueve o cambia al personaje y lo deja donde no debe",,IdleWerewolfTransformation
+IdleVampireLordTransformation,Transformarse (2),Transformarse (2). Forma parte de lanzar hechizos.,Descartado,"Es un efecto de guion, no una pose: mueve o cambia al personaje y lo deja donde no debe",,IdleVampireLordTransformation
+DragonMountExit,Bajar del dragón,Bajarse de dragón,Descartado,Requiere estar subido en un dragón para ejecutarse,Estar montado en un dragón,DragonDismount
 Ground_Dismount_Dragon,Bajar del dragón en tierra,Bajarse de dragón mientras el dragón está en el suelo,Descartado,Requiere estar subido en un dragón para ejecutarse,Estar montado en un dragón,GroundDismountDragonNPC
-MountedSwimStop,Dejar de nadar montado,Fade-out animación de montar,Descartado,"Sin animación, es un stop",Haber ejecutado antes: Nadar montado,MountedSwimStop
-HorseExit,Desmontar del caballo,Bajarse del caballo,Descartado,Se necesita estar montado en el caballo para poder ejecutarla,Haber ejecutado antes: Montar a caballo,Dismount
+MountedSwimStop,Dejar de nadar montado,Fade-out animación de montar,Descartado,"Sin animación, es un stop",Estar ya haciendo esa animación,MountedSwimStop
+HorseExit,Desmontar del caballo,Bajarse del caballo,Descartado,Se necesita estar montado en el caballo para poder ejecutarla,Estar montado en un caballo,Dismount
 HorseExitSwim,Desmontar del caballo en el agua,Bajarse del caballo estando en el agua,Descartado,Se necesita estar montado en el caballo para poder ejecutarla,Estar montado en un caballo,DismountSwim
 MC_shoutStart,Empezar un Grito (2),Inicia grito (bucle),Descartado,Comienza la animación al momento de lanzar un grito. Se repite en bucle.,Necesita un grito aprendido,MountedVoice
-HorseEnter,Montar a caballo,Montarse en un caballo,Descartado,,Estar montado en un caballo. Termina con: Desmontar del caballo,Mount
-DragonMountEnter,Montar en el dragón,Montarse en un dragón,Descartado,,Estar montado en un dragón. Termina con: Bajar del dragón,DragonMount
-MountedSwimStart,Nadar montado,Nadar mientras estás montado,Descartado,,Estar montado en un caballo. Termina con: Dejar de nadar montado,MountedSwimStart
+HorseEnter,Montar a caballo,Montarse en un caballo,Descartado,,Estar montado en un caballo,Mount
+DragonMountEnter,Montar en el dragón,Montarse en un dragón,Descartado,,Estar montado en un dragón,DragonMount
+MountedSwimStart,Nadar montado,Nadar mientras estás montado,Descartado,,Estar montado en un caballo,MountedSwimStart
 MountedStaggerStart,Retroceder por golpe (Montado),Retrocede al ser golpeado mientras vas montado,Descartado,,Estar montado en un caballo,MountedStaggerStart
 IdleApplaud2,Aplaudir,Aplaudir.,,,,IdleApplaud2
 IdleApplaud3,Aplaudir (2),Aplaudir (2).,,,,IdleApplaud3
@@ -439,7 +439,7 @@ Lever_PlayerPush,Accionar una palanca,Acciona palanca,Descartado,No se ejecuta s
 IdleSharpeningWheelStart,Afilar arma,Sentarse a afilar el arma,Descartado,Animación usada para afilar en la peidra de afilar de las herrerias,,IdleSharpeningWheelStart
 IdleTake,Agarrar algo,Agarrar algo.,,,,IdleTake
 IdleHoe,Arar suelo,Ara el suelo con una azada,Aceptado,,,IdleHoe
-IdleCartDriverExit,Bajarse de la carreta,Bajarse de la carreta,Descartado,Es la animacion de salida de Subirse al pescante; el mod la lanza solo al detener,Haber ejecutado antes: Subirse al pescante,IdleCartDriverExit
+IdleCartDriverExit,Bajarse de la carreta,Bajarse de la carreta,Descartado,,Estar subido en el carro,IdleCartDriverExit
 idleLooseSweepingStart,Barrer,Barre el suelo con una escoba,Aceptado,,,IdleLooseSweepingStart
 IdleChiselStandingEnter,Cincelar de pie,Cincela con martillo y cincel hacia adelante,Aceptado,,,IdleChiselStandingEnter
 IdleChiselKneelingEnter,Cincelar de rodillas,Cincela con martillo y cincel en el suelo,Aceptado,,,IdleChiselKneelingEnter
@@ -447,50 +447,50 @@ IdleCraftingCookingPotTalkA,Cocinar y hablar (A),Habla mientras cocinas en el co
 IdleCraftingCookingPotTalkB,Cocinar y hablar (B),Habla mientras cocinas en el cookingpot,Descartado,,Estar delante de la mesa de trabajo,IdleCraftingCookingPotTalkB
 IdleWoodChopStart,Cortar leña,Cortar leña.,,,,IdleWoodChopStart
 IdleFeedChicken,Dar de comer a las gallinas,Dar de comer a las gallinas.,,,,IdleFeedChickens
-IdlewoodputdownEnter,Dejar la leña,Dejar la leña. Necesita: haber ejecutado antes: Recoger leña.,Descartado,Es la animacion de salida de Recoger leña; el mod la lanza solo al detener,Haber ejecutado antes: Recoger leña,IdlewoodputdownEnter
-IdleStonePutDownEnter,Dejar una piedra,Dejar una piedra. Necesita: haber ejecutado antes: Recoger una piedra.,Descartado,Es la animacion de salida de Recoger una piedra; el mod la lanza solo al detener,Haber ejecutado antes: Recoger una piedra,IdleStonePutDownEnter
+IdlewoodputdownEnter,Dejar la leña,Dejar la leña.,,,,IdlewoodputdownEnter
+IdleStonePutDownEnter,Dejar una piedra,Dejar una piedra. Necesita: necesita llevar el objeto en las manos.,,,Necesita llevar el objeto en las manos,IdleStonePutDownEnter
 IdleCraftingCookingPotAddIngredient,Echar un ingrediente a la olla,Echar un ingrediente a la olla. Necesita: estar delante de la mesa de trabajo.,,,Estar delante de la mesa de trabajo,IdleCraftingCookingPotAddIngredient
 IdleLightSconce,Encender una antorcha de pared,Encender una antorcha de pared.,,,,IdleLightSconceEnter
 IdleGive,Entregar algo,Entregar algo.,,,,IdleGive
 IdleGiveMQ105Horn,Entregar el cuerno,Entregar el cuerno.,,,,IdleGiveMQ105Horn
 IdleWriteTableStandingEnter,Escribir de pie en la mesa,Escribir de pie en la mesa. Necesita: estar delante de la mesa de trabajo.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de la mesa de trabajo,IdleWriteTableStandingEnter
-IdleWriteLedgerEnter,Escribir en el registro,Escribir en el registro.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",,IdleWriteLedgerEnter
+IdleWriteLedgerEnter,Escribir en el registro,Escribir en el registro.,Aceptado,,,IdleWriteLedgerEnter
 IdleWriteLedgerWrite,Escribir en el registro (escribiendo),Escribir en el registro (escribiendo).,,,,IdleWriteLedgerWrite
 IdleChairWrite,Escribir sentado,"Escribir sentado. Necesita: estar sentado en una silla, banco o taburete.",,,"Estar sentado en una silla, banco o taburete",IdleChairWrite
 IdleExamine,Examinar algo,Examinar algo.,,,,IdleExamine
 IdleLockPick,Forzar una cerradura,Forzar una cerradura.,,,,IdleLockPick
-IdleDLC02BoatRide,Ir en barca,Ir en barca.,,,,IdleDLC02BoatRide
-IdleWriteTableChairRightExit,Levantarse del escritorio por la derecha,Levantarse del escritorio por la derecha. Necesita: haber ejecutado antes: Sentarse a escribir por la derecha.,Descartado,Es la animacion de salida de Sentarse a escribir por la derecha; el mod la lanza solo al detener,Haber ejecutado antes: Sentarse a escribir por la derecha,IdleWriteTableChairExitRight
-IdleWriteTableChairLeftExit,Levantarse del escritorio por la izquierda,Levantarse del escritorio por la izquierda. Necesita: haber ejecutado antes: Sentarse a escribir por la izquierda.,Descartado,Es la animacion de salida de Sentarse a escribir por la izquierda; el mod la lanza solo al detener,Haber ejecutado antes: Sentarse a escribir por la izquierda,IdleWriteTableChairExitLeft
+IdleDLC02BoatRide,Ir en barca,Ir en barca.,Descartado,"Es un efecto de guion, no una pose: mueve o cambia al personaje y lo deja donde no debe",,IdleDLC02BoatRide
+IdleWriteTableChairRightExit,Levantarse del escritorio por la derecha,Levantarse del escritorio por la derecha. Necesita: estar sentado en una silla.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar sentado en una silla,IdleWriteTableChairExitRight
+IdleWriteTableChairLeftExit,Levantarse del escritorio por la izquierda,Levantarse del escritorio por la izquierda. Necesita: estar sentado en una silla.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar sentado en una silla,IdleWriteTableChairExitLeft
 IdleBarCounterWipe,Limpiar el mostrador,Limpiar el mostrador. Necesita: estar en el mostrador o el mostrador.,,,Estar en el mostrador o el mostrador,BarCounterWipe
 IdleCartDriverIdle,Llevar el carro,Llevar el carro. Necesita: estar subido en el carro.,,,Estar subido en el carro,IdleCartDriverIdle
 IdleCartDriverSway,"Llevar el carro, con vaivén","Llevar el carro, con vaivén. Necesita: estar subido en el carro.",,,Estar subido en el carro,IdleCartDriverSway
 OffsetFlowerBasketStart,Llevar el cesto de flores,Llevar el cesto de flores. Necesita: necesita llevar el objeto en las manos.,,,Necesita llevar el objeto en las manos,OffsetFlowerBasketStart
-OffsetCarryBasketStart,Llevar un cesto,Llevar un cesto. Necesita: necesita llevar el objeto en las manos. Termina con: Soltar lo que lleva en las manos.,,,Necesita llevar el objeto en las manos. Termina con: Soltar lo que lleva en las manos,OffsetCarryBasketStart
+OffsetCarryBasketStart,Llevar un cesto,Llevar un cesto. Necesita: necesita llevar el objeto en las manos.,,,Necesita llevar el objeto en las manos,OffsetCarryBasketStart
 OffsetCarryMQ201DrinkTray,Llevar una bandeja de bebidas,Llevar una bandeja de bebidas. Necesita: necesita llevar el objeto en las manos.,,,Necesita llevar el objeto en las manos,OffsetCarryMQ201DrinkTray
 OffsetCarryMQ201DrinkR,Llevar una copa en la mano,Llevar una copa en la mano. Necesita: necesita llevar el objeto en las manos.,,,Necesita llevar el objeto en las manos,OffsetCarryMQ201DrinkR
-OffsetCarryPotStart,Llevar una olla,Llevar una olla. Necesita: necesita llevar el objeto en las manos. Termina con: Soltar lo que lleva en las manos.,,,Necesita llevar el objeto en las manos. Termina con: Soltar lo que lleva en las manos,OffsetCarryPotStart
+OffsetCarryPotStart,Llevar una olla,Llevar una olla. Necesita: necesita llevar el objeto en las manos.,,,Necesita llevar el objeto en las manos,OffsetCarryPotStart
 IdleDwemerExtractorEnter,Manejar un extractor,Manejar un extractor.,,,,IdleDwemerExtractor
-IdlePickaxeEnter,Picar con el pico,Picar con el pico.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",,IdlePickaxeEnter
-IdleWriteLedgerChargenEnter,Ponerse a escribir en el registro,Ponerse a escribir en el registro.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",,IdleHadvarWriteLedgerEnter
-IdleCounterStart,Ponerse tras el mostrador,Ponerse tras el mostrador. Necesita: estar en el mostrador o el mostrador. Termina con: Levantarse del mueble.,,,Estar en el mostrador o el mostrador. Termina con: Levantarse del mueble,IdleCounterStart
+IdlePickaxeEnter,Picar con el pico,Picar con el pico.,Aceptado,,,IdlePickaxeEnter
+IdleWriteLedgerChargenEnter,Ponerse a escribir en el registro,Ponerse a escribir en el registro.,Aceptado,,,IdleHadvarWriteLedgerEnter
+IdleCounterStart,Ponerse tras el mostrador,Ponerse tras el mostrador. Necesita: estar en el mostrador o el mostrador.,,,Estar en el mostrador o el mostrador,IdleCounterStart
 IdleSearchingChest,Rebuscando en el cofre,Rebuscando en el cofre.,,,,IdleSearchingChest
 IdleSearchingTable,Rebuscando en la mesa,Rebuscando en la mesa. Necesita: estar delante de la mesa de trabajo.,,,Estar delante de la mesa de trabajo,IdleSearchingTable
-IdleSearchTableEnter,Rebuscar en la mesa,Rebuscar en la mesa. Necesita: estar delante de la mesa de trabajo.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de la mesa de trabajo,IdleSearchTableEnter
+IdleSearchTableEnter,Rebuscar en la mesa,Rebuscar en la mesa. Necesita: estar delante de la mesa de trabajo.,Aceptado,,Estar delante de la mesa de trabajo,IdleSearchTableEnter
 IdleSearchChestEnter,Rebuscar en un cofre,Rebuscar en un cofre.,,,,IdleSearchChestEnter
 IdleActivatePickUp,Recoger algo,Recoger algo. Necesita: necesita llevar el objeto en las manos.,,,Necesita llevar el objeto en las manos,IdleActivatePickUpDUPLICATE000
 IdlePickup_Ground,Recoger algo del suelo,Recoger algo del suelo.,,,,IdlePickup_Ground
-OffsetCarryFlowerBasketPickStart,Recoger flores en el cesto,Recoger flores en el cesto. Necesita: necesita llevar el objeto en las manos. Termina con: Soltar lo que lleva en las manos.,,,Necesita llevar el objeto en las manos. Termina con: Soltar lo que lleva en las manos,OffsetCarryFlowerBasketPickStart
-IdleWoodPickUpEnter,Recoger leña,Recoger leña. Necesita: necesita llevar el objeto en las manos. Termina con: Dejar la leña.,,,Necesita llevar el objeto en las manos. Termina con: Dejar la leña,IdleWoodPickUpExit
+OffsetCarryFlowerBasketPickStart,Recoger flores en el cesto,Recoger flores en el cesto. Necesita: necesita llevar el objeto en las manos.,,,Necesita llevar el objeto en las manos,OffsetCarryFlowerBasketPickStart
+IdleWoodPickUpEnter,Recoger leña,Recoger leña. Necesita: necesita llevar el objeto en las manos.,,,Necesita llevar el objeto en las manos,IdleWoodPickUpExit
 IdleRFPickUpScroll,Recoger un pergamino,Recoger un pergamino. Necesita: necesita llevar el objeto en las manos.,,,Necesita llevar el objeto en las manos,IdleRFPickUpScroll
-IdleStonePickUpEnter,Recoger una piedra,Recoger una piedra. Necesita: necesita llevar el objeto en las manos. Termina con: Dejar una piedra.,,,Necesita llevar el objeto en las manos. Termina con: Dejar una piedra,IdleStonePickUpExit
+IdleStonePickUpEnter,Recoger una piedra,Recoger una piedra. Necesita: necesita llevar el objeto en las manos.,,,Necesita llevar el objeto en las manos,IdleStonePickUpExit
 IdleWriteTableChairRightEnter,Sentarse a escribir por la derecha,"Sentarse a escribir por la derecha. Necesita: estar sentado en una silla, banco o taburete.",Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando","Estar sentado en una silla, banco o taburete",IdleWriteTableChairEnterRight
 IdleWriteTableChairLeftEnter,Sentarse a escribir por la izquierda,"Sentarse a escribir por la izquierda. Necesita: estar sentado en una silla, banco o taburete.",Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando","Estar sentado en una silla, banco o taburete",IdleWriteTableChairEnterLeft
-IdleOffsetCarryPotServe,Servir de la olla,Servir de la olla. Necesita: necesita llevar el objeto en las manos. Termina con: Soltar lo que lleva en las manos.,,,Necesita llevar el objeto en las manos. Termina con: Soltar lo que lleva en las manos,IdleOffsetCarryPotServe
+IdleOffsetCarryPotServe,Servir de la olla,Servir de la olla. Necesita: necesita llevar el objeto en las manos.,,,Necesita llevar el objeto en las manos,IdleOffsetCarryPotServe
 IdleCartTravelPlayerEnter,Subirse al carro,Subirse al carro. Necesita: estar subido en el carro.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar subido en el carro,IdleCartTravelPlayerEnter
 IdleCartTravelDriverEnter,Subirse al pescante,Subirse al pescante. Necesita: estar subido en el carro.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar subido en el carro,IdleCartTravelDriverEnter
 IdlePullChain,Tirar de la cadena,Tirar de la cadena.,,,,IdlePullChainEnter
-IdleBlackSmithingEnterStart,Trabajar en la forja,Trabajar en la forja. Necesita: estar delante de la mesa de trabajo.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de la mesa de trabajo,BlackSmithingEnter
+IdleBlackSmithingEnterStart,Trabajar en la forja,Trabajar en la forja. Necesita: estar delante de la mesa de trabajo.,Aceptado,,Estar delante de la mesa de trabajo,BlackSmithingEnter
 IdleSell,Vender algo,Vender algo.,,,,IdleSell
 pa_OffsetBoundStandingCut,Cortar las ataduras (A ti),Se cortan las ataduras de las manos por alguien más (hace un pequeño movimiento de manos como que alguien le corta la atadura de las manos),Descartado,Posible transición entre estar atado y quitar ataduras (usada en helguen cuando te cortan las ataduras),"Necesita un arma desenvainada, de cualquier tipo",pa_OffsetBoundStandingCut
 ExecutionNextClip,Ejecución: siguiente parte,Siguiente paso de la animación de ejecución,Descartado,"Animación usada en las ejecuciones publicas, no funciona si no está scripteado el corte de cabeza de otro pj",,00NextClip
@@ -580,8 +580,8 @@ pa_KillMove2HMDragonSlash,Rematar tajo y montarse 2 (Dos manos),Remata dando un 
 pa_KillMove1HMDragonRodeoSlash,Rematar tajo y montarse 2 (Una mano),Remata dando un tajo y se sube en algo grande,Descartado,"Ejecución: el juego la lanza solo al matar a un enemigo, con la cámara y el enemigo colocados. A mano queda el personaje dando tajos al aire",Necesita un arma de una mano desenvainada,pa_1HMKillMoveDragonRodeoSlash
 pa_KillMove2HWDragonSlash,Rematar tajo y montarse 3 (Dos manos),Remata dando un tajo y se sube en algo grande,Descartado,Sonido contundente,Necesita un arma pesada desenvainada (hacha o martillo a dos manos),pa_2HWKillMoveDragonSlash
 pa_DLC1SeranaHoldsVyrthur,Sujetar a alguien y soltarlo,Levantar a alguien para despues de unos segundos soltarlo,Descartado,Animación hecha por serana al vampiro. Puede servir para cargar cosas. Suena sonido al final de brillo,"Necesita un arma desenvainada, de cualquier tipo",pa_DLC1SeranaHoldsVyrthur
-IdleBarCounterEnter,Apoyarse en el mostrador,"Apoya en el mostrador de bar, a veces limpia",Aceptado,,Estar en el mostrador o el mostrador. Termina con: Levantarse del mueble,IdleBarCounterEnter
-IdleRailLeanEnter,Apoyarse en la baranda,Avanza un poco y apoyate en la baranda,Aceptado,,Termina con: Dejar de apoyarse en la baranda,RailLeanEnter
+IdleBarCounterEnter,Apoyarse en el mostrador,"Apoya en el mostrador de bar, a veces limpia",Aceptado,,Estar en el mostrador o el mostrador,IdleBarCounterEnter
+IdleRailLeanEnter,Apoyarse en la baranda,Avanza un poco y apoyate en la baranda,Aceptado,,,RailLeanEnter
 IdleTableLeanPoint,Apoyarse en la mesa y señalar,Apoyarse en la mesa para señalar,Descartado,"No pareciera funcionar y no da animación, es usada para Esbern en la mesa con el mapa",Estar delante de la mesa de trabajo,IdleTableLeanPoint
 IdleWallLeanStart,Apoyarse en la pared,Voltea y te apoyas con brazos cruzados,Aceptado,Voltea y se apoya en la pared. Pone la espalda donde estabas mirando.,,EnterWallLean
 IdleChildSitOnKnees,Arrodillarse,Sentarse sobre las rodillas y hace un pequeño balanceo,Aceptado,,,ChildSitOnKneesEnter
@@ -589,30 +589,30 @@ idleChairArmsCrossedVar1,Brazos cruzados (Sentado),Cruzar los brazos mientras es
 idleChairArmsCrossedVar2,Brazos cruzados 2 (Sentado),Cruzar los brazos mientras estás sentado en una silla,Aceptado,Necesita estar sentado en silla para ejecutarse,"Estar sentado en una silla, banco o taburete",SittingChairArmsCrossedVar2
 IdleChairVar1,Cambio de pose (Sentado),Pose de estar centado,Aceptado,Necesita estar sentado en silla para ejecutarse,"Estar sentado en una silla, banco o taburete",SittingChairVar1
 idleChairVar2,Cambio de pose 2 (Sentado),Pose de estar centado,Aceptado,Necesita estar sentado en silla para ejecutarse,"Estar sentado en una silla, banco o taburete",SittingChairVar2
-IdleRailLeanExit,Dejar de apoyarse en la baranda,Retrocede un poco y sale de apoyate en la baranda,Revisión,Animación de salida de IdleRailLeanEnter,Haber ejecutado antes: Apoyarse en la baranda,RailLeanExit
+IdleRailLeanExit,Dejar de apoyarse en la baranda,Retrocede un poco y sale de apoyate en la baranda,Revisión,Animación de salida de IdleRailLeanEnter,Estar en el mueble o la mesa de trabajo,RailLeanExit
 IdleLounge_Exit,Dejar de repantigarse,Bajarse de mueble alto.,Descartado,Animación  de salida de IdleLounge. Animación usada por astrid en la cabaña abandonada,Estar ya haciendo esa animación,IdleShelfExit
 IdleWallSoldierEnter,Esperar atento,Quedarse quieto esperando con diferentes poses intercaladas,Aceptado,Se ejecuta y pone la espalda hacia donde estemos mirando,,IdleSoldierWallEnter
 idleChairShoulderFlex,Estirarse (Sentado),Estirar los brazos mientras estás sentado en una silla,Aceptado,Necesita estar sentado en silla para ejecutarse,"Estar sentado en una silla, banco o taburete",SittingChairShoulderFlex
-IdleChairFrontExit,Levantarse de frente,Levantarse de la silla de frente,Descartado,Es la animacion de salida de Sentarse de frente; el mod la lanza solo al detener,Haber ejecutado antes: Sentarse de frente,ExitChairFront
+IdleChairFrontExit,Levantarse de frente,Levantarse de la silla de frente,Descartado,,Estar sentado en una silla,ExitChairFront
 IdleChairFrontQuickExit,"Levantarse de frente, rápido",Levantarse de la silla de frente rapido,Descartado,,Estar sentado en una silla,ExitChairFrontQuick
-IdleTableBackExit,Levantarse de la mesa,Levantarse de mesa hacia atras,Descartado,Es la animacion de salida de Sentarse a la mesa; el mod la lanza solo al detener,"Haber ejecutado antes: Sentarse a la mesa, Sentarse a la mesa (jugador)",ExitChairBackQuick
+IdleTableBackExit,Levantarse de la mesa,Levantarse de mesa hacia atras,Descartado,,Estar en el mueble o la mesa de trabajo,ExitChairBackQuick
 IdleChairExitStart,Levantarse de la silla,Levantarse de la silla de lado,Descartado,,Estar sentado en una silla,IdleHadvarWriteLedgerExit
-IdleStoolBackExit,Levantarse del taburete,Levantarse de taburete de bar,Descartado,Es la animacion de salida de Sentarse en el taburete; el mod la lanza solo al detener,"Haber ejecutado antes: Sentarse en el taburete, Sentarse en el taburete (jugador)",IdleStoolExit
-idleChairRightExit,Levantarse por la derecha,Levantarse de la silla del lado derecho,Descartado,Es la animacion de salida de Sentarse por la derecha; el mod la lanza solo al detener,Haber ejecutado antes: Sentarse por la derecha,ExitChairRight
+IdleStoolBackExit,Levantarse del taburete,Levantarse de taburete de bar,Descartado,,Estar sentado en una silla,IdleStoolExit
+idleChairRightExit,Levantarse por la derecha,Levantarse de la silla del lado derecho,Descartado,,Estar sentado en una silla,ExitChairRight
 IdleChairRightQuickExit,"Levantarse por la derecha, rápido",Levantarse de la silla del lado derecho rapido,Descartado,,Estar sentado en una silla,ExitChairRightQuick
-idleChairLeftExit,Levantarse por la izquierda,Levantarse de la silla del lado izquierdo,Descartado,Es la animacion de salida de Sentarse por la izquierda; el mod la lanza solo al detener,Haber ejecutado antes: Sentarse por la izquierda,ExitChairLeft
+idleChairLeftExit,Levantarse por la izquierda,Levantarse de la silla del lado izquierdo,Descartado,,Estar sentado en una silla,ExitChairLeft
 IdleChairLeftQuickExit,"Levantarse por la izquierda, rápido",Levantarse de la silla del lado izquierdo rapido,Descartado,,Estar sentado en una silla,ExitChairLeftQuick
 idleChairLookDown,Mirar al suelo (Sentado),Mirar alrededor y luego mirar al suelo mientras estás sentado en una silla,Aceptado,Necesita estar sentado en silla para ejecutarse,"Estar sentado en una silla, banco o taburete",SittingChairLookDown
 IdleLounge,Repantigarse,Subirse a mueble alto,Descartado,Animación usada por astrid en la cabaña abandonada,"Estar sentado en una silla, banco o taburete",IdleShelfEnterInstant
 IdleChildLegsOutStart,Sentarse con las piernas estiradas,Sentarse con piernas cruzadas,Descartado,"No se ejecuta a pesar de estar sentados, pareciera estar ligado a los niños",,IdleChildLegsOut
-IdleChairFrontEnter,Sentarse de frente,Sentarse de frente en silla,Descartado,"Se sienta en una ""silla"" con la espalda hacia donde estaba mirando","Estar sentado en una silla, banco o taburete. Termina con: Levantarse de frente",EnterChairFront
-IdleStoolEnter,Sentarse en el taburete,Sentarse en taburete de bar,Descartado,Se sienta como en un taburete,"Estar sentado en una silla, banco o taburete. Termina con: Levantarse del taburete",IdleStoolEnter
+IdleChairFrontEnter,Sentarse de frente,Sentarse de frente en silla,Descartado,"Se sienta en una ""silla"" con la espalda hacia donde estaba mirando","Estar sentado en una silla, banco o taburete",EnterChairFront
+IdleStoolEnter,Sentarse en el taburete,Sentarse en taburete de bar,Descartado,Se sienta como en un taburete,"Estar sentado en una silla, banco o taburete",IdleStoolEnter
 IdleJarlChairEnter,Sentarse en el trono del jarl,Sentarse en trono de jarl,Descartado,,"Estar sentado en una silla, banco o taburete",IdleJarlChairEnter
-IdleChairRightEnter,Sentarse por la derecha,Sentarse por la derecha en silla,Descartado,,"Estar sentado en una silla, banco o taburete. Termina con: Levantarse por la derecha",EnterChairRight
-IdleChairLeftEnter,Sentarse por la izquierda,Sentarse por la izquierda en silla,Descartado,,"Estar sentado en una silla, banco o taburete. Termina con: Levantarse por la izquierda",EnterChairLeft
+IdleChairRightEnter,Sentarse por la derecha,Sentarse por la derecha en silla,Descartado,,"Estar sentado en una silla, banco o taburete",EnterChairRight
+IdleChairLeftEnter,Sentarse por la izquierda,Sentarse por la izquierda en silla,Descartado,,"Estar sentado en una silla, banco o taburete",EnterChairLeft
 ,,,,,,
 IdleActivateDoor,Abrir una puerta,Abrir una puerta.,,,,activateDoor
-IdleLayDownEnter,Acostarse en el suelo,Acostarse en el suelo. Necesita: termina con: Levantarse del mueble.,,,Termina con: Levantarse del mueble,IdleLayDownEnter
+IdleLayDownEnter,Acostarse en el suelo,Acostarse en el suelo.,,,,IdleLayDownEnter
 DualMagic_WardStart,Alzar una protección con las dos manos,Alzar una protección con las dos manos. Forma parte de lanzar hechizos.,Descartado,"De jugabilidad: el jugador ya la hace con los controles del juego, no hace falta un menú para esto",Necesita un hechizo preparado en las dos manos,CastDualMagicWard
 IdleLeanTableEnter,Apoyarse en la mesa,Apoyarse en la mesa. Necesita: estar delante de la mesa de trabajo.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de la mesa de trabajo,IdleLeanTableEnter
 IdleBoundKneesStart,Arrodillarse maniatado,Arrodillarse maniatado. Necesita: estar maniatado o preso.,,,Estar maniatado o preso,IdleBoundKneesStart
@@ -633,7 +633,7 @@ JumpFallDirectional,Caer de lado,Caer de lado. Forma parte del combate normal de
 StrafeReverseLeft,Cambiar el paso de lado a la derecha,Cambiar el paso de lado a la derecha. Es parte del movimiento normal del personaje.,Descartado,"De jugabilidad: el jugador ya la hace con los controles del juego, no hace falta un menú para esto",Estar ya en movimiento,RiderRunReversalLeftToRight
 StrafeReverseRight,Cambiar el paso de lado a la izquierda,Cambiar el paso de lado a la izquierda. Es parte del movimiento normal del personaje.,Descartado,"De jugabilidad: el jugador ya la hace con los controles del juego, no hace falta un menú para esto",Estar ya en movimiento,RiderRunReversalRightToLeft
 IdleMillLoadStart,Cargar grano en el molino,Cargar grano en el molino. Necesita: estar delante de la mesa de trabajo.,,,Estar delante de la mesa de trabajo,IdleMillLoadStart
-attackStop,Dejar de apuntar con el arco,Dejar de apuntar con el arco. Forma parte del combate normal del juego.,Descartado,Es la animacion de salida de Atacar; el mod la lanza solo al detener,Haber ejecutado antes: Atacar,PlayerCancelBowAttack
+attackStop,Dejar de apuntar con el arco,Dejar de apuntar con el arco. Forma parte del combate normal del juego.,Descartado,"De jugabilidad: el jugador ya la hace con los controles del juego, no hace falta un menú para esto",Estar ya haciendo esa animación,PlayerCancelBowAttack
 StrafeStopRunRight,Dejar de correr de lado a la derecha,Dejar de correr de lado a la derecha. Es parte del movimiento normal del personaje.,Descartado,"De jugabilidad: el jugador ya la hace con los controles del juego, no hace falta un menú para esto",Estar ya en movimiento,RiderStrafeStopRunRight
 StrafeStopRunLeft,Dejar de correr de lado a la izquierda,Dejar de correr de lado a la izquierda. Es parte del movimiento normal del personaje.,Descartado,"De jugabilidad: el jugador ya la hace con los controles del juego, no hace falta un menú para esto",Estar ya en movimiento,RiderStrafeStopRunLeft
 StrafeStopRight,Dejar de moverse de lado a la derecha,Dejar de moverse de lado a la derecha. Es parte del movimiento normal del personaje.,Descartado,"De jugabilidad: el jugador ya la hace con los controles del juego, no hace falta un menú para esto",Estar ya en movimiento,RiderStrafeStopWalkRight
@@ -648,7 +648,7 @@ StrafeStartLeft,Empezar a moverse de lado a la izquierda,Empezar a moverse de la
 StrafeStartTrotRight,Empezar a trotar de lado a la derecha,Empezar a trotar de lado a la derecha. Es parte del movimiento normal del personaje.,Descartado,"De jugabilidad: el jugador ya la hace con los controles del juego, no hace falta un menú para esto",Estar ya en movimiento,RiderTrotForwardToTrotRight
 StrafeStartTrotLeft,Empezar a trotar de lado a la izquierda,Empezar a trotar de lado a la izquierda. Es parte del movimiento normal del personaje.,Descartado,"De jugabilidad: el jugador ya la hace con los controles del juego, no hace falta un menú para esto",Estar ya en movimiento,RiderTrotForwardToTrotLeft
 IdleLeverPushStart,Empujar una palanca,Empujar una palanca.,,,,IdleLeverPushStart
-IdleHideLEnter,Esconderse contra la pared,Esconderse contra la pared. Necesita: termina con: Levantarse del mueble.,,,Termina con: Levantarse del mueble,HideLEnter
+IdleHideLEnter,Esconderse contra la pared,Esconderse contra la pared.,,,,HideLEnter
 IdleExecutioneeIdle,Esperar como condenado,Esperar como condenado.,,,,IdleExecutioneeIdle
 IdleExecutionerIdle,Esperar como verdugo,Esperar como verdugo.,,,,IdleExecutionerIdle
 BrakeStart,Frenar en seco,Frenar en seco. Forma parte del combate normal del juego.,Descartado,"De jugabilidad: el jugador ya la hace con los controles del juego, no hace falta un menú para esto",Estar ya en movimiento,RiderStopFromSprintRoot
@@ -662,8 +662,8 @@ cannedTurnRight90,Girar 90 grados a la derecha en el sitio,Girar 90 grados a la 
 NPC_TurnLeft90,Girar 90 grados a la izquierda,Girar 90 grados a la izquierda. Forma parte del combate normal del juego.,Descartado,"De jugabilidad: el jugador ya la hace con los controles del juego, no hace falta un menú para esto",Estar ya en movimiento,NPCTurnLeft90End
 cannedTurnLeft90,Girar 90 grados a la izquierda en el sitio,Girar 90 grados a la izquierda en el sitio. Es parte del movimiento normal del personaje.,Descartado,"De jugabilidad: el jugador ya la hace con los controles del juego, no hace falta un menú para esto",Estar ya en movimiento,WolfPathStartTurnLeft90
 NPC_TurnToWalkLeft90,Girar 90 grados a la izquierda y echar a andar,Girar 90 grados a la izquierda y echar a andar. Forma parte del combate normal del juego.,Descartado,"De jugabilidad: el jugador ya la hace con los controles del juego, no hace falta un menú para esto",Estar ya en movimiento,NPCTurnToWalkLeft90
-IdleDLC02TentacleWordBurnStart,Grabar la Palabra en la piedra negra,Grabar la Palabra en la piedra negra. Forma parte de lanzar hechizos.,,,Termina con: Grabar la Palabra (terminar),IdleDLC02TentacleWordBurnStart
-Unequip,Guardar lo que lleves en las manos,Guardar lo que lleves en las manos. Forma parte del combate normal del juego.,Descartado,"De jugabilidad: el jugador ya la hace con los controles del juego, no hace falta un menú para esto",,WitchlightStopCombatDUPLICATE000
+IdleDLC02TentacleWordBurnStart,Grabar la Palabra en la piedra negra,Grabar la Palabra en la piedra negra. Forma parte de lanzar hechizos.,,,,IdleDLC02TentacleWordBurnStart
+Unequip,Guardar lo que lleves en las manos,Guardar lo que lleves en las manos. Forma parte del combate normal del juego.,Aceptado,,,WitchlightStopCombatDUPLICATE000
 DialogueGeneric,Hablar con normalidad,Hablar con normalidad. Necesita: estar en una conversación.,,,Estar en una conversación,DialogueGenericTalking
 DialogueHappy,Hablar contento,Hablar contento. Necesita: estar en una conversación.,,,Estar en una conversación,DialogueHappyExpressive
 DialogueAngry,Hablar enojado (1),Hablar enojado (1). Necesita: estar en una conversación.,,,Estar en una conversación,DialogueAngryExpressive
@@ -679,23 +679,23 @@ MLh_SpellSelfConcentrationStart,Mantenerse un hechizo con la izquierda,Manteners
 DualMagic_SpellSelfConcentrationStart,Mantenerse un hechizo con las dos manos,Mantenerse un hechizo con las dos manos. Forma parte de lanzar hechizos.,Descartado,"De jugabilidad: el jugador ya la hace con los controles del juego, no hace falta un menú para esto",Necesita un hechizo preparado en las dos manos,CastDualMagicConcentrationSelf
 StrafeBackRight,Moverse de lado hacia atrás por la derecha,Moverse de lado hacia atrás por la derecha. Es parte del movimiento normal del personaje.,Descartado,"De jugabilidad: el jugador ya la hace con los controles del juego, no hace falta un menú para esto",Estar ya en movimiento,RiderRunReversalRightToBack
 StrafeBackLeft,Moverse de lado hacia atrás por la izquierda,Moverse de lado hacia atrás por la izquierda. Es parte del movimiento normal del personaje.,Descartado,"De jugabilidad: el jugador ya la hace con los controles del juego, no hace falta un menú para esto",Estar ya en movimiento,RiderRunReversalLeftToBack
-IdleCookingSpitEnter,Ponerse a cocinar en el asador,Ponerse a cocinar en el asador. Necesita: estar delante de la mesa de trabajo.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de la mesa de trabajo,IdleCookingSpitEnter
-IdleCookingPotEnter,Ponerse a cocinar en la olla,Ponerse a cocinar en la olla. Necesita: estar delante de la mesa de trabajo.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de la mesa de trabajo,IdleCookingPotEnter
-IdleAlchemyEnter,Ponerse a la mesa de alquimia,Ponerse a la mesa de alquimia. Necesita: estar delante de la mesa de trabajo.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de la mesa de trabajo,IdleAlchemyEnter
-IdleEnchantingEnter,Ponerse a la mesa de encantamiento,Ponerse a la mesa de encantamiento. Necesita: estar delante de la mesa de trabajo.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de la mesa de trabajo,IdleEnchantingEnter
-IdleHammerCarpenterTableEnter,Ponerse a martillear en el banco de carpintero,Ponerse a martillear en el banco de carpintero. Necesita: estar delante de la mesa de trabajo.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de la mesa de trabajo,IdleHammerCarpenterTableEnter
-IdleHammerTableEnter,Ponerse a martillear en la mesa,Ponerse a martillear en la mesa. Necesita: estar delante de la mesa de trabajo.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de la mesa de trabajo,IdleHammerTableEnter
-IdleHammerWallEnter,Ponerse a martillear en la pared,Ponerse a martillear en la pared.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",,IdleHammerWallEnter
-IdleDLC2PickaxeEnter,Ponerse a picar con el pico,Ponerse a picar con el pico.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",,DLC2IdlePickaxeEnterDUPLICATE001
-IdlePickaxeFloorEnter,Ponerse a picar en el suelo,Ponerse a picar en el suelo. Necesita: termina con: Levantarse del mueble.,,,Termina con: Levantarse del mueble,IdlePickaxeFloorEnter
-IdleDLC2PickaxeFloorEnter,Ponerse a picar en el suelo (Solstheim),Ponerse a picar en el suelo (Solstheim). Necesita: termina con: Levantarse del mueble.,,,Termina con: Levantarse del mueble,DLC2IdlePickaxeFloorEnterDUPLICATE001
-IdlePickaxeTableEnter,Ponerse a picar en la mesa,Ponerse a picar en la mesa. Necesita: estar delante de la mesa de trabajo.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de la mesa de trabajo,IdlePickaxeTableEnter
-IdleDLC2PickaxeTableEnter,Ponerse a picar en la mesa (Solstheim),Ponerse a picar en la mesa (Solstheim). Necesita: estar delante de la mesa de trabajo.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de la mesa de trabajo,DLC2IdlePickaxeTableEnterDUPLICATE001
-IdleOvenEnter,Ponerse al horno,Ponerse al horno. Necesita: estar delante de la mesa de trabajo.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de la mesa de trabajo,IdleOvenEnter
-IdleTanningEnter,Ponerse en el banco de curtido,Ponerse en el banco de curtido. Necesita: estar delante de la mesa de trabajo.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de la mesa de trabajo,IdleTanningEnter
-IdleGrainMillEnter,Ponerse en el molino,Ponerse en el molino. Necesita: estar delante de la mesa de trabajo.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de la mesa de trabajo,IdleGrainMillEnter
-combatStanceStart,Ponerse en guardia,Ponerse en guardia. Forma parte del combate normal del juego.,Descartado,"De jugabilidad: el jugador ya la hace con los controles del juego, no hace falta un menú para esto","Necesita un arma desenvainada, de cualquier tipo",McrabMeleeAttack
-IdleSmelterEnter,Ponerse en la fundición,Ponerse en la fundición. Necesita: estar delante de la mesa de trabajo.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de la mesa de trabajo,IdleSmelterEnter
+IdleCookingSpitEnter,Ponerse a cocinar en el asador,Ponerse a cocinar en el asador. Necesita: estar delante de la mesa de trabajo.,Aceptado,,Estar delante de la mesa de trabajo,IdleCookingSpitEnter
+IdleCookingPotEnter,Ponerse a cocinar en la olla,Ponerse a cocinar en la olla. Necesita: estar delante de la mesa de trabajo.,Aceptado,,Estar delante de la mesa de trabajo,IdleCookingPotEnter
+IdleAlchemyEnter,Ponerse a la mesa de alquimia,Ponerse a la mesa de alquimia. Necesita: estar delante de la mesa de trabajo.,Aceptado,,Estar delante de la mesa de trabajo,IdleAlchemyEnter
+IdleEnchantingEnter,Ponerse a la mesa de encantamiento,Ponerse a la mesa de encantamiento. Necesita: estar delante de la mesa de trabajo.,Aceptado,,Estar delante de la mesa de trabajo,IdleEnchantingEnter
+IdleHammerCarpenterTableEnter,Ponerse a martillear en el banco de carpintero,Ponerse a martillear en el banco de carpintero. Necesita: estar delante de la mesa de trabajo.,Aceptado,,Estar delante de la mesa de trabajo,IdleHammerCarpenterTableEnter
+IdleHammerTableEnter,Ponerse a martillear en la mesa,Ponerse a martillear en la mesa. Necesita: estar delante de la mesa de trabajo.,Aceptado,,Estar delante de la mesa de trabajo,IdleHammerTableEnter
+IdleHammerWallEnter,Ponerse a martillear en la pared,Ponerse a martillear en la pared.,Aceptado,,,IdleHammerWallEnter
+IdleDLC2PickaxeEnter,Ponerse a picar con el pico,Ponerse a picar con el pico.,Aceptado,,,DLC2IdlePickaxeEnterDUPLICATE001
+IdlePickaxeFloorEnter,Ponerse a picar en el suelo,Ponerse a picar en el suelo.,,,,IdlePickaxeFloorEnter
+IdleDLC2PickaxeFloorEnter,Ponerse a picar en el suelo (Solstheim),Ponerse a picar en el suelo (Solstheim).,,,,DLC2IdlePickaxeFloorEnterDUPLICATE001
+IdlePickaxeTableEnter,Ponerse a picar en la mesa,Ponerse a picar en la mesa. Necesita: estar delante de la mesa de trabajo.,Aceptado,,Estar delante de la mesa de trabajo,IdlePickaxeTableEnter
+IdleDLC2PickaxeTableEnter,Ponerse a picar en la mesa (Solstheim),Ponerse a picar en la mesa (Solstheim). Necesita: estar delante de la mesa de trabajo.,Aceptado,,Estar delante de la mesa de trabajo,DLC2IdlePickaxeTableEnterDUPLICATE001
+IdleOvenEnter,Ponerse al horno,Ponerse al horno. Necesita: estar delante de la mesa de trabajo.,Aceptado,,Estar delante de la mesa de trabajo,IdleOvenEnter
+IdleTanningEnter,Ponerse en el banco de curtido,Ponerse en el banco de curtido. Necesita: estar delante de la mesa de trabajo.,Aceptado,,Estar delante de la mesa de trabajo,IdleTanningEnter
+IdleGrainMillEnter,Ponerse en el molino,Ponerse en el molino. Necesita: estar delante de la mesa de trabajo.,Aceptado,,Estar delante de la mesa de trabajo,IdleGrainMillEnter
+combatStanceStart,Ponerse en guardia,Ponerse en guardia. Forma parte del combate normal del juego.,Aceptado,,"Necesita un arma desenvainada, de cualquier tipo",McrabMeleeAttack
+IdleSmelterEnter,Ponerse en la fundición,Ponerse en la fundición. Necesita: estar delante de la mesa de trabajo.,Aceptado,,Estar delante de la mesa de trabajo,IdleSmelterEnter
 MotionDrivenIdle,Quedarse quieto al hablar,Quedarse quieto al hablar.,,,,MotionDrivenDialogueStartIfNotCasual
 IdleScrapeTreeBark,Raspar la corteza de un árbol,Raspar la corteza de un árbol.,,,,IdleScrapeTreeBark
 IdleExecutioneeChop,Recibir el golpe de hacha del verdugo,Recibir el golpe de hacha del verdugo.,,,,IdleExecutioneeChop
@@ -726,13 +726,13 @@ pa_KillMoveH2HBodySlam,Rematar estrellándolo contra el suelo,"Rematar estrellá
 pa_KillMoveH2HSneakNeckBreak,Rematar partiendo el cuello por sorpresa,"Rematar partiendo el cuello por sorpresa. Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados.",Descartado,"Ejecución: el juego la lanza solo al matar a un enemigo, con la cámara y el enemigo colocados. A mano queda el personaje dando tajos al aire","Necesita tener los puños libres, sin arma",KillMoveSneakH2HNeckBreak
 SneakSprintStartRoll,Rodar por el suelo agachado,Rodar por el suelo agachado. Forma parte del combate normal del juego.,Descartado,"De jugabilidad: el jugador ya la hace con los controles del juego, no hace falta un menú para esto",Estar agachado,SneakSprintStartRoll
 MagicForceEquip,Sacar la magia en las dos manos,Sacar la magia en las dos manos. Forma parte del combate normal del juego.,Descartado,"De jugabilidad: el jugador ya la hace con los controles del juego, no hace falta un menú para esto",Necesita un hechizo preparado en la mano,BothHandsChangeMagicOut
-combatStanceStop,Salir de la guardia,Salir de la guardia. Forma parte del combate normal del juego.,Descartado,Es la animacion de salida de Ponerse en guardia; el mod la lanza solo al detener,Haber ejecutado antes: Ponerse en guardia,SkeeverCombatStanceStop
+combatStanceStop,Salir de la guardia,Salir de la guardia. Forma parte del combate normal del juego.,Descartado,"De jugabilidad: el jugador ya la hace con los controles del juego, no hace falta un menú para esto",Estar ya haciendo esa animación,SkeeverCombatStanceStop
 IdleTableEnter,Sentarse a la mesa,Sentarse a la mesa. Necesita: estar delante de la mesa de trabajo.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de la mesa de trabajo,IdleTableEnter
 IdleTableEnterPlayer,Sentarse a la mesa (jugador),Sentarse a la mesa (jugador). Necesita: estar delante de la mesa de trabajo.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de la mesa de trabajo,IdleTableEnterPlayer
-IdleSitCrossLeggedEnter,Sentarse con las piernas cruzadas,"Sentarse con las piernas cruzadas. Necesita: estar sentado en una silla, banco o taburete. Termina con: Levantarse del mueble.",,,"Estar sentado en una silla, banco o taburete. Termina con: Levantarse del mueble",IdleSitCrossLeggedEnter
+IdleSitCrossLeggedEnter,Sentarse con las piernas cruzadas,"Sentarse con las piernas cruzadas. Necesita: estar sentado en una silla, banco o taburete.",,,"Estar sentado en una silla, banco o taburete",IdleSitCrossLeggedEnter
 IdleStoolEnterPlayer,Sentarse en el taburete (jugador),"Sentarse en el taburete (jugador). Necesita: estar sentado en una silla, banco o taburete.",Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando","Estar sentado en una silla, banco o taburete",IdleStoolEnterPlayer
 IdleSnowElfPrinceChairEnter,Sentarse en el trono élfico,"Sentarse en el trono élfico. Necesita: estar sentado en una silla, banco o taburete.",Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando","Estar sentado en una silla, banco o taburete",IdleSnowElfPrinceChairEnter
-IdleSitLedgeEnter,Sentarse en una repisa,"Sentarse en una repisa. Necesita: estar sentado en una silla, banco o taburete.",Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando","Estar sentado en una silla, banco o taburete",IdleSitLedgeEnter
+IdleSitLedgeEnter,Sentarse en una repisa,"Sentarse en una repisa. Necesita: estar sentado en una silla, banco o taburete.",Aceptado,,"Estar sentado en una silla, banco o taburete",IdleSitLedgeEnter
 SpellRelease,Soltar el hechizo,Soltar el hechizo. Forma parte de lanzar hechizos.,Descartado,"De jugabilidad: el jugador ya la hace con los controles del juego, no hace falta un menú para esto",Necesita un hechizo preparado en la mano,FalmerReleaseLeft
 IdleLadderEnter,Subir por una escalera,Subir por una escalera.,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",,IdleLadderEnter
 IdleCarryBucketPourEnter,Vaciar una cubeta,Vaciar una cubeta. Necesita: necesita llevar el objeto en las manos.,,,Necesita llevar el objeto en las manos,IdleCarryBucketPourEnter

@@ -42,6 +42,7 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.dirname(AQUI)
 sys.path.insert(0, AQUI)
 import csv
+import decisiones
 import descartes
 import idles
 import neutral
@@ -681,6 +682,17 @@ def generar(data):
         fuera, motivo = descartes.descarte(a["evento"], a["categoria"])
         if fuera:
             a["visible"] = False
+
+    # Y lo ultimo, lo decidido a mano probandolas en el juego. Va al final
+    # porque corrige a los demas: una regla acierta en la mayoria, pero quien
+    # las ha visto sabe cuales son la excepcion. Ver herramientas/decisiones.py.
+    def avisarDeLosPerdidos(nombres):
+        print("  OJO: decisiones.py nombra animaciones que no existen:")
+        for n in nombres:
+            print("       " + n)
+
+    puestas, quitadas = decisiones.aplicar(animaciones, avisarDeLosPerdidos)
+    print("  decididas a mano: %d se quedan, %d se esconden" % (puestas, quitadas))
 
     animaciones.sort(key=lambda a: (a["categoria"], a["nombre"].lower()))
     return animaciones

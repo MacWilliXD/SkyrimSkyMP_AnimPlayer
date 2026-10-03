@@ -30,7 +30,11 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.dirname(AQUI)
 sys.path.insert(0, AQUI)
 import dependencias
+import decisiones
 import descartes
+
+# Un conjunto para mirar rapido: se consulta una vez por animacion.
+ACEPTADAS = set(decisiones.ACEPTADAS)
 import estilo
 import neutral
 
@@ -82,6 +86,17 @@ def main():
             estado = u"Descartado"
             if not nota:
                 nota = porQue
+
+        # Y lo decidido a mano manda sobre todo lo anterior. No hace falta
+        # volver a razonarlo: el catalogo ya lo aplico y dejo escrito el
+        # motivo. Ver herramientas/decisiones.py.
+        if a.get("motivoDescarte"):
+            estado = u"Descartado"
+            nota = a["motivoDescarte"]
+        elif a["nombre"] in ACEPTADAS:
+            estado = u"Aceptado"
+            if nota == porQue:
+                nota = u""      # era la nota de un descarte que ya no vale
 
         # Todo lo que se lee pasa por el filtro de espanol neutral: nombre,
         # descripcion, nota y dependencia. Ver herramientas/neutral.py.

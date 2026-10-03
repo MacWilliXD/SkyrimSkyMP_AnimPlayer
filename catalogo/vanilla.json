@@ -933,8 +933,7 @@
    "origen": "vanilla",
    "sincroniza": false,
    "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip",
-   "descripcion": "Guardar lo que lleves en las manos. Forma parte del combate normal del juego.",
-   "visible": false
+   "descripcion": "Guardar lo que lleves en las manos. Forma parte del combate normal del juego."
   },
   {
    "edid": "BleedOutCastLeftConcentrationAimed",
@@ -1166,8 +1165,7 @@
    "categoria": "combate",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ponerse en guardia. Forma parte del combate normal del juego.",
-   "visible": false
+   "descripcion": "Ponerse en guardia. Forma parte del combate normal del juego."
   },
   {
    "edid": "CombatIdleStagger_Regular",
@@ -1777,7 +1775,7 @@
    "categoria": "comer",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Dejar de tambalearse. Necesita: haber ejecutado antes: Ponerse a tambalearse."
+   "descripcion": "Dejar de tambalearse. Necesita: estar ya haciendo esa animación."
   },
   {
    "edid": "IdleTablePassOutEnterLoose",
@@ -1832,7 +1830,7 @@
    "categoria": "comer",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ponerse a tambalearse. Necesita: termina con: Dejar de tambalearse."
+   "descripcion": "Ponerse a tambalearse."
   },
   {
    "edid": "IdleTableDrinkEnterLoose",
@@ -1909,7 +1907,7 @@
    "categoria": "control",
    "busqueda": "levantarse salir silla cama mueble",
    "origen": "vanilla",
-   "descripcion": "Levantarse del mueble. Necesita: haber ejecutado antes: Acostarse (Ataúd), Acostarse en el suelo, Apoyarse en el mostrador.",
+   "descripcion": "Levantarse del mueble. Necesita: estar en el mueble o la mesa de trabajo.",
    "visible": false
   },
   {
@@ -1938,7 +1936,7 @@
    "categoria": "control",
    "busqueda": "soltar dejar manos",
    "origen": "vanilla",
-   "descripcion": "Soltar lo que lleva en las manos. Necesita: haber ejecutado antes: Llevar un cesto, Llevar una olla, Recoger flores en el cesto."
+   "descripcion": "Soltar lo que lleva en las manos. Necesita: estar ya haciendo esa animación."
   },
   {
    "edid": "Caring",
@@ -1947,7 +1945,9 @@
    "categoria": "dialogo",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Actitud: cercana."
+   "descripcion": "Actitud: cercana.",
+   "visible": false,
+   "motivoDescarte": "Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada"
   },
   {
    "edid": "Standoffish",
@@ -1956,7 +1956,9 @@
    "categoria": "dialogo",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Actitud: distante."
+   "descripcion": "Actitud: distante.",
+   "visible": false,
+   "motivoDescarte": "Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada"
   },
   {
    "edid": "Flirty",
@@ -1965,7 +1967,9 @@
    "categoria": "dialogo",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Actitud: juguetona."
+   "descripcion": "Actitud: juguetona.",
+   "visible": false,
+   "motivoDescarte": "Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada"
   },
   {
    "edid": "Sarcastic",
@@ -1974,7 +1978,9 @@
    "categoria": "dialogo",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Actitud: seria."
+   "descripcion": "Actitud: seria.",
+   "visible": false,
+   "motivoDescarte": "Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada"
   },
   {
    "edid": "RF_MoodChangeOpen",
@@ -1983,7 +1989,9 @@
    "categoria": "dialogo",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Cambiar a actitud cercana."
+   "descripcion": "Cambiar a actitud cercana.",
+   "visible": false,
+   "motivoDescarte": "Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada"
   },
   {
    "edid": "RF_MoodChangeGuarded",
@@ -1992,7 +2000,9 @@
    "categoria": "dialogo",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Cambiar a actitud distante."
+   "descripcion": "Cambiar a actitud distante.",
+   "visible": false,
+   "motivoDescarte": "Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada"
   },
   {
    "edid": "RF_MoodChangePlayful",
@@ -2001,7 +2011,9 @@
    "categoria": "dialogo",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Cambiar a actitud juguetona."
+   "descripcion": "Cambiar a actitud juguetona.",
+   "visible": false,
+   "motivoDescarte": "Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada"
   },
   {
    "edid": "RF_MoodChangeSerious",
@@ -2010,7 +2022,9 @@
    "categoria": "dialogo",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Cambiar a actitud seria."
+   "descripcion": "Cambiar a actitud seria.",
+   "visible": false,
+   "motivoDescarte": "Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada"
   },
   {
    "edid": "RF_OpenDismissive",
@@ -2019,7 +2033,9 @@
    "categoria": "dialogo",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Cercana: desdén."
+   "descripcion": "Cercana: desdén.",
+   "visible": false,
+   "motivoDescarte": "Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada"
   },
   {
    "edid": "RF_OpenInterested",
@@ -2028,7 +2044,9 @@
    "categoria": "dialogo",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Cercana: interés."
+   "descripcion": "Cercana: interés.",
+   "visible": false,
+   "motivoDescarte": "Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada"
   },
   {
    "edid": "RF_OpenThrowHands",
@@ -2037,7 +2055,9 @@
    "categoria": "dialogo",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Cercana: manos al aire."
+   "descripcion": "Cercana: manos al aire.",
+   "visible": false,
+   "motivoDescarte": "Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada"
   },
   {
    "edid": "RF_ShockOpen",
@@ -2046,7 +2066,9 @@
    "categoria": "dialogo",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Cercana: sobresalto."
+   "descripcion": "Cercana: sobresalto.",
+   "visible": false,
+   "motivoDescarte": "Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada"
   },
   {
    "edid": "RF_OpenPleading",
@@ -2055,7 +2077,9 @@
    "categoria": "dialogo",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Cercana: súplica."
+   "descripcion": "Cercana: súplica.",
+   "visible": false,
+   "motivoDescarte": "Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada"
   },
   {
    "edid": "RF_GuardedDismissive",
@@ -2064,7 +2088,9 @@
    "categoria": "dialogo",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Distante: desdén."
+   "descripcion": "Distante: desdén.",
+   "visible": false,
+   "motivoDescarte": "Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada"
   },
   {
    "edid": "RF_GuardedInterested",
@@ -2073,7 +2099,9 @@
    "categoria": "dialogo",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Distante: interés."
+   "descripcion": "Distante: interés.",
+   "visible": false,
+   "motivoDescarte": "Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada"
   },
   {
    "edid": "RF_GuardedThrowHands",
@@ -2082,7 +2110,9 @@
    "categoria": "dialogo",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Distante: manos al aire."
+   "descripcion": "Distante: manos al aire.",
+   "visible": false,
+   "motivoDescarte": "Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada"
   },
   {
    "edid": "RF_ShockGuarded",
@@ -2091,7 +2121,9 @@
    "categoria": "dialogo",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Distante: sobresalto."
+   "descripcion": "Distante: sobresalto.",
+   "visible": false,
+   "motivoDescarte": "Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada"
   },
   {
    "edid": "RF_GuardedPleading",
@@ -2100,7 +2132,9 @@
    "categoria": "dialogo",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Distante: súplica."
+   "descripcion": "Distante: súplica.",
+   "visible": false,
+   "motivoDescarte": "Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada"
   },
   {
    "edid": "TalkingHappy",
@@ -2194,7 +2228,9 @@
    "categoria": "dialogo",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Hablar con naturalidad. Necesita: estar en una conversación."
+   "descripcion": "Hablar con naturalidad. Necesita: estar en una conversación.",
+   "visible": false,
+   "motivoDescarte": "Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada"
   },
   {
    "edid": "DialogueGenericTalking",
@@ -2221,7 +2257,9 @@
    "categoria": "dialogo",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Hablar enojado. Necesita: estar en una conversación."
+   "descripcion": "Hablar enojado. Necesita: estar en una conversación.",
+   "visible": false,
+   "motivoDescarte": "Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada"
   },
   {
    "edid": "DialogueAngryExpressive",
@@ -2241,7 +2279,9 @@
    "origen": "vanilla",
    "andando": true,
    "confirmado": false,
-   "descripcion": "Hablar enojado mientras te mueves. Necesita: estar en una conversación."
+   "descripcion": "Hablar enojado mientras te mueves. Necesita: estar en una conversación.",
+   "visible": false,
+   "motivoDescarte": "Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada"
   },
   {
    "edid": "TalkingExpressive",
@@ -2250,7 +2290,9 @@
    "categoria": "dialogo",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Hablar gesticulando. Necesita: estar en una conversación."
+   "descripcion": "Hablar gesticulando. Necesita: estar en una conversación.",
+   "visible": false,
+   "motivoDescarte": "Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada"
   },
   {
    "edid": "DialogueGenericMotionDriven",
@@ -2261,7 +2303,9 @@
    "origen": "vanilla",
    "andando": true,
    "confirmado": false,
-   "descripcion": "Hablar mientras te mueves. Necesita: estar en una conversación."
+   "descripcion": "Hablar mientras te mueves. Necesita: estar en una conversación.",
+   "visible": false,
+   "motivoDescarte": "Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada"
   },
   {
    "edid": "SnowElfPrinceDialogue",
@@ -2271,7 +2315,9 @@
    "busqueda": "",
    "origen": "vanilla",
    "sentado": true,
-   "descripcion": "Hablar sentado con gesto solemne. Necesita: estar sentado en una silla, banco o taburete."
+   "descripcion": "Hablar sentado con gesto solemne. Necesita: estar sentado en una silla, banco o taburete.",
+   "visible": false,
+   "motivoDescarte": "Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada"
   },
   {
    "edid": "DialogueNeutralShiftMotionDriven",
@@ -2282,7 +2328,9 @@
    "origen": "vanilla",
    "andando": true,
    "confirmado": false,
-   "descripcion": "Hablar: cambiar de gesto. Necesita: estar en una conversación."
+   "descripcion": "Hablar: cambiar de gesto. Necesita: estar en una conversación.",
+   "visible": false,
+   "motivoDescarte": "Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada"
   },
   {
    "edid": "RF_PlayfulDismissive",
@@ -2462,7 +2510,7 @@
    "categoria": "dormir",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Acostarse en el suelo. Necesita: termina con: Levantarse del mueble."
+   "descripcion": "Acostarse en el suelo."
   },
   {
    "edid": "RightBedEnter",
@@ -2613,7 +2661,9 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Asomarse por la esquina, a la derecha."
+   "descripcion": "Asomarse por la esquina, a la derecha.",
+   "visible": false,
+   "motivoDescarte": "El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal"
   },
   {
    "edid": "IdleWallCornerPeekLEnter",
@@ -2622,7 +2672,9 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Asomarse por la esquina, a la izquierda."
+   "descripcion": "Asomarse por la esquina, a la izquierda.",
+   "visible": false,
+   "motivoDescarte": "El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal"
   },
   {
    "edid": "idle_A_sway_fastTrans",
@@ -2713,7 +2765,9 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Cambiar el peso de pierna."
+   "descripcion": "Cambiar el peso de pierna.",
+   "visible": false,
+   "motivoDescarte": "El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal"
   },
   {
    "edid": "IdleValericaWalkForward",
@@ -2723,7 +2777,9 @@
    "busqueda": "",
    "origen": "vanilla",
    "andando": true,
-   "descripcion": "Caminar hacia delante."
+   "descripcion": "Caminar hacia delante.",
+   "visible": false,
+   "motivoDescarte": "El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal"
   },
   {
    "edid": "Idle_A_left_longTrans",
@@ -2732,7 +2788,9 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Cargar el peso a la izquierda."
+   "descripcion": "Cargar el peso a la izquierda.",
+   "visible": false,
+   "motivoDescarte": "El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal"
   },
   {
    "edid": "IdleOffsetArmsCrossedStart",
@@ -2761,7 +2819,7 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Dejar de llorar. Necesita: haber ejecutado antes: Llorar."
+   "descripcion": "Dejar de llorar."
   },
   {
    "edid": "IdleCower",
@@ -2789,7 +2847,9 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Esconderse a la derecha."
+   "descripcion": "Esconderse a la derecha.",
+   "visible": false,
+   "motivoDescarte": "El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal"
   },
   {
    "edid": "idle_A_swat_flies",
@@ -2825,7 +2885,7 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Fin del paseo de cámara. Necesita: haber ejecutado antes: Paseo de cámara."
+   "descripcion": "Fin del paseo de cámara."
   },
   {
    "edid": "IdleCiceroAgitated",
@@ -2909,7 +2969,7 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Mostrar incredulidad. Necesita: termina con: Salir de la incredulidad."
+   "descripcion": "Mostrar incredulidad."
   },
   {
    "edid": "DLC2StornReaction2Start",
@@ -2918,7 +2978,7 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Mostrar incredulidad (2). Necesita: termina con: Salir de la incredulidad (2)."
+   "descripcion": "Mostrar incredulidad (2)."
   },
   {
    "edid": "DLC2FreaDisbeliefStart",
@@ -2990,7 +3050,7 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Llorar. Necesita: termina con: Dejar de llorar."
+   "descripcion": "Llorar."
   },
   {
    "edid": "IdleHandsBehindBack",
@@ -3046,7 +3106,9 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Paseo de cámara. Necesita: termina con: Fin del paseo de cámara."
+   "descripcion": "Paseo de cámara.",
+   "visible": false,
+   "motivoDescarte": "El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal"
   },
   {
    "edid": "IdleChildApologize",
@@ -3064,7 +3126,7 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Pena. Necesita: termina con: Salir de la pena."
+   "descripcion": "Pena."
   },
   {
    "edid": "IdleSnapToAttention",
@@ -3083,7 +3145,9 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Adoptar la pose de espera."
+   "descripcion": "Adoptar la pose de espera.",
+   "visible": false,
+   "motivoDescarte": "El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal"
   },
   {
    "edid": "IdleStaticPoseA",
@@ -3092,7 +3156,9 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Adoptar la pose fija A."
+   "descripcion": "Adoptar la pose fija A.",
+   "visible": false,
+   "motivoDescarte": "El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal"
   },
   {
    "edid": "IdleStaticPoseB",
@@ -3101,7 +3167,9 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Adoptar la pose fija B."
+   "descripcion": "Adoptar la pose fija B.",
+   "visible": false,
+   "motivoDescarte": "El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal"
   },
   {
    "edid": "IdleStaticPoseC",
@@ -3110,7 +3178,9 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Adoptar la pose fija C."
+   "descripcion": "Adoptar la pose fija C.",
+   "visible": false,
+   "motivoDescarte": "El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal"
   },
   {
    "edid": "PlayOnceThenPickNewIdle",
@@ -3184,7 +3254,7 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Salir de la incredulidad. Necesita: haber ejecutado antes: Incredulidad."
+   "descripcion": "Salir de la incredulidad. Necesita: estar ya haciendo esa animación."
   },
   {
    "edid": "DLC2StornReaction2Stop",
@@ -3193,7 +3263,7 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Salir de la incredulidad (2). Necesita: haber ejecutado antes: Incredulidad (2)."
+   "descripcion": "Salir de la incredulidad (2). Necesita: estar ya haciendo esa animación."
   },
   {
    "edid": "DLC2FreaReactionStop",
@@ -3202,7 +3272,9 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Salir de la incredulidad (3). Necesita: estar ya haciendo esa animación."
+   "descripcion": "Salir de la incredulidad (3). Necesita: estar ya haciendo esa animación.",
+   "visible": false,
+   "motivoDescarte": "El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal"
   },
   {
    "edid": "DLC2IdleFreaDisbelief2Stop",
@@ -3211,7 +3283,9 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Salir de la incredulidad (4). Necesita: estar ya haciendo esa animación."
+   "descripcion": "Salir de la incredulidad (4). Necesita: estar ya haciendo esa animación.",
+   "visible": false,
+   "motivoDescarte": "El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal"
   },
   {
    "edid": "DLC2FreaSorrowExit",
@@ -3220,7 +3294,7 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Salir de la pena. Necesita: haber ejecutado antes: Pena."
+   "descripcion": "Salir de la pena. Necesita: estar ya haciendo esa animación."
   },
   {
    "edid": "IdleWave",
@@ -3286,7 +3360,9 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Subirse los pantalones."
+   "descripcion": "Subirse los pantalones.",
+   "visible": false,
+   "motivoDescarte": "El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal"
   },
   {
    "edid": "idle_A_sigh_var1Trans",
@@ -3295,7 +3371,9 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Suspirar."
+   "descripcion": "Suspirar.",
+   "visible": false,
+   "motivoDescarte": "El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal"
   },
   {
    "edid": "idle_A_sigh_var2Trans",
@@ -3304,7 +3382,9 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Suspirar (2)."
+   "descripcion": "Suspirar (2).",
+   "visible": false,
+   "motivoDescarte": "El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal"
   },
   {
    "edid": "IdleChildShy",
@@ -3322,7 +3402,9 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Volver la mirada a la derecha."
+   "descripcion": "Volver la mirada a la derecha.",
+   "visible": false,
+   "motivoDescarte": "El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal"
   },
   {
    "edid": "IdleNocturnal_LookLeft",
@@ -3331,7 +3413,9 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Volver la mirada a la izquierda."
+   "descripcion": "Volver la mirada a la izquierda.",
+   "visible": false,
+   "motivoDescarte": "El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal"
   },
   {
    "edid": "IdleBracedPain",
@@ -3376,7 +3460,9 @@
    "categoria": "herido",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Caer de rodillas. Necesita: estar ya en movimiento."
+   "descripcion": "Caer de rodillas. Necesita: estar ya en movimiento.",
+   "visible": false,
+   "motivoDescarte": "Deja al personaje tirado en el suelo y hace falta Reiniciar para levantarlo"
   },
   {
    "edid": "BoundStandingCut",
@@ -3448,7 +3534,9 @@
    "categoria": "herido",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Desplomarse como un muñeco. Necesita: estar muerto o abatido."
+   "descripcion": "Desplomarse como un muñeco. Necesita: estar muerto o abatido.",
+   "visible": false,
+   "motivoDescarte": "Deja al personaje tirado en el suelo y hace falta Reiniciar para levantarlo"
   },
   {
    "edid": "IdleExecutioneeIdle",
@@ -3475,7 +3563,9 @@
    "categoria": "herido",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Forcejear en la telaraña."
+   "descripcion": "Forcejear en la telaraña.",
+   "visible": false,
+   "motivoDescarte": "Necesita la telaraña delante; sin ella el personaje forcejea contra el aire"
   },
   {
    "edid": "IdleWebThrashShort2",
@@ -3484,7 +3574,9 @@
    "categoria": "herido",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Forcejear en la telaraña (2)."
+   "descripcion": "Forcejear en la telaraña (2).",
+   "visible": false,
+   "motivoDescarte": "Necesita la telaraña delante; sin ella el personaje forcejea contra el aire"
   },
   {
    "edid": "IdleExecutionerGuardEnter",
@@ -3549,7 +3641,9 @@
    "categoria": "herido",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Levantarse del suelo. Necesita: estar ya haciendo esa animación."
+   "descripcion": "Levantarse del suelo. Necesita: estar ya haciendo esa animación.",
+   "visible": false,
+   "motivoDescarte": "Deja al personaje tirado en el suelo y hace falta Reiniciar para levantarlo"
   },
   {
    "edid": "OffsetBoundStandingStart",
@@ -3568,7 +3662,9 @@
    "categoria": "herido",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Morir. Necesita: estar muerto o abatido."
+   "descripcion": "Morir. Necesita: estar muerto o abatido.",
+   "visible": false,
+   "motivoDescarte": "Deja al personaje tirado en el suelo y hace falta Reiniciar para levantarlo"
   },
   {
    "edid": "IdleDLC02MiraakDeathStart",
@@ -3577,7 +3673,9 @@
    "categoria": "herido",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Morir despacio. Necesita: estar muerto o abatido."
+   "descripcion": "Morir despacio. Necesita: estar muerto o abatido.",
+   "visible": false,
+   "motivoDescarte": "Deja al personaje tirado en el suelo y hace falta Reiniciar para levantarlo"
   },
   {
    "edid": "MS12BedDeath",
@@ -3586,7 +3684,9 @@
    "categoria": "herido",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Morir en la cama. Necesita: estar muerto o abatido."
+   "descripcion": "Morir en la cama. Necesita: estar muerto o abatido.",
+   "visible": false,
+   "motivoDescarte": "Deja al personaje tirado en el suelo y hace falta Reiniciar para levantarlo"
   },
   {
    "edid": "IdleSoupDeath",
@@ -3595,7 +3695,9 @@
    "categoria": "herido",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Morir sobre el plato. Necesita: estar muerto o abatido."
+   "descripcion": "Morir sobre el plato. Necesita: estar muerto o abatido.",
+   "visible": false,
+   "motivoDescarte": "Deja al personaje tirado en el suelo y hace falta Reiniciar para levantarlo"
   },
   {
    "edid": "IdleCartPrisonerAExit",
@@ -3604,7 +3706,7 @@
    "categoria": "herido",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Preso A: bajarse del carro. Necesita: haber ejecutado antes: Subirse al carro.",
+   "descripcion": "Preso A: bajarse del carro. Necesita: estar subido en el carro.",
    "visible": false
   },
   {
@@ -3614,7 +3716,9 @@
    "categoria": "herido",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Preso A: en el carro. Necesita: estar subido en el carro."
+   "descripcion": "Preso A: en el carro. Necesita: estar subido en el carro.",
+   "visible": false,
+   "motivoDescarte": "Sin el carro delante el jugador aparece flotando en el aire"
   },
   {
    "edid": "IdleCartPrisonerASway",
@@ -3623,7 +3727,9 @@
    "categoria": "herido",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Preso A: vaivén del carro. Necesita: estar subido en el carro."
+   "descripcion": "Preso A: vaivén del carro. Necesita: estar subido en el carro.",
+   "visible": false,
+   "motivoDescarte": "Sin el carro delante el jugador aparece flotando en el aire"
   },
   {
    "edid": "IdleCartPrisonerBExit",
@@ -3633,7 +3739,8 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Preso B: bajarse del carro. Necesita: estar subido en el carro.",
-   "visible": false
+   "visible": false,
+   "motivoDescarte": "Sin el carro delante el jugador aparece flotando en el aire"
   },
   {
    "edid": "IdleCartPrisonerBIdle",
@@ -3642,7 +3749,9 @@
    "categoria": "herido",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Preso B: en el carro. Necesita: estar subido en el carro."
+   "descripcion": "Preso B: en el carro. Necesita: estar subido en el carro.",
+   "visible": false,
+   "motivoDescarte": "Sin el carro delante el jugador aparece flotando en el aire"
   },
   {
    "edid": "IdleCartPrisonerBSway",
@@ -3651,7 +3760,9 @@
    "categoria": "herido",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Preso B: vaivén del carro. Necesita: estar subido en el carro."
+   "descripcion": "Preso B: vaivén del carro. Necesita: estar subido en el carro.",
+   "visible": false,
+   "motivoDescarte": "Sin el carro delante el jugador aparece flotando en el aire"
   },
   {
    "edid": "IdleCartPrisonerCExit",
@@ -3661,7 +3772,8 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Preso C: bajarse del carro. Necesita: estar subido en el carro.",
-   "visible": false
+   "visible": false,
+   "motivoDescarte": "Sin el carro delante el jugador aparece flotando en el aire"
   },
   {
    "edid": "IdleCartPrisonerCIdle",
@@ -3670,7 +3782,9 @@
    "categoria": "herido",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Preso C: en el carro. Necesita: estar subido en el carro."
+   "descripcion": "Preso C: en el carro. Necesita: estar subido en el carro.",
+   "visible": false,
+   "motivoDescarte": "Sin el carro delante el jugador aparece flotando en el aire"
   },
   {
    "edid": "IdleCartPrisonerCSway",
@@ -3679,7 +3793,9 @@
    "categoria": "herido",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Preso C: vaivén del carro. Necesita: estar subido en el carro."
+   "descripcion": "Preso C: vaivén del carro. Necesita: estar subido en el carro.",
+   "visible": false,
+   "motivoDescarte": "Sin el carro delante el jugador aparece flotando en el aire"
   },
   {
    "edid": "IdleCartPrisonerDExit",
@@ -3689,7 +3805,8 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Preso D: bajarse del carro. Necesita: estar subido en el carro.",
-   "visible": false
+   "visible": false,
+   "motivoDescarte": "Sin el carro delante el jugador aparece flotando en el aire"
   },
   {
    "edid": "IdleCartPrisonerDIdle",
@@ -3698,7 +3815,9 @@
    "categoria": "herido",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Preso D: en el carro. Necesita: estar subido en el carro."
+   "descripcion": "Preso D: en el carro. Necesita: estar subido en el carro.",
+   "visible": false,
+   "motivoDescarte": "Sin el carro delante el jugador aparece flotando en el aire"
   },
   {
    "edid": "IdleCartPrisonerDSway",
@@ -3707,7 +3826,9 @@
    "categoria": "herido",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Preso D: vaivén del carro. Necesita: estar subido en el carro."
+   "descripcion": "Preso D: vaivén del carro. Necesita: estar subido en el carro.",
+   "visible": false,
+   "motivoDescarte": "Sin el carro delante el jugador aparece flotando en el aire"
   },
   {
    "edid": "EnterWebInstant",
@@ -3716,7 +3837,9 @@
    "categoria": "herido",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Quedar atrapado en la telaraña."
+   "descripcion": "Quedar atrapado en la telaraña.",
+   "visible": false,
+   "motivoDescarte": "Necesita la telaraña delante; sin ella el personaje forcejea contra el aire"
   },
   {
    "edid": "TG05_KnockOut",
@@ -3771,7 +3894,9 @@
    "categoria": "herido",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Soltarse de la telaraña. Necesita: estar ya haciendo esa animación."
+   "descripcion": "Soltarse de la telaraña. Necesita: estar ya haciendo esa animación.",
+   "visible": false,
+   "motivoDescarte": "Necesita la telaraña delante; sin ella el personaje forcejea contra el aire"
   },
   {
    "edid": "WebIdleExitQuickTurn",
@@ -3780,7 +3905,9 @@
    "categoria": "herido",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Soltarse de la telaraña y girarse."
+   "descripcion": "Soltarse de la telaraña y girarse.",
+   "visible": false,
+   "motivoDescarte": "Necesita la telaraña delante; sin ella el personaje forcejea contra el aire"
   },
   {
    "edid": "IdleDLC02MiraakDeathFinish",
@@ -3789,7 +3916,9 @@
    "categoria": "herido",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Terminar de morir despacio. Necesita: estar muerto o abatido."
+   "descripcion": "Terminar de morir despacio. Necesita: estar muerto o abatido.",
+   "visible": false,
+   "motivoDescarte": "Deja al personaje tirado en el suelo y hace falta Reiniciar para levantarlo"
   },
   {
    "edid": "IdleUncontrollableCough",
@@ -3984,7 +4113,9 @@
    "categoria": "magia",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Levantarse. Forma parte de lanzar hechizos."
+   "descripcion": "Levantarse. Forma parte de lanzar hechizos.",
+   "visible": false,
+   "motivoDescarte": "Es un efecto de guion, no una pose: mueve o cambia al personaje y lo deja donde no debe"
   },
   {
    "edid": "IdleTGFalmerStatueEnter",
@@ -4002,7 +4133,9 @@
    "categoria": "magia",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Aparecer. Forma parte de lanzar hechizos."
+   "descripcion": "Aparecer. Forma parte de lanzar hechizos.",
+   "visible": false,
+   "motivoDescarte": "Es un efecto de guion, no una pose: mueve o cambia al personaje y lo deja donde no debe"
   },
   {
    "edid": "IdleBlessingKneelEnter",
@@ -4021,8 +4154,7 @@
    "categoria": "magia",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Arrodillarse en el altar. Forma parte de lanzar hechizos.",
-   "visible": false
+   "descripcion": "Arrodillarse en el altar. Forma parte de lanzar hechizos."
   },
   {
    "edid": "IdleT02AscendMale",
@@ -4049,7 +4181,9 @@
    "categoria": "magia",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ascender flotando. Forma parte de lanzar hechizos."
+   "descripcion": "Ascender flotando. Forma parte de lanzar hechizos.",
+   "visible": false,
+   "motivoDescarte": "Es un efecto de guion, no una pose: mueve o cambia al personaje y lo deja donde no debe"
   },
   {
    "edid": "IdleSnowElfPrinceAscension",
@@ -4076,7 +4210,9 @@
    "categoria": "magia",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Atravesar la pared. Forma parte de lanzar hechizos."
+   "descripcion": "Atravesar la pared. Forma parte de lanzar hechizos.",
+   "visible": false,
+   "motivoDescarte": "Es un efecto de guion, no una pose: mueve o cambia al personaje y lo deja donde no debe"
   },
   {
    "edid": "TG08_CeremonyEnter",
@@ -4212,7 +4348,9 @@
    "categoria": "magia",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Explosión (1ª persona). Forma parte de lanzar hechizos."
+   "descripcion": "Explosión (1ª persona). Forma parte de lanzar hechizos.",
+   "visible": false,
+   "motivoDescarte": "Es un efecto de guion, no una pose: mueve o cambia al personaje y lo deja donde no debe"
   },
   {
    "edid": "pa_ExtractWerewolfSpirit",
@@ -4461,7 +4599,9 @@
    "categoria": "magia",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Transformarse. Forma parte de lanzar hechizos."
+   "descripcion": "Transformarse. Forma parte de lanzar hechizos.",
+   "visible": false,
+   "motivoDescarte": "Es un efecto de guion, no una pose: mueve o cambia al personaje y lo deja donde no debe"
   },
   {
    "edid": "IdleVampireLordTransformation",
@@ -4470,7 +4610,9 @@
    "categoria": "magia",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Transformarse (2). Forma parte de lanzar hechizos."
+   "descripcion": "Transformarse (2). Forma parte de lanzar hechizos.",
+   "visible": false,
+   "motivoDescarte": "Es un efecto de guion, no una pose: mueve o cambia al personaje y lo deja donde no debe"
   },
   {
    "edid": "IdleWayShrineWaterPour",
@@ -5100,7 +5242,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "confirmado": false,
-   "descripcion": "Dejar la leña. Necesita: haber ejecutado antes: Recoger leña."
+   "descripcion": "Dejar la leña."
   },
   {
    "edid": "IdleStonePutDownEnter",
@@ -5109,7 +5251,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Dejar una piedra. Necesita: haber ejecutado antes: Recoger una piedra."
+   "descripcion": "Dejar una piedra. Necesita: necesita llevar el objeto en las manos."
   },
   {
    "edid": "IdleCraftingCookingPotAddIngredient",
@@ -5173,8 +5315,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Escribir en el registro.",
-   "visible": false
+   "descripcion": "Escribir en el registro."
   },
   {
    "edid": "IdleWriteLedgerWrite",
@@ -5220,7 +5361,9 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ir en barca."
+   "descripcion": "Ir en barca.",
+   "visible": false,
+   "motivoDescarte": "Es un efecto de guion, no una pose: mueve o cambia al personaje y lo deja donde no debe"
   },
   {
    "edid": "IdleWriteTableChairExitRight",
@@ -5229,7 +5372,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Levantarse del escritorio por la derecha. Necesita: haber ejecutado antes: Sentarse a escribir por la derecha.",
+   "descripcion": "Levantarse del escritorio por la derecha. Necesita: estar sentado en una silla.",
    "visible": false
   },
   {
@@ -5239,7 +5382,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Levantarse del escritorio por la izquierda. Necesita: haber ejecutado antes: Sentarse a escribir por la izquierda.",
+   "descripcion": "Levantarse del escritorio por la izquierda. Necesita: estar sentado en una silla.",
    "visible": false
   },
   {
@@ -5308,7 +5451,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "andando": true,
-   "descripcion": "Llevar un cesto. Necesita: necesita llevar el objeto en las manos. Termina con: Soltar lo que lleva en las manos."
+   "descripcion": "Llevar un cesto. Necesita: necesita llevar el objeto en las manos."
   },
   {
    "edid": "OffsetCarryMQ201DrinkTray",
@@ -5338,7 +5481,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "andando": true,
-   "descripcion": "Llevar una olla. Necesita: necesita llevar el objeto en las manos. Termina con: Soltar lo que lleva en las manos."
+   "descripcion": "Llevar una olla. Necesita: necesita llevar el objeto en las manos."
   },
   {
    "edid": "IdleDwemerExtractor",
@@ -5357,8 +5500,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "destacada": true,
-   "descripcion": "Picar con el pico.",
-   "visible": false
+   "descripcion": "Picar con el pico."
   },
   {
    "edid": "IdleCookingSpitEnter",
@@ -5367,8 +5509,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ponerse a cocinar en el asador. Necesita: estar delante de la mesa de trabajo.",
-   "visible": false
+   "descripcion": "Ponerse a cocinar en el asador. Necesita: estar delante de la mesa de trabajo."
   },
   {
    "edid": "IdleCookingPotEnter",
@@ -5377,8 +5518,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ponerse a cocinar en la olla. Necesita: estar delante de la mesa de trabajo.",
-   "visible": false
+   "descripcion": "Ponerse a cocinar en la olla. Necesita: estar delante de la mesa de trabajo."
   },
   {
    "edid": "IdleHadvarWriteLedgerEnter",
@@ -5387,8 +5527,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ponerse a escribir en el registro.",
-   "visible": false
+   "descripcion": "Ponerse a escribir en el registro."
   },
   {
    "edid": "IdleAlchemyEnter",
@@ -5397,8 +5536,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ponerse a la mesa de alquimia. Necesita: estar delante de la mesa de trabajo.",
-   "visible": false
+   "descripcion": "Ponerse a la mesa de alquimia. Necesita: estar delante de la mesa de trabajo."
   },
   {
    "edid": "IdleEnchantingEnter",
@@ -5407,8 +5545,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ponerse a la mesa de encantamiento. Necesita: estar delante de la mesa de trabajo.",
-   "visible": false
+   "descripcion": "Ponerse a la mesa de encantamiento. Necesita: estar delante de la mesa de trabajo."
   },
   {
    "edid": "IdleHammerCarpenterTableEnter",
@@ -5417,8 +5554,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ponerse a martillear en el banco de carpintero. Necesita: estar delante de la mesa de trabajo.",
-   "visible": false
+   "descripcion": "Ponerse a martillear en el banco de carpintero. Necesita: estar delante de la mesa de trabajo."
   },
   {
    "edid": "IdleHammerTableEnter",
@@ -5427,8 +5563,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ponerse a martillear en la mesa. Necesita: estar delante de la mesa de trabajo.",
-   "visible": false
+   "descripcion": "Ponerse a martillear en la mesa. Necesita: estar delante de la mesa de trabajo."
   },
   {
    "edid": "IdleHammerWallEnter",
@@ -5437,8 +5572,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ponerse a martillear en la pared.",
-   "visible": false
+   "descripcion": "Ponerse a martillear en la pared."
   },
   {
    "edid": "DLC2IdlePickaxeEnterDUPLICATE001",
@@ -5447,8 +5581,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ponerse a picar con el pico.",
-   "visible": false
+   "descripcion": "Ponerse a picar con el pico."
   },
   {
    "edid": "IdlePickaxeFloorEnter",
@@ -5457,7 +5590,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ponerse a picar en el suelo. Necesita: termina con: Levantarse del mueble."
+   "descripcion": "Ponerse a picar en el suelo."
   },
   {
    "edid": "DLC2IdlePickaxeFloorEnterDUPLICATE001",
@@ -5466,7 +5599,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ponerse a picar en el suelo (Solstheim). Necesita: termina con: Levantarse del mueble."
+   "descripcion": "Ponerse a picar en el suelo (Solstheim)."
   },
   {
    "edid": "IdlePickaxeTableEnter",
@@ -5475,8 +5608,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ponerse a picar en la mesa. Necesita: estar delante de la mesa de trabajo.",
-   "visible": false
+   "descripcion": "Ponerse a picar en la mesa. Necesita: estar delante de la mesa de trabajo."
   },
   {
    "edid": "DLC2IdlePickaxeTableEnterDUPLICATE001",
@@ -5485,8 +5617,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ponerse a picar en la mesa (Solstheim). Necesita: estar delante de la mesa de trabajo.",
-   "visible": false
+   "descripcion": "Ponerse a picar en la mesa (Solstheim). Necesita: estar delante de la mesa de trabajo."
   },
   {
    "edid": "IdleOvenEnter",
@@ -5495,8 +5626,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ponerse al horno. Necesita: estar delante de la mesa de trabajo.",
-   "visible": false
+   "descripcion": "Ponerse al horno. Necesita: estar delante de la mesa de trabajo."
   },
   {
    "edid": "IdleTanningEnter",
@@ -5505,8 +5635,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ponerse en el banco de curtido. Necesita: estar delante de la mesa de trabajo.",
-   "visible": false
+   "descripcion": "Ponerse en el banco de curtido. Necesita: estar delante de la mesa de trabajo."
   },
   {
    "edid": "IdleGrainMillEnter",
@@ -5515,8 +5644,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ponerse en el molino. Necesita: estar delante de la mesa de trabajo.",
-   "visible": false
+   "descripcion": "Ponerse en el molino. Necesita: estar delante de la mesa de trabajo."
   },
   {
    "edid": "IdleSmelterEnter",
@@ -5525,8 +5653,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ponerse en la fundición. Necesita: estar delante de la mesa de trabajo.",
-   "visible": false
+   "descripcion": "Ponerse en la fundición. Necesita: estar delante de la mesa de trabajo."
   },
   {
    "edid": "IdleCounterStart",
@@ -5535,7 +5662,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ponerse tras el mostrador. Necesita: estar en el mostrador o el mostrador. Termina con: Levantarse del mueble."
+   "descripcion": "Ponerse tras el mostrador. Necesita: estar en el mostrador o el mostrador."
   },
   {
    "edid": "IdleScrapeTreeBark",
@@ -5571,8 +5698,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Rebuscar en la mesa. Necesita: estar delante de la mesa de trabajo.",
-   "visible": false
+   "descripcion": "Rebuscar en la mesa. Necesita: estar delante de la mesa de trabajo."
   },
   {
    "edid": "IdleSearchChestEnter",
@@ -5618,7 +5744,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "andando": true,
-   "descripcion": "Recoger flores en el cesto. Necesita: necesita llevar el objeto en las manos. Termina con: Soltar lo que lleva en las manos."
+   "descripcion": "Recoger flores en el cesto. Necesita: necesita llevar el objeto en las manos."
   },
   {
    "edid": "IdleWoodPickUpExit",
@@ -5627,7 +5753,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Recoger leña. Necesita: necesita llevar el objeto en las manos. Termina con: Dejar la leña."
+   "descripcion": "Recoger leña. Necesita: necesita llevar el objeto en las manos."
   },
   {
    "edid": "IdleRFPickUpScroll",
@@ -5645,7 +5771,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Recoger una piedra. Necesita: necesita llevar el objeto en las manos. Termina con: Dejar una piedra."
+   "descripcion": "Recoger una piedra. Necesita: necesita llevar el objeto en las manos."
   },
   {
    "edid": "IdleWriteTableChairEnterRight",
@@ -5675,7 +5801,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "andando": true,
-   "descripcion": "Servir de la olla. Necesita: necesita llevar el objeto en las manos. Termina con: Soltar lo que lleva en las manos."
+   "descripcion": "Servir de la olla. Necesita: necesita llevar el objeto en las manos."
   },
   {
    "edid": "IdleLadderEnter",
@@ -5724,8 +5850,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "destacada": true,
-   "descripcion": "Trabajar en la forja. Necesita: estar delante de la mesa de trabajo.",
-   "visible": false
+   "descripcion": "Trabajar en la forja. Necesita: estar delante de la mesa de trabajo."
   },
   {
    "edid": "IdleCarryBucketPourEnter",
@@ -7014,7 +7139,7 @@
    "categoria": "sentarse",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Esconderse contra la pared. Necesita: termina con: Levantarse del mueble."
+   "descripcion": "Esconderse contra la pared."
   },
   {
    "edid": "IdleSoldierWallEnter",
@@ -7173,7 +7298,7 @@
    "categoria": "sentarse",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Sentarse con las piernas cruzadas. Necesita: estar sentado en una silla, banco o taburete. Termina con: Levantarse del mueble."
+   "descripcion": "Sentarse con las piernas cruzadas. Necesita: estar sentado en una silla, banco o taburete."
   },
   {
    "edid": "IdleChildLegsOut",
@@ -7244,8 +7369,7 @@
    "categoria": "sentarse",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Sentarse en una repisa. Necesita: estar sentado en una silla, banco o taburete.",
-   "visible": false
+   "descripcion": "Sentarse en una repisa. Necesita: estar sentado en una silla, banco o taburete."
   },
   {
    "edid": "EnterChairRight",
