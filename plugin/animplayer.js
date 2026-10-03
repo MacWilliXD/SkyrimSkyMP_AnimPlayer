@@ -1286,17 +1286,24 @@
        * detenian:
        *
        *   OffsetStop       la pose que va encima de la postura
-       *   IdleOffsetStop   su variante para los idles de tipo offset
        *   AnimObjectStop   lo que el juego te engancha a la mano: la copa del
        *                    brindis, la jarra, el libro. Sin esto el objeto se
        *                    queda puesto y con el la animacion que lo sostiene.
        *   IdleStop         y el idle en si
        *
        * Los que no vienen al caso no hacen nada: el grafo ignora lo que no
-       * puede atender desde donde esta. */
+       * puede atender desde donde esta.
+       *
+       * AQUI NO VA IdleOffsetStop. Lo meti al arreglar lo del brindis, por
+       * parecerse al OffsetStop de arriba, y rompio las de "En guardia": la
+       * postura con el arma en alto se sostiene con una capa de offset encima
+       * del cuerpo, y ese evento la tira. El personaje bajaba las manos al
+       * encadenar otra animacion. Es el mismo sintoma que daba
+       * IdleForceDefaultState en su dia, por el mismo motivo: un corte que se
+       * lleva por delante mas de lo que tiene que cortar. Se quedo abajo, en
+       * el corte a por todas. */
       try {
         enviarAlGrafo(actor, 'OffsetStop');
-        enviarAlGrafo(actor, 'IdleOffsetStop');
         enviarAlGrafo(actor, 'AnimObjectStop');
         if (!enUnMueble) {
           enviarAlGrafo(actor, 'IdleFurnitureExit');
@@ -1312,6 +1319,7 @@
          * vuelves a pulsar, lo que estas diciendo es que lo de antes no
          * funciono. */
         if (peticion && peticion.insistiendo) {
+          enviarAlGrafo(actor, 'IdleOffsetStop');
           enviarAlGrafo(actor, 'IdleStopInstant');
           enviarAlGrafo(actor, 'IdleForceDefaultState');
           apuntar('insistiendo: corte a por todas');

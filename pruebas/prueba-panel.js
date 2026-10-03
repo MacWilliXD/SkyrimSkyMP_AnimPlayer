@@ -39,14 +39,13 @@ const SALIDA = path.join(__dirname, 'salida');
 /* El corte que manda Detener, en orden. Son los eventos genericos de parada
    que acepta el grafo del personaje:
      OffsetStop         la pose que va encima de la postura
-     IdleOffsetStop     su variante para los idles de tipo offset
      AnimObjectStop     lo que el juego te engancha a la mano: la copa, la
                         jarra, el libro
      IdleFurnitureExit  solo si NO estas en un mueble
      IdleStop           y el idle en si
    Va aqui y no escrito a mano en cada prueba para que anadir uno manana sea
    tocar una linea. */
-const CORTE = 'OffsetStop,IdleOffsetStop,AnimObjectStop,IdleFurnitureExit,IdleStop';
+const CORTE = 'OffsetStop,AnimObjectStop,IdleFurnitureExit,IdleStop';
 
 const falsoSp = require('./sp-falso');
 
@@ -1725,7 +1724,7 @@ app.whenReady().then(async () => {
   await esperar(400);
   await pasarMensajesAlPlugin(falso);
   const insistiendo = falso.registro.animaciones.map((a) => a.evento);
-  comprobar(insistiendo.join(',') === CORTE + ',IdleStopInstant,IdleForceDefaultState',
+  comprobar(insistiendo.join(',') === CORTE + ',IdleOffsetStop,IdleStopInstant,IdleForceDefaultState',
             'y al segundo Detener seguido, el corte va a por todas',
             insistiendo.join(' + '));
   /* El reloj se devuelve AQUI y no antes: el mod apunto la hora del primer
@@ -2090,9 +2089,10 @@ app.whenReady().then(async () => {
   otroMod.tic();
   comprobar(ap.enBucle() === null, 'parar corta el bucle');
   const trasParar = otroMod.registro.animaciones.map((a) => a.evento);
-  comprobar(trasParar.slice(-5).join(',') === CORTE,
+  const cuantos = CORTE.split(',').length;
+  comprobar(trasParar.slice(-cuantos).join(',') === CORTE,
             'y suelta, levanta y para, en ese orden',
-            trasParar.slice(-5).join(' + '));
+            trasParar.slice(-cuantos).join(' + '));
 
   console.log('\n  --- consultar el catalogo ---');
   comprobar(ap.existe('IdleLuteStart'), 'se puede preguntar si un evento esta');
