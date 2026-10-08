@@ -721,13 +721,19 @@ if __name__ == "__main__":
     print("Leyendo animaciones de:", data)
     animaciones = generar(data)
 
-    nombres = dict((c[0], c[1]) for c in CATEGORIAS)
-    nombres["control"] = "Control"
-    nombres["otras"] = "Otras"
-    cuenta = collections.Counter(a["categoria"] for a in animaciones)
+    # El resumen, con las categorias de ahora y contando solo lo que se ve:
+    # el total incluye 510 escondidas y leerlo asi enganaba.
+    nombres = dict((c[0], c[1]) for c in categoriasPorNombre.LISTA)
+    aLaVista = [a for a in animaciones if a.get("visible") is not False]
+    cuenta = collections.Counter(a["categoria"] for a in aLaVista)
+    extra = collections.Counter()
+    for a in aLaVista:
+        for c in a.get("tambien", []):
+            extra[c] += 1
     print()
-    for clave, n in cuenta.most_common():
-        print("  %-10s %-24s %4d" % (clave, nombres.get(clave, clave), n))
+    for clave, _ in sorted(cuenta.items(), key=lambda x: -x[1]):
+        print("  %-10s %-22s %4d  (+%d de otras)"
+              % (clave, nombres.get(clave, clave), cuenta[clave], extra[clave]))
     sinSinc = [a for a in animaciones if a.get("sincroniza") is False]
     print()
     print("  total %d animaciones, %d destacadas, %d que SkyMP no sincroniza" %
@@ -744,14 +750,11 @@ if __name__ == "__main__":
     io.open(salida, "w", encoding="utf-8").write(json.dumps({
         "version": 1,
         "fuente": "registros IDLE de " + ", ".join(PLUGINS),
-        "categorias": [{"clave": c[0],
-                        "nombre": RENOMBRA.get(c[0], c[1]),
-                        "busqueda": c[2]}
-                       for c in CATEGORIAS
-                       if c[0] not in FUSIONES_CATEGORIA] +
-                      [{"clave": "control", "nombre": "Control",
-                        "busqueda": "parar detener cancelar"},
-                       {"clave": "otras", "nombre": "Otras", "busqueda": ""}],
+        # La lista sale de categorias.py, que es donde se decide a cual va
+        # cada animacion. Dos listas diciendo lo mismo acaban diciendo cosas
+        # distintas.
+        "categorias": [{"clave": c[0], "nombre": c[1], "busqueda": c[2]}
+                       for c in categoriasPorNombre.LISTA],
         "animaciones": animaciones,
     }, ensure_ascii=False, indent=1))
     print("  escrito", salida)

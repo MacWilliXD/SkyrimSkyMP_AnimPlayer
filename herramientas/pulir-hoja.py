@@ -45,10 +45,17 @@ import csv
 import io
 import os
 import re
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import descripciones
+import estados
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.dirname(AQUI)
-ENTRADA = os.path.join(RAIZ, "catalogo", "revisado-nuevo.csv")
+_BAJADA = os.path.join(RAIZ, "catalogo", "revisado-nuevo.csv")
+_LA_DEL_PROYECTO = os.path.join(RAIZ, "catalogo", "revisado.csv")
+ENTRADA = _BAJADA if os.path.isfile(_BAJADA) else _LA_DEL_PROYECTO
 SALIDA = os.path.join(RAIZ, "catalogo", "hoja-pulida.csv")
 
 COLUMNAS = ["id", "nombre", u"descripción", "estado", "nota", "dependencia",
@@ -236,6 +243,16 @@ def main():
     filas = list(csv.DictReader(io.open(ENTRADA, encoding="utf-8-sig")))
     print(u"leidas %d filas de %s" % (len(filas), os.path.basename(ENTRADA)))
 
+    # Lo primero, las correcciones de estado: lo demas depende de si una fila
+    # esta aceptada o no. Ver herramientas/estados.py.
+    corregidos, sinEncontrar = estados.aplicar(filas)
+    if corregidos:
+        print(u"  estados corregidos a mano: %d" % corregidos)
+    if sinEncontrar:
+        print(u"  OJO: estados.py nombra ids que no existen:")
+        for i in sorted(sinEncontrar):
+            print(u"       " + i)
+
     quitadas = cambiadas = renombradas = 0
     for f in filas:
         desc = f.get(u"descripción") or u""
@@ -254,6 +271,29 @@ def main():
 
     conLetra = ponerLetras(filas)
 
+    # Y ahora, con el nombre ya definitivo, las descripciones escritas a mano
+    # para las que se quedaban en dos palabras. Va aqui y no antes porque la
+    # tabla esta indexada por el nombre con su letra: antes de ponerla, cinco
+    # filas se llaman "Reirse" y no hay forma de saber cual es cual.
+    alargadas = 0
+    noEncontradas = []
+    porNombre = {}
+    for f in filas:
+        porNombre.setdefault(f["nombre"], []).append(f)
+    for nombre, frase in descripciones.LARGAS.items():
+        if nombre not in porNombre:
+            noEncontradas.append(nombre)
+            continue
+        for f in porNombre[nombre]:
+            f[u"descripción"] = frase
+            alargadas += 1
+
+    # Las que siguen cortas y no estan en la tabla: se avisan, que es la unica
+    # forma de no dejarlas ahi para siempre.
+    cortas = [f["nombre"] for f in filas
+              if (f.get("estado") or "").strip().lower() == "aceptado"
+              and descripciones.esPobre(f.get(u"descripción"))]
+
     with io.open(SALIDA, "w", encoding="utf-8-sig", newline="") as s:
         w = csv.DictWriter(s, fieldnames=COLUMNAS)
         w.writeheader()
@@ -264,6 +304,16 @@ def main():
     print(u"  descripciones pasadas a infinitivo:           %d" % cambiadas)
     print(u"  nombres pasados a infinitivo:                 %d" % renombradas)
     print(u"  nombres repetidos que ahora llevan letra:     %d" % conLetra)
+    print(u"  descripciones escritas a mano:                %d" % alargadas)
+    if noEncontradas:
+        print(u"  OJO: descripciones.py nombra filas que no existen:")
+        for n in sorted(noEncontradas):
+            print(u"       " + n)
+    if cortas:
+        print(u"  OJO: siguen con menos de %d palabras (%d):"
+              % (descripciones.MINIMO, len(cortas)))
+        for n in sorted(cortas):
+            print(u"       " + n)
     print(u"escrito %s" % SALIDA)
 
 

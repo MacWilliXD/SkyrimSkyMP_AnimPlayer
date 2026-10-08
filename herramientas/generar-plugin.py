@@ -56,6 +56,12 @@ def compactar(catalogo):
                  "categoria": a["categoria"]}
         if a.get("busqueda") and a["busqueda"] != porCategoria.get(a["categoria"]):
             ficha["busqueda"] = a["busqueda"]
+        # Las categorias de mas a las que pertenece, si tiene alguna. Una
+        # animacion puede estar en varias: "Beber de taza sentado" es de comer
+        # y de sentarse, y obligarla a elegir la escondia de la mitad de la
+        # gente que la iba a buscar.
+        if a.get("tambien"):
+            ficha["tambien"] = a["tambien"]
         if a.get("destacada"):
             ficha["destacada"] = True
         if a.get("andando"):

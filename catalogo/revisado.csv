@@ -89,10 +89,10 @@ recoilLargeStart,Retroceder de un golpetazo,Retroceder de un golpe,Descartado,An
 recoilStart,Retroceder por el golpe,Retroceder de un golpe rapido,Descartado,Animación muy fea,,McrabRecoilsStart
 FlinchStart,Retroceder por golpe (A),Retroceder por un golpe en la parte superior del cuerpo,Aceptado,"Golpe en el rostro o en la parte superior del cuerpo, retrocediendo un poco",Estar herido o desangrándose,Flinch
 NPC_BumpFromFront,Retroceder por golpe (B),Retroceder al ser empujado por un golpe,Aceptado,,,BumpedFromFront
-StaggerPlayer,Retroceder por golpe (C),Retroceder al ser golpeado,Aceptado,,,PlayerStagger
+StaggerPlayer,Retroceder por golpe (C),Retroceder un paso al recibir un golpe,Aceptado,,,PlayerStagger
 staggerStart,Retroceder por golpe (D),Retroceder al ser golpeado,Descartado,Repetido de StaggerPlayer,,LooseFullBodyStagger
 WardBreak,Retroceder por golpe (E),Retroceder al ser golpeado,Descartado,Animación ejecutada cuando se rompe hehcizo de protecciones,Necesita un hechizo preparado en la mano,WardBroken
-IdleCombatWeaponCheckStart,Revisar arma (En guardia),Revisar el arma desenvainada,Aceptado,Animación que requiere tener las armas desenvainadas. Levanta el arma que tiene y la mira para volver a bajarla.,"Necesita un arma desenvainada, de cualquier tipo",CombatIdleWeaponCheck
+IdleCombatWeaponCheckStart,Revisar arma (En guardia),Mirar el filo del arma desenvainada,Aceptado,Animación que requiere tener las armas desenvainadas. Levanta el arma que tiene y la mira para volver a bajarla.,"Necesita un arma desenvainada, de cualquier tipo",CombatIdleWeaponCheck
 WeapOutRightReplaceForceEquip,Sacar Arma,Desenfundar el arma equipada,Descartado,Saca el arma equipada sin discreción,"Necesita un arma desenvainada, de cualquier tipo",BothHandsChange
 ShdEquip,Sacar el escudo,Sacar el escudo equipado,Descartado,,Necesita un escudo equipado,shieldForceEquip
 torchEquip,Sacar la antorcha,Sacar una antorcha y se mantiene,Descartado,Hace la animación y se queda de levantar la antorcha,Necesita una antorcha equipada,torchForceEquip
@@ -113,11 +113,11 @@ MRh_SpellTelekinesisStart,Telequinesis con la derecha,Estirar el brazo para move
 MLh_SpellTelekinesisStart,Telequinesis con la izquierda,Estirar el brazo para mover con telequinesis,Descartado,No funciona sin el hechizo equipado,Necesita un hechizo preparado en la mano izquierda,CastLeftTelekinesis
 bowEnd,Terminar con el arco,Terminar al lanzar una flecha,Descartado,Animación ejecutada al terminar de lanzar una flecha con el arco,Necesita un arco equipado,CrossbowReleaseDuringReload
 shoutStop,Terminar el Grito,Terminar de gritar,Descartado,Animación ejecutada al finalizar un grito,Estar ya haciendo esa animación,VoiceInterruptRoot
-VampireFeedingBedRollRight,Alimentarse del suelo (A),Alimentarse y del suelo,Aceptado,,Estar acostado en la cama o en un saco de dormir,IdleVampireBedrollRight
-VampireFeedingBedRollLeft,Alimentarse del suelo (B),Alimentarse y del suelo,Aceptado,,Estar acostado en la cama o en un saco de dormir,IdleVampireBedrollLeft
+VampireFeedingBedRollRight,Alimentarse del suelo (A),Agacharse a morder un cuerpo tendido en el suelo,Aceptado,,Estar acostado en la cama o en un saco de dormir,IdleVampireBedrollRight
+VampireFeedingBedRollLeft,Alimentarse del suelo (B),Inclinarse sobre un cuerpo en el suelo para alimentarse,Aceptado,,Estar acostado en la cama o en un saco de dormir,IdleVampireBedrollLeft
 VampireFeedingBedRight,Alimentarse en superficie baja (A),Alimentarse en una superficie baja,Aceptado,,,IdleVampireBedRight
 VampireFeedingBedLeft,Alimentarse en superficie baja (B),Alimentarse en una superficie baja,Aceptado,,,IdleVampireBedLeft
-IdleDrink,Beber de taza (A),Beberse de una taza,Aceptado,,,IdleDrink
+IdleDrink,Beber de taza (A),Levantar una taza y beber de ella,Aceptado,,,IdleDrink
 IdleDrinkFromFountain,Beber de la fuente,Beberse de la fuente de agua,Aceptado,,,IdleDrinkFountain
 idleDrinkingStandingStart,Beber de taza (B),"Beberse de una taza, manteniendose con ella en la mano",Aceptado,,,IdleDrinkingStandingStart
 idleBarDrinkingStart,Beber de taza (C),"Beberse de una taza, manteniendose con ella en la mano y festejando",Aceptado,,,idleBarDrinkingStart
@@ -130,13 +130,13 @@ idleEatingStandingStart_DLC1Vampire,Comer carne cruda de pie,Comer carne cruda d
 ChairEatingStart_VampireMeat,Comer carne cruda sentado,Comer carne cruda estando sentado,Aceptado,,"Estar sentado en una silla, banco o taburete",ChairEating_VampireMeat
 idleEatingStandingStart,Comer pan,Comerse un pan de pie y manteniendolo en la mano,Aceptado,,,IdleEatingStandingStart
 ChairEatingStart,Comer pan sentado,Comerse un pan sentado en una silla y manteniendolo en la mano,Aceptado,,"Estar sentado en una silla, banco o taburete",ChairEatingStart
-DrunkStop,Dejar de Tambalear,Dejar de tambalearse,Aceptado,Necesita estar en estado de Tambalearse,Estar ya haciendo esa animación,IdleDrunkStop
+DrunkStop,Dejar de Tambalear,Recuperar el equilibrio y dejar de tambalearse,Aceptado,Necesita estar en estado de Tambalearse,Estar ya haciendo esa animación,IdleDrunkStop
 IdleTablePassOutEnter,Desplomarse sobre la mesa,Desplomarse sobre la mesa,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de la mesa de trabajo,IdleTablePassOutEnterLoose
 IdleCannibalFeedStanding,Comer con ansias,Comer con ansias en una superficie baja,Aceptado,,,IdleCannibalFeedStanding
 IdleCannibalFeedCrouching,Comer con ansias del suelo,Comer con ansias en el suelo,Aceptado,,Estar agachado,IdleCannibalFeedCrouching
-pa_VampireFeedStanding_Front,Morder el cuello,Morder el cuello,Aceptado,,"Necesita un arma desenvainada, de cualquier tipo",IdleVampireStandingFeedFront_Loose
+pa_VampireFeedStanding_Front,Morder el cuello,Sujetar a alguien y morderle el cuello,Aceptado,,"Necesita un arma desenvainada, de cualquier tipo",IdleVampireStandingFeedFront_Loose
 pa_VampireFeedStanding_Back,Morder el cuello por la espalda,Morder el cuello por la espalda,Descartado,Muy intenso y sin sentido de repetir,"Necesita un arma desenvainada, de cualquier tipo",IdleVampireStandingBack
-DrunkStart,Tambalear (A),Ponerse a tambalearse,Aceptado,,,IdleDrunkStart
+DrunkStart,Tambalear (A),Perder el equilibrio y empezar a tambalearse,Aceptado,,,IdleDrunkStart
 IdleTableDrinkEnter,Sentarse a la mesa a beber,Sentarse a la mesa a beber,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de la mesa de trabajo,IdleTableDrinkEnterLoose
 IdleTableDrinkAndMugEnter,Sentarse a la mesa con jarra y bebida,Sentarse a la mesa con jarra y bebida,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de la mesa de trabajo,IdleTableDrinkAndMugEnterLoose
 IdleTableMugEnter,Sentarse a la mesa con una jarra,Sentarse a la mesa con una jarra,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de la mesa de trabajo,IdleTableMugEnterLoose
@@ -171,7 +171,7 @@ IdleDialogueDefensiveHandGesture,Defenderse,Levantar las manos con gesto defensi
 IdleDialogueWelcomeHandGesture,Dar bienvenida,Abrir los brazos para dar la bienvenida,Aceptado,,Estar en una conversación,IdleDialogueWelcomeHandGesture
 IdleDialogueStart,Hablar,Levantar hombros para comenzar el dialogo,Aceptado,,Estar en una conversación,TalkingFail
 IdleDialogueMovingTalkA,Gesticular andando (A),Andar de lado a lado gesticulando,Aceptado,,Estar en una conversación,IdleDialogueMovingTalkA
-IdleDialogueMovingTalkB,Mostrar algo,Señalar algo mostrando algo,Aceptado,,Estar en una conversación,IdleDialogueMovingTalkB
+IdleDialogueMovingTalkB,Mostrar algo,Señalar algo con la mano para mostrarlo,Aceptado,,Estar en una conversación,IdleDialogueMovingTalkB
 IdleDialogueMovingTalkC,Gesticular andando (B),Andar de lado a lado gesticulando,Aceptado,,Estar en una conversación,IdleDialogueMovingTalkC
 IdleDialogueMovingTalkD,Gesticular andando (C),Andar de lado a lado gesticulando,Aceptado,,Estar en una conversación,IdleDialogueMovingTalkD
 DialogueNeutral,Hablar con naturalidad,Hablar con naturalidad,Descartado,"Es un modo de conversación del juego, no una pose: cambia cómo gesticula el personaje mientras habla y suelta no se ve nada",Estar en una conversación,DialogueNeutralExpressive
@@ -205,7 +205,7 @@ IdleBedLeftEnterStart,Acostarse por la izquierda (Cama),Acostarse en una cama po
 IdleBedRollLeftEnterStart,Acostarse por la izquierda (Saco),Acostarse en un saco de dormir por la izquierda,Descartado,,Estar acostado en la cama o en un saco de dormir,LeftBedRollEnter
 DLC01CoffinEnterInstant,Acostarse verticalmente (Ataúd) (A),Acostarse en un ataúd vertical con brazos cruzados,Descartado,Coloca la espalda donde mires,Estar dentro de un ataúd,DLC1SeranaCoffinEnterInstant
 IdleCoffinVertEnter,Acostarse verticalmente (Ataúd) (B),Meterse en el ataúd vertical para acostarse con brazos abajos,Descartado,Coloca la espalda donde mires,Estar dentro de un ataúd,DLC1IdleCoffinVert
-IdleSleepNod,Dar cabezadas,Dar cabezadas del sueño,Aceptado,,Estar acostado en la cama o en un saco de dormir,IdleSleepNod
+IdleSleepNod,Dar cabezadas,Cabecear de sueño sin llegar a dormirse,Aceptado,,Estar acostado en la cama o en un saco de dormir,IdleSleepNod
 IdleBedExitStart,Levantarse (Cama),Levantarse de una cama,Descartado,Se requiere estar acostado en la cama,Estar acostado en la cama,ExitBed
 Idle_1stPersonWoozyGetUpFromBed,Levantarse de la cama aturdido (1ª persona),Levantarse de una cama aturdido,Descartado,"No se ejecuta con normalidad, no descubrí su condición",Estar ya haciendo esa animación,Idle_1stPersonWoozyGetUpFromBed
 IdleBedQuickExitStart,Levantarse rápido (Cama),Levantarse de una cama rapidamente,Descartado,Se requiere estar acostado en la cama,Estar acostado en la cama,BedQuickExit
@@ -217,87 +217,87 @@ IdleKneeling,Arrodillarse junto a un cadáver,Arrodillarse junto a un cadáver,D
 IdleWallCornerPeekREnter,"Asomarse por la esquina, a la derecha","Asomarse por la esquina, a la derecha",Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,IdleWallCornerPeekREnter
 IdleWallCornerPeekLEnter,"Asomarse por la esquina, a la izquierda","Asomarse por la esquina, a la izquierda",Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,IdleWallCornerPeekLEnter
 idle_A_sway_fastTrans,Balancearse,Balancearse,Descartado,,,idle_A_sway_fastTrans
-IdleChildTaunt1,Reirse (A),Burlarse a carcajadas,Aceptado,,,IdleChildTaunt1
+IdleChildTaunt1,Reirse (A),Soltar una carcajada burlona echando la cabeza atrás,Aceptado,,,IdleChildTaunt1
 IdleChildTaunt2,Reirse (B),Burlarse a carcajada y golpearse la pierna,Aceptado,,,IdleChildTaunt2
 IdleChildTaunt3,Reirse (C),Burlarse con las manos en la cintura,Aceptado,,,IdleChildTaunt3
 IdleChildTaunt4,Reirse (D),Burlarse con las manos en el estomago,Aceptado,,,IdleChildTaunt4
 IdleWarmHands,Calentarse las manos,Calentarse las manos de pie y luego de cuclillas,Aceptado,,,IdleWarmHands
 IdleWarmHandsStanding,Calentarse las manos de pie,Calentarse las manos de pie,Aceptado,,,IdleWarmHandsStanding
 IdleWarmHandsCrouched,Calentarse las manos en cuclillas,Calentarse las manos en cuclillas,Aceptado,,Estar agachado,IdleWarmHandsCrouched
-IdleWarmArms,Calentarse los brazos,Calentarse los brazos,Aceptado,,,IdleWarmArms
+IdleWarmArms,Calentarse los brazos,Frotarse los brazos para entrar en calor,Aceptado,,,IdleWarmArms
 idle_A_leg_shift,Cambiar el peso de pierna,Cambiar el peso de pierna,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,idle_A_leg_shift
 IdleValericaWalkForward,Caminar hacia delante,Caminar hacia delante,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,IdleValericaWalkForward
 idle_A_left_longTrans,Cargar el peso a la izquierda,Cargar el peso a la izquierda,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,Idle_A_left_longTrans
 OffsetArmsCrossedStart,Cruzar brazos,Cruzarse de brazos de pie,Aceptado,,Necesita llevar el objeto en las manos,IdleOffsetArmsCrossedStart
 IdleCiceroHappy,Asentir con energia,Asentir con la cabeza para dar una respuesta afirmativa,Aceptado,,,IdleCiceroHappy
-IdleChildCryingEnd,Dejar de llorar,Dejar de llorar,Aceptado,,,IdleChildCryingEnd
-IdleCowering,Encogerse de miedo,Encogerse de miedo,Aceptado,,,IdleCower
+IdleChildCryingEnd,Dejar de llorar,Serenarse y dejar de llorar poco a poco,Aceptado,,,IdleChildCryingEnd
+IdleCowering,Encogerse de miedo,Encogerse y cubrirse la cara con miedo,Aceptado,,,IdleCower
 IdleCowerEnter,Encogerse de miedo (empezar),Encogerse de miedo (empezar),Descartado,,,IdleCowerEnter
 IdleHideREnter,Esconderse a la derecha,Esconderse a la derecha,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,HideREnter
 idle_A_swat_flies,Espantar moscas,Espantar moscas,Descartado,,,idle_A_swat_flies
 idle_A_shoulders,Estirar los hombros (A),Estirar los hombros,Descartado,,,idle_A_shoulders
 idle_A_shouldersVar1,Estirar los hombros (B),Estirar los hombros (2),Descartado,,,idle_A_shouldersVar1
 IdleWalkingCameraEnd,Terminar el paseo de cámara,Fin del paseo de cámara,Descartado,,,IdleWalkingCameraEnd
-IdleCiceroAgitated,Gesticular alterado,Gesticular alterado,Aceptado,,,IdleCiceroAgitated
+IdleCiceroAgitated,Gesticular alterado,Mover mucho las manos hablando alterado,Aceptado,,,IdleCiceroAgitated
 IdleHDRight,Hacer un gesto hacia la derecha (variante HD),Hacer un gesto hacia la derecha (variante HD),Descartado,,,IdleHDRight
 IdleHHRight,Hacer un gesto hacia la derecha (variante HH),Hacer un gesto hacia la derecha (variante HH),Descartado,,,IdleHHRight
 IdleTalkAndUseItem,Hablar manejando algo,Hablar manejando algo,Descartado,,Estar en una conversación,TalkingWithItem
 IdleComeThisWay,Señalar que te sigan,Hacer señas para que te sigan,Aceptado,,,IdleComeThisWay
 IdleGrave_01,Avergonzarse (A),Inclinar la cabeza de verguenza o respeto con las manos adelante,Aceptado,,,IdleBowHeadAtGrave_01
 IdleGrave_02,Avergonzarse (B),Inclinar la cabeza de verguenza o respeto con las manos atrás,Aceptado,,,IdleBowHeadAtGrave_02
-IdleSilentBow,Presentar respeto,Inclinarse para presentar respeto,Aceptado,,Necesita un arco equipado,MQPhantomUnsummon
+IdleSilentBow,Presentar respeto,Inclinar el cuerpo despacio en señal de respeto,Aceptado,,Necesita un arco equipado,MQPhantomUnsummon
 idleDisbelief01Start,Reservarse (A),Mostrar incredulidad,Descartado,,,DLC2StornReaction1Start
 idleDisbelief02Start,Reservarse (B),Mostrar incredulidad (2),Descartado,,,DLC2StornReaction2Start
 idleFreaReactionStart,Mostrar incredulidad (A),Mostrar incredulidad (3),Descartado,,,DLC2FreaDisbeliefStart
 IdleFreaReaction2Start,Mostrar incredulidad (B),Mostrar incredulidad (4),Descartado,,,DLC2IdleFreaDisbelief2Start
 IdleChildPlayDirt,Golepar el suelo,Golpear el suelo con la mano estandoa gachado,Aceptado,,,IdleChildPlayDirt
-IdleChildPlayDoll,Jugar con una muñeca,Jugar con una muñeca,Aceptado,,,IdleChildPlayDoll
+IdleChildPlayDoll,Jugar con una muñeca,Sostener una muñeca de trapo y jugar con ella,Aceptado,,,IdleChildPlayDoll
 idle_A_soft_rightTrans,Ladearse a la derecha,Ladearse a la derecha,Descartado,,,idle_A_soft_right_trans
-IdleCleanSword,Limpiar espada,Limpiar la espada,Aceptado,,,IdleCleanSword
-IdleGetAttention,Llamar la atención,Llamar la atención,Aceptado,,,IdleGetAttention
-IdleChildCryingStart,Llorar,Empezar a llorar,Aceptado,,,IdleChildCryingStart
+IdleCleanSword,Limpiar espada,Pasar un trapo por el filo de la espada,Aceptado,,,IdleCleanSword
+IdleGetAttention,Llamar la atención,Agitar el brazo para llamar la atención de alguien,Aceptado,,,IdleGetAttention
+IdleChildCryingStart,Llorar,Taparse la cara y romper a llorar,Aceptado,,,IdleChildCryingStart
 IdleHandsBehindBack,Ponerse firme (A),Ponerse firme con las manos a la espalda,Aceptado,,,IdleHandsBehindBack
 IdlePresentSkeletonKey,Mostrar la Llave Maestra,Mostrar la Llave Maestra,Descartado,,,IdlePresentSkeletonKey
 IdleChildFidget,Esperar inquieto,Esperar inquieto moviendo los brazos,Aceptado,,,IdleChildFidget
 IdleNervous,Ponerse nervioso,"Ponerse nervioso, mirando a los lados",Aceptado,,,IdleNervous
 IdleLookFar,Mirar al horizonte,Mirar a lo lejos con la mano,Aceptado,,,IdleLookFar
 IdleWalkingCameraStart,Pasear la cámara,Paseo de cámara,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,IdleWalkingCameraStart
-IdleChildApologize,Avergonzarse (C),Avergonzarse,Aceptado,,,IdleChildApologize
-idleFreaSorrowLoopEnter,Arrodillarse de verguenza,Arrodillarse cabisbajo de verguenza,Aceptado,,,DLC2FreaSorrowEnter
+IdleChildApologize,Avergonzarse (C),Bajar la cabeza y encogerse de vergüenza,Aceptado,,,IdleChildApologize
+idleFreaSorrowLoopEnter,Arrodillarse de verguenza,"Arrodillarse cabizbajo, avergonzado ante alguien",Aceptado,,,DLC2FreaSorrowEnter
 IdleSnapToAttention,Ponerse firme (B),Ponerse firme por un instante,Aceptado,,,IdleSnapToAttention
 IdleAstridEnter,Adoptar la pose de espera,Adoptar la pose de espera,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,IdleAstrid
 IdleStaticPoseAStart,Adoptar la pose fija A,Adoptar la pose fija A,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,IdleStaticPoseA
 IdleStaticPoseBStart,Adoptar la pose fija B,Adoptar la pose fija B,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,IdleStaticPoseB
 IdleStaticPoseCStart,Adoptar la pose fija C,Adoptar la pose fija C,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,IdleStaticPoseC
 IdlePlayer,Adoptar la postura del jugador,Adoptar la postura del jugador,Descartado,,,PlayOnceThenPickNewIdle
-IdleChildWhineKick,Rabiar con patadas,Hacer una rabieta pateando,Aceptado,,,IdleChildWhineKick
-IdleChildWhineStompFeet,Patalear con rabia,hacer una rabieta pataleando,Aceptado,,,IdleChildWhineStomp
+IdleChildWhineKick,Rabiar con patadas,Patear el suelo en pleña rabieta,Aceptado,,,IdleChildWhineKick
+IdleChildWhineStompFeet,Patalear con rabia,Dar patadas al aire con rabia,Aceptado,,,IdleChildWhineStomp
 idle_A_scratch_back,Rascarse la espalda,Rascarse la espalda,Descartado,,,idle_A_scratch_back
 IdleSurrender,Rendirse,Levantar las manos para rendirse,Aceptado,,,IdleSurrender
-IdleLaugh,Reirse (E),Reírse,Aceptado,,,IdleLaugh
+IdleLaugh,Reirse (E),Reírse con ganas llevándose la mano al pecho,Aceptado,,,IdleLaugh
 idle_A_shakeout,Sacudirse,Sacudirse,Descartado,,,idle_A_shakeout
 idleDisbelief01Exit,Salir de la incredulidad (A),Salir de la incredulidad,Descartado,,Estar ya haciendo esa animación,DLC2StornReaction1Stop
 idleDisbelief02Exit,Salir de la incredulidad (B),Salir de la incredulidad (2),Descartado,,Estar ya haciendo esa animación,DLC2StornReaction2Stop
 idleFreaDisbeliefLoopStop,Salir de la incredulidad (C),Salir de la incredulidad (3),Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,Estar ya haciendo esa animación,DLC2FreaReactionStop
 IdleFreaDisbelief2LoopStop,Salir de la incredulidad (D),Salir de la incredulidad (4),Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,Estar ya haciendo esa animación,DLC2IdleFreaDisbelief2Stop
 idleFreaSorrowExit,Salir de la pena,Salir de la pena,Descartado,,Estar ya haciendo esa animación,DLC2FreaSorrowExit
-IdleWave,Saludar con la mano,Saludar sacudiendo la mano,Aceptado,,,IdleWave
+IdleWave,Saludar con la mano,Levantar el brazo y sacudir la mano saludando,Aceptado,,,IdleWave
 IdleSalute,Saludar con respeto,Saludar llevando la mano al pecho,Aceptado,,,IdleSalute
-IdleWipeBrow,Secarse la frente,Secarse la frente,Aceptado,,,IdleWipeBrow
-IdlePointFar_01,Señalar algo (A),Señalar algo medianamente lejano,Aceptado,,,IdlePointFar_01
-IdlePointFar_02,Señalar algo (B),Señalar algo lejano,Aceptado,,,IdlePointFar_02
-IdlePointClose,Señalar algo (C),Señalar algo cercano,Aceptado,,,IdlePointClose
+IdleWipeBrow,Secarse la frente,Pasarse el brazo por la frente sudada,Aceptado,,,IdleWipeBrow
+IdlePointFar_01,Señalar algo (A),Señalar con el brazo algo a media distancia,Aceptado,,,IdlePointFar_01
+IdlePointFar_02,Señalar algo (B),Estirar el brazo señalando algo lejano,Aceptado,,,IdlePointFar_02
+IdlePointClose,Señalar algo (C),Señalar con el dedo algo que tiene cerca,Aceptado,,,IdlePointClose
 idle_A_pull_pants,Subirse los pantalones,Subirse los pantalones,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,idle_A_pull_pants
 idle_A_sigh_var1Trans,Suspirar (A),Suspirar,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,idle_A_sigh_var1Trans
 idle_A_sigh_var2Trans,Suspirar (B),Suspirar (2),Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,idle_A_sigh_var2Trans
 IdleChildShy,Avergonzarse (D),Avergonzarse jugueteando con las manos,Aceptado,,,IdleChildShy
 IdleNocturnal_LookRight,Volver la mirada a la derecha,Volver la mirada a la derecha,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,IdleNocturnal_LookRight
 IdleNocturnal_LookLeft,Volver la mirada a la izquierda,Volver la mirada a la izquierda,Descartado,El juego la usa él solo mientras juegas; lanzada a mano no se ve nada o se ve mal,,IdleNocturnal_LookLeft
-IdleBracedPain,Reverenciar,Reverenciarse,Aceptado,,,IdleBracedPain
+IdleBracedPain,Reverenciar,Hacer una reverencia inclinando el cuerpo,Aceptado,,,IdleBracedPain
 IdlePrisonerBeat,Lanzar un golpe,Lanzar un golpe en seco con el puño,Aceptado,,Estar maniatado o preso,IdlePrisonerBeat
 TG05_StabPlayer,Apuñalar al jugador,Apuñalar al jugador,Descartado,"Animación usada por mercer, lider de los ladrones cuando nos drogan{",,TG05_StabPlayer
 IdleDLC02FallOnKnees,Caer de rodillas,Caer de rodillas,Descartado,Deja al personaje tirado en el suelo y hace falta Reiniciar para levantarlo,Estar ya en movimiento,IdleDLC02FallOnKnees
-BoundStandingCut,Cortar las ataduras,Cortar las ataduras,Aceptado,,Estar maniatado o preso,BoundStandingCut
+BoundStandingCut,Cortar las ataduras,Cortar las cuerdas que atan las manos,Aceptado,,Estar maniatado o preso,BoundStandingCut
 BoundStandingCutNPC,Cortarle las ataduras a alguien,Cortarle las ataduras a alguien,Aceptado,,Estar maniatado o preso,BoundStandingCutNPC
 IdleHandCut,Cortarse la mano,Cortarse la mano estando de cuclilla,Aceptado,,,IdleHandCut
 IdleBoundKneesEnterInstant,Arrodillarse atado (A),Estar de rodilla con las manos atadas en la espalda,Aceptado,,Estar maniatado o preso,IdleBoundKneesEnterInstant
@@ -308,13 +308,13 @@ Ragdoll,Desplomarse como un muñeco,Desplomarse como un muñeco,Descartado,Deja 
 IdleWebThrashShort,Forcejear en la telaraña (A),Forcejear en la telaraña,Descartado,Necesita la telaraña delante; sin ella el personaje forcejea contra el aire,,IdleWebThrashShort
 IdleWebThrashShort2,Forcejear en la telaraña (B),Forcejear en la telaraña (2),Descartado,Necesita la telaraña delante; sin ella el personaje forcejea contra el aire,,IdleWebThrashShort2
 IdleExecutionGuardIdle,Vigilar la ejecución,Guardia de la ejecución,Descartado,,,IdleExecutionerGuardEnter
-IdleInjured,Estar herido (A),Aguantarse el hombro herido,Aceptado,,,IdleInjured
+IdleInjured,Estar herido (A),Sujetarse el hombro herido con la otra mano,Aceptado,,,IdleInjured
 IdleWounded_01,Estar herido (B),Sentarse en el suelo herido,Aceptado,,,IdleWounded01EnterInstant
-IdleWounded_02,Estar herido (C),Acostarse y retorserse herido,Aceptado,,,IdleWounded02EnterInstant
-IdleWounded_03,Estar herido (D),Arrodillarse herido,Aceptado,,,IdleWounded03EnterInstant
+IdleWounded_02,Estar herido (C),Tirarse al suelo y retorcerse de dolor,Aceptado,,,IdleWounded02EnterInstant
+IdleWounded_03,Estar herido (D),Caer de rodillas sujetándose la herida,Aceptado,,,IdleWounded03EnterInstant
 TG05_GetUp,Levantarse aturdido,Levantarse aturdido,Descartado,,Estar ya haciendo esa animación,TG05_GetUp
 GetUpBegin,Levantarse del suelo,Levantarse del suelo,Descartado,Deja al personaje tirado en el suelo y hace falta Reiniciar para levantarlo,Estar ya haciendo esa animación,NPCGetUp
-OffsetBoundStandingStart,Estar atado de pie,Estar de pie atado,Aceptado,,Estar maniatado o preso,OffsetBoundStandingStart
+OffsetBoundStandingStart,Estar atado de pie,Esperar de pie con las manos atadas,Aceptado,,Estar maniatado o preso,OffsetBoundStandingStart
 DeathAnim,Morir,Morir,Descartado,Deja al personaje tirado en el suelo y hace falta Reiniciar para levantarlo,Estar muerto o abatido,DeathAnimationStart
 IdleDLC02MiraakDeath,Morir despacio,Morir despacio,Descartado,Deja al personaje tirado en el suelo y hace falta Reiniciar para levantarlo,Estar muerto o abatido,IdleDLC02MiraakDeathStart
 MS12BedDeath,Morir en la cama,Morir en la cama,Descartado,Deja al personaje tirado en el suelo y hace falta Reiniciar para levantarlo,Estar muerto o abatido,MS12BedDeath
@@ -339,7 +339,7 @@ IdleFurnitureExitTriggered,Salir del mueble (forzado),Salir del mueble (forzado)
 IdleWebExit,Soltarse de la telaraña,Soltarse de la telaraña,Descartado,Necesita la telaraña delante; sin ella el personaje forcejea contra el aire,Estar ya haciendo esa animación,WebIdleExit
 IdleWebExitQuickTurn,Soltarse de la telaraña y girarse,Soltarse de la telaraña y girarse,Descartado,Necesita la telaraña delante; sin ella el personaje forcejea contra el aire,,WebIdleExitQuickTurn
 IdleDLC02MiraakDeathFinish,Terminar de morir despacio,Terminar de morir despacio,Descartado,Deja al personaje tirado en el suelo y hace falta Reiniciar para levantarlo,Estar muerto o abatido,IdleDLC02MiraakDeathFinish
-IdleUncontrollableCough,Toser,Toser incontrolablemente,Aceptado,,,IdleUncontrollableCough
+IdleUncontrollableCough,Toser,Toser con fuerza sin poder parar,Aceptado,,,IdleUncontrollableCough
 IdleMQ203EsbernBookEnter,Entregar libro,Buscar en todo el cuerpo y entregar un libro,Aceptado,,,IdleMQ203EsbernBookEnter
 IdleStudy,Pensar,Ponerse la mano en la barbilla para pensar,Aceptado,,,IdleStudy
 IdleReadElderScroll,Leer el Pergamino Ancestral,Leer el Pergamino Ancestral,Descartado,,,IdleReadElderScroll
@@ -382,26 +382,26 @@ IdleMesmerizeStop,Dejar de hipnotizar,Dejar de hipnotizar. Forma parte de lanzar
 IdleNocturnal_Exit,Desaparecer,Desaparecer. Forma parte de lanzar hechizos,Descartado,,Estar ya haciendo esa animación,IdleNocturnalExit
 IdleTelvanniTowerFloatDown,Descender flotando,Descender flotando. Forma parte de lanzar hechizos,Descartado,,,IdleTelvanniTowerFloatDownEnter
 IdleRitualStart,Empezar un ritual,Empezar un ritual abriendo brazos y mirando hacia arriba,Aceptado,,,IdleRitualStart
-IdleGreybeardWordTeach,Entregar algo (A),Entregar algo acercandose,Aceptado,,,IdleGreybeardWordTeach
+IdleGreybeardWordTeach,Entregar algo (A),Acercarse y entregar algo con las dos manos,Aceptado,,,IdleGreybeardWordTeach
 IdleDLC1BossExplosion1stP,Explosión (1ª persona),Explosión (1ª persona). Forma parte de lanzar hechizos,Descartado,"Es un efecto de guion, no una pose: mueve o cambia al personaje y lo deja donde no debe",,IdleDLC1BossExplosion1stP
 pa_ExtractWerewolfSpirit,Extraer un espíritu,Volverse loco y caer al suelo porque te extraen algo,Aceptado,,"Necesita un arma desenvainada, de cualquier tipo",pa_ExtractWerewolfSpirit
 IdleMagic_01,Mover brazo,Mover el brazo para alardear,Aceptado,,,IdleMagic_01
 IdleDLC02TentacleWordBurnBegin,Grabar la Palabra (empezar),Grabar la Palabra (empezar). Forma parte de lanzar hechizos,Descartado,,,IdleDLC02TentacleWordBurnBegin
 IdleDLC02TentacleWordBurnEnd,Grabar la Palabra (terminar),Grabar la Palabra (terminar). Forma parte de lanzar hechizos,Descartado,,,IdleDLC02TentacleWordBurnEnd
 IdleSnowElfPrinceBigSpell,Gran hechizo,Gran hechizo. Forma parte de lanzar hechizos,Descartado,,Necesita un hechizo preparado en la mano,IdleSnowElfPrinceBigSpell
-IdleMesmerize,Tambalear (B),Tambalear todo el cuerpo,Aceptado,,,IdleMesmerize
+IdleMesmerize,Tambalear (B),Tambalearse de lado a lado sin caerse,Aceptado,,,IdleMesmerize
 IdleSnowElfPrinceFireAndForget,Lanzar un hechizo sentado,Lanzar un hechizo sentado. Forma parte de lanzar hechizos,Descartado,,Estar delante de la mesa de trabajo,IdleSnowElfPrinceChairFireAndForget
 IdleGreybeardMeditateEnter,Meditar,Meditar arrodillado (pose de brazos variable),Aceptado,,,IdleGreybeardMeditateEnter
 IdleNocturnal_IdleA,Adoptar la pose solemne (A),Adoptar la pose solemne. Forma parte de lanzar hechizos,Descartado,,,IdleNocturnal_IdleA
 IdleNocturnal_IdleB,Adoptar la pose solemne (B),Adoptar la pose solemne (2). Forma parte de lanzar hechizos,Descartado,,,IdleNocturnal_IdleB
 IdleNocturnal_IdleAMirror,Adoptar la pose solemne (reflejada),Adoptar la pose solemne (reflejada). Forma parte de lanzar hechizos,Descartado,,,IdleNocturnal_IdleAMirror
-IdleWayShrineWaterScoopEnter,Rellenar jarra decorada,Rellenar una jarra blanca decorada,Descartado,,Estar delante de un altar o un santuario,IdleWayShrineWaterScoop
+IdleWayShrineWaterScoopEnter,Rellenar jarra decorada,Rellenar una jarra blanca decorada,Aceptado,,Estar delante de un altar o un santuario,IdleWayShrineWaterScoop
 IdlePray,Rezar,Levantar los brazos en forma de rezo,Aceptado,,,IdlePray
-IdlePrayCrouchedEnter,Rezar en cuclillas,Arrodillarse para rezar,Aceptado,,Estar agachado,IdleCrouchedPrayEnter
+IdlePrayCrouchedEnter,Rezar en cuclillas,Ponerse en cuclillas y rezar en silencio,Aceptado,,Estar agachado,IdleCrouchedPrayEnter
 IdleBoyRitual,Golpear el suelo,Golpear el suelo con la mano estando agachado triste,Aceptado,,,IdleBoyRitual
 IdleRitualSkull1,Abrir brazos (B),Abrir los brazos mirando al cielo,Descartado,,,IdleRitualSkull1
 IdleRitualSkull2,Mover los brazos,Mover los brazos por todos lados para quedar con los brazos abiertos,Descartado,,,IdleRitualSkull2
-IdleRitualSkull3,Quejarse,Quejarse moviendo los brazos,Aceptado,,,IdleRitualSkull3
+IdleRitualSkull3,Quejarse,Quejarse en voz alta moviendo los brazos,Aceptado,,,IdleRitualSkull3
 IdleMQ206FelldirRitualEnter,Leer pergamino antiguo,Leer un pergamino antiguo con los brazos en alto,Aceptado,,,IdleMQ206FelldirRitualEnter
 IdleSnowElfPrinceBigSpellRelease,Soltar el gran hechizo,Soltar el gran hechizo. Forma parte de lanzar hechizos,Descartado,,Necesita un hechizo preparado en la mano,IdleSnowElfPrinceBigSpellRelease
 IdleWerewolfTransformation,Transformarse (A),Transformarse. Forma parte de lanzar hechizos,Descartado,"Es un efecto de guion, no una pose: mueve o cambia al personaje y lo deja donde no debe",,IdleWerewolfTransformation
@@ -416,28 +416,28 @@ HorseEnter,Montar a caballo,Montarse en un caballo,Descartado,,Estar montado en 
 DragonMountEnter,Montar en el dragón,Montarse en un dragón,Descartado,,Estar montado en un dragón,DragonMount
 MountedSwimStart,Nadar montado,Nadar mientras estás montado,Descartado,,Estar montado en un caballo,MountedSwimStart
 MountedStaggerStart,Retroceder por golpe (Montado),Retroceder al ser golpeado mientras vas montado,Descartado,,Estar montado en un caballo,MountedStaggerStart
-IdleApplaud2,Aplaudir (A),Aplaudir,Aceptado,,,IdleApplaud2
-IdleApplaud3,Aplaudir (B),Aplaudir lentamente,Aceptado,,,IdleApplaud3
-IdleApplaud4,Aplaudir (C),Aplaudir con gran emoción,Aceptado,,,IdleApplaud4
+IdleApplaud2,Aplaudir (A),Aplaudir con un ritmo normal,Aceptado,,,IdleApplaud2
+IdleApplaud3,Aplaudir (B),"Aplaudir despacio, con las manos separadas",Aceptado,,,IdleApplaud3
+IdleApplaud4,Aplaudir (C),Aplaudir deprisa y con mucha emoción,Aceptado,,,IdleApplaud4
 IdleApplaud5,Aplaudir (D),Aplaudir con las manos arriba,Aceptado,,,IdleApplaud5
-IdleApplaudSarcastic,Aplaudir (E),Aplaudir sin gracia,Aceptado,,,IdleApplaudSarcastic
-IdleCiceroDance1,Bailar (A),Baile,Aceptado,,,IdleCiceroDance1
-IdleCiceroDance2,Bailar (B),Baile,Aceptado,,,IdleCiceroDance2
-IdleCiceroDance3,Bailar (C),Baile,Aceptado,,,IdleCiceroDance3
-SpectatorClap,Celebrar (A),Celebrar con los brazos,Aceptado,,,SpectatorClap
-SpectatorTalking,Celebrar (B),Celebrar con los brazos,Aceptado,,Estar en una conversación,SpectatorTalkFailSafe
-SpectatorGawk,Celebrar (C),Celebrar con los brazos,Aceptado,,,SpectatorGawk
-SpectatorCheer,Celebrar (D),Celebrar con los brazos,Aceptado,,,SpectatorCheer
+IdleApplaudSarcastic,Aplaudir (E),"Aplaudir sin ganas, con poca fuerza",Aceptado,,,IdleApplaudSarcastic
+IdleCiceroDance1,Bailar (A),Bailar dando vueltas con los brazos sueltos,Aceptado,,,IdleCiceroDance1
+IdleCiceroDance2,Bailar (B),Bailar moviendo los hombros y los pies,Aceptado,,,IdleCiceroDance2
+IdleCiceroDance3,Bailar (C),Bailar saltando de un pie a otro,Aceptado,,,IdleCiceroDance3
+SpectatorClap,Celebrar (A),Levantar los dos brazos celebrando algo,Aceptado,,,SpectatorClap
+SpectatorTalking,Celebrar (B),Alzar los brazos y celebrar con fuerza,Aceptado,,Estar en una conversación,SpectatorTalkFailSafe
+SpectatorGawk,Celebrar (C),Abrir los brazos celebrando hacia los lados,Aceptado,,,SpectatorGawk
+SpectatorCheer,Celebrar (D),Celebrar levantando los puños al aire,Aceptado,,,SpectatorCheer
 IdleBlowHornStormcloak,Tocar cuerno tallado,Tocar el cuerno de una cabra tallada,Aceptado,,,IdleBlowHornStormcloak
 IdleBlowHornImperial,Tocar cuerno metalico,Tocar el cuerno metalico largo,Aceptado,,,IdleBlowHornImperial
-IdleLuteStart,Tocar el laúd,Tocar el laúd,Aceptado,,,IdleLuteStart
-IdleDrumStart,Tocar el tambor,Tocar el tambor,Aceptado,,,IdleDrumStart
-IdleFluteStart,Tocar la flauta,Tocar la flauta,Aceptado,,,IdleFluteStart
-IdleCivilWarCheer,Celebrar (E),Celebrar con los brazos,Aceptado,,,IdleCivilWarCheer
+IdleLuteStart,Tocar el laúd,Sacar un laúd y tocarlo de pie,Aceptado,,,IdleLuteStart
+IdleDrumStart,Tocar el tambor,Sostener un tambor y golpearlo con la mano,Aceptado,,,IdleDrumStart
+IdleFluteStart,Tocar la flauta,Llevarse una flauta a la boca y tocar,Aceptado,,,IdleFluteStart
+IdleCivilWarCheer,Celebrar (E),Celebrar agitando los dos brazos en alto,Aceptado,,,IdleCivilWarCheer
 IdleActivateCoffinPuzzle,Accionar el cuenco del ataúd,Accionar botón con pincho del ataúd,Descartado,Animación usada para el botón con pincho de Serana,Estar dentro de un ataúd,DLC1CoffinPuzzleBowlIdle
 Lever_PlayerPush,Accionar una palanca,Accionar palanca,Descartado,No se ejecuta sin una palanca cercana,,IdleLeverPush_Player
 IdleSharpeningWheelStart,Afilar arma,Sentarse a afilar el arma,Descartado,Animación usada para afilar en la peidra de afilar de las herrerias,,IdleSharpeningWheelStart
-IdleTake,Agarrar algo,Agarrar algo,Aceptado,,,IdleTake
+IdleTake,Agarrar algo,Estirar el brazo y agarrar algo cercano,Aceptado,,,IdleTake
 IdleHoe,Arar suelo,Arar el suelo con una azada,Aceptado,,,IdleHoe
 IdleCartDriverExit,Bajarse de la carreta,Bajarse de la carreta,Descartado,,Estar subido en el carro,IdleCartDriverExit
 idleLooseSweepingStart,Barrer,Barrer el suelo con una escoba,Aceptado,,,IdleLooseSweepingStart
@@ -445,20 +445,20 @@ IdleChiselStandingEnter,Cincelar de pie,Cincelar con martillo y cincel hacia ade
 IdleChiselKneelingEnter,Cincelar de rodillas,Cincelar con martillo y cincel en el suelo,Aceptado,,,IdleChiselKneelingEnter
 IdleCraftingCookingPotTalkA,Cocinar y hablar (A),Hablar mientras cocinas en el cookingpot,Descartado,,Estar delante de la mesa de trabajo,IdleCraftingCookingPotTalkA
 IdleCraftingCookingPotTalkB,Cocinar y hablar (B),Hablar mientras cocinas en el cookingpot,Descartado,,Estar delante de la mesa de trabajo,IdleCraftingCookingPotTalkB
-IdleWoodChopStart,Cortar leña,Cortar leña,Aceptado,,,IdleWoodChopStart
-IdleFeedChicken,Lanzar flores,Lanzar flores del cesto,Aceptado,,,IdleFeedChickens
-IdlewoodputdownEnter,Dejar la leña,Dejar la leña,Aceptado,,,IdlewoodputdownEnter
-IdleStonePutDownEnter,Dejar una piedra,Dejar una piedra,Aceptado,,Necesita llevar el objeto en las manos,IdleStonePutDownEnter
+IdleWoodChopStart,Cortar leña,Partir leña a hachazos sobre el tocón,Aceptado,,,IdleWoodChopStart
+IdleFeedChicken,Lanzar flores,Sacar flores del cesto y lanzarlas al aire,Aceptado,,,IdleFeedChickens
+IdlewoodputdownEnter,Dejar la leña,Agacharse y dejar la leña en el suelo,Aceptado,,,IdlewoodputdownEnter
+IdleStonePutDownEnter,Dejar una piedra,Agacharse y dejar una piedra en el suelo,Aceptado,,Necesita llevar el objeto en las manos,IdleStonePutDownEnter
 IdleCraftingCookingPotAddIngredient,Echar un ingrediente a la olla,Echar un ingrediente a la olla,Descartado,,Estar delante de la mesa de trabajo,IdleCraftingCookingPotAddIngredient
 IdleLightSconce,Encender una antorcha de pared,Encender una antorcha de pared,Descartado,,,IdleLightSconceEnter
-IdleGive,Entregar algo (B),Entregar algo,Aceptado,,,IdleGive
-IdleGiveMQ105Horn,Entregar cuerno tallado,Entregar un cuerno tallado,Aceptado,,,IdleGiveMQ105Horn
+IdleGive,Entregar algo (B),Tender el brazo para entregar algo,Aceptado,,,IdleGive
+IdleGiveMQ105Horn,Entregar cuerno tallado,Ofrecer un cuerno tallado con las dos manos,Aceptado,,,IdleGiveMQ105Horn
 IdleWriteTableStandingEnter,Escribir de pie en la mesa,Escribir de pie en la mesa,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de la mesa de trabajo,IdleWriteTableStandingEnter
-IdleWriteLedgerEnter,Escribir en el registro,Escribir en el registro,Aceptado,,,IdleWriteLedgerEnter
+IdleWriteLedgerEnter,Escribir en el registro,Escribir en un libro de cuentas abierto,Aceptado,,,IdleWriteLedgerEnter
 IdleWriteLedgerWrite,Escribir en el registro (escribiendo),Escribir en el registro (escribiendo),Descartado,,,IdleWriteLedgerWrite
 IdleChairWrite,Escribir sentado,Escribir en un libro mientras estás sentado en una silla,Aceptado,,"Estar sentado en una silla, banco o taburete",IdleChairWrite
-IdleExamine,Observar,Observar algo detenidamente,Aceptado,,,IdleExamine
-IdleLockPick,Forzar una cerradura,Forzar una cerradura,Aceptado,,,IdleLockPick
+IdleExamine,Observar,Quedarse quieto observando algo con atención,Aceptado,,,IdleExamine
+IdleLockPick,Forzar una cerradura,Agacharse a forzar una cerradura con ganzúa,Aceptado,,,IdleLockPick
 IdleDLC02BoatRide,Ir en barca,Ir en barca,Descartado,"Es un efecto de guion, no una pose: mueve o cambia al personaje y lo deja donde no debe",,IdleDLC02BoatRide
 IdleWriteTableChairRightExit,Levantarse del escritorio por la derecha,Levantarse del escritorio por la derecha,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar sentado en una silla,IdleWriteTableChairExitRight
 IdleWriteTableChairLeftExit,Levantarse del escritorio por la izquierda,Levantarse del escritorio por la izquierda,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar sentado en una silla,IdleWriteTableChairExitLeft
@@ -469,29 +469,29 @@ OffsetFlowerBasketStart,Llevar cesto de flores,Llevar un cesto lleno de flores,A
 OffsetCarryBasketStart,Llevar un cesto,Llevar un cesto,Descartado,,Necesita llevar el objeto en las manos,OffsetCarryBasketStart
 OffsetCarryMQ201DrinkTray,Llevar una bandeja de bebidas,Llevar una bandeja de bebidas,Aceptado,,Necesita llevar el objeto en las manos,OffsetCarryMQ201DrinkTray
 OffsetCarryMQ201DrinkR,Llevar una copa en la mano,Llevar una copa en la mano,Aceptado,,Necesita llevar el objeto en las manos,OffsetCarryMQ201DrinkR
-OffsetCarryPotStart,Llevar una olla,Llevar una olla,Aceptado,,Necesita llevar el objeto en las manos,OffsetCarryPotStart
-IdleDwemerExtractorEnter,Inyectarse extractor,Inyectarse extractor enano,Aceptado,Animación usada del extractor de sangres de maximo,,IdleDwemerExtractor
-IdlePickaxeEnter,Picar con el pico (A),Picar con el pico,Aceptado,,,IdlePickaxeEnter
+OffsetCarryPotStart,Llevar una olla,Cargar una olla grande con las dos manos,Aceptado,,Necesita llevar el objeto en las manos,OffsetCarryPotStart
+IdleDwemerExtractorEnter,Inyectarse extractor,Clavarse un extractor enano en el brazo,Aceptado,Animación usada del extractor de sangres de maximo,,IdleDwemerExtractor
+IdlePickaxeEnter,Picar con el pico (A),Golpear la roca con un pico,Aceptado,,,IdlePickaxeEnter
 IdleWriteLedgerChargenEnter,Ponerse a escribir en el registro,Ponerse a escribir en el registro,Descartado,,,IdleHadvarWriteLedgerEnter
 IdleCounterStart,Antender barra,Ponerse a atender la barra,Aceptado,,Estar en el mostrador o el mostrador,IdleCounterStart
-IdleSearchingChest,Rebuscar en el suelo,Rebuscar en el cofre,Aceptado,,,IdleSearchingChest
-IdleSearchingTable,Rebuscar en la mesa (A),Rebuscar en la mesa,Aceptado,,Estar delante de la mesa de trabajo,IdleSearchingTable
+IdleSearchingChest,Rebuscar en el suelo,Agacharse a rebuscar dentro de un cofre,Aceptado,,,IdleSearchingChest
+IdleSearchingTable,Rebuscar en la mesa (A),Revolver lo que hay sobre la mesa,Aceptado,,Estar delante de la mesa de trabajo,IdleSearchingTable
 IdleSearchTableEnter,Rebuscar en la mesa (B),Rebuscar en la mesa,Descartado,,Estar delante de la mesa de trabajo,IdleSearchTableEnter
 IdleSearchChestEnter,Rebuscar en un cofre,Rebuscar en un cofre,Descartado,,,IdleSearchChestEnter
-IdleActivatePickUp,Recoger algo,Recoger algo de pie,Aceptado,,Necesita llevar el objeto en las manos,IdleActivatePickUpDUPLICATE000
-IdlePickup_Ground,Recoger algo del suelo (A),Recoger algo del suelo,Aceptado,,,IdlePickup_Ground
+IdleActivatePickUp,Recoger algo,Recoger algo sin llegar a agacharse,Aceptado,,Necesita llevar el objeto en las manos,IdleActivatePickUpDUPLICATE000
+IdlePickup_Ground,Recoger algo del suelo (A),Agacharse a recoger algo del suelo,Aceptado,,,IdlePickup_Ground
 OffsetCarryFlowerBasketPickStart,Recoger flores en el cesto,Recoger flores para colocar en el cesto,Aceptado,,Necesita llevar el objeto en las manos,OffsetCarryFlowerBasketPickStart
-IdleWoodPickUpEnter,Recoger leña,Recoger leña del suelo,Aceptado,,Necesita llevar el objeto en las manos,IdleWoodPickUpExit
-IdleRFPickUpScroll,Recoger algo del suelo (C),Recoger algo del suelo,Aceptado,,Necesita llevar el objeto en las manos,IdleRFPickUpScroll
+IdleWoodPickUpEnter,Recoger leña,Agacharse a recoger leña del suelo,Aceptado,,Necesita llevar el objeto en las manos,IdleWoodPickUpExit
+IdleRFPickUpScroll,Recoger algo del suelo (C),Ponerse de rodillas para recoger algo del suelo,Aceptado,,Necesita llevar el objeto en las manos,IdleRFPickUpScroll
 IdleStonePickUpEnter,Recoger piedra,Recoger una piedra del suelo,Aceptado,,Necesita llevar el objeto en las manos,IdleStonePickUpExit
 IdleWriteTableChairRightEnter,Sentarse a escribir por la derecha,Sentarse a escribir por la derecha,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando","Estar sentado en una silla, banco o taburete",IdleWriteTableChairEnterRight
 IdleWriteTableChairLeftEnter,Sentarse a escribir por la izquierda,Sentarse a escribir por la izquierda,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando","Estar sentado en una silla, banco o taburete",IdleWriteTableChairEnterLeft
-IdleOffsetCarryPotServe,Servir de la olla,Servir de la olla,Aceptado,,Necesita llevar el objeto en las manos,IdleOffsetCarryPotServe
+IdleOffsetCarryPotServe,Servir de la olla,Servir con un cucharón de la olla,Aceptado,,Necesita llevar el objeto en las manos,IdleOffsetCarryPotServe
 IdleCartTravelPlayerEnter,Subirse al carro,Subirse al carro,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar subido en el carro,IdleCartTravelPlayerEnter
 IdleCartTravelDriverEnter,Subirse al pescante,Subirse al pescante,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar subido en el carro,IdleCartTravelDriverEnter
-IdlePullChain,Tirar de algo,Tirar de algo adelante,Aceptado,,,IdlePullChainEnter
-IdleBlackSmithingEnterStart,Trabajar en la forja,Trabajar en la forja,Aceptado,,Estar delante de la mesa de trabajo,BlackSmithingEnter
-IdleSell,Mostrar poción,Mostrar una posicón grande,Aceptado,,,IdleSell
+IdlePullChain,Tirar de algo,Tirar de algo pesado hacia delante,Aceptado,,,IdlePullChainEnter
+IdleBlackSmithingEnterStart,Trabajar en la forja,Golpear el hierro al rojo en la forja,Aceptado,,Estar delante de la mesa de trabajo,BlackSmithingEnter
+IdleSell,Mostrar poción,Levantar una poción grande para enseñarla,Aceptado,,,IdleSell
 pa_OffsetBoundStandingCut,Cortar las ataduras (A ti),Cortarse las ataduras de las manos por alguien más (hace un pequeño movimiento de manos como que alguien le corta la atadura de las manos),Descartado,Posible transición entre estar atado y quitar ataduras (usada en helguen cuando te cortan las ataduras),"Necesita un arma desenvainada, de cualquier tipo",pa_OffsetBoundStandingCut
 ExecutionNextClip,Ejecución: siguiente parte,Siguiente paso de la animación de ejecución,Descartado,"Animación usada en las ejecuciones publicas, no funciona si no está scripteado el corte de cabeza de otro pj",,00NextClip
 pa_KillingBlow,Golpe de gracia,Tomar su espada de una mano y la clava rematando,Descartado,"Remata con el arma equipada hacia el suelo, junta sus dos manos y hace el Rematar en el suelo.","Necesita un arma desenvainada, de cualquier tipo",KillingBlowBleedOut00
@@ -587,8 +587,8 @@ IdleWallLeanStart,Apoyarse en la pared,Voltear y te apoyas con brazos cruzados,A
 IdleChildSitOnKnees,Arrodillarse,Sentarse sobre las rodillas y hace un pequeño balanceo,Aceptado,,,ChildSitOnKneesEnter
 idleChairArmsCrossedVar1,Cruzar los brazos (Sentado) (A),Cruzar los brazos mientras estás sentado en una silla,Aceptado,Necesita estar sentado en silla para ejecutarse,"Estar sentado en una silla, banco o taburete",SittingChairArmsCrossedVar1
 idleChairArmsCrossedVar2,Cruzar los brazos (Sentado) (B),Cruzar los brazos mientras estás sentado en una silla,Aceptado,Necesita estar sentado en silla para ejecutarse,"Estar sentado en una silla, banco o taburete",SittingChairArmsCrossedVar2
-IdleChairVar1,Cambiar de pose (Sentado) (A),Pose de estar centado,Aceptado,Necesita estar sentado en silla para ejecutarse,"Estar sentado en una silla, banco o taburete",SittingChairVar1
-idleChairVar2,Cambiar de pose (Sentado) (B),Pose de estar centado,Aceptado,Necesita estar sentado en silla para ejecutarse,"Estar sentado en una silla, banco o taburete",SittingChairVar2
+IdleChairVar1,Cambiar de pose (Sentado) (A),Cambiar de postura estando sentado,Aceptado,Necesita estar sentado en silla para ejecutarse,"Estar sentado en una silla, banco o taburete",SittingChairVar1
+idleChairVar2,Cambiar de pose (Sentado) (B),Acomodarse en el asiento cambiando de postura,Aceptado,Necesita estar sentado en silla para ejecutarse,"Estar sentado en una silla, banco o taburete",SittingChairVar2
 IdleRailLeanExit,Dejar de apoyarse en la baranda,Retroceder un poco y sale de apoyate en la baranda,Revisión,Animación de salida de IdleRailLeanEnter,Estar en el mueble o la mesa de trabajo,RailLeanExit
 IdleLounge_Exit,Dejar de repantigarse,Bajarse de mueble alto,Descartado,Animación  de salida de IdleLounge. Animación usada por astrid en la cabaña abandonada,Estar ya haciendo esa animación,IdleShelfExit
 IdleWallSoldierEnter,Esperar atento,Quedarse quieto esperando con diferentes poses intercaladas,Aceptado,Se ejecuta y pone la espalda hacia donde estemos mirando,,IdleSoldierWallEnter
@@ -610,8 +610,8 @@ IdleStoolEnter,Sentarse en el taburete,Sentarse en taburete de bar,Descartado,Se
 IdleJarlChairEnter,Sentarse en el trono del jarl,Sentarse en trono de jarl,Descartado,,"Estar sentado en una silla, banco o taburete",IdleJarlChairEnter
 IdleChairRightEnter,Sentarse por la derecha,Sentarse por la derecha en silla,Descartado,,"Estar sentado en una silla, banco o taburete",EnterChairRight
 IdleChairLeftEnter,Sentarse por la izquierda,Sentarse por la izquierda en silla,Descartado,,"Estar sentado en una silla, banco o taburete",EnterChairLeft
-IdleActivateDoor,Abrir una puerta,Abrir una puerta,Aceptado,,,activateDoor
-IdleLayDownEnter,Acostarse en el suelo,Acostarse en el suelo,Aceptado,,,IdleLayDownEnter
+IdleActivateDoor,Abrir una puerta,Empujar una puerta para abrirla,Aceptado,,,activateDoor
+IdleLayDownEnter,Acostarse en el suelo,Tumbarse en el suelo boca arriba,Aceptado,,,IdleLayDownEnter
 DualMagic_WardStart,Alzar una protección con las dos manos,Alzar una protección con las dos manos. Forma parte de lanzar hechizos,Descartado,"De jugabilidad: el jugador ya la hace con los controles del juego, no hace falta un menú para esto",Necesita un hechizo preparado en las dos manos,CastDualMagicWard
 IdleLeanTableEnter,Apoyarse en la mesa,Apoyarse en la mesa,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",Estar delante de la mesa de trabajo,IdleLeanTableEnter
 IdleBoundKneesStart,Arrodillarse atado (B),Arrodillarse estando atado de manos,Aceptado,,Estar maniatado o preso,IdleBoundKneesStart
@@ -646,7 +646,7 @@ StrafeStartRight,Empezar a moverse de lado a la derecha,Empezar a moverse de lad
 StrafeStartLeft,Empezar a moverse de lado a la izquierda,Empezar a moverse de lado a la izquierda. Es parte del movimiento normal del personaje,Descartado,"De jugabilidad: el jugador ya la hace con los controles del juego, no hace falta un menú para esto",Estar ya en movimiento,RiderStrafeStartLeft
 StrafeStartTrotRight,Empezar a trotar de lado a la derecha,Empezar a trotar de lado a la derecha. Es parte del movimiento normal del personaje,Descartado,"De jugabilidad: el jugador ya la hace con los controles del juego, no hace falta un menú para esto",Estar ya en movimiento,RiderTrotForwardToTrotRight
 StrafeStartTrotLeft,Empezar a trotar de lado a la izquierda,Empezar a trotar de lado a la izquierda. Es parte del movimiento normal del personaje,Descartado,"De jugabilidad: el jugador ya la hace con los controles del juego, no hace falta un menú para esto",Estar ya en movimiento,RiderTrotForwardToTrotLeft
-IdleLeverPushStart,Empujar una palanca,Empujar una palanca,Aceptado,,,IdleLeverPushStart
+IdleLeverPushStart,Empujar una palanca,Empujar una palanca con las dos manos,Aceptado,,,IdleLeverPushStart
 IdleHideLEnter,Esconderse contra la pared,Esconderse contra la pared,Descartado,,,HideLEnter
 IdleExecutioneeIdle,Esperar atado,Esperar estando de pie atado de manos,Aceptado,,,IdleExecutioneeIdle
 IdleExecutionerIdle,Esperar a ejecutar,Esperar con un hacha de ejecución preparado para ejecutar,Aceptado,,,IdleExecutionerIdle
@@ -734,5 +734,5 @@ IdleSnowElfPrinceChairEnter,Sentarse en el trono élfico,Sentarse en el trono é
 IdleSitLedgeEnter,Sentarse en el borde,Sentarse en un borde con las piernas colgando,Aceptado,,"Estar sentado en una silla, banco o taburete",IdleSitLedgeEnter
 SpellRelease,Soltar el hechizo,Soltar el hechizo. Forma parte de lanzar hechizos,Descartado,"De jugabilidad: el jugador ya la hace con los controles del juego, no hace falta un menú para esto",Necesita un hechizo preparado en la mano,FalmerReleaseLeft
 IdleLadderEnter,Subir por una escalera,Subir por una escalera,Descartado,"Depende de un mueble: es entrar o salir de él, y sin el mueble delante el jugador aparece flotando",,IdleLadderEnter
-IdleCarryBucketPourEnter,Vaciar una cubeta,Vaciar una cubeta,Aceptado,Se requiere de la cubeta en las manos,Necesita llevar el objeto en las manos,IdleCarryBucketPourEnter
+IdleCarryBucketPourEnter,Vaciar una cubeta,Volcar una cubeta para vaciarla,Aceptado,Se requiere de la cubeta en las manos,Necesita llevar el objeto en las manos,IdleCarryBucketPourEnter
 IdleWayShrineWaterPourEnter,Verter con jarra decorada,Verter agua en el santuario. Forma parte de lanzar hechizos,Aceptado,,Estar delante de un altar o un santuario,IdleWayShrineWaterPour

@@ -326,13 +326,19 @@ app.whenReady().then(async () => {
     const f = document.querySelector('#animplayer .ap-ficha');
     if (!f || !f.classList.contains('ap-puesta')) return null;
     return { nombre: f.querySelector('b').textContent,
-             id: f.querySelector('i').textContent,
+             id: f.querySelector('i') ? f.querySelector('i').textContent : null,
              raya: !!f.querySelector('hr'),
-             texto: f.querySelector('p').textContent };
+             texto: f.querySelector('p').textContent,
+             todo: f.textContent };
   })()`);
-  comprobar(laFicha && laFicha.nombre && laFicha.id,
-            'al pasar el raton sale la ficha, con nombre e id',
-            laFicha && laFicha.nombre + ' / ' + laFicha.id);
+  comprobar(laFicha && laFicha.nombre,
+            'al pasar el raton sale la ficha, con el nombre',
+            laFicha && laFicha.nombre);
+  /* Y SIN el id: es dato tecnico y quien juega no tiene por que verlo. */
+  comprobar(laFicha && laFicha.id === null &&
+            !/bleedOutStart/.test(laFicha.todo),
+            'y sin el id por ningun lado',
+            laFicha && laFicha.todo.slice(0, 60));
   comprobar(laFicha && laFicha.raya && laFicha.texto.length > 0,
             'y debajo de una raya, la descripcion',
             laFicha && laFicha.texto.slice(0, 60));
@@ -345,9 +351,16 @@ app.whenReady().then(async () => {
     .filter((a) => !a.descripcion);
   comprobar(sinTexto.length === 0, 'todas las animaciones traen descripcion',
             sinTexto.length + ' sin ella');
-  /* El id ya no se ve en el renglon: ocupaba un tercio y se cortaba. */
   comprobar(!(await js(`!!document.querySelector('#animplayer .ap-fila .ap-evento')`)),
-            'y el id no se repite en la lista: solo esta en la ficha');
+            'ni en el renglon de la lista');
+  /* Ni de ejemplo en el texto gris del buscador, donde antes ponia
+     "rezar, IdleWave...". Ni la pista de #hidden, que si es una puerta de
+     servicio no lleva cartel. */
+  const pista = await js(
+    `document.querySelector('#animplayer .ap-buscar').placeholder`);
+  comprobar(!/Idle|hidden/i.test(pista), 'ni en el texto del buscador', pista);
+  /* Que buscar por id sigue funcionando se comprueba mas abajo, en la
+     prueba del buscador: no se anuncia, pero no se quita. */
   await captura('2-abierto');
 
   console.log('\n=== si SkyMP le quita el foco al navegador, se cierra ===');
@@ -510,7 +523,10 @@ app.whenReady().then(async () => {
   await captura('4-favorito');
   const chip = await js(`(() => { const c = document.querySelector('#animplayer .ap-chip[data-cat="favoritos"]');
     return c ? c.textContent.trim() : null; })()`);
-  comprobar(!!chip && /1/.test(chip), 'aparece la categoria Favoritos con su cuenta', chip);
+  comprobar(!!chip && /Favoritos/.test(chip),
+            'aparece la categoria Favoritos', chip);
+  /* Y SIN numero: las cuentas por categoria son de inventario, no de uso. */
+  comprobar(!!chip && !/\d/.test(chip), 'y sin cuenta al lado', chip);
 
   await js(`document.querySelector('#animplayer .ap-chip[data-cat="favoritos"]').click()`);
   await esperar(160);
@@ -942,16 +958,15 @@ app.whenReady().then(async () => {
   await js(`document.querySelector('#animplayer .ap-chip[data-cat="todas"]').click()`);
   await esperar(200);
   const todasLasFilas = await js(`document.querySelectorAll('#animplayer .ap-fila').length`);
-  /* Ya no se mira cuantos renglones hay pintados —la lista va por tandas y
-     empieza por 60— sino lo que dice que hay. El tope va holgado a proposito:
-     el catalogo adelgaza cada vez que se limpia (las "al instante", las de
-     nino, los remates contra bichos), y la prueba no tiene por que romperse
-     por eso. Lo que importa es que sean todas y no solo las recomendadas. */
-  const cuantasDice = await js(
-    `document.querySelector('#animplayer .ap-donde').textContent`);
-  comprobar(parseInt(String(cuantasDice).replace(/\D+/g, ''), 10) > 200,
-            'y al pulsarla sale el catalogo entero',
-            cuantasDice + ' / ' + todasLasFilas + ' pintadas');
+  /* El chip ya no dice cuantas hay, asi que se mide por la lista: con
+     "Todas" puesta tiene que traer mas de una tanda, y con "Recomendadas"
+     solo la treintena de siempre. La lista va por tandas de 60, de ahi que se
+     compare contra eso y no contra el total. */
+  comprobar(todasLasFilas >= 60, 'y al pulsarla sale el catalogo entero',
+            todasLasFilas + ' renglones pintados');
+  const chipTodas = await js(
+    `document.querySelector('#animplayer .ap-chip[data-cat="todas"]').textContent`);
+  comprobar(!/\d/.test(chipTodas), 'y el chip no lleva numero', chipTodas);
   const buscandoEnTodas = await js(`(() => {
     const c = document.querySelector('#animplayer .ap-buscar');
     c.value = 'rezar'; c.dispatchEvent(new Event('input', { bubbles: true }));
@@ -2332,14 +2347,17 @@ app.whenReady().then(async () => {
 
   /* Lo que NO cambia es la cuenta: lo que dicen los contadores es cuantas
      puedes usar, y eso no cambia porque mires detras. */
+  /* Y al buscar normal, el numero que sale es el de resultados y nada mas:
+     no aparece por ningun lado cuantas hay en total. */
+  const alBuscar = await buscar('aplaudir');
+  const rotulo = await js(
+    `document.querySelector('#animplayer .ap-donde').textContent`);
+  comprobar(new RegExp('^' + alBuscar.length + ' resultado').test(rotulo),
+            'y buscando, el unico numero es el de resultados', rotulo);
   await buscar('');
-  const cuantasNormal = await js(`(() => {
-    const c = document.querySelector('#animplayer .ap-chip[data-cat="todas"]');
-    return c ? c.textContent : ''; })()`);
-  const soloVisibles = parseInt(String(cuantasNormal).replace(/\D+/g, ''), 10);
-  comprobar(soloVisibles > 100 && soloVisibles < 400,
-            'y el contador sigue diciendo solo las que se ven, no las 737',
-            cuantasNormal);
+  const sinBuscar = await js(
+    `document.querySelector('#animplayer .ap-donde').textContent`);
+  comprobar(!/\d/.test(sinBuscar), 'sin buscar, ningun numero', sinBuscar);
 
   /* La llave es una palabra entera, no el signo suelto: buscar algo que
      empiece por almohadilla no tiene que abrir la puerta de servicio. */

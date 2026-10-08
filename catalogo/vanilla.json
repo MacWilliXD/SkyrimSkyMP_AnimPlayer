@@ -3,74 +3,69 @@
  "fuente": "registros IDLE de Skyrim.esm, Update.esm, Dawnguard.esm, HearthFires.esm, Dragonborn.esm",
  "categorias": [
   {
-   "clave": "remates",
-   "nombre": "Remates",
-   "busqueda": "remate golpe de gracia ejecucion matar acabar"
-  },
-  {
-   "clave": "montar",
-   "nombre": "Montar",
-   "busqueda": "caballo dragon montura cabalgar jinete"
-  },
-  {
-   "clave": "combate",
-   "nombre": "Combate",
-   "busqueda": "pelear luchar atacar espada arco escudo grito"
-  },
-  {
-   "clave": "moverse",
-   "nombre": "Moverse",
-   "busqueda": "saltar correr frenar nadar caer aterrizar andar"
-  },
-  {
-   "clave": "sentarse",
-   "nombre": "Sentarse y apoyarse",
-   "busqueda": "sentarse silla taburete banco mesa barra apoyarse trono"
-  },
-  {
-   "clave": "dormir",
-   "nombre": "Dormir y tumbarse",
-   "busqueda": "dormir cama tumbarse acostarse ataud desmayarse suelo"
+   "clave": "gestos",
+   "nombre": "Gestos y diálogo",
+   "busqueda": "gesto expresion hablar conversar senalar mirar"
   },
   {
    "clave": "oficios",
    "nombre": "Oficios y tareas",
-   "busqueda": "trabajar herrero minar talar barrer granja escribir recoger"
+   "busqueda": "trabajo taller oficio herrar recoger llevar"
   },
   {
    "clave": "comer",
    "nombre": "Comer y beber",
-   "busqueda": "comer beber cenar hidromiel sopa brindar calentarse manos fuego"
+   "busqueda": "comida bebida mesa taberna banquete"
+  },
+  {
+   "clave": "batalla",
+   "nombre": "Batalla",
+   "busqueda": "combate guerra arma preso herido militar guardia"
   },
   {
    "clave": "musica",
    "nombre": "Música y fiesta",
-   "busqueda": "musica bailar tocar laud flauta tambor aplaudir animar cuerno vitorear"
+   "busqueda": "bailar tocar celebrar aplaudir taberna"
+  },
+  {
+   "clave": "emociones",
+   "nombre": "Emociones",
+   "busqueda": "reir llorar miedo rabia verguenza animo"
+  },
+  {
+   "clave": "descansar",
+   "nombre": "Sentarse y dormir",
+   "busqueda": "sentarse silla cama dormir apoyarse descansar"
+  },
+  {
+   "clave": "cortesia",
+   "nombre": "Saludos y cortesía",
+   "busqueda": "saludar respeto reverencia agradecer modales"
   },
   {
    "clave": "magia",
    "nombre": "Magia y rituales",
-   "busqueda": "rezar orar ritual altar bendicion meditar pergamino transformarse"
+   "busqueda": "hechizo ritual rezar altar fe"
   },
   {
    "clave": "leer",
-   "nombre": "Leer y estudiar",
-   "busqueda": "leer libro estudiar nota pergamino traducir pagina"
+   "nombre": "Leer y escribir",
+   "busqueda": "libro pergamino escribir estudiar"
   },
   {
-   "clave": "gestos",
-   "nombre": "Gestos y expresión",
-   "busqueda": "saludar senalar reir asentir rendirse burlarse gesto encogerse pose"
+   "clave": "moverse",
+   "nombre": "Moverse",
+   "busqueda": "andar correr saltar nadar"
   },
   {
-   "clave": "dialogo",
-   "nombre": "Diálogo",
-   "busqueda": "hablar conversar charlar discutir responder"
+   "clave": "montar",
+   "nombre": "Montar",
+   "busqueda": "caballo carro dragon montura"
   },
   {
-   "clave": "herido",
-   "nombre": "Herido y cautiverio",
-   "busqueda": "herido dolor morir sangrar toser levantarse atado ejecucion"
+   "clave": "remates",
+   "nombre": "Remates",
+   "busqueda": "ejecucion rematar"
   },
   {
    "clave": "control",
@@ -88,7 +83,7 @@
    "edid": "CombatIdleStagger_Regular",
    "evento": "IdleCombatStart",
    "nombre": "Adoptar la postura de combate",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Comenzar animación de postura de combate",
@@ -98,17 +93,51 @@
    "edid": "IdleSharpeningWheelStart",
    "evento": "IdleSharpeningWheelStart",
    "nombre": "Afilar arma",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Sentarse a afilar el arma",
    "visible": false
   },
   {
+   "edid": "TG05_StabPlayer",
+   "evento": "TG05_StabPlayer",
+   "nombre": "Apuñalar al jugador",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Apuñalar al jugador",
+   "visible": false
+  },
+  {
+   "edid": "IdleBoundKneesEnterInstant",
+   "evento": "IdleBoundKneesEnterInstant",
+   "nombre": "Arrodillarse atado (A)",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Estar de rodilla con las manos atadas en la espalda",
+   "tambien": [
+    "descansar"
+   ]
+  },
+  {
+   "edid": "IdleBoundKneesStart",
+   "evento": "IdleBoundKneesStart",
+   "nombre": "Arrodillarse atado (B)",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Arrodillarse estando atado de manos",
+   "tambien": [
+    "descansar"
+   ]
+  },
+  {
    "edid": "NormalAttack",
    "evento": "attackStart",
    "nombre": "Atacar",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Atacar con el arma equipada (Mano derecha)",
@@ -118,27 +147,33 @@
    "edid": "AttackRightForwardSprinting_2hand",
    "evento": "attackStartSprint",
    "nombre": "Atacar al correr a toda velocidad",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Atacar al correr a toda velocidad. Forma parte del combate normal del juego",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "moverse"
+   ]
   },
   {
    "edid": "AttackLeftHandForwardSprinting",
    "evento": "attackStartSprintLeftHand",
    "nombre": "Atacar al correr a toda velocidad con la izquierda",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Atacar al correr a toda velocidad con la izquierda. Forma parte del combate normal del juego",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "moverse"
+   ]
   },
   {
    "edid": "LeftHandPowerAttackRight",
    "evento": "attackPowerStartRightLeftHand",
    "nombre": "Atacar con fuerza a la derecha, con la izquierda",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Ataque potente con arma equipada (Una mano, izquierda)",
@@ -148,7 +183,7 @@
    "edid": "LeftHandPowerAttackLeft",
    "evento": "attackPowerStartLeftLeftHand",
    "nombre": "Atacar con fuerza a la izquierda, con la izquierda",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Ataque potente con arma equipada (Una mano, derecha)",
@@ -158,47 +193,59 @@
    "edid": "AttackRightPowerForwardSprinting",
    "evento": "attackPowerStart_Sprint",
    "nombre": "Atacar con fuerza al correr a toda velocidad",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Atacar con fuerza al correr a toda velocidad. Forma parte del combate normal del juego",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "moverse"
+   ]
   },
   {
    "edid": "AttackRightPower2HMForwardSprinting",
    "evento": "attackPowerStart_2HMSprint",
    "nombre": "Atacar con fuerza al correr a toda velocidad a dos manos",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Atacar con fuerza al correr a toda velocidad a dos manos. Forma parte del combate normal del juego",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "moverse"
+   ]
   },
   {
    "edid": "AttackRightPower2HWForwardSprinting",
    "evento": "attackPowerStart_2HWSprint",
    "nombre": "Atacar con fuerza al correr a toda velocidad con arma pesada",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Atacar con fuerza al correr a toda velocidad con arma pesada. Forma parte del combate normal del juego",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "moverse"
+   ]
   },
   {
    "edid": "AttackPowerLeftHandForwardSprinting",
    "evento": "attackPowerStart_SprintLeftHand",
    "nombre": "Atacar con fuerza al correr a toda velocidad con la izquierda",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Atacar con fuerza al correr a toda velocidad con la izquierda. Forma parte del combate normal del juego",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "moverse"
+   ]
   },
   {
    "edid": "RightPowerAttack",
    "evento": "attackPowerStart_MC_1HMRight",
    "nombre": "Atacar con fuerza con la derecha (una mano)",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Ataque potente con arma equipada",
@@ -208,7 +255,7 @@
    "edid": "LeftPowerAttack",
    "evento": "attackPowerStart_MC_1HMLeft",
    "nombre": "Atacar con fuerza con la izquierda (una mano)",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Ataque potente con arma equipada",
@@ -218,7 +265,7 @@
    "edid": "DualWieldSpecialPowerAttack",
    "evento": "attackPowerStartDualWield",
    "nombre": "Atacar con fuerza con las dos armas",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Ataque potente con arma equipada",
@@ -228,7 +275,7 @@
    "edid": "LeftHandPowerAttack",
    "evento": "attackPowerStartInPlaceLeftHand",
    "nombre": "Atacar con fuerza en el sitio, con la izquierda",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Ataque potente con arma equipada",
@@ -238,7 +285,7 @@
    "edid": "PowerAttackBackward",
    "evento": "attackPowerStartBackward",
    "nombre": "Atacar con fuerza hacia atrás",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Atacar con fuerza hacia atrás. Forma parte del combate normal del juego",
@@ -248,7 +295,7 @@
    "edid": "LeftHandPowerAttackBack",
    "evento": "attackPowerStartBackLeftHand",
    "nombre": "Atacar con fuerza hacia atrás, con la izquierda",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Ataque potente con arma equipada",
@@ -258,7 +305,7 @@
    "edid": "PowerAttackForward",
    "evento": "attackPowerStartForward",
    "nombre": "Atacar con fuerza hacia delante",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Atacar con fuerza hacia delante. Forma parte del combate normal del juego",
@@ -268,7 +315,7 @@
    "edid": "LeftHandPowerAttackForward",
    "evento": "attackPowerStartForwardLeftHand",
    "nombre": "Atacar con fuerza hacia delante con la izquierda",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Atacar con fuerza hacia delante con la izquierda. Forma parte del combate normal del juego",
@@ -278,7 +325,7 @@
    "edid": "PowerAttackRight",
    "evento": "attackPowerStartRight",
    "nombre": "Atacar con fuerza hacia la derecha",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Atacar con fuerza hacia la derecha. Forma parte del combate normal del juego",
@@ -288,7 +335,7 @@
    "edid": "PowerAttackLeft",
    "evento": "attackPowerStartLeft",
    "nombre": "Atacar con fuerza hacia la izquierda",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Ataque potente con arma equipada",
@@ -298,7 +345,7 @@
    "edid": "PowerAttackStanding",
    "evento": "attackPowerStartInPlace",
    "nombre": "Atacar con fuerza sin moverse",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Atacar con fuerza sin moverse. Forma parte del combate normal del juego",
@@ -308,7 +355,7 @@
    "edid": "AttackRightSide",
    "evento": "attackStart_MC_1HMRight",
    "nombre": "Atacar con la derecha (una mano)",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Atacar con el arma equipada (Una mano, mano derecha)",
@@ -318,7 +365,7 @@
    "edid": "LeftHandAttack",
    "evento": "attackStartLeftHand",
    "nombre": "Atacar con la izquierda",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Atacar con el arma equipada (Mano izquierda)",
@@ -328,7 +375,7 @@
    "edid": "AttackLeftSide",
    "evento": "attackStart_MC_1HMLeft",
    "nombre": "Atacar con la izquierda (una mano)",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Atacar con el arma equipada (Una mano, mano izquierda)",
@@ -338,7 +385,7 @@
    "edid": "DualWieldPowerAttack",
    "evento": "attackStartDualWield",
    "nombre": "Atacar con las dos armas",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Atacar con el arma equipada (A dos manos)",
@@ -348,7 +395,7 @@
    "edid": "JumpSoftEndFailSafe",
    "evento": "JumpLandEnd",
    "nombre": "Aterrizar",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Cierre al caer de un salto (No tiene movimiento)",
@@ -358,7 +405,7 @@
    "edid": "WerewolfJumpStandingLandSoft",
    "evento": "JumpSoftEnd",
    "nombre": "Aterrizar con suavidad",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Aterrizar con suavidad. Forma parte del combate normal del juego",
@@ -368,7 +415,7 @@
    "edid": "WerewolfJumpLandDirectional",
    "evento": "JumpLandDirectional",
    "nombre": "Aterrizar de lado",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Cierre al caer de un salto mientras te mueves (No tiene movimiento)",
@@ -378,7 +425,7 @@
    "edid": "JumpLand",
    "evento": "JumpLand",
    "nombre": "Aterrizar de un salto",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Aterrizar de un salto. Forma parte del combate normal del juego",
@@ -388,7 +435,7 @@
    "edid": "JumpFall",
    "evento": "JumpFall",
    "nombre": "Caer",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Ejecutarse automaticamente mientras cae el jugador (Aleteo mientras caes)",
@@ -398,7 +445,7 @@
    "edid": "BleedoutStart",
    "evento": "bleedOutStart",
    "nombre": "Caer abatido",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Caer al suelo tocandose el estomago y en 4 patas derrotado"
@@ -407,7 +454,7 @@
    "edid": "BleedoutStop",
    "evento": "bleedOutStop",
    "nombre": "Caer abatido (Levantarse)",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Fade-out animación de bleedOutStart (Se levanta de estar abatido)"
@@ -416,7 +463,7 @@
    "edid": "WerewolfFallDirectional",
    "evento": "JumpFallDirectional",
    "nombre": "Caer de lado",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Caer de lado. Forma parte del combate normal del juego",
@@ -426,7 +473,7 @@
    "edid": "MC_WeaponRightHandEquip",
    "evento": "MC_WeapOutRightReplaceForceEquip",
    "nombre": "Cambiar el arma de la derecha",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "confirmado": false,
@@ -439,7 +486,7 @@
    "edid": "StaffMagicShieldTorchANDWeapEquip",
    "evento": "WeapOutLeftReplaceForceEquip",
    "nombre": "Cambiar el arma de la izquierda",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "sincroniza": false,
@@ -451,7 +498,7 @@
    "edid": "VoiceWhirlwindSprintMedium",
    "evento": "ShoutSprintLongStart",
    "nombre": "Carrera del Torbellino, larga",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Grito de torbellino arrollador Nivel 1",
@@ -461,7 +508,7 @@
    "edid": "VoiceWhirlwindSprintShort",
    "evento": "ShoutSprintMediumStart",
    "nombre": "Carrera del Torbellino, media",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Grito de torbellino arrollador Nivel 2",
@@ -471,7 +518,7 @@
    "edid": "VoiceWhirlwindSprintLong",
    "evento": "ShoutSprintLongestStart",
    "nombre": "Carrera del Torbellino, muy larga",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Grito de torbellino arrollador Nivel 3",
@@ -481,17 +528,74 @@
    "edid": "RightH2HComboPowerAttack",
    "evento": "attackPowerStartH2HCombo",
    "nombre": "Combinación de puñetazos",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Golpe cargado intercambiado entre ambos puños",
    "visible": false
   },
   {
+   "edid": "BoundStandingCut",
+   "evento": "BoundStandingCut",
+   "nombre": "Cortar las ataduras",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Cortar las cuerdas que atan las manos"
+  },
+  {
+   "edid": "pa_OffsetBoundStandingCut",
+   "evento": "pa_OffsetBoundStandingCut",
+   "nombre": "Cortar las ataduras (A ti)",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Cortarse las ataduras de las manos por alguien más (hace un pequeño movimiento de manos como que alguien le corta la atadura de las manos)",
+   "visible": false
+  },
+  {
+   "edid": "BoundStandingCutNPC",
+   "evento": "BoundStandingCutNPC",
+   "nombre": "Cortarle las ataduras a alguien",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Cortarle las ataduras a alguien"
+  },
+  {
+   "edid": "IdleHandCut",
+   "evento": "IdleHandCut",
+   "nombre": "Cortarse la mano",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Cortarse la mano estando de cuclilla"
+  },
+  {
+   "edid": "IdleExecutionerChop_Player",
+   "evento": "IdleExecutionerChop_Player",
+   "nombre": "Decapitar al jugador",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Decapitar al jugador",
+   "visible": false
+  },
+  {
+   "edid": "IdleHeadChop",
+   "evento": "IdleExecutionerChop",
+   "nombre": "Decapitar con el hacha",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Decapitar con el hacha",
+   "visible": false
+  },
+  {
    "edid": "IdleDialogueDefensiveHandGesture",
    "evento": "IdleDialogueDefensiveHandGesture",
    "nombre": "Defenderse",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Levantar las manos con gesto defensivo"
@@ -500,7 +604,7 @@
    "edid": "PlayerCancelBowAttack",
    "evento": "attackStop",
    "nombre": "Dejar de apuntar con el arco",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Dejar de apuntar con el arco. Forma parte del combate normal del juego",
@@ -510,7 +614,7 @@
    "edid": "FalmerBlockStop",
    "evento": "blockStop",
    "nombre": "Dejar de bloquear",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Fade-out animación de bloquear",
@@ -520,7 +624,7 @@
    "edid": "DefaultDrawWeapon",
    "evento": "WeapEquip",
    "nombre": "Desenvainar",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "sincroniza": false,
@@ -532,7 +636,7 @@
    "edid": "LeftH2HEquip",
    "evento": "WeapSoloEquip",
    "nombre": "Desenvainar (sin nada más)",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "sincroniza": false,
@@ -541,10 +645,30 @@
    "visible": false
   },
   {
+   "edid": "NPCKnockDown",
+   "evento": "Ragdoll",
+   "nombre": "Desplomarse como un muñeco",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Desplomarse como un muñeco",
+   "visible": false
+  },
+  {
+   "edid": "IdleTablePassOutEnterLoose",
+   "evento": "IdleTablePassOutEnter",
+   "nombre": "Desplomarse sobre la mesa",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Desplomarse sobre la mesa",
+   "visible": false
+  },
+  {
    "edid": "BowAttack",
    "evento": "bowAttackStart",
    "nombre": "Disparar el arco",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Disparar con el arco equipado",
@@ -554,7 +678,7 @@
    "edid": "crossbowAttackStart",
    "evento": "crossbowAttackStart",
    "nombre": "Disparar la ballesta",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "confirmado": false,
@@ -565,7 +689,7 @@
    "edid": "crossbowDwarvenAttackStart",
    "evento": "crossbowDwarvenAttackStart",
    "nombre": "Disparar la ballesta mejorada",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "confirmado": false,
@@ -576,27 +700,33 @@
    "edid": "BlockBashSprint",
    "evento": "BlockBashSprint",
    "nombre": "Embestir con el escudo al correr a toda velocidad",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Embestir con el escudo al correr a toda velocidad. Es parte del movimiento normal del personaje",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "moverse"
+   ]
   },
   {
    "edid": "IdleLightSconceEnter",
    "evento": "IdleLightSconce",
    "nombre": "Encender una antorcha de pared",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Encender una antorcha de pared",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "descansar"
+   ]
   },
   {
    "edid": "MC_ForceSheathe",
    "evento": "UnequipNoAnim",
    "nombre": "Envainar sin animación",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "sincroniza": false,
@@ -605,30 +735,118 @@
    "visible": false
   },
   {
+   "edid": "IdleExecutionerIdle",
+   "evento": "IdleExecutionerIdle",
+   "nombre": "Esperar a ejecutar",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Esperar con un hacha de ejecución preparado para ejecutar",
+   "tambien": [
+    "gestos"
+   ]
+  },
+  {
+   "edid": "IdleExecutioneeIdle",
+   "evento": "IdleExecutioneeIdle",
+   "nombre": "Esperar atado",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Esperar estando de pie atado de manos",
+   "tambien": [
+    "gestos"
+   ]
+  },
+  {
+   "edid": "IdleDA02BoethiahPostEnter",
+   "evento": "IdleDA02BoethiahPostEnter",
+   "nombre": "Estar atado a un poste",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Atado a un poste. Forma parte de lanzar hechizos",
+   "visible": false
+  },
+  {
+   "edid": "OffsetBoundStandingStart",
+   "evento": "OffsetBoundStandingStart",
+   "nombre": "Estar atado de pie",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "andando": true,
+   "descripcion": "Esperar de pie con las manos atadas"
+  },
+  {
+   "edid": "IdleInjured",
+   "evento": "IdleInjured",
+   "nombre": "Estar herido (A)",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "destacada": true,
+   "descripcion": "Sujetarse el hombro herido con la otra mano"
+  },
+  {
+   "edid": "IdleWounded01EnterInstant",
+   "evento": "IdleWounded_01",
+   "nombre": "Estar herido (B)",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "destacada": true,
+   "descripcion": "Sentarse en el suelo herido"
+  },
+  {
+   "edid": "IdleWounded02EnterInstant",
+   "evento": "IdleWounded_02",
+   "nombre": "Estar herido (C)",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Tirarse al suelo y retorcerse de dolor"
+  },
+  {
+   "edid": "IdleWounded03EnterInstant",
+   "evento": "IdleWounded_03",
+   "nombre": "Estar herido (D)",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Caer de rodillas sujetándose la herida"
+  },
+  {
    "edid": "CombatIdleStretching",
    "evento": "IdleCombatStretchingStart",
    "nombre": "Estirar hombros (En guardia) (A)",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "confirmado": false,
-   "descripcion": "Estirar tus brazos y hombros cuando estas en guardia"
+   "descripcion": "Estirar tus brazos y hombros cuando estas en guardia",
+   "tambien": [
+    "gestos"
+   ]
   },
   {
    "edid": "CombatIdleSpecial",
    "evento": "IdleCombatSpecialStart",
    "nombre": "Estirar hombros (En guardia) (B)",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "confirmado": false,
-   "descripcion": "Estirar tus brazos y hombros cuando estas en guardia"
+   "descripcion": "Estirar tus brazos y hombros cuando estas en guardia",
+   "tambien": [
+    "gestos"
+   ]
   },
   {
    "edid": "VoiceRelease",
    "evento": "MT_BreathExhaleShort",
    "nombre": "Exhalar",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Exhalar nuestra respiración",
@@ -638,17 +856,37 @@
    "edid": "VoiceReleaseWeaponOut",
    "evento": "CombatReady_BreathExhaleShort",
    "nombre": "Exhalar (En guardia)",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Exhalar nuestra respiración",
    "visible": false
   },
   {
+   "edid": "IdleWebThrashShort",
+   "evento": "IdleWebThrashShort",
+   "nombre": "Forcejear en la telaraña (A)",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Forcejear en la telaraña",
+   "visible": false
+  },
+  {
+   "edid": "IdleWebThrashShort2",
+   "evento": "IdleWebThrashShort2",
+   "nombre": "Forcejear en la telaraña (B)",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Forcejear en la telaraña (2)",
+   "visible": false
+  },
+  {
    "edid": "RiderStopFromSprintRoot",
    "evento": "BrakeStart",
    "nombre": "Frenar en seco",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Frenar en seco. Forma parte del combate normal del juego",
@@ -658,7 +896,7 @@
    "edid": "BashFail",
    "evento": "bashFail",
    "nombre": "Golpe de escudo fallido (A)",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Arrazar con escudo y falla el golpe",
@@ -668,7 +906,7 @@
    "edid": "BashFail",
    "evento": "BashFail",
    "nombre": "Golpe de escudo fallido (B)",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "confirmado": false,
@@ -679,7 +917,7 @@
    "edid": "PowerBash",
    "evento": "bashPowerStart",
    "nombre": "Golpe de escudo potente",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Golpear con el escudo fuerte",
@@ -689,17 +927,20 @@
    "edid": "BowBash",
    "evento": "bashStart",
    "nombre": "Golpear con el escudo",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Golpear con el escudo",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "gestos"
+   ]
   },
   {
    "edid": "Removed",
    "evento": "torchUnequip",
    "nombre": "Guardar la antorcha",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Guardar la antorcha equipada",
@@ -709,7 +950,7 @@
    "edid": "WitchlightStopCombatDUPLICATE000",
    "evento": "Unequip",
    "nombre": "Guardar lo que lleves en las manos",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "sincroniza": false,
@@ -720,7 +961,7 @@
    "edid": "IdlePrisonerBeat",
    "evento": "IdlePrisonerBeat",
    "nombre": "Lanzar un golpe",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Lanzar un golpe en seco con el puño"
@@ -729,7 +970,7 @@
    "edid": "BleedOutCastRightWard",
    "evento": "MRh_WardStart",
    "nombre": "Levantar protección con la derecha",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Cargar hechizo",
@@ -739,27 +980,93 @@
    "edid": "BleedOutCastLeftWard",
    "evento": "MLh_WardStart",
    "nombre": "Levantar protección con la izquierda",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Cargar hechizo",
    "visible": false
   },
   {
+   "edid": "TG05_GetUp",
+   "evento": "TG05_GetUp",
+   "nombre": "Levantarse aturdido",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Levantarse aturdido",
+   "visible": false
+  },
+  {
+   "edid": "NPCGetUp",
+   "evento": "GetUpBegin",
+   "nombre": "Levantarse del suelo",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Levantarse del suelo",
+   "visible": false
+  },
+  {
    "edid": "CombatIdleLookingAround",
    "evento": "IdleCombatLookingAroundStart",
    "nombre": "Mirar alrededor (En guardia)",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "confirmado": false,
-   "descripcion": "Mirar alrededor cuando estas en guardia"
+   "descripcion": "Mirar alrededor cuando estas en guardia",
+   "tambien": [
+    "gestos"
+   ]
+  },
+  {
+   "edid": "DeathAnimationStart",
+   "evento": "DeathAnim",
+   "nombre": "Morir",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Morir",
+   "visible": false
+  },
+  {
+   "edid": "IdleDLC02MiraakDeathStart",
+   "evento": "IdleDLC02MiraakDeath",
+   "nombre": "Morir despacio",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Morir despacio",
+   "visible": false
+  },
+  {
+   "edid": "MS12BedDeath",
+   "evento": "MS12BedDeath",
+   "nombre": "Morir en la cama",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Morir en la cama",
+   "visible": false,
+   "tambien": [
+    "descansar"
+   ]
+  },
+  {
+   "edid": "IdleSoupDeath",
+   "evento": "IdleSoupDeath",
+   "nombre": "Morir sobre el plato",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Morir sobre el plato",
+   "visible": false
   },
   {
    "edid": "BowZoom",
    "evento": "blockStart",
    "nombre": "Ponerse a bloquear",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Comenzar animación de bloquear",
@@ -769,17 +1076,37 @@
    "edid": "McrabMeleeAttack",
    "evento": "combatStanceStart",
    "nombre": "Ponerse en guardia",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Ponerse en guardia. Forma parte del combate normal del juego",
    "visible": false
   },
   {
+   "edid": "IdleHandsBehindBack",
+   "evento": "IdleHandsBehindBack",
+   "nombre": "Ponerse firme (A)",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "destacada": true,
+   "descripcion": "Ponerse firme con las manos a la espalda"
+  },
+  {
+   "edid": "IdleSnapToAttention",
+   "evento": "IdleSnapToAttention",
+   "nombre": "Ponerse firme (B)",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "destacada": true,
+   "descripcion": "Ponerse firme por un instante"
+  },
+  {
    "edid": "BlockAnticipate",
    "evento": "blockAnticipateStart",
    "nombre": "Prepararse para bloquear",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Iniciar la animación de bloquear",
@@ -789,7 +1116,7 @@
    "edid": "IdleCivilWarShieldCheer",
    "evento": "IdleCombatShieldStart",
    "nombre": "Provocar golpeando armas (En guardia)",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Golpear tus armas para provocar"
@@ -798,7 +1125,7 @@
    "edid": "AttackRightH2H",
    "evento": "AttackStartH2HRight",
    "nombre": "Puñetazo con la derecha",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Golpear con puño con la derecha",
@@ -808,7 +1135,7 @@
    "edid": "AttackLeftH2H",
    "evento": "AttackStartH2HLeft",
    "nombre": "Puñetazo con la izquierda",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Golpear con puño con la izquierda",
@@ -818,7 +1145,7 @@
    "edid": "H2HRightHandPowerAttack",
    "evento": "attackPowerStartForwardH2HRightHand",
    "nombre": "Puñetazo potente hacia delante, derecha",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Golpear fuerte con el puño derecho",
@@ -828,17 +1155,57 @@
    "edid": "H2HLeftHandPowerAttack",
    "evento": "attackPowerStartForwardH2HLeftHand",
    "nombre": "Puñetazo potente hacia delante, izquierda",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Golpear fuerte con el puño izquierdo",
    "visible": false
   },
   {
+   "edid": "EnterWebInstant",
+   "evento": "IdleWebEnterInstant",
+   "nombre": "Quedar atrapado en la telaraña",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Quedar atrapado en la telaraña",
+   "visible": false
+  },
+  {
+   "edid": "TG05_KnockOut",
+   "evento": "TG05_KnockOut",
+   "nombre": "Quedar inconsciente",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Quedar inconsciente",
+   "visible": false
+  },
+  {
+   "edid": "IdleExecutionerAlduinReaction",
+   "evento": "IdleExecutionerAlduinReaction",
+   "nombre": "Reaccionar con espanto",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Reaccionar con espanto",
+   "visible": false
+  },
+  {
+   "edid": "IdleExecutionerAlduinReactionDeath",
+   "evento": "IdleExecutionerAlduinReactionDeath",
+   "nombre": "Reaccionar con espanto y morir",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Reaccionar con espanto y morir",
+   "visible": false
+  },
+  {
    "edid": "ReloadRoot",
    "evento": "reloadStart",
    "nombre": "Recargar Ballesta",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "confirmado": false,
@@ -846,10 +1213,20 @@
    "visible": false
   },
   {
+   "edid": "IdleExecutioneeChop",
+   "evento": "IdleExecutioneeChop",
+   "nombre": "Recibir el golpe de hacha del verdugo",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Recibir el golpe de hacha del verdugo",
+   "visible": false
+  },
+  {
    "edid": "BumpedFromRight",
    "evento": "NPC_BumpedFromRight",
    "nombre": "Recibir un empujón por la derecha",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Recibir un empujón por la derecha. Forma parte del combate normal del juego",
@@ -859,7 +1236,7 @@
    "edid": "BumpedFromBack",
    "evento": "NPC_BumpedFromBack",
    "nombre": "Recibir un empujón por la espalda",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Recibir un empujón por la espalda. Forma parte del combate normal del juego",
@@ -869,7 +1246,7 @@
    "edid": "BumpedFromLeft",
    "evento": "NPC_BumpedFromLeft",
    "nombre": "Recibir un empujón por la izquierda",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Recibir un empujón por la izquierda. Forma parte del combate normal del juego",
@@ -879,7 +1256,7 @@
    "edid": "BlockHit",
    "evento": "blockHitStart",
    "nombre": "Recibir un golpe con el bloqueo",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Empezar la animación que detiene golpes con el escudo",
@@ -889,7 +1266,7 @@
    "edid": "McrabRecoilLarge",
    "evento": "recoilLargeStart",
    "nombre": "Retroceder de un golpetazo",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Retroceder de un golpe",
@@ -899,7 +1276,7 @@
    "edid": "McrabRecoilsStart",
    "evento": "recoilStart",
    "nombre": "Retroceder por el golpe",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Retroceder de un golpe rapido",
@@ -909,7 +1286,7 @@
    "edid": "Flinch",
    "evento": "FlinchStart",
    "nombre": "Retroceder por golpe (A)",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Retroceder por un golpe en la parte superior del cuerpo"
@@ -918,7 +1295,7 @@
    "edid": "BumpedFromFront",
    "evento": "NPC_BumpFromFront",
    "nombre": "Retroceder por golpe (B)",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Retroceder al ser empujado por un golpe"
@@ -927,16 +1304,16 @@
    "edid": "PlayerStagger",
    "evento": "StaggerPlayer",
    "nombre": "Retroceder por golpe (C)",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Retroceder al ser golpeado"
+   "descripcion": "Retroceder un paso al recibir un golpe"
   },
   {
    "edid": "LooseFullBodyStagger",
    "evento": "staggerStart",
    "nombre": "Retroceder por golpe (D)",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Retroceder al ser golpeado",
@@ -946,7 +1323,7 @@
    "edid": "WardBroken",
    "evento": "WardBreak",
    "nombre": "Retroceder por golpe (E)",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Retroceder al ser golpeado",
@@ -956,17 +1333,17 @@
    "edid": "CombatIdleWeaponCheck",
    "evento": "IdleCombatWeaponCheckStart",
    "nombre": "Revisar arma (En guardia)",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "confirmado": false,
-   "descripcion": "Revisar el arma desenvainada"
+   "descripcion": "Mirar el filo del arma desenvainada"
   },
   {
    "edid": "SneakSprintStartRoll",
    "evento": "SneakSprintStartRoll",
    "nombre": "Rodar por el suelo agachado",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Rodar por el suelo agachado. Forma parte del combate normal del juego",
@@ -976,7 +1353,7 @@
    "edid": "BothHandsChange",
    "evento": "WeapOutRightReplaceForceEquip",
    "nombre": "Sacar Arma",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "sincroniza": false,
@@ -988,7 +1365,7 @@
    "edid": "shieldForceEquip",
    "evento": "ShdEquip",
    "nombre": "Sacar el escudo",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "sincroniza": false,
@@ -1000,7 +1377,7 @@
    "edid": "torchForceEquip",
    "evento": "torchEquip",
    "nombre": "Sacar la antorcha",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Sacar una antorcha y se mantiene",
@@ -1010,7 +1387,7 @@
    "edid": "TorchEquip",
    "evento": "torchForceEquip",
    "nombre": "Sacar la antorcha a la fuerza",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Sacar una antorcha y se mantiene",
@@ -1020,17 +1397,27 @@
    "edid": "SkeeverCombatStanceStop",
    "evento": "combatStanceStop",
    "nombre": "Salir de la guardia",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Salir de la guardia. Forma parte del combate normal del juego",
    "visible": false
   },
   {
+   "edid": "IdleExecutionerGuardExit",
+   "evento": "IdleFurnitureExitTriggered",
+   "nombre": "Salir del mueble (forzado)",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Salir del mueble (forzado)",
+   "visible": false
+  },
+  {
    "edid": "RightAttackRelease",
    "evento": "attackRelease",
    "nombre": "Soltar el ataque",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Soltar el ataque que se va a efectuar",
@@ -1040,7 +1427,7 @@
    "edid": "LeftAttackRelease",
    "evento": "attackReleaseL",
    "nombre": "Soltar el ataque con la izquierda",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "confirmado": false,
@@ -1051,22 +1438,65 @@
    "edid": "MagicRightReleaseBash",
    "evento": "bashRelease",
    "nombre": "Soltar el golpe de escudo",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Soltar el ataque que se va a efectuar",
    "visible": false
   },
   {
+   "edid": "WebIdleExit",
+   "evento": "IdleWebExit",
+   "nombre": "Soltarse de la telaraña",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Soltarse de la telaraña",
+   "visible": false
+  },
+  {
+   "edid": "WebIdleExitQuickTurn",
+   "evento": "IdleWebExitQuickTurn",
+   "nombre": "Soltarse de la telaraña y girarse",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Soltarse de la telaraña y girarse",
+   "visible": false
+  },
+  {
    "edid": "CrossbowReleaseDuringReload",
    "evento": "bowEnd",
    "nombre": "Terminar con el arco",
-   "categoria": "combate",
+   "categoria": "batalla",
    "busqueda": "",
    "origen": "vanilla",
    "confirmado": false,
    "descripcion": "Terminar al lanzar una flecha",
    "visible": false
+  },
+  {
+   "edid": "IdleDLC02MiraakDeathFinish",
+   "evento": "IdleDLC02MiraakDeathFinish",
+   "nombre": "Terminar de morir despacio",
+   "categoria": "batalla",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Terminar de morir despacio",
+   "visible": false
+  },
+  {
+   "edid": "DLC1CoffinPuzzleBowlIdle",
+   "evento": "IdleActivateCoffinPuzzle",
+   "nombre": "Accionar el cuenco del ataúd",
+   "categoria": "comer",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Accionar botón con pincho del ataúd",
+   "visible": false,
+   "tambien": [
+    "descansar"
+   ]
   },
   {
    "edid": "IdleVampireBedrollRight",
@@ -1075,7 +1505,7 @@
    "categoria": "comer",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Alimentarse y del suelo"
+   "descripcion": "Agacharse a morder un cuerpo tendido en el suelo"
   },
   {
    "edid": "IdleVampireBedrollLeft",
@@ -1084,7 +1514,7 @@
    "categoria": "comer",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Alimentarse y del suelo"
+   "descripcion": "Inclinarse sobre un cuerpo en el suelo para alimentarse"
   },
   {
    "edid": "VampireChairDrinking",
@@ -1122,7 +1552,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "destacada": true,
-   "descripcion": "Arrodillarse para posterior beber algo"
+   "descripcion": "Arrodillarse para posterior beber algo",
+   "tambien": [
+    "descansar"
+   ]
   },
   {
    "edid": "IdleMQ201Drink",
@@ -1150,7 +1583,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "destacada": true,
-   "descripcion": "Beberse de una taza"
+   "descripcion": "Levantar una taza y beber de ella"
   },
   {
    "edid": "IdleDrinkingStandingStart",
@@ -1180,7 +1613,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "sentado": true,
-   "descripcion": "Beberse de una taza estando sentado, manteniendose con ella en la mano"
+   "descripcion": "Beberse de una taza estando sentado, manteniendose con ella en la mano",
+   "tambien": [
+    "descansar"
+   ]
   },
   {
    "edid": "IdleDrinkPotion",
@@ -1217,7 +1653,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "sentado": true,
-   "descripcion": "Comer carne cruda estando sentado"
+   "descripcion": "Comer carne cruda estando sentado",
+   "tambien": [
+    "descansar"
+   ]
   },
   {
    "edid": "IdleCannibalFeedStanding",
@@ -1245,7 +1684,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "sentado": true,
-   "descripcion": "Comer en un cuenco en la mesa, sentado en una silla"
+   "descripcion": "Comer en un cuenco en la mesa, sentado en una silla",
+   "tambien": [
+    "descansar"
+   ]
   },
   {
    "edid": "IdleEatingStandingStart",
@@ -1265,7 +1707,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "sentado": true,
-   "descripcion": "Comerse un pan sentado en una silla y manteniendolo en la mano"
+   "descripcion": "Comerse un pan sentado en una silla y manteniendolo en la mano",
+   "tambien": [
+    "descansar"
+   ]
   },
   {
    "edid": "IdleDrunkStop",
@@ -1274,7 +1719,7 @@
    "categoria": "comer",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Dejar de tambalearse"
+   "descripcion": "Recuperar el equilibrio y dejar de tambalearse"
   },
   {
    "edid": "IdleVampireFeastVictimEnter",
@@ -1284,7 +1729,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Dejarse morder el cuello",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "gestos"
+   ]
   },
   {
    "edid": "IdleVampireStandingFeedFront_Loose",
@@ -1293,7 +1741,10 @@
    "categoria": "comer",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Morder el cuello"
+   "descripcion": "Sujetar a alguien y morderle el cuello",
+   "tambien": [
+    "gestos"
+   ]
   },
   {
    "edid": "IdleVampireStandingBack",
@@ -1303,7 +1754,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Morder el cuello por la espalda",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "gestos"
+   ]
   },
   {
    "edid": "IdleTableDrinkEnterLoose",
@@ -1313,7 +1767,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Sentarse a la mesa a beber",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "descansar"
+   ]
   },
   {
    "edid": "IdleTableDrinkAndMugEnterLoose",
@@ -1323,7 +1780,11 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Sentarse a la mesa con jarra y bebida",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "oficios",
+    "descansar"
+   ]
   },
   {
    "edid": "IdleUseMeadBarrelEnter",
@@ -1341,7 +1802,7 @@
    "categoria": "comer",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ponerse a tambalearse"
+   "descripcion": "Perder el equilibrio y empezar a tambalearse"
   },
   {
    "edid": "IdleMesmerize",
@@ -1350,7 +1811,7 @@
    "categoria": "comer",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Tambalear todo el cuerpo"
+   "descripcion": "Tambalearse de lado a lado sin caerse"
   },
   {
    "edid": "IdleEatSoup",
@@ -1405,50 +1866,19 @@
    "visible": false
   },
   {
-   "edid": "Caring",
-   "evento": "RF_OpenStart",
-   "nombre": "Actitud: cercana",
-   "categoria": "dialogo",
+   "edid": "IdleCO2Ceremony1Welcome",
+   "evento": "IdleCO2Ceremony1Welcome",
+   "nombre": "Agradecer",
+   "categoria": "cortesia",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Actitud: cercana",
-   "visible": false
-  },
-  {
-   "edid": "Standoffish",
-   "evento": "RF_GuardedStart",
-   "nombre": "Actitud: distante",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Actitud: distante",
-   "visible": false
-  },
-  {
-   "edid": "Flirty",
-   "evento": "RF_PlayfulStart",
-   "nombre": "Actitud: juguetona",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Actitud: juguetona",
-   "visible": false
-  },
-  {
-   "edid": "Sarcastic",
-   "evento": "RF_SeriousStart",
-   "nombre": "Actitud: seria",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Actitud: seria",
-   "visible": false
+   "descripcion": "Abrir los brazos para agradecer"
   },
   {
    "edid": "LooseDialogueResponsePositive",
    "evento": "LooseDialogueResponsePositive",
    "nombre": "Asentir",
-   "categoria": "dialogo",
+   "categoria": "cortesia",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Asentir con la cabeza para dar una respuesta afirmativa"
@@ -1457,86 +1887,16 @@
    "edid": "IdleCiceroHappy",
    "evento": "IdleCiceroHappy",
    "nombre": "Asentir con energia",
-   "categoria": "dialogo",
+   "categoria": "cortesia",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Asentir con la cabeza para dar una respuesta afirmativa"
   },
   {
-   "edid": "RF_MoodChangeOpen",
-   "evento": "RF_MoodChangeOpen",
-   "nombre": "Cambiar a actitud cercana",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Cambiar a actitud cercana",
-   "visible": false
-  },
-  {
-   "edid": "RF_MoodChangeGuarded",
-   "evento": "RF_MoodChangeGuarded",
-   "nombre": "Cambiar a actitud distante",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Cambiar a actitud distante",
-   "visible": false
-  },
-  {
-   "edid": "RF_MoodChangePlayful",
-   "evento": "RF_MoodChangePlayful",
-   "nombre": "Cambiar a actitud juguetona",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Cambiar a actitud juguetona",
-   "visible": false
-  },
-  {
-   "edid": "RF_MoodChangeSerious",
-   "evento": "RF_MoodChangeSerious",
-   "nombre": "Cambiar a actitud seria",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Cambiar a actitud seria",
-   "visible": false
-  },
-  {
-   "edid": "RF_OpenInterested",
-   "evento": "RF_OpenInterested_In",
-   "nombre": "Cercana: interés",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Cercana: interés",
-   "visible": false
-  },
-  {
-   "edid": "RF_OpenThrowHands",
-   "evento": "RF_OpenThrowHands_In",
-   "nombre": "Cercana: manos al aire",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Cercana: manos al aire",
-   "visible": false
-  },
-  {
-   "edid": "RF_ShockOpen",
-   "evento": "RF_Shock_Open",
-   "nombre": "Cercana: sobresalto",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Cercana: sobresalto",
-   "visible": false
-  },
-  {
    "edid": "RF_OpenPleading",
    "evento": "RF_OpenPleading_In",
    "nombre": "Cercana: súplica",
-   "categoria": "dialogo",
+   "categoria": "cortesia",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Cercana: súplica",
@@ -1546,387 +1906,125 @@
    "edid": "IdleDialogueWelcomeHandGesture",
    "evento": "IdleDialogueWelcomeHandGesture",
    "nombre": "Dar bienvenida",
-   "categoria": "dialogo",
+   "categoria": "cortesia",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Abrir los brazos para dar la bienvenida"
   },
   {
-   "edid": "RF_GuardedInterested",
-   "evento": "RF_GuardedInterested_In",
-   "nombre": "Distante: interés",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Distante: interés",
-   "visible": false
-  },
-  {
-   "edid": "RF_GuardedThrowHands",
-   "evento": "RF_GuardedThrowHands_In",
-   "nombre": "Distante: manos al aire",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Distante: manos al aire",
-   "visible": false
-  },
-  {
-   "edid": "RF_ShockGuarded",
-   "evento": "RF_Shock_Guarded",
-   "nombre": "Distante: sobresalto",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Distante: sobresalto",
-   "visible": false
-  },
-  {
    "edid": "RF_GuardedPleading",
    "evento": "RF_GuardedPleading_In",
    "nombre": "Distante: súplica",
-   "categoria": "dialogo",
+   "categoria": "cortesia",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Distante: súplica",
    "visible": false
   },
   {
-   "edid": "TalkingHappy",
-   "evento": "IdleDialogueHappyStart",
-   "nombre": "Empezar a hablar contento",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Empezar a hablar contento",
-   "visible": false
-  },
-  {
-   "edid": "IdleDialogueHandOnChinGesture",
-   "evento": "IdleDialogueHandOnChinGesture",
-   "nombre": "Entender algo",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Llevarse la mano a la barbilla para entender algo"
-  },
-  {
-   "edid": "RF_ShockPlayful",
-   "evento": "RF_Shock_Playful",
-   "nombre": "Gesticular (A)",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Ponerse la mano en la cintura y gesticular"
-  },
-  {
-   "edid": "RF_ShockSerious",
-   "evento": "RF_Shock_Serious",
-   "nombre": "Gesticular (B)",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Ponerse las manos a la cintura y gesticular"
-  },
-  {
-   "edid": "IdleCiceroAgitated",
-   "evento": "IdleCiceroAgitated",
-   "nombre": "Gesticular alterado",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Gesticular alterado"
-  },
-  {
-   "edid": "IdleDialogueMovingTalkA",
-   "evento": "IdleDialogueMovingTalkA",
-   "nombre": "Gesticular andando (A)",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "andando": true,
-   "descripcion": "Andar de lado a lado gesticulando"
-  },
-  {
-   "edid": "IdleDialogueMovingTalkC",
-   "evento": "IdleDialogueMovingTalkC",
-   "nombre": "Gesticular andando (B)",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "andando": true,
-   "descripcion": "Andar de lado a lado gesticulando"
-  },
-  {
-   "edid": "IdleDialogueMovingTalkD",
-   "evento": "IdleDialogueMovingTalkD",
-   "nombre": "Gesticular andando (C)",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "andando": true,
-   "descripcion": "Andar de lado a lado gesticulando"
-  },
-  {
-   "edid": "TalkingFail",
-   "evento": "IdleDialogueStart",
-   "nombre": "Hablar",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Levantar hombros para comenzar el dialogo"
-  },
-  {
-   "edid": "DialogueNeutralExpressive",
-   "evento": "DialogueNeutral",
-   "nombre": "Hablar con naturalidad",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Hablar con naturalidad",
-   "visible": false
-  },
-  {
-   "edid": "DialogueGenericTalking",
-   "evento": "DialogueGeneric",
-   "nombre": "Hablar con normalidad",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Hablar con normalidad",
-   "visible": false
-  },
-  {
-   "edid": "DialogueHappyExpressive",
-   "evento": "DialogueHappy",
-   "nombre": "Hablar contento",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Hablar contento",
-   "visible": false
-  },
-  {
-   "edid": "TalkingAngry",
-   "evento": "IdleDialogueAngryStart",
-   "nombre": "Hablar enojado (A)",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Hablar enojado",
-   "visible": false
-  },
-  {
-   "edid": "DialogueAngryExpressive",
-   "evento": "DialogueAngry",
-   "nombre": "Hablar enojado (B)",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Hablar enojado (1)",
-   "visible": false
-  },
-  {
-   "edid": "DialogueAngryMotionDriven",
-   "evento": "MotionDrivenDialogueAngry",
-   "nombre": "Hablar enojado mientras te mueves",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "andando": true,
-   "confirmado": false,
-   "descripcion": "Hablar enojado mientras te mueves",
-   "visible": false
-  },
-  {
-   "edid": "TalkingExpressive",
-   "evento": "IdleDialogueExpressiveStart",
-   "nombre": "Hablar gesticulando",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Hablar gesticulando",
-   "visible": false
-  },
-  {
-   "edid": "TalkingWithItem",
-   "evento": "IdleTalkAndUseItem",
-   "nombre": "Hablar manejando algo",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Hablar manejando algo",
-   "visible": false
-  },
-  {
-   "edid": "DialogueGenericMotionDriven",
-   "evento": "MotionDrivenDialogueGeneric",
-   "nombre": "Hablar mientras te mueves",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "andando": true,
-   "confirmado": false,
-   "descripcion": "Hablar mientras te mueves",
-   "visible": false
-  },
-  {
-   "edid": "SnowElfPrinceDialogue",
-   "evento": "IdleSnowElfPrinceChairDialogue",
-   "nombre": "Hablar sentado con gesto solemne",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "sentado": true,
-   "descripcion": "Hablar sentado con gesto solemne",
-   "visible": false
-  },
-  {
-   "edid": "DialogueNeutralShiftMotionDriven",
-   "evento": "MotionDrivenDialogueNextClip",
-   "nombre": "Hablar: cambiar de gesto",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "andando": true,
-   "confirmado": false,
-   "descripcion": "Hablar: cambiar de gesto",
-   "visible": false
-  },
-  {
-   "edid": "RF_PlayfulInterested",
-   "evento": "RF_PlayfulInterested_In",
-   "nombre": "Juguetona: interés",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Juguetona: interés",
-   "visible": false
-  },
-  {
-   "edid": "RF_PlayfulThrowHands",
-   "evento": "RF_PlayfulThrowHands_In",
-   "nombre": "Juguetona: manos al aire",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Juguetona: manos al aire",
-   "visible": false
-  },
-  {
    "edid": "RF_PlayfulPleading",
    "evento": "RF_PlayfulPleading_In",
    "nombre": "Juguetona: súplica",
-   "categoria": "dialogo",
+   "categoria": "cortesia",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Juguetona: súplica",
    "visible": false
   },
   {
-   "edid": "IdleDialogueMovingTalkB",
-   "evento": "IdleDialogueMovingTalkB",
-   "nombre": "Mostrar algo",
-   "categoria": "dialogo",
+   "edid": "IdleGetAttention",
+   "evento": "IdleGetAttention",
+   "nombre": "Llamar la atención",
+   "categoria": "cortesia",
    "busqueda": "",
    "origen": "vanilla",
-   "andando": true,
-   "descripcion": "Señalar algo mostrando algo"
+   "descripcion": "Agitar el brazo para llamar la atención de alguien"
   },
   {
    "edid": "LooseDialogueResponseNegative",
    "evento": "LooseDialogueResponseNegative",
    "nombre": "Negar",
-   "categoria": "dialogo",
+   "categoria": "cortesia",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Negar con la cabeza para dar una respuesta negativa"
   },
   {
-   "edid": "Talk",
-   "evento": "RF_Talk_In",
-   "nombre": "Ponerse a hablar",
-   "categoria": "dialogo",
+   "edid": "MQPhantomUnsummon",
+   "evento": "IdleSilentBow",
+   "nombre": "Presentar respeto",
+   "categoria": "cortesia",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ponerse a hablar",
-   "visible": false
+   "descripcion": "Inclinar el cuerpo despacio en señal de respeto"
   },
   {
-   "edid": "MotionDrivenDialogueStartIfNotCasual",
-   "evento": "MotionDrivenIdle",
-   "nombre": "Quedarse quieto al hablar",
-   "categoria": "dialogo",
+   "edid": "IdleSurrender",
+   "evento": "IdleSurrender",
+   "nombre": "Rendirse",
+   "categoria": "cortesia",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Quedarse quieto al hablar",
-   "visible": false
+   "destacada": true,
+   "descripcion": "Levantar las manos para rendirse"
   },
   {
-   "edid": "RF_SeriousInterested",
-   "evento": "RF_SeriousInterested_In",
-   "nombre": "Seria: interés",
-   "categoria": "dialogo",
+   "edid": "IdleBracedPain",
+   "evento": "IdleBracedPain",
+   "nombre": "Reverenciar",
+   "categoria": "cortesia",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Seria: interés",
-   "visible": false
+   "descripcion": "Hacer una reverencia inclinando el cuerpo"
   },
   {
-   "edid": "RF_SeriousThrowHands",
-   "evento": "RF_SeriousThrowHands_In",
-   "nombre": "Seria: manos al aire",
-   "categoria": "dialogo",
+   "edid": "IdleWave",
+   "evento": "IdleWave",
+   "nombre": "Saludar con la mano",
+   "categoria": "cortesia",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Seria: manos al aire",
-   "visible": false
+   "destacada": true,
+   "descripcion": "Levantar el brazo y sacudir la mano saludando"
+  },
+  {
+   "edid": "IdleSalute",
+   "evento": "IdleSalute",
+   "nombre": "Saludar con respeto",
+   "categoria": "cortesia",
+   "busqueda": "",
+   "origen": "vanilla",
+   "destacada": true,
+   "descripcion": "Saludar llevando la mano al pecho"
   },
   {
    "edid": "RF_SeriousPleading",
    "evento": "RF_SeriousPleading_In",
    "nombre": "Seria: súplica",
-   "categoria": "dialogo",
+   "categoria": "cortesia",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Seria: súplica",
    "visible": false
   },
   {
-   "edid": "DLC1PairEnd",
-   "evento": "PairEnd",
-   "nombre": "Terminar la escena en pareja",
-   "categoria": "dialogo",
+   "edid": "IdleComeThisWay",
+   "evento": "IdleComeThisWay",
+   "nombre": "Señalar que te sigan",
+   "categoria": "cortesia",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Fin de la escena en pareja",
-   "visible": false
-  },
-  {
-   "edid": "IdleRomanticFollowerStop",
-   "evento": "RF_Idle_Out",
-   "nombre": "Volver a la actitud normal",
-   "categoria": "dialogo",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Volver a la actitud normal",
-   "visible": false
-  },
-  {
-   "edid": "DLC1CoffinPuzzleBowlIdle",
-   "evento": "IdleActivateCoffinPuzzle",
-   "nombre": "Accionar el cuenco del ataúd",
-   "categoria": "dormir",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Accionar botón con pincho del ataúd",
-   "visible": false
+   "destacada": true,
+   "descripcion": "Hacer señas para que te sigan",
+   "tambien": [
+    "gestos"
+   ]
   },
   {
    "edid": "IdleCoffinEnter",
    "evento": "IdleCoffinEnter",
    "nombre": "Acostarse (Ataúd) (A)",
-   "categoria": "dormir",
+   "categoria": "descansar",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Acostarse con manos en el abdomen y cerrando los ojos",
@@ -1936,7 +2034,7 @@
    "edid": "DLC1IdleCoffinHorzEnter",
    "evento": "IdleCoffinHorzEnter",
    "nombre": "Acostarse (Ataúd) (B)",
-   "categoria": "dormir",
+   "categoria": "descansar",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Acostarse en un ataúd con manos a los lados",
@@ -1946,7 +2044,7 @@
    "edid": "FrontBedRollEnter",
    "evento": "IdleBedRollFrontEnterStart",
    "nombre": "Acostarse (Saco)",
-   "categoria": "dormir",
+   "categoria": "descansar",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Acostarse en un saco de dormir",
@@ -1956,7 +2054,7 @@
    "edid": "ChildLayOnFloorEnter",
    "evento": "IdleChildLayOnFloor",
    "nombre": "Acostarse boca abajo",
-   "categoria": "dormir",
+   "categoria": "descansar",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Acostarse en el suelo con cabeza apoyada en los brazos y piernas juguetonas"
@@ -1965,16 +2063,16 @@
    "edid": "IdleLayDownEnter",
    "evento": "IdleLayDownEnter",
    "nombre": "Acostarse en el suelo",
-   "categoria": "dormir",
+   "categoria": "descansar",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Acostarse en el suelo"
+   "descripcion": "Tumbarse en el suelo boca arriba"
   },
   {
    "edid": "RightBedEnter",
    "evento": "IdleBedRightEnterStart",
    "nombre": "Acostarse por la derecha (Cama)",
-   "categoria": "dormir",
+   "categoria": "descansar",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Acostarse en una cama por la derecha",
@@ -1984,7 +2082,7 @@
    "edid": "RightBedRollEnter",
    "evento": "IdleBedRollRightEnterStart",
    "nombre": "Acostarse por la derecha (Saco)",
-   "categoria": "dormir",
+   "categoria": "descansar",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Acostarse en un saco de dormir por la derecha",
@@ -1994,7 +2092,7 @@
    "edid": "LeftBedEnter",
    "evento": "IdleBedLeftEnterStart",
    "nombre": "Acostarse por la izquierda (Cama)",
-   "categoria": "dormir",
+   "categoria": "descansar",
    "busqueda": "",
    "origen": "vanilla",
    "destacada": true,
@@ -2005,7 +2103,7 @@
    "edid": "LeftBedRollEnter",
    "evento": "IdleBedRollLeftEnterStart",
    "nombre": "Acostarse por la izquierda (Saco)",
-   "categoria": "dormir",
+   "categoria": "descansar",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Acostarse en un saco de dormir por la izquierda",
@@ -2015,7 +2113,7 @@
    "edid": "DLC1SeranaCoffinEnterInstant",
    "evento": "DLC01CoffinEnterInstant",
    "nombre": "Acostarse verticalmente (Ataúd) (A)",
-   "categoria": "dormir",
+   "categoria": "descansar",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Acostarse en un ataúd vertical con brazos cruzados",
@@ -2025,60 +2123,849 @@
    "edid": "DLC1IdleCoffinVert",
    "evento": "IdleCoffinVertEnter",
    "nombre": "Acostarse verticalmente (Ataúd) (B)",
-   "categoria": "dormir",
+   "categoria": "descansar",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Meterse en el ataúd vertical para acostarse con brazos abajos",
    "visible": false
   },
   {
+   "edid": "IdleBarCounterEnter",
+   "evento": "IdleBarCounterEnter",
+   "nombre": "Apoyarse en el mostrador",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Apoyar en el mostrador de bar, a veces limpia"
+  },
+  {
+   "edid": "RailLeanEnter",
+   "evento": "IdleRailLeanEnter",
+   "nombre": "Apoyarse en la baranda",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "destacada": true,
+   "descripcion": "Avanzar un poco y apoyate en la baranda"
+  },
+  {
+   "edid": "IdleLeanTableEnter",
+   "evento": "IdleLeanTableEnter",
+   "nombre": "Apoyarse en la mesa",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Apoyarse en la mesa",
+   "visible": false
+  },
+  {
+   "edid": "IdleTableLeanPoint",
+   "evento": "IdleTableLeanPoint",
+   "nombre": "Apoyarse en la mesa y señalar",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Apoyarse en la mesa para señalar",
+   "visible": false,
+   "tambien": [
+    "gestos"
+   ]
+  },
+  {
+   "edid": "EnterWallLean",
+   "evento": "IdleWallLeanStart",
+   "nombre": "Apoyarse en la pared",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "destacada": true,
+   "descripcion": "Voltear y te apoyas con brazos cruzados"
+  },
+  {
+   "edid": "ChildSitOnKneesEnter",
+   "evento": "IdleChildSitOnKnees",
+   "nombre": "Arrodillarse",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Sentarse sobre las rodillas y hace un pequeño balanceo"
+  },
+  {
+   "edid": "CheckCorpse",
+   "evento": "IdleKneeling",
+   "nombre": "Arrodillarse junto a un cadáver",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Arrodillarse junto a un cadáver",
+   "visible": false
+  },
+  {
+   "edid": "IdleWalkThroughWallEnter",
+   "evento": "IdleWalkThroughWallEnter",
+   "nombre": "Atravesar la pared",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Atravesar la pared. Forma parte de lanzar hechizos",
+   "visible": false
+  },
+  {
+   "edid": "IdleDLC02FallOnKnees",
+   "evento": "IdleDLC02FallOnKnees",
+   "nombre": "Caer de rodillas",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Caer de rodillas",
+   "visible": false
+  },
+  {
+   "edid": "SittingChairVar1",
+   "evento": "IdleChairVar1",
+   "nombre": "Cambiar de pose (Sentado) (A)",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "sentado": true,
+   "descripcion": "Cambiar de postura estando sentado",
+   "tambien": [
+    "gestos"
+   ]
+  },
+  {
+   "edid": "SittingChairVar2",
+   "evento": "idleChairVar2",
+   "nombre": "Cambiar de pose (Sentado) (B)",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "sentado": true,
+   "descripcion": "Acomodarse en el asiento cambiando de postura",
+   "tambien": [
+    "gestos"
+   ]
+  },
+  {
+   "edid": "SittingChairArmsCrossedVar1",
+   "evento": "idleChairArmsCrossedVar1",
+   "nombre": "Cruzar los brazos (Sentado) (A)",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "sentado": true,
+   "descripcion": "Cruzar los brazos mientras estás sentado en una silla",
+   "tambien": [
+    "gestos"
+   ]
+  },
+  {
+   "edid": "SittingChairArmsCrossedVar2",
+   "evento": "idleChairArmsCrossedVar2",
+   "nombre": "Cruzar los brazos (Sentado) (B)",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "sentado": true,
+   "descripcion": "Cruzar los brazos mientras estás sentado en una silla",
+   "tambien": [
+    "gestos"
+   ]
+  },
+  {
    "edid": "IdleSleepNod",
    "evento": "IdleSleepNod",
    "nombre": "Dar cabezadas",
-   "categoria": "dormir",
+   "categoria": "descansar",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Dar cabezadas del sueño"
+   "descripcion": "Cabecear de sueño sin llegar a dormirse"
+  },
+  {
+   "edid": "RailLeanExit",
+   "evento": "IdleRailLeanExit",
+   "nombre": "Dejar de apoyarse en la baranda",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Retroceder un poco y sale de apoyate en la baranda",
+   "visible": false
+  },
+  {
+   "edid": "IdleShelfExit",
+   "evento": "IdleLounge_Exit",
+   "nombre": "Dejar de repantigarse",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Bajarse de mueble alto",
+   "visible": false
+  },
+  {
+   "edid": "HideLEnter",
+   "evento": "IdleHideLEnter",
+   "nombre": "Esconderse contra la pared",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Esconderse contra la pared",
+   "visible": false
+  },
+  {
+   "edid": "SittingChairShoulderFlex",
+   "evento": "idleChairShoulderFlex",
+   "nombre": "Estirarse (Sentado)",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "sentado": true,
+   "descripcion": "Estirar los brazos mientras estás sentado en una silla",
+   "tambien": [
+    "gestos"
+   ]
+  },
+  {
+   "edid": "SnowElfPrinceDialogue",
+   "evento": "IdleSnowElfPrinceChairDialogue",
+   "nombre": "Hablar sentado con gesto solemne",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "sentado": true,
+   "descripcion": "Hablar sentado con gesto solemne",
+   "visible": false,
+   "tambien": [
+    "gestos"
+   ]
   },
   {
    "edid": "ExitBed",
    "evento": "IdleBedExitStart",
    "nombre": "Levantarse (Cama)",
-   "categoria": "dormir",
+   "categoria": "descansar",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Levantarse de una cama",
    "visible": false
   },
   {
+   "edid": "ExitChairFront",
+   "evento": "IdleChairFrontExit",
+   "nombre": "Levantarse de frente",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Levantarse de la silla de frente",
+   "visible": false
+  },
+  {
+   "edid": "ExitChairFrontQuick",
+   "evento": "IdleChairFrontQuickExit",
+   "nombre": "Levantarse de frente, rápido",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Levantarse de la silla de frente rapido",
+   "visible": false
+  },
+  {
    "edid": "Idle_1stPersonWoozyGetUpFromBed",
    "evento": "Idle_1stPersonWoozyGetUpFromBed",
    "nombre": "Levantarse de la cama aturdido (1ª persona)",
-   "categoria": "dormir",
+   "categoria": "descansar",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Levantarse de una cama aturdido",
    "visible": false
   },
   {
+   "edid": "ExitChairBackQuick",
+   "evento": "IdleTableBackExit",
+   "nombre": "Levantarse de la mesa",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Levantarse de mesa hacia atras",
+   "visible": false
+  },
+  {
+   "edid": "IdleHadvarWriteLedgerExit",
+   "evento": "IdleChairExitStart",
+   "nombre": "Levantarse de la silla",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Levantarse de la silla de lado",
+   "visible": false
+  },
+  {
+   "edid": "IdleStoolExit",
+   "evento": "IdleStoolBackExit",
+   "nombre": "Levantarse del taburete",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Levantarse de taburete de bar",
+   "visible": false
+  },
+  {
+   "edid": "ExitChairRight",
+   "evento": "idleChairRightExit",
+   "nombre": "Levantarse por la derecha",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Levantarse de la silla del lado derecho",
+   "visible": false
+  },
+  {
+   "edid": "ExitChairRightQuick",
+   "evento": "IdleChairRightQuickExit",
+   "nombre": "Levantarse por la derecha, rápido",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Levantarse de la silla del lado derecho rapido",
+   "visible": false
+  },
+  {
+   "edid": "ExitChairLeft",
+   "evento": "idleChairLeftExit",
+   "nombre": "Levantarse por la izquierda",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Levantarse de la silla del lado izquierdo",
+   "visible": false
+  },
+  {
+   "edid": "ExitChairLeftQuick",
+   "evento": "IdleChairLeftQuickExit",
+   "nombre": "Levantarse por la izquierda, rápido",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Levantarse de la silla del lado izquierdo rapido",
+   "visible": false
+  },
+  {
    "edid": "BedQuickExit",
    "evento": "IdleBedQuickExitStart",
    "nombre": "Levantarse rápido (Cama)",
-   "categoria": "dormir",
+   "categoria": "descansar",
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Levantarse de una cama rapidamente",
    "visible": false
   },
   {
-   "edid": "MS12BedDeath",
-   "evento": "MS12BedDeath",
-   "nombre": "Morir en la cama",
-   "categoria": "dormir",
+   "edid": "SittingChairLookDown",
+   "evento": "idleChairLookDown",
+   "nombre": "Mirar al suelo (Sentado)",
+   "categoria": "descansar",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Morir en la cama",
+   "sentado": true,
+   "descripcion": "Mirar alrededor y luego mirar al suelo mientras estás sentado en una silla",
+   "tambien": [
+    "gestos"
+   ]
+  },
+  {
+   "edid": "IdleShelfEnterInstant",
+   "evento": "IdleLounge",
+   "nombre": "Repantigarse",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "destacada": true,
+   "descripcion": "Subirse a mueble alto",
    "visible": false
+  },
+  {
+   "edid": "IdleTableEnter",
+   "evento": "IdleTableEnter",
+   "nombre": "Sentarse a la mesa",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Sentarse a la mesa",
+   "visible": false
+  },
+  {
+   "edid": "IdleTableEnterPlayer",
+   "evento": "IdleTableEnterPlayer",
+   "nombre": "Sentarse a la mesa (jugador)",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Sentarse a la mesa (jugador)",
+   "visible": false
+  },
+  {
+   "edid": "IdleSitCrossLeggedEnter",
+   "evento": "IdleSitCrossLeggedEnter",
+   "nombre": "Sentarse con las piernas cruzadas",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Sentarse con las piernas cruzadas"
+  },
+  {
+   "edid": "IdleChildLegsOut",
+   "evento": "IdleChildLegsOutStart",
+   "nombre": "Sentarse con las piernas estiradas",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Sentarse con piernas cruzadas",
+   "visible": false
+  },
+  {
+   "edid": "EnterChairFront",
+   "evento": "IdleChairFrontEnter",
+   "nombre": "Sentarse de frente",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "destacada": true,
+   "descripcion": "Sentarse de frente en silla",
+   "visible": false
+  },
+  {
+   "edid": "IdleSitLedgeEnter",
+   "evento": "IdleSitLedgeEnter",
+   "nombre": "Sentarse en el borde",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Sentarse en un borde con las piernas colgando"
+  },
+  {
+   "edid": "IdleStoolEnter",
+   "evento": "IdleStoolEnter",
+   "nombre": "Sentarse en el taburete",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "destacada": true,
+   "descripcion": "Sentarse en taburete de bar",
+   "visible": false
+  },
+  {
+   "edid": "IdleStoolEnterPlayer",
+   "evento": "IdleStoolEnterPlayer",
+   "nombre": "Sentarse en el taburete (jugador)",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Sentarse en el taburete (jugador)",
+   "visible": false
+  },
+  {
+   "edid": "IdleJarlChairEnter",
+   "evento": "IdleJarlChairEnter",
+   "nombre": "Sentarse en el trono del jarl",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Sentarse en trono de jarl",
+   "visible": false
+  },
+  {
+   "edid": "IdleSnowElfPrinceChairEnter",
+   "evento": "IdleSnowElfPrinceChairEnter",
+   "nombre": "Sentarse en el trono élfico",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Sentarse en el trono élfico",
+   "visible": false
+  },
+  {
+   "edid": "EnterChairRight",
+   "evento": "IdleChairRightEnter",
+   "nombre": "Sentarse por la derecha",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Sentarse por la derecha en silla",
+   "visible": false
+  },
+  {
+   "edid": "EnterChairLeft",
+   "evento": "IdleChairLeftEnter",
+   "nombre": "Sentarse por la izquierda",
+   "categoria": "descansar",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Sentarse por la izquierda en silla",
+   "visible": false
+  },
+  {
+   "edid": "DLC2FreaSorrowEnter",
+   "evento": "idleFreaSorrowLoopEnter",
+   "nombre": "Arrodillarse de verguenza",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Arrodillarse cabizbajo, avergonzado ante alguien",
+   "tambien": [
+    "descansar"
+   ]
+  },
+  {
+   "edid": "IdleBowHeadAtGrave_01",
+   "evento": "IdleGrave_01",
+   "nombre": "Avergonzarse (A)",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Inclinar la cabeza de verguenza o respeto con las manos adelante"
+  },
+  {
+   "edid": "IdleBowHeadAtGrave_02",
+   "evento": "IdleGrave_02",
+   "nombre": "Avergonzarse (B)",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Inclinar la cabeza de verguenza o respeto con las manos atrás"
+  },
+  {
+   "edid": "IdleChildApologize",
+   "evento": "IdleChildApologize",
+   "nombre": "Avergonzarse (C)",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Bajar la cabeza y encogerse de vergüenza"
+  },
+  {
+   "edid": "IdleChildShy",
+   "evento": "IdleChildShy",
+   "nombre": "Avergonzarse (D)",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Avergonzarse jugueteando con las manos"
+  },
+  {
+   "edid": "IdleWarmHandsCrouched",
+   "evento": "IdleWarmHandsCrouched",
+   "nombre": "Calentarse las manos en cuclillas",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Calentarse las manos en cuclillas",
+   "tambien": [
+    "descansar",
+    "gestos"
+   ]
+  },
+  {
+   "edid": "RF_OpenDismissive",
+   "evento": "RF_OpenDismissive_In",
+   "nombre": "Cercana: desdén",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Cercana: desdén",
+   "visible": false
+  },
+  {
+   "edid": "RF_ShockOpen",
+   "evento": "RF_Shock_Open",
+   "nombre": "Cercana: sobresalto",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Cercana: sobresalto",
+   "visible": false
+  },
+  {
+   "edid": "IdleChildCryingEnd",
+   "evento": "IdleChildCryingEnd",
+   "nombre": "Dejar de llorar",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Serenarse y dejar de llorar poco a poco"
+  },
+  {
+   "edid": "RF_GuardedDismissive",
+   "evento": "RF_GuardedDismissive_In",
+   "nombre": "Distante: desdén",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Distante: desdén",
+   "visible": false
+  },
+  {
+   "edid": "RF_ShockGuarded",
+   "evento": "RF_Shock_Guarded",
+   "nombre": "Distante: sobresalto",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Distante: sobresalto",
+   "visible": false
+  },
+  {
+   "edid": "IdleCower",
+   "evento": "IdleCowering",
+   "nombre": "Encogerse de miedo",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "destacada": true,
+   "descripcion": "Encogerse y cubrirse la cara con miedo"
+  },
+  {
+   "edid": "IdleCowerEnter",
+   "evento": "IdleCowerEnter",
+   "nombre": "Encogerse de miedo (empezar)",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Encogerse de miedo (empezar)",
+   "visible": false
+  },
+  {
+   "edid": "IdleChildFidget",
+   "evento": "IdleChildFidget",
+   "nombre": "Esperar inquieto",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Esperar inquieto moviendo los brazos",
+   "tambien": [
+    "gestos"
+   ]
+  },
+  {
+   "edid": "IdleCiceroAgitated",
+   "evento": "IdleCiceroAgitated",
+   "nombre": "Gesticular alterado",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Mover mucho las manos hablando alterado",
+   "tambien": [
+    "gestos"
+   ]
+  },
+  {
+   "edid": "RF_PlayfulDismissive",
+   "evento": "RF_PlayfulDismissive_In",
+   "nombre": "Juguetona: desdén",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Juguetona: desdén",
+   "visible": false
+  },
+  {
+   "edid": "IdleChildCryingStart",
+   "evento": "IdleChildCryingStart",
+   "nombre": "Llorar",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Taparse la cara y romper a llorar"
+  },
+  {
+   "edid": "DLC2FreaDisbeliefStart",
+   "evento": "idleFreaReactionStart",
+   "nombre": "Mostrar incredulidad (A)",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Mostrar incredulidad (3)",
+   "visible": false
+  },
+  {
+   "edid": "DLC2IdleFreaDisbelief2Start",
+   "evento": "IdleFreaReaction2Start",
+   "nombre": "Mostrar incredulidad (B)",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Mostrar incredulidad (4)",
+   "visible": false
+  },
+  {
+   "edid": "IdleChildWhineStomp",
+   "evento": "IdleChildWhineStompFeet",
+   "nombre": "Patalear con rabia",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Dar patadas al aire con rabia"
+  },
+  {
+   "edid": "IdleNervous",
+   "evento": "IdleNervous",
+   "nombre": "Ponerse nervioso",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "destacada": true,
+   "descripcion": "Ponerse nervioso, mirando a los lados"
+  },
+  {
+   "edid": "IdleRitualSkull3",
+   "evento": "IdleRitualSkull3",
+   "nombre": "Quejarse",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Quejarse en voz alta moviendo los brazos"
+  },
+  {
+   "edid": "IdleChildWhineKick",
+   "evento": "IdleChildWhineKick",
+   "nombre": "Rabiar con patadas",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Patear el suelo en pleña rabieta"
+  },
+  {
+   "edid": "IdleChildTaunt1",
+   "evento": "IdleChildTaunt1",
+   "nombre": "Reirse (A)",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Soltar una carcajada burlona echando la cabeza atrás"
+  },
+  {
+   "edid": "IdleChildTaunt2",
+   "evento": "IdleChildTaunt2",
+   "nombre": "Reirse (B)",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Burlarse a carcajada y golpearse la pierna"
+  },
+  {
+   "edid": "IdleChildTaunt3",
+   "evento": "IdleChildTaunt3",
+   "nombre": "Reirse (C)",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Burlarse con las manos en la cintura"
+  },
+  {
+   "edid": "IdleChildTaunt4",
+   "evento": "IdleChildTaunt4",
+   "nombre": "Reirse (D)",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Burlarse con las manos en el estomago"
+  },
+  {
+   "edid": "IdleLaugh",
+   "evento": "IdleLaugh",
+   "nombre": "Reirse (E)",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "destacada": true,
+   "descripcion": "Reírse con ganas llevándose la mano al pecho"
+  },
+  {
+   "edid": "DLC2StornReaction1Stop",
+   "evento": "idleDisbelief01Exit",
+   "nombre": "Salir de la incredulidad (A)",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Salir de la incredulidad",
+   "visible": false
+  },
+  {
+   "edid": "DLC2StornReaction2Stop",
+   "evento": "idleDisbelief02Exit",
+   "nombre": "Salir de la incredulidad (B)",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Salir de la incredulidad (2)",
+   "visible": false
+  },
+  {
+   "edid": "DLC2FreaReactionStop",
+   "evento": "idleFreaDisbeliefLoopStop",
+   "nombre": "Salir de la incredulidad (C)",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Salir de la incredulidad (3)",
+   "visible": false
+  },
+  {
+   "edid": "DLC2IdleFreaDisbelief2Stop",
+   "evento": "IdleFreaDisbelief2LoopStop",
+   "nombre": "Salir de la incredulidad (D)",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Salir de la incredulidad (4)",
+   "visible": false
+  },
+  {
+   "edid": "DLC2FreaSorrowExit",
+   "evento": "idleFreaSorrowExit",
+   "nombre": "Salir de la pena",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Salir de la pena",
+   "visible": false
+  },
+  {
+   "edid": "RF_SeriousDismissive",
+   "evento": "RF_SeriousDismissive_In",
+   "nombre": "Seria: desdén",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Seria: desdén",
+   "visible": false
+  },
+  {
+   "edid": "idle_A_sigh_var1Trans",
+   "evento": "idle_A_sigh_var1Trans",
+   "nombre": "Suspirar (A)",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Suspirar",
+   "visible": false
+  },
+  {
+   "edid": "idle_A_sigh_var2Trans",
+   "evento": "idle_A_sigh_var2Trans",
+   "nombre": "Suspirar (B)",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Suspirar (2)",
+   "visible": false
+  },
+  {
+   "edid": "IdleUncontrollableCough",
+   "evento": "IdleUncontrollableCough",
+   "nombre": "Toser",
+   "categoria": "emociones",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Toser con fuerza sin poder parar"
   },
   {
    "edid": "pa_HugA",
@@ -2106,6 +2993,46 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Abrir los brazos mirando al cielo",
+   "visible": false
+  },
+  {
+   "edid": "Caring",
+   "evento": "RF_OpenStart",
+   "nombre": "Actitud: cercana",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Actitud: cercana",
+   "visible": false
+  },
+  {
+   "edid": "Standoffish",
+   "evento": "RF_GuardedStart",
+   "nombre": "Actitud: distante",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Actitud: distante",
+   "visible": false
+  },
+  {
+   "edid": "Flirty",
+   "evento": "RF_PlayfulStart",
+   "nombre": "Actitud: juguetona",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Actitud: juguetona",
+   "visible": false
+  },
+  {
+   "edid": "Sarcastic",
+   "evento": "RF_SeriousStart",
+   "nombre": "Actitud: seria",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Actitud: seria",
    "visible": false
   },
   {
@@ -2149,6 +3076,36 @@
    "visible": false
   },
   {
+   "edid": "IdleNocturnal_IdleA",
+   "evento": "IdleNocturnal_IdleA",
+   "nombre": "Adoptar la pose solemne (A)",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Adoptar la pose solemne. Forma parte de lanzar hechizos",
+   "visible": false
+  },
+  {
+   "edid": "IdleNocturnal_IdleB",
+   "evento": "IdleNocturnal_IdleB",
+   "nombre": "Adoptar la pose solemne (B)",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Adoptar la pose solemne (2). Forma parte de lanzar hechizos",
+   "visible": false
+  },
+  {
+   "edid": "IdleNocturnal_IdleAMirror",
+   "evento": "IdleNocturnal_IdleAMirror",
+   "nombre": "Adoptar la pose solemne (reflejada)",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Adoptar la pose solemne (reflejada). Forma parte de lanzar hechizos",
+   "visible": false
+  },
+  {
    "edid": "PlayOnceThenPickNewIdle",
    "evento": "IdlePlayer",
    "nombre": "Adoptar la postura del jugador",
@@ -2157,33 +3114,6 @@
    "origen": "vanilla",
    "descripcion": "Adoptar la postura del jugador",
    "visible": false
-  },
-  {
-   "edid": "IdleCO2Ceremony1Welcome",
-   "evento": "IdleCO2Ceremony1Welcome",
-   "nombre": "Agradecer",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Abrir los brazos para agradecer"
-  },
-  {
-   "edid": "IdleMT_DoorBang",
-   "evento": "IdleMT_DoorBang",
-   "nombre": "Aporrear una puerta",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Aporrear una puerta con desdén"
-  },
-  {
-   "edid": "DLC2FreaSorrowEnter",
-   "evento": "idleFreaSorrowLoopEnter",
-   "nombre": "Arrodillarse de verguenza",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Arrodillarse cabisbajo de verguenza"
   },
   {
    "edid": "IdleWallCornerPeekREnter",
@@ -2204,42 +3134,6 @@
    "origen": "vanilla",
    "descripcion": "Asomarse por la esquina, a la izquierda",
    "visible": false
-  },
-  {
-   "edid": "IdleBowHeadAtGrave_01",
-   "evento": "IdleGrave_01",
-   "nombre": "Avergonzarse (A)",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Inclinar la cabeza de verguenza o respeto con las manos adelante"
-  },
-  {
-   "edid": "IdleBowHeadAtGrave_02",
-   "evento": "IdleGrave_02",
-   "nombre": "Avergonzarse (B)",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Inclinar la cabeza de verguenza o respeto con las manos atrás"
-  },
-  {
-   "edid": "IdleChildApologize",
-   "evento": "IdleChildApologize",
-   "nombre": "Avergonzarse (C)",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Avergonzarse"
-  },
-  {
-   "edid": "IdleChildShy",
-   "evento": "IdleChildShy",
-   "nombre": "Avergonzarse (D)",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Avergonzarse jugueteando con las manos"
   },
   {
    "edid": "idle_A_sway_fastTrans",
@@ -2271,22 +3165,53 @@
    "descripcion": "Calentarse las manos de pie"
   },
   {
-   "edid": "IdleWarmHandsCrouched",
-   "evento": "IdleWarmHandsCrouched",
-   "nombre": "Calentarse las manos en cuclillas",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Calentarse las manos en cuclillas"
-  },
-  {
    "edid": "IdleWarmArms",
    "evento": "IdleWarmArms",
    "nombre": "Calentarse los brazos",
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Calentarse los brazos"
+   "descripcion": "Frotarse los brazos para entrar en calor"
+  },
+  {
+   "edid": "RF_MoodChangeOpen",
+   "evento": "RF_MoodChangeOpen",
+   "nombre": "Cambiar a actitud cercana",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Cambiar a actitud cercana",
+   "visible": false
+  },
+  {
+   "edid": "RF_MoodChangeGuarded",
+   "evento": "RF_MoodChangeGuarded",
+   "nombre": "Cambiar a actitud distante",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Cambiar a actitud distante",
+   "visible": false
+  },
+  {
+   "edid": "RF_MoodChangePlayful",
+   "evento": "RF_MoodChangePlayful",
+   "nombre": "Cambiar a actitud juguetona",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Cambiar a actitud juguetona",
+   "visible": false
+  },
+  {
+   "edid": "RF_MoodChangeSerious",
+   "evento": "RF_MoodChangeSerious",
+   "nombre": "Cambiar a actitud seria",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Cambiar a actitud seria",
+   "visible": false
   },
   {
    "edid": "idle_A_leg_shift",
@@ -2299,13 +3224,34 @@
    "visible": false
   },
   {
-   "edid": "RF_OpenDismissive",
-   "evento": "RF_OpenDismissive_In",
-   "nombre": "Cercana: desdén",
+   "edid": "RF_OpenInterested",
+   "evento": "RF_OpenInterested_In",
+   "nombre": "Cercana: interés",
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Cercana: desdén",
+   "descripcion": "Cercana: interés",
+   "visible": false
+  },
+  {
+   "edid": "RF_OpenThrowHands",
+   "evento": "RF_OpenThrowHands_In",
+   "nombre": "Cercana: manos al aire",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Cercana: manos al aire",
+   "visible": false
+  },
+  {
+   "edid": "pa_WereWolf_CutWrist",
+   "evento": "pa_WW_CutWrist",
+   "nombre": "Cortarse la muñeca",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "confirmado": false,
+   "descripcion": "Cortarse la muñeca. Forma parte de lanzar hechizos",
    "visible": false
   },
   {
@@ -2320,43 +3266,43 @@
    "descripcion": "Cruzarse de brazos de pie"
   },
   {
-   "edid": "IdleChildCryingEnd",
-   "evento": "IdleChildCryingEnd",
-   "nombre": "Dejar de llorar",
+   "edid": "RF_GuardedInterested",
+   "evento": "RF_GuardedInterested_In",
+   "nombre": "Distante: interés",
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Dejar de llorar"
-  },
-  {
-   "edid": "RF_GuardedDismissive",
-   "evento": "RF_GuardedDismissive_In",
-   "nombre": "Distante: desdén",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Distante: desdén",
+   "descripcion": "Distante: interés",
    "visible": false
   },
   {
-   "edid": "IdleCower",
-   "evento": "IdleCowering",
-   "nombre": "Encogerse de miedo",
+   "edid": "RF_GuardedThrowHands",
+   "evento": "RF_GuardedThrowHands_In",
+   "nombre": "Distante: manos al aire",
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "destacada": true,
-   "descripcion": "Encogerse de miedo"
+   "descripcion": "Distante: manos al aire",
+   "visible": false
   },
   {
-   "edid": "IdleCowerEnter",
-   "evento": "IdleCowerEnter",
-   "nombre": "Encogerse de miedo (empezar)",
+   "edid": "TalkingHappy",
+   "evento": "IdleDialogueHappyStart",
+   "nombre": "Empezar a hablar contento",
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Encogerse de miedo (empezar)",
+   "descripcion": "Empezar a hablar contento",
    "visible": false
+  },
+  {
+   "edid": "IdleDialogueHandOnChinGesture",
+   "evento": "IdleDialogueHandOnChinGesture",
+   "nombre": "Entender algo",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Llevarse la mano a la barbilla para entender algo"
   },
   {
    "edid": "HideREnter",
@@ -2388,15 +3334,6 @@
    "descripcion": "Quedarse quieto esperando con diferentes poses intercaladas"
   },
   {
-   "edid": "IdleChildFidget",
-   "evento": "IdleChildFidget",
-   "nombre": "Esperar inquieto",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Esperar inquieto moviendo los brazos"
-  },
-  {
    "edid": "idle_A_shoulders",
    "evento": "idle_A_shoulders",
    "nombre": "Estirar los hombros (A)",
@@ -2415,6 +3352,54 @@
    "origen": "vanilla",
    "descripcion": "Estirar los hombros (2)",
    "visible": false
+  },
+  {
+   "edid": "RF_ShockPlayful",
+   "evento": "RF_Shock_Playful",
+   "nombre": "Gesticular (A)",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Ponerse la mano en la cintura y gesticular"
+  },
+  {
+   "edid": "RF_ShockSerious",
+   "evento": "RF_Shock_Serious",
+   "nombre": "Gesticular (B)",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Ponerse las manos a la cintura y gesticular"
+  },
+  {
+   "edid": "IdleDialogueMovingTalkA",
+   "evento": "IdleDialogueMovingTalkA",
+   "nombre": "Gesticular andando (A)",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "andando": true,
+   "descripcion": "Andar de lado a lado gesticulando"
+  },
+  {
+   "edid": "IdleDialogueMovingTalkC",
+   "evento": "IdleDialogueMovingTalkC",
+   "nombre": "Gesticular andando (B)",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "andando": true,
+   "descripcion": "Andar de lado a lado gesticulando"
+  },
+  {
+   "edid": "IdleDialogueMovingTalkD",
+   "evento": "IdleDialogueMovingTalkD",
+   "nombre": "Gesticular andando (C)",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "andando": true,
+   "descripcion": "Andar de lado a lado gesticulando"
   },
   {
    "edid": "IdleChildPlayDirt",
@@ -2445,6 +3430,121 @@
    "descripcion": "Golpear el suelo con la mano estando agachado triste"
   },
   {
+   "edid": "TalkingFail",
+   "evento": "IdleDialogueStart",
+   "nombre": "Hablar",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Levantar hombros para comenzar el dialogo"
+  },
+  {
+   "edid": "DialogueNeutralExpressive",
+   "evento": "DialogueNeutral",
+   "nombre": "Hablar con naturalidad",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Hablar con naturalidad",
+   "visible": false
+  },
+  {
+   "edid": "DialogueGenericTalking",
+   "evento": "DialogueGeneric",
+   "nombre": "Hablar con normalidad",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Hablar con normalidad",
+   "visible": false
+  },
+  {
+   "edid": "DialogueHappyExpressive",
+   "evento": "DialogueHappy",
+   "nombre": "Hablar contento",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Hablar contento",
+   "visible": false
+  },
+  {
+   "edid": "TalkingAngry",
+   "evento": "IdleDialogueAngryStart",
+   "nombre": "Hablar enojado (A)",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Hablar enojado",
+   "visible": false
+  },
+  {
+   "edid": "DialogueAngryExpressive",
+   "evento": "DialogueAngry",
+   "nombre": "Hablar enojado (B)",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Hablar enojado (1)",
+   "visible": false
+  },
+  {
+   "edid": "DialogueAngryMotionDriven",
+   "evento": "MotionDrivenDialogueAngry",
+   "nombre": "Hablar enojado mientras te mueves",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "andando": true,
+   "confirmado": false,
+   "descripcion": "Hablar enojado mientras te mueves",
+   "visible": false
+  },
+  {
+   "edid": "TalkingExpressive",
+   "evento": "IdleDialogueExpressiveStart",
+   "nombre": "Hablar gesticulando",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Hablar gesticulando",
+   "visible": false
+  },
+  {
+   "edid": "TalkingWithItem",
+   "evento": "IdleTalkAndUseItem",
+   "nombre": "Hablar manejando algo",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Hablar manejando algo",
+   "visible": false
+  },
+  {
+   "edid": "DialogueGenericMotionDriven",
+   "evento": "MotionDrivenDialogueGeneric",
+   "nombre": "Hablar mientras te mueves",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "andando": true,
+   "confirmado": false,
+   "descripcion": "Hablar mientras te mueves",
+   "visible": false
+  },
+  {
+   "edid": "DialogueNeutralShiftMotionDriven",
+   "evento": "MotionDrivenDialogueNextClip",
+   "nombre": "Hablar: cambiar de gesto",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "andando": true,
+   "confirmado": false,
+   "descripcion": "Hablar: cambiar de gesto",
+   "visible": false
+  },
+  {
    "edid": "IdleHDRight",
    "evento": "IdleHDRight",
    "nombre": "Hacer un gesto hacia la derecha (variante HD)",
@@ -2473,16 +3573,26 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Jugar con una muñeca"
+   "descripcion": "Sostener una muñeca de trapo y jugar con ella"
   },
   {
-   "edid": "RF_PlayfulDismissive",
-   "evento": "RF_PlayfulDismissive_In",
-   "nombre": "Juguetona: desdén",
+   "edid": "RF_PlayfulInterested",
+   "evento": "RF_PlayfulInterested_In",
+   "nombre": "Juguetona: interés",
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Juguetona: desdén",
+   "descripcion": "Juguetona: interés",
+   "visible": false
+  },
+  {
+   "edid": "RF_PlayfulThrowHands",
+   "evento": "RF_PlayfulThrowHands_In",
+   "nombre": "Juguetona: manos al aire",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Juguetona: manos al aire",
    "visible": false
   },
   {
@@ -2494,24 +3604,6 @@
    "origen": "vanilla",
    "descripcion": "Ladearse a la derecha",
    "visible": false
-  },
-  {
-   "edid": "IdleGetAttention",
-   "evento": "IdleGetAttention",
-   "nombre": "Llamar la atención",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Llamar la atención"
-  },
-  {
-   "edid": "IdleChildCryingStart",
-   "evento": "IdleChildCryingStart",
-   "nombre": "Llorar",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Empezar a llorar"
   },
   {
    "edid": "IdleLookFar",
@@ -2532,24 +3624,14 @@
    "descripcion": "Morderse la mano para gotear sangre en el suelo"
   },
   {
-   "edid": "DLC2FreaDisbeliefStart",
-   "evento": "idleFreaReactionStart",
-   "nombre": "Mostrar incredulidad (A)",
+   "edid": "IdleDialogueMovingTalkB",
+   "evento": "IdleDialogueMovingTalkB",
+   "nombre": "Mostrar algo",
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Mostrar incredulidad (3)",
-   "visible": false
-  },
-  {
-   "edid": "DLC2IdleFreaDisbelief2Start",
-   "evento": "IdleFreaReaction2Start",
-   "nombre": "Mostrar incredulidad (B)",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Mostrar incredulidad (4)",
-   "visible": false
+   "andando": true,
+   "descripcion": "Señalar algo con la mano para mostrarlo"
   },
   {
    "edid": "IdlePresentSkeletonKey",
@@ -2587,7 +3669,7 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Observar algo detenidamente"
+   "descripcion": "Quedarse quieto observando algo con atención"
   },
   {
    "edid": "IdleWalkingCameraStart",
@@ -2600,70 +3682,24 @@
    "visible": false
   },
   {
-   "edid": "IdleChildWhineStomp",
-   "evento": "IdleChildWhineStompFeet",
-   "nombre": "Patalear con rabia",
+   "edid": "Talk",
+   "evento": "RF_Talk_In",
+   "nombre": "Ponerse a hablar",
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "hacer una rabieta pataleando"
+   "descripcion": "Ponerse a hablar",
+   "visible": false
   },
   {
-   "edid": "IdleHandsBehindBack",
-   "evento": "IdleHandsBehindBack",
-   "nombre": "Ponerse firme (A)",
+   "edid": "MotionDrivenDialogueStartIfNotCasual",
+   "evento": "MotionDrivenIdle",
+   "nombre": "Quedarse quieto al hablar",
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "destacada": true,
-   "descripcion": "Ponerse firme con las manos a la espalda"
-  },
-  {
-   "edid": "IdleSnapToAttention",
-   "evento": "IdleSnapToAttention",
-   "nombre": "Ponerse firme (B)",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "destacada": true,
-   "descripcion": "Ponerse firme por un instante"
-  },
-  {
-   "edid": "IdleNervous",
-   "evento": "IdleNervous",
-   "nombre": "Ponerse nervioso",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "destacada": true,
-   "descripcion": "Ponerse nervioso, mirando a los lados"
-  },
-  {
-   "edid": "MQPhantomUnsummon",
-   "evento": "IdleSilentBow",
-   "nombre": "Presentar respeto",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Inclinarse para presentar respeto"
-  },
-  {
-   "edid": "IdleRitualSkull3",
-   "evento": "IdleRitualSkull3",
-   "nombre": "Quejarse",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Quejarse moviendo los brazos"
-  },
-  {
-   "edid": "IdleChildWhineKick",
-   "evento": "IdleChildWhineKick",
-   "nombre": "Rabiar con patadas",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Hacer una rabieta pateando"
+   "descripcion": "Quedarse quieto al hablar",
+   "visible": false
   },
   {
    "edid": "idle_A_scratch_back",
@@ -2674,62 +3710,6 @@
    "origen": "vanilla",
    "descripcion": "Rascarse la espalda",
    "visible": false
-  },
-  {
-   "edid": "IdleChildTaunt1",
-   "evento": "IdleChildTaunt1",
-   "nombre": "Reirse (A)",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Burlarse a carcajadas"
-  },
-  {
-   "edid": "IdleChildTaunt2",
-   "evento": "IdleChildTaunt2",
-   "nombre": "Reirse (B)",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Burlarse a carcajada y golpearse la pierna"
-  },
-  {
-   "edid": "IdleChildTaunt3",
-   "evento": "IdleChildTaunt3",
-   "nombre": "Reirse (C)",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Burlarse con las manos en la cintura"
-  },
-  {
-   "edid": "IdleChildTaunt4",
-   "evento": "IdleChildTaunt4",
-   "nombre": "Reirse (D)",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Burlarse con las manos en el estomago"
-  },
-  {
-   "edid": "IdleLaugh",
-   "evento": "IdleLaugh",
-   "nombre": "Reirse (E)",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "destacada": true,
-   "descripcion": "Reírse"
-  },
-  {
-   "edid": "IdleSurrender",
-   "evento": "IdleSurrender",
-   "nombre": "Rendirse",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "destacada": true,
-   "descripcion": "Levantar las manos para rendirse"
   },
   {
    "edid": "DLC2StornReaction1Start",
@@ -2752,15 +3732,6 @@
    "visible": false
   },
   {
-   "edid": "IdleBracedPain",
-   "evento": "IdleBracedPain",
-   "nombre": "Reverenciar",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Reverenciarse"
-  },
-  {
    "edid": "idle_A_shakeout",
    "evento": "idle_A_shakeout",
    "nombre": "Sacudirse",
@@ -2771,92 +3742,32 @@
    "visible": false
   },
   {
-   "edid": "DLC2StornReaction1Stop",
-   "evento": "idleDisbelief01Exit",
-   "nombre": "Salir de la incredulidad (A)",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Salir de la incredulidad",
-   "visible": false
-  },
-  {
-   "edid": "DLC2StornReaction2Stop",
-   "evento": "idleDisbelief02Exit",
-   "nombre": "Salir de la incredulidad (B)",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Salir de la incredulidad (2)",
-   "visible": false
-  },
-  {
-   "edid": "DLC2FreaReactionStop",
-   "evento": "idleFreaDisbeliefLoopStop",
-   "nombre": "Salir de la incredulidad (C)",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Salir de la incredulidad (3)",
-   "visible": false
-  },
-  {
-   "edid": "DLC2IdleFreaDisbelief2Stop",
-   "evento": "IdleFreaDisbelief2LoopStop",
-   "nombre": "Salir de la incredulidad (D)",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Salir de la incredulidad (4)",
-   "visible": false
-  },
-  {
-   "edid": "DLC2FreaSorrowExit",
-   "evento": "idleFreaSorrowExit",
-   "nombre": "Salir de la pena",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Salir de la pena",
-   "visible": false
-  },
-  {
-   "edid": "IdleWave",
-   "evento": "IdleWave",
-   "nombre": "Saludar con la mano",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "destacada": true,
-   "descripcion": "Saludar sacudiendo la mano"
-  },
-  {
-   "edid": "IdleSalute",
-   "evento": "IdleSalute",
-   "nombre": "Saludar con respeto",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "destacada": true,
-   "descripcion": "Saludar llevando la mano al pecho"
-  },
-  {
    "edid": "IdleWipeBrow",
    "evento": "IdleWipeBrow",
    "nombre": "Secarse la frente",
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Secarse la frente"
+   "descripcion": "Pasarse el brazo por la frente sudada"
   },
   {
-   "edid": "RF_SeriousDismissive",
-   "evento": "RF_SeriousDismissive_In",
-   "nombre": "Seria: desdén",
+   "edid": "RF_SeriousInterested",
+   "evento": "RF_SeriousInterested_In",
+   "nombre": "Seria: interés",
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Seria: desdén",
+   "descripcion": "Seria: interés",
+   "visible": false
+  },
+  {
+   "edid": "RF_SeriousThrowHands",
+   "evento": "RF_SeriousThrowHands_In",
+   "nombre": "Seria: manos al aire",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Seria: manos al aire",
    "visible": false
   },
   {
@@ -2867,7 +3778,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "destacada": true,
-   "descripcion": "Señalar algo medianamente lejano"
+   "descripcion": "Señalar con el brazo algo a media distancia"
   },
   {
    "edid": "IdlePointFar_02",
@@ -2876,7 +3787,7 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Señalar algo lejano"
+   "descripcion": "Estirar el brazo señalando algo lejano"
   },
   {
    "edid": "IdlePointClose",
@@ -2885,17 +3796,7 @@
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Señalar algo cercano"
-  },
-  {
-   "edid": "IdleComeThisWay",
-   "evento": "IdleComeThisWay",
-   "nombre": "Señalar que te sigan",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "destacada": true,
-   "descripcion": "Hacer señas para que te sigan"
+   "descripcion": "Señalar con el dedo algo que tiene cerca"
   },
   {
    "edid": "idle_A_pull_pants",
@@ -2905,26 +3806,6 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Subirse los pantalones",
-   "visible": false
-  },
-  {
-   "edid": "idle_A_sigh_var1Trans",
-   "evento": "idle_A_sigh_var1Trans",
-   "nombre": "Suspirar (A)",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Suspirar",
-   "visible": false
-  },
-  {
-   "edid": "idle_A_sigh_var2Trans",
-   "evento": "idle_A_sigh_var2Trans",
-   "nombre": "Suspirar (B)",
-   "categoria": "gestos",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Suspirar (2)",
    "visible": false
   },
   {
@@ -2938,13 +3819,24 @@
    "visible": false
   },
   {
-   "edid": "IdleUncontrollableCough",
-   "evento": "IdleUncontrollableCough",
-   "nombre": "Toser",
+   "edid": "DLC1PairEnd",
+   "evento": "PairEnd",
+   "nombre": "Terminar la escena en pareja",
    "categoria": "gestos",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Toser incontrolablemente"
+   "descripcion": "Fin de la escena en pareja",
+   "visible": false
+  },
+  {
+   "edid": "IdleRomanticFollowerStop",
+   "evento": "RF_Idle_Out",
+   "nombre": "Volver a la actitud normal",
+   "categoria": "gestos",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Volver a la actitud normal",
+   "visible": false
   },
   {
    "edid": "IdleNocturnal_LookRight",
@@ -2964,347 +3856,6 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Volver la mirada a la izquierda",
-   "visible": false
-  },
-  {
-   "edid": "TG05_StabPlayer",
-   "evento": "TG05_StabPlayer",
-   "nombre": "Apuñalar al jugador",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Apuñalar al jugador",
-   "visible": false
-  },
-  {
-   "edid": "IdleBoundKneesEnterInstant",
-   "evento": "IdleBoundKneesEnterInstant",
-   "nombre": "Arrodillarse atado (A)",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Estar de rodilla con las manos atadas en la espalda"
-  },
-  {
-   "edid": "IdleBoundKneesStart",
-   "evento": "IdleBoundKneesStart",
-   "nombre": "Arrodillarse atado (B)",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Arrodillarse estando atado de manos"
-  },
-  {
-   "edid": "BoundStandingCut",
-   "evento": "BoundStandingCut",
-   "nombre": "Cortar las ataduras",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Cortar las ataduras"
-  },
-  {
-   "edid": "pa_OffsetBoundStandingCut",
-   "evento": "pa_OffsetBoundStandingCut",
-   "nombre": "Cortar las ataduras (A ti)",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Cortarse las ataduras de las manos por alguien más (hace un pequeño movimiento de manos como que alguien le corta la atadura de las manos)",
-   "visible": false
-  },
-  {
-   "edid": "BoundStandingCutNPC",
-   "evento": "BoundStandingCutNPC",
-   "nombre": "Cortarle las ataduras a alguien",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Cortarle las ataduras a alguien"
-  },
-  {
-   "edid": "IdleHandCut",
-   "evento": "IdleHandCut",
-   "nombre": "Cortarse la mano",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Cortarse la mano estando de cuclilla"
-  },
-  {
-   "edid": "IdleExecutionerChop_Player",
-   "evento": "IdleExecutionerChop_Player",
-   "nombre": "Decapitar al jugador",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Decapitar al jugador",
-   "visible": false
-  },
-  {
-   "edid": "IdleHeadChop",
-   "evento": "IdleExecutionerChop",
-   "nombre": "Decapitar con el hacha",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Decapitar con el hacha",
-   "visible": false
-  },
-  {
-   "edid": "NPCKnockDown",
-   "evento": "Ragdoll",
-   "nombre": "Desplomarse como un muñeco",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Desplomarse como un muñeco",
-   "visible": false
-  },
-  {
-   "edid": "IdleTablePassOutEnterLoose",
-   "evento": "IdleTablePassOutEnter",
-   "nombre": "Desplomarse sobre la mesa",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Desplomarse sobre la mesa",
-   "visible": false
-  },
-  {
-   "edid": "IdleExecutionerIdle",
-   "evento": "IdleExecutionerIdle",
-   "nombre": "Esperar a ejecutar",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Esperar con un hacha de ejecución preparado para ejecutar"
-  },
-  {
-   "edid": "IdleExecutioneeIdle",
-   "evento": "IdleExecutioneeIdle",
-   "nombre": "Esperar atado",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Esperar estando de pie atado de manos"
-  },
-  {
-   "edid": "IdleDA02BoethiahPostEnter",
-   "evento": "IdleDA02BoethiahPostEnter",
-   "nombre": "Estar atado a un poste",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Atado a un poste. Forma parte de lanzar hechizos",
-   "visible": false
-  },
-  {
-   "edid": "OffsetBoundStandingStart",
-   "evento": "OffsetBoundStandingStart",
-   "nombre": "Estar atado de pie",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "andando": true,
-   "descripcion": "Estar de pie atado"
-  },
-  {
-   "edid": "IdleInjured",
-   "evento": "IdleInjured",
-   "nombre": "Estar herido (A)",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "destacada": true,
-   "descripcion": "Aguantarse el hombro herido"
-  },
-  {
-   "edid": "IdleWounded01EnterInstant",
-   "evento": "IdleWounded_01",
-   "nombre": "Estar herido (B)",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "destacada": true,
-   "descripcion": "Sentarse en el suelo herido"
-  },
-  {
-   "edid": "IdleWounded02EnterInstant",
-   "evento": "IdleWounded_02",
-   "nombre": "Estar herido (C)",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Acostarse y retorserse herido"
-  },
-  {
-   "edid": "IdleWounded03EnterInstant",
-   "evento": "IdleWounded_03",
-   "nombre": "Estar herido (D)",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Arrodillarse herido"
-  },
-  {
-   "edid": "IdleWebThrashShort",
-   "evento": "IdleWebThrashShort",
-   "nombre": "Forcejear en la telaraña (A)",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Forcejear en la telaraña",
-   "visible": false
-  },
-  {
-   "edid": "IdleWebThrashShort2",
-   "evento": "IdleWebThrashShort2",
-   "nombre": "Forcejear en la telaraña (B)",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Forcejear en la telaraña (2)",
-   "visible": false
-  },
-  {
-   "edid": "TG05_GetUp",
-   "evento": "TG05_GetUp",
-   "nombre": "Levantarse aturdido",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Levantarse aturdido",
-   "visible": false
-  },
-  {
-   "edid": "NPCGetUp",
-   "evento": "GetUpBegin",
-   "nombre": "Levantarse del suelo",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Levantarse del suelo",
-   "visible": false
-  },
-  {
-   "edid": "DeathAnimationStart",
-   "evento": "DeathAnim",
-   "nombre": "Morir",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Morir",
-   "visible": false
-  },
-  {
-   "edid": "IdleDLC02MiraakDeathStart",
-   "evento": "IdleDLC02MiraakDeath",
-   "nombre": "Morir despacio",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Morir despacio",
-   "visible": false
-  },
-  {
-   "edid": "IdleSoupDeath",
-   "evento": "IdleSoupDeath",
-   "nombre": "Morir sobre el plato",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Morir sobre el plato",
-   "visible": false
-  },
-  {
-   "edid": "EnterWebInstant",
-   "evento": "IdleWebEnterInstant",
-   "nombre": "Quedar atrapado en la telaraña",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Quedar atrapado en la telaraña",
-   "visible": false
-  },
-  {
-   "edid": "TG05_KnockOut",
-   "evento": "TG05_KnockOut",
-   "nombre": "Quedar inconsciente",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Quedar inconsciente",
-   "visible": false
-  },
-  {
-   "edid": "IdleExecutionerAlduinReaction",
-   "evento": "IdleExecutionerAlduinReaction",
-   "nombre": "Reaccionar con espanto",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Reaccionar con espanto",
-   "visible": false
-  },
-  {
-   "edid": "IdleExecutionerAlduinReactionDeath",
-   "evento": "IdleExecutionerAlduinReactionDeath",
-   "nombre": "Reaccionar con espanto y morir",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Reaccionar con espanto y morir",
-   "visible": false
-  },
-  {
-   "edid": "IdleExecutioneeChop",
-   "evento": "IdleExecutioneeChop",
-   "nombre": "Recibir el golpe de hacha del verdugo",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Recibir el golpe de hacha del verdugo",
-   "visible": false
-  },
-  {
-   "edid": "IdleExecutionerGuardExit",
-   "evento": "IdleFurnitureExitTriggered",
-   "nombre": "Salir del mueble (forzado)",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Salir del mueble (forzado)",
-   "visible": false
-  },
-  {
-   "edid": "WebIdleExit",
-   "evento": "IdleWebExit",
-   "nombre": "Soltarse de la telaraña",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Soltarse de la telaraña",
-   "visible": false
-  },
-  {
-   "edid": "WebIdleExitQuickTurn",
-   "evento": "IdleWebExitQuickTurn",
-   "nombre": "Soltarse de la telaraña y girarse",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Soltarse de la telaraña y girarse",
-   "visible": false
-  },
-  {
-   "edid": "IdleDLC02MiraakDeathFinish",
-   "evento": "IdleDLC02MiraakDeathFinish",
-   "nombre": "Terminar de morir despacio",
-   "categoria": "herido",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Terminar de morir despacio",
    "visible": false
   },
   {
@@ -3333,7 +3884,10 @@
    "categoria": "leer",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Buscar en todo el cuerpo y entregar un libro"
+   "descripcion": "Buscar en todo el cuerpo y entregar un libro",
+   "tambien": [
+    "oficios"
+   ]
   },
   {
    "edid": "IdleWriteTableStandingEnter",
@@ -3352,7 +3906,7 @@
    "categoria": "leer",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Escribir en el registro"
+   "descripcion": "Escribir en un libro de cuentas abierto"
   },
   {
    "edid": "IdleWriteLedgerWrite",
@@ -3372,7 +3926,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "sentado": true,
-   "descripcion": "Escribir en un libro mientras estás sentado en una silla"
+   "descripcion": "Escribir en un libro mientras estás sentado en una silla",
+   "tambien": [
+    "descansar"
+   ]
   },
   {
    "edid": "IdleReadElderScroll",
@@ -3421,7 +3978,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "sentado": true,
-   "descripcion": "Leer un libro sentado en una silla"
+   "descripcion": "Leer un libro sentado en una silla",
+   "tambien": [
+    "descansar"
+   ]
   },
   {
    "edid": "IdleNoteRead",
@@ -3460,7 +4020,10 @@
    "origen": "vanilla",
    "sentado": true,
    "descripcion": "Leer sentado: pasar páginas",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "descansar"
+   ]
   },
   {
    "edid": "IdleMQ206FelldirShowScroll",
@@ -3530,7 +4093,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Sentarse a escribir por la derecha",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "descansar"
+   ]
   },
   {
    "edid": "IdleWriteTableChairEnterLeft",
@@ -3540,7 +4106,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Sentarse a escribir por la izquierda",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "descansar"
+   ]
   },
   {
    "edid": "DLC1ReadElderScroll3rdPExit",
@@ -3550,36 +4119,6 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Terminar de leer el Pergamino Ancestral",
-   "visible": false
-  },
-  {
-   "edid": "IdleNocturnal_IdleA",
-   "evento": "IdleNocturnal_IdleA",
-   "nombre": "Adoptar la pose solemne (A)",
-   "categoria": "magia",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Adoptar la pose solemne. Forma parte de lanzar hechizos",
-   "visible": false
-  },
-  {
-   "edid": "IdleNocturnal_IdleB",
-   "evento": "IdleNocturnal_IdleB",
-   "nombre": "Adoptar la pose solemne (B)",
-   "categoria": "magia",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Adoptar la pose solemne (2). Forma parte de lanzar hechizos",
-   "visible": false
-  },
-  {
-   "edid": "IdleNocturnal_IdleAMirror",
-   "evento": "IdleNocturnal_IdleAMirror",
-   "nombre": "Adoptar la pose solemne (reflejada)",
-   "categoria": "magia",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Adoptar la pose solemne (reflejada). Forma parte de lanzar hechizos",
    "visible": false
   },
   {
@@ -3610,7 +4149,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Incrementar el efecto del hechizo derecho",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "BleedOutCastLeftFireForgetTargetActor",
@@ -3620,7 +4162,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Incrementar el efecto del hechizo izquierdo",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "IdleAltarEnterLeft",
@@ -3629,7 +4174,10 @@
    "categoria": "magia",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Arrodillarse en el altar. Forma parte de lanzar hechizos"
+   "descripcion": "Arrodillarse en el altar. Forma parte de lanzar hechizos",
+   "tambien": [
+    "descansar"
+   ]
   },
   {
    "edid": "IdleTelvanniTowerFloatUpEnter",
@@ -3658,17 +4206,6 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Cortar la animación del hechizo de alto nivel (los que usan dos manos para cargar el hechizo)",
-   "visible": false
-  },
-  {
-   "edid": "pa_WereWolf_CutWrist",
-   "evento": "pa_WW_CutWrist",
-   "nombre": "Cortarse la muñeca",
-   "categoria": "magia",
-   "busqueda": "",
-   "origen": "vanilla",
-   "confirmado": false,
-   "descripcion": "Cortarse la muñeca. Forma parte de lanzar hechizos",
    "visible": false
   },
   {
@@ -3750,7 +4287,10 @@
    "origen": "vanilla",
    "confirmado": false,
    "descripcion": "Comenzar a cargar hechizo de 2 manos tipo ritual",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "gestos"
+   ]
   },
   {
    "edid": "IdleRitualStart",
@@ -3950,7 +4490,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Lanzar un hechizo sentado. Forma parte de lanzar hechizos",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "descansar"
+   ]
   },
   {
    "edid": "FalmerCastLeftFireForgetSelf",
@@ -4075,7 +4618,10 @@
    "sincroniza": false,
    "motivo": "SkyMP convierte todo evento con equip en el nombre a SkympFakeEquip",
    "descripcion": "Equipo hechizo y arma",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "IdleSnowElfPrinceAscension",
@@ -4094,7 +4640,9 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Rellenar una jarra blanca decorada",
-   "visible": false
+   "tambien": [
+    "oficios"
+   ]
   },
   {
    "edid": "IdlePray",
@@ -4123,7 +4671,10 @@
    "categoria": "magia",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Arrodillarse para rezar"
+   "descripcion": "Ponerse en cuclillas y rezar en silencio",
+   "tambien": [
+    "descansar"
+   ]
   },
   {
    "edid": "DrawMagic",
@@ -4221,7 +4772,10 @@
    "origen": "vanilla",
    "confirmado": false,
    "descripcion": "Soltar el ataque que se va a efectuar",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "gestos"
+   ]
   },
   {
    "edid": "CastRightTelekinesis",
@@ -4280,7 +4834,10 @@
    "categoria": "magia",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Verter agua en el santuario. Forma parte de lanzar hechizos"
+   "descripcion": "Verter agua en el santuario. Forma parte de lanzar hechizos",
+   "tambien": [
+    "oficios"
+   ]
   },
   {
    "edid": "DragonDismount",
@@ -4320,7 +4877,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Fade-out animación de montar",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "moverse"
+   ]
   },
   {
    "edid": "Dismount",
@@ -4402,7 +4962,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Nadar mientras estás montado",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "moverse"
+   ]
   },
   {
    "edid": "IdleCartPrisonerAExit",
@@ -4412,7 +4975,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Preso A: bajarse del carro",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "IdleCartPrisonerAIdle",
@@ -4422,7 +4988,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Preso A: en el carro",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "IdleCartPrisonerASway",
@@ -4432,7 +5001,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Preso A: vaivén del carro",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "IdleCartPrisonerBExit",
@@ -4442,7 +5014,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Preso B: bajarse del carro",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "IdleCartPrisonerBIdle",
@@ -4452,7 +5027,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Preso B: en el carro",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "IdleCartPrisonerBSway",
@@ -4462,7 +5040,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Preso B: vaivén del carro",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "IdleCartPrisonerCExit",
@@ -4472,7 +5053,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Preso C: bajarse del carro",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "IdleCartPrisonerCIdle",
@@ -4482,7 +5066,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Preso C: en el carro",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "IdleCartPrisonerCSway",
@@ -4492,7 +5079,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Preso C: vaivén del carro",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "IdleCartPrisonerDExit",
@@ -4502,7 +5092,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Preso D: bajarse del carro",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "IdleCartPrisonerDIdle",
@@ -4512,7 +5105,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Preso D: en el carro",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "IdleCartPrisonerDSway",
@@ -4522,7 +5118,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Preso D: vaivén del carro",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "MountedStaggerStart",
@@ -4532,7 +5131,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Retroceder al ser golpeado mientras vas montado",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "IdleCartTravelPlayerEnter",
@@ -4985,7 +5587,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "destacada": true,
-   "descripcion": "Aplaudir"
+   "descripcion": "Aplaudir con un ritmo normal"
   },
   {
    "edid": "IdleApplaud3",
@@ -4994,7 +5596,7 @@
    "categoria": "musica",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Aplaudir lentamente"
+   "descripcion": "Aplaudir despacio, con las manos separadas"
   },
   {
    "edid": "IdleApplaud4",
@@ -5003,7 +5605,7 @@
    "categoria": "musica",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Aplaudir con gran emoción"
+   "descripcion": "Aplaudir deprisa y con mucha emoción"
   },
   {
    "edid": "IdleApplaud5",
@@ -5021,7 +5623,7 @@
    "categoria": "musica",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Aplaudir sin gracia"
+   "descripcion": "Aplaudir sin ganas, con poca fuerza"
   },
   {
    "edid": "IdleCiceroDance1",
@@ -5031,7 +5633,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "destacada": true,
-   "descripcion": "Baile"
+   "descripcion": "Bailar dando vueltas con los brazos sueltos"
   },
   {
    "edid": "IdleCiceroDance2",
@@ -5040,7 +5642,7 @@
    "categoria": "musica",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Baile"
+   "descripcion": "Bailar moviendo los hombros y los pies"
   },
   {
    "edid": "IdleCiceroDance3",
@@ -5049,7 +5651,7 @@
    "categoria": "musica",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Baile"
+   "descripcion": "Bailar saltando de un pie a otro"
   },
   {
    "edid": "SpectatorClap",
@@ -5058,7 +5660,7 @@
    "categoria": "musica",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Celebrar con los brazos"
+   "descripcion": "Levantar los dos brazos celebrando algo"
   },
   {
    "edid": "SpectatorTalkFailSafe",
@@ -5067,7 +5669,7 @@
    "categoria": "musica",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Celebrar con los brazos"
+   "descripcion": "Alzar los brazos y celebrar con fuerza"
   },
   {
    "edid": "SpectatorGawk",
@@ -5076,7 +5678,7 @@
    "categoria": "musica",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Celebrar con los brazos"
+   "descripcion": "Abrir los brazos celebrando hacia los lados"
   },
   {
    "edid": "SpectatorCheer",
@@ -5085,7 +5687,7 @@
    "categoria": "musica",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Celebrar con los brazos"
+   "descripcion": "Celebrar levantando los puños al aire"
   },
   {
    "edid": "IdleCivilWarCheer",
@@ -5094,7 +5696,7 @@
    "categoria": "musica",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Celebrar con los brazos"
+   "descripcion": "Celebrar agitando los dos brazos en alto"
   },
   {
    "edid": "IdleTG08_Phase2",
@@ -5162,7 +5764,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "destacada": true,
-   "descripcion": "Tocar el laúd"
+   "descripcion": "Sacar un laúd y tocarlo de pie"
   },
   {
    "edid": "IdleDrumStart",
@@ -5172,7 +5774,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "destacada": true,
-   "descripcion": "Tocar el tambor"
+   "descripcion": "Sostener un tambor y golpearlo con la mano"
   },
   {
    "edid": "IdleFluteStart",
@@ -5182,7 +5784,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "destacada": true,
-   "descripcion": "Tocar la flauta"
+   "descripcion": "Llevarse una flauta a la boca y tocar"
   },
   {
    "edid": "activateDoor",
@@ -5191,7 +5793,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Abrir una puerta"
+   "descripcion": "Empujar una puerta para abrirla"
   },
   {
    "edid": "IdleLeverPush_Player",
@@ -5210,7 +5812,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Agarrar algo"
+   "descripcion": "Estirar el brazo y agarrar algo cercano"
   },
   {
    "edid": "IdleCounterStart",
@@ -5220,6 +5822,18 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Ponerse a atender el mostrador"
+  },
+  {
+   "edid": "IdleMT_DoorBang",
+   "evento": "IdleMT_DoorBang",
+   "nombre": "Aporrear una puerta",
+   "categoria": "oficios",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Aporrear una puerta con desdén",
+   "tambien": [
+    "gestos"
+   ]
   },
   {
    "edid": "IdleHoe",
@@ -5276,7 +5890,10 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Cincelar con martillo y cincel en el suelo"
+   "descripcion": "Cincelar con martillo y cincel en el suelo",
+   "tambien": [
+    "descansar"
+   ]
   },
   {
    "edid": "IdleCookingSpitEnter",
@@ -5304,7 +5921,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Hablar mientras cocinas en el cookingpot",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "gestos"
+   ]
   },
   {
    "edid": "IdleCraftingCookingPotTalkB",
@@ -5314,7 +5934,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Hablar mientras cocinas en el cookingpot",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "gestos"
+   ]
   },
   {
    "edid": "IdleWoodChopStart",
@@ -5324,7 +5947,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "destacada": true,
-   "descripcion": "Cortar leña"
+   "descripcion": "Partir leña a hachazos sobre el tocón"
   },
   {
    "edid": "IdleTanningEnter",
@@ -5343,7 +5966,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "confirmado": false,
-   "descripcion": "Dejar la leña"
+   "descripcion": "Agacharse y dejar la leña en el suelo"
   },
   {
    "edid": "IdleStonePutDownEnter",
@@ -5352,7 +5975,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Dejar una piedra"
+   "descripcion": "Agacharse y dejar una piedra en el suelo"
   },
   {
    "edid": "IdleCraftingCookingPotAddIngredient",
@@ -5371,7 +5994,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Empujar una palanca"
+   "descripcion": "Empujar una palanca con las dos manos"
   },
   {
    "edid": "IdleGreybeardWordTeach",
@@ -5380,7 +6003,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Entregar algo acercandose"
+   "descripcion": "Acercarse y entregar algo con las dos manos"
   },
   {
    "edid": "IdleGive",
@@ -5389,7 +6012,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Entregar algo"
+   "descripcion": "Tender el brazo para entregar algo"
   },
   {
    "edid": "IdleGiveMQ105Horn",
@@ -5398,7 +6021,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Entregar un cuerno tallado"
+   "descripcion": "Ofrecer un cuerno tallado con las dos manos"
   },
   {
    "edid": "IdleLockPick",
@@ -5407,7 +6030,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Forzar una cerradura"
+   "descripcion": "Agacharse a forzar una cerradura con ganzúa"
   },
   {
    "edid": "IdleSmelterEnter",
@@ -5445,7 +6068,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Inyectarse extractor enano"
+   "descripcion": "Clavarse un extractor enano en el brazo"
   },
   {
    "edid": "IdleFeedChickens",
@@ -5454,7 +6077,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Lanzar flores del cesto"
+   "descripcion": "Sacar flores del cesto y lanzarlas al aire"
   },
   {
    "edid": "IdleWriteTableChairExitRight",
@@ -5494,7 +6117,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Limpiar el mostrador",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "descansar"
+   ]
   },
   {
    "edid": "IdleCleanSword",
@@ -5503,7 +6129,10 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Limpiar la espada"
+   "descripcion": "Pasar un trapo por el filo de la espada",
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "IdleCarryBucketFillEnter",
@@ -5553,7 +6182,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "andando": true,
-   "descripcion": "Llevar una copa en la mano"
+   "descripcion": "Llevar una copa en la mano",
+   "tambien": [
+    "comer"
+   ]
   },
   {
    "edid": "OffsetCarryPotStart",
@@ -5563,7 +6195,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "andando": true,
-   "descripcion": "Llevar una olla"
+   "descripcion": "Cargar una olla grande con las dos manos"
   },
   {
    "edid": "IdleHammerCarpenterTableEnter",
@@ -5572,7 +6204,10 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ponerse a martillear en el banco de carpintero"
+   "descripcion": "Ponerse a martillear en el banco de carpintero",
+   "tambien": [
+    "descansar"
+   ]
   },
   {
    "edid": "IdleHammerTableEnter",
@@ -5590,7 +6225,10 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Ponerse a martillear en la pared"
+   "descripcion": "Ponerse a martillear en la pared",
+   "tambien": [
+    "descansar"
+   ]
   },
   {
    "edid": "IdleSell",
@@ -5599,7 +6237,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Mostrar una posicón grande"
+   "descripcion": "Levantar una poción grande para enseñarla"
   },
   {
    "edid": "IdlePickaxeEnter",
@@ -5609,7 +6247,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "destacada": true,
-   "descripcion": "Picar con el pico"
+   "descripcion": "Golpear la roca con un pico"
   },
   {
    "edid": "DLC2IdlePickaxeEnterDUPLICATE001",
@@ -5672,7 +6310,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Rebuscar en el cofre"
+   "descripcion": "Agacharse a rebuscar dentro de un cofre"
   },
   {
    "edid": "IdleSearchingTable",
@@ -5681,7 +6319,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Rebuscar en la mesa"
+   "descripcion": "Revolver lo que hay sobre la mesa"
   },
   {
    "edid": "IdleSearchTableEnter",
@@ -5710,7 +6348,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Recoger algo de pie"
+   "descripcion": "Recoger algo sin llegar a agacharse"
   },
   {
    "edid": "IdlePickup_Ground",
@@ -5719,7 +6357,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Recoger algo del suelo"
+   "descripcion": "Agacharse a recoger algo del suelo"
   },
   {
    "edid": "IdleActivatePickUpLowDUPLICATE000",
@@ -5737,7 +6375,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Recoger algo del suelo"
+   "descripcion": "Ponerse de rodillas para recoger algo del suelo"
   },
   {
    "edid": "OffsetCarryFlowerBasketPickStart",
@@ -5756,7 +6394,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Recoger leña del suelo"
+   "descripcion": "Agacharse a recoger leña del suelo"
   },
   {
    "edid": "IdleStonePickUpExit",
@@ -5768,6 +6406,19 @@
    "descripcion": "Recoger una piedra del suelo"
   },
   {
+   "edid": "IdleTableMugEnterLoose",
+   "evento": "IdleTableMugEnter",
+   "nombre": "Sentarse a la mesa con una jarra",
+   "categoria": "oficios",
+   "busqueda": "",
+   "origen": "vanilla",
+   "descripcion": "Sentarse a la mesa con una jarra",
+   "visible": false,
+   "tambien": [
+    "descansar"
+   ]
+  },
+  {
    "edid": "IdleOffsetCarryPotServe",
    "evento": "IdleOffsetCarryPotServe",
    "nombre": "Servir de la olla",
@@ -5775,7 +6426,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "andando": true,
-   "descripcion": "Servir de la olla"
+   "descripcion": "Servir con un cucharón de la olla"
   },
   {
    "edid": "IdleMQ201HoldingDrinkTray",
@@ -5813,7 +6464,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Tirar de algo adelante"
+   "descripcion": "Tirar de algo pesado hacia delante"
   },
   {
    "edid": "IdleOvenEnter",
@@ -5832,7 +6483,7 @@
    "busqueda": "",
    "origen": "vanilla",
    "destacada": true,
-   "descripcion": "Trabajar en la forja"
+   "descripcion": "Golpear el hierro al rojo en la forja"
   },
   {
    "edid": "IdleAlchemyEnter",
@@ -5868,7 +6519,7 @@
    "categoria": "oficios",
    "busqueda": "",
    "origen": "vanilla",
-   "descripcion": "Vaciar una cubeta"
+   "descripcion": "Volcar una cubeta para vaciarla"
   },
   {
    "edid": "00NextClip",
@@ -6019,7 +6670,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Rematar agarrando y apuñalando con un arma de una mano. Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "KillMove2HMStab00",
@@ -6061,7 +6715,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Rematar apuñalando en el pecho con un arma de una mano. Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "1HMKillMoveStabUpFace00",
@@ -6071,7 +6728,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Rematar apuñalando en la cara con un arma de una mano. Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "1HMKillMoveRepeatStabDowns00",
@@ -6081,7 +6741,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Rematar apuñalando varias veces con un arma de una mano. Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "pa_1HMKillMoveBackStab",
@@ -6286,7 +6949,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Rematar perforando desde abajo con las dos armas de una mano",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "pa_2HMKillMoveSprigganA",
@@ -6370,7 +7036,10 @@
    "origen": "vanilla",
    "confirmado": false,
    "descripcion": "Rematar con un tajo alto y patada de Rematar",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "pa_1HMKillMoveWolfB",
@@ -6381,7 +7050,10 @@
    "origen": "vanilla",
    "confirmado": false,
    "descripcion": "Rematar dando una patada y luego un tajo vertical",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "pa_1HMKillMoveSprigganB",
@@ -6488,7 +7160,10 @@
    "origen": "vanilla",
    "confirmado": false,
    "descripcion": "Rematar dando una patada fuerte",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "pa_1HMKillMoveSprigganA",
@@ -6637,7 +7312,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Rematar de tres tajos con un arma a dos manos. Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "KillMoveDualWieldDualSlashCOPY0000",
@@ -6647,7 +7325,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Rematar de un tajo con las dos armas. Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "KillMove2HMSlash00",
@@ -6657,7 +7338,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Rematar de un tajo con un arma a dos manos. Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "2HWKillMoveChaurusFlyer",
@@ -6763,7 +7447,10 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Rematar en cruz con las dos armas. Es una ejecución: el juego la lanza al rematar a un enemigo, con la cámara y el enemigo ya colocados",
-   "visible": false
+   "visible": false,
+   "tambien": [
+    "batalla"
+   ]
   },
   {
    "edid": "1HMKillMoveSabreCatShortA00",
@@ -7013,415 +7700,6 @@
    "busqueda": "",
    "origen": "vanilla",
    "descripcion": "Guardia de la ejecución",
-   "visible": false
-  },
-  {
-   "edid": "IdleBarCounterEnter",
-   "evento": "IdleBarCounterEnter",
-   "nombre": "Apoyarse en el mostrador",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Apoyar en el mostrador de bar, a veces limpia"
-  },
-  {
-   "edid": "RailLeanEnter",
-   "evento": "IdleRailLeanEnter",
-   "nombre": "Apoyarse en la baranda",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "destacada": true,
-   "descripcion": "Avanzar un poco y apoyate en la baranda"
-  },
-  {
-   "edid": "IdleLeanTableEnter",
-   "evento": "IdleLeanTableEnter",
-   "nombre": "Apoyarse en la mesa",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Apoyarse en la mesa",
-   "visible": false
-  },
-  {
-   "edid": "IdleTableLeanPoint",
-   "evento": "IdleTableLeanPoint",
-   "nombre": "Apoyarse en la mesa y señalar",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Apoyarse en la mesa para señalar",
-   "visible": false
-  },
-  {
-   "edid": "EnterWallLean",
-   "evento": "IdleWallLeanStart",
-   "nombre": "Apoyarse en la pared",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "destacada": true,
-   "descripcion": "Voltear y te apoyas con brazos cruzados"
-  },
-  {
-   "edid": "ChildSitOnKneesEnter",
-   "evento": "IdleChildSitOnKnees",
-   "nombre": "Arrodillarse",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Sentarse sobre las rodillas y hace un pequeño balanceo"
-  },
-  {
-   "edid": "CheckCorpse",
-   "evento": "IdleKneeling",
-   "nombre": "Arrodillarse junto a un cadáver",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Arrodillarse junto a un cadáver",
-   "visible": false
-  },
-  {
-   "edid": "IdleWalkThroughWallEnter",
-   "evento": "IdleWalkThroughWallEnter",
-   "nombre": "Atravesar la pared",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Atravesar la pared. Forma parte de lanzar hechizos",
-   "visible": false
-  },
-  {
-   "edid": "IdleDLC02FallOnKnees",
-   "evento": "IdleDLC02FallOnKnees",
-   "nombre": "Caer de rodillas",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Caer de rodillas",
-   "visible": false
-  },
-  {
-   "edid": "SittingChairVar1",
-   "evento": "IdleChairVar1",
-   "nombre": "Cambiar de pose (Sentado) (A)",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "sentado": true,
-   "descripcion": "Pose de estar centado"
-  },
-  {
-   "edid": "SittingChairVar2",
-   "evento": "idleChairVar2",
-   "nombre": "Cambiar de pose (Sentado) (B)",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "sentado": true,
-   "descripcion": "Pose de estar centado"
-  },
-  {
-   "edid": "SittingChairArmsCrossedVar1",
-   "evento": "idleChairArmsCrossedVar1",
-   "nombre": "Cruzar los brazos (Sentado) (A)",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "sentado": true,
-   "descripcion": "Cruzar los brazos mientras estás sentado en una silla"
-  },
-  {
-   "edid": "SittingChairArmsCrossedVar2",
-   "evento": "idleChairArmsCrossedVar2",
-   "nombre": "Cruzar los brazos (Sentado) (B)",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "sentado": true,
-   "descripcion": "Cruzar los brazos mientras estás sentado en una silla"
-  },
-  {
-   "edid": "RailLeanExit",
-   "evento": "IdleRailLeanExit",
-   "nombre": "Dejar de apoyarse en la baranda",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Retroceder un poco y sale de apoyate en la baranda",
-   "visible": false
-  },
-  {
-   "edid": "IdleShelfExit",
-   "evento": "IdleLounge_Exit",
-   "nombre": "Dejar de repantigarse",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Bajarse de mueble alto",
-   "visible": false
-  },
-  {
-   "edid": "HideLEnter",
-   "evento": "IdleHideLEnter",
-   "nombre": "Esconderse contra la pared",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Esconderse contra la pared",
-   "visible": false
-  },
-  {
-   "edid": "SittingChairShoulderFlex",
-   "evento": "idleChairShoulderFlex",
-   "nombre": "Estirarse (Sentado)",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "sentado": true,
-   "descripcion": "Estirar los brazos mientras estás sentado en una silla"
-  },
-  {
-   "edid": "ExitChairFront",
-   "evento": "IdleChairFrontExit",
-   "nombre": "Levantarse de frente",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Levantarse de la silla de frente",
-   "visible": false
-  },
-  {
-   "edid": "ExitChairFrontQuick",
-   "evento": "IdleChairFrontQuickExit",
-   "nombre": "Levantarse de frente, rápido",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Levantarse de la silla de frente rapido",
-   "visible": false
-  },
-  {
-   "edid": "ExitChairBackQuick",
-   "evento": "IdleTableBackExit",
-   "nombre": "Levantarse de la mesa",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Levantarse de mesa hacia atras",
-   "visible": false
-  },
-  {
-   "edid": "IdleHadvarWriteLedgerExit",
-   "evento": "IdleChairExitStart",
-   "nombre": "Levantarse de la silla",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Levantarse de la silla de lado",
-   "visible": false
-  },
-  {
-   "edid": "IdleStoolExit",
-   "evento": "IdleStoolBackExit",
-   "nombre": "Levantarse del taburete",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Levantarse de taburete de bar",
-   "visible": false
-  },
-  {
-   "edid": "ExitChairRight",
-   "evento": "idleChairRightExit",
-   "nombre": "Levantarse por la derecha",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Levantarse de la silla del lado derecho",
-   "visible": false
-  },
-  {
-   "edid": "ExitChairRightQuick",
-   "evento": "IdleChairRightQuickExit",
-   "nombre": "Levantarse por la derecha, rápido",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Levantarse de la silla del lado derecho rapido",
-   "visible": false
-  },
-  {
-   "edid": "ExitChairLeft",
-   "evento": "idleChairLeftExit",
-   "nombre": "Levantarse por la izquierda",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Levantarse de la silla del lado izquierdo",
-   "visible": false
-  },
-  {
-   "edid": "ExitChairLeftQuick",
-   "evento": "IdleChairLeftQuickExit",
-   "nombre": "Levantarse por la izquierda, rápido",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Levantarse de la silla del lado izquierdo rapido",
-   "visible": false
-  },
-  {
-   "edid": "SittingChairLookDown",
-   "evento": "idleChairLookDown",
-   "nombre": "Mirar al suelo (Sentado)",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "sentado": true,
-   "descripcion": "Mirar alrededor y luego mirar al suelo mientras estás sentado en una silla"
-  },
-  {
-   "edid": "IdleShelfEnterInstant",
-   "evento": "IdleLounge",
-   "nombre": "Repantigarse",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "destacada": true,
-   "descripcion": "Subirse a mueble alto",
-   "visible": false
-  },
-  {
-   "edid": "IdleTableEnter",
-   "evento": "IdleTableEnter",
-   "nombre": "Sentarse a la mesa",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Sentarse a la mesa",
-   "visible": false
-  },
-  {
-   "edid": "IdleTableEnterPlayer",
-   "evento": "IdleTableEnterPlayer",
-   "nombre": "Sentarse a la mesa (jugador)",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Sentarse a la mesa (jugador)",
-   "visible": false
-  },
-  {
-   "edid": "IdleTableMugEnterLoose",
-   "evento": "IdleTableMugEnter",
-   "nombre": "Sentarse a la mesa con una jarra",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Sentarse a la mesa con una jarra",
-   "visible": false
-  },
-  {
-   "edid": "IdleSitCrossLeggedEnter",
-   "evento": "IdleSitCrossLeggedEnter",
-   "nombre": "Sentarse con las piernas cruzadas",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Sentarse con las piernas cruzadas"
-  },
-  {
-   "edid": "IdleChildLegsOut",
-   "evento": "IdleChildLegsOutStart",
-   "nombre": "Sentarse con las piernas estiradas",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Sentarse con piernas cruzadas",
-   "visible": false
-  },
-  {
-   "edid": "EnterChairFront",
-   "evento": "IdleChairFrontEnter",
-   "nombre": "Sentarse de frente",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "destacada": true,
-   "descripcion": "Sentarse de frente en silla",
-   "visible": false
-  },
-  {
-   "edid": "IdleSitLedgeEnter",
-   "evento": "IdleSitLedgeEnter",
-   "nombre": "Sentarse en el borde",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Sentarse en un borde con las piernas colgando"
-  },
-  {
-   "edid": "IdleStoolEnter",
-   "evento": "IdleStoolEnter",
-   "nombre": "Sentarse en el taburete",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "destacada": true,
-   "descripcion": "Sentarse en taburete de bar",
-   "visible": false
-  },
-  {
-   "edid": "IdleStoolEnterPlayer",
-   "evento": "IdleStoolEnterPlayer",
-   "nombre": "Sentarse en el taburete (jugador)",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Sentarse en el taburete (jugador)",
-   "visible": false
-  },
-  {
-   "edid": "IdleJarlChairEnter",
-   "evento": "IdleJarlChairEnter",
-   "nombre": "Sentarse en el trono del jarl",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Sentarse en trono de jarl",
-   "visible": false
-  },
-  {
-   "edid": "IdleSnowElfPrinceChairEnter",
-   "evento": "IdleSnowElfPrinceChairEnter",
-   "nombre": "Sentarse en el trono élfico",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Sentarse en el trono élfico",
-   "visible": false
-  },
-  {
-   "edid": "EnterChairRight",
-   "evento": "IdleChairRightEnter",
-   "nombre": "Sentarse por la derecha",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Sentarse por la derecha en silla",
-   "visible": false
-  },
-  {
-   "edid": "EnterChairLeft",
-   "evento": "IdleChairLeftEnter",
-   "nombre": "Sentarse por la izquierda",
-   "categoria": "sentarse",
-   "busqueda": "",
-   "origen": "vanilla",
-   "descripcion": "Sentarse por la izquierda en silla",
    "visible": false
   }
  ]
