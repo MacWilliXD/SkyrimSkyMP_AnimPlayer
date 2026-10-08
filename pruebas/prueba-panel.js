@@ -464,8 +464,12 @@ app.whenReady().then(async () => {
             'y ningun nombre se repite en todo el catalogo',
             todosLosNombres.length + ' animaciones, ' +
             new Set(todosLosNombres).size + ' nombres');
-  comprobar(todosLosNombres.filter((n) => /\(\d+\)$/.test(n)).length > 20,
-            'los que coincidirian se numeran',
+  /* Los que coincidirian llevan letra, no numero: "Baile (A)", "Baile (B)".
+     Se la pone la hoja, al pulirla, y es lo que hace que ninguna copia se
+     quede sin distintivo —antes la primera iba a secas y las demas
+     numeradas—. */
+  comprobar(todosLosNombres.filter((n) => /\([A-Z]\)$/.test(n)).length > 20,
+            'los que coincidirian llevan letra',
             todosLosNombres.filter((n) => /^Remate con un arma de una mano \(\d/.test(n))[0]);
 
   console.log('  --- las que aguantan andando ---');
@@ -945,7 +949,7 @@ app.whenReady().then(async () => {
      por eso. Lo que importa es que sean todas y no solo las recomendadas. */
   const cuantasDice = await js(
     `document.querySelector('#animplayer .ap-donde').textContent`);
-  comprobar(parseInt(String(cuantasDice).replace(/\D+/g, ''), 10) > 300,
+  comprobar(parseInt(String(cuantasDice).replace(/\D+/g, ''), 10) > 200,
             'y al pulsarla sale el catalogo entero',
             cuantasDice + ' / ' + todasLasFilas + ' pintadas');
   const buscandoEnTodas = await js(`(() => {
@@ -974,9 +978,10 @@ app.whenReady().then(async () => {
   console.log('\n=== las que los demas no veran se avisan ===');
   const aviso = await js(`(() => {
     const c = document.querySelector('#animplayer .ap-buscar');
-    /* Magic_Equip y no WeapEquip: esta ultima la descarta la hoja de revision
-       y ya no sale en la lista. Las dos son de las que SkyMP no sincroniza. */
-    c.value = 'Magic_Equip'; c.dispatchEvent(new Event('input', { bubbles: true }));
+    /* La unica de las que SkyMP no sincroniza que la hoja deja a la vista.
+       Las otras veintiuna estan descartadas, asi que no salen en la lista y
+       no se las puede mirar aqui. */
+    c.value = 'Unequip'; c.dispatchEvent(new Event('input', { bubbles: true }));
     const f = document.querySelector('#animplayer .ap-fila');
     return f ? { sinSinc: f.classList.contains('ap-sinsinc'), titulo: f.title } : null;
   })()`);
@@ -2304,6 +2309,44 @@ app.whenReady().then(async () => {
   comprobar(nombresEnGuardia.some((n) => /\(En guardia\)/.test(n)),
             'y son las que llevan "(En guardia)" en el nombre',
             nombresEnGuardia.slice(0, 3).join(' / '));
+  await buscar('');
+
+  console.log('\n=== #hidden saca las escondidas ===');
+  /* Lo que se ve lo decide la columna "estado" de la hoja: Aceptado y nada
+     mas. Las demas siguen en el catalogo y el servidor las puede lanzar, pero
+     no salen solas. Para verlas se escribe "#hidden" delante. */
+  await verLista();
+  const normal = await buscar('agacharse');
+  comprobar(normal.indexOf('SneakStart') === -1,
+            'una descartada no sale buscando normal', normal.join(', ') || 'nada');
+  const conOcultas = await buscar('#hidden agacharse');
+  comprobar(conOcultas.indexOf('SneakStart') !== -1,
+            'y con #hidden delante si sale', conOcultas.join(', ') || 'nada');
+  comprobar(await js(`!!document.querySelector(
+    '#animplayer .ap-fila[data-evento="SneakStart"].ap-escondida')`),
+            'y sale marcada como escondida');
+  comprobar(/escondidas/.test(await js(
+    `document.querySelector('#animplayer .ap-donde').textContent`)),
+            'y el panel avisa de que estan a la vista',
+            await js(`document.querySelector('#animplayer .ap-donde').textContent`));
+
+  /* Lo que NO cambia es la cuenta: lo que dicen los contadores es cuantas
+     puedes usar, y eso no cambia porque mires detras. */
+  await buscar('');
+  const cuantasNormal = await js(`(() => {
+    const c = document.querySelector('#animplayer .ap-chip[data-cat="todas"]');
+    return c ? c.textContent : ''; })()`);
+  const soloVisibles = parseInt(String(cuantasNormal).replace(/\D+/g, ''), 10);
+  comprobar(soloVisibles > 100 && soloVisibles < 400,
+            'y el contador sigue diciendo solo las que se ven, no las 737',
+            cuantasNormal);
+
+  /* La llave es una palabra entera, no el signo suelto: buscar algo que
+     empiece por almohadilla no tiene que abrir la puerta de servicio. */
+  const soloAlmohadilla = await buscar('#agacharse');
+  comprobar(soloAlmohadilla.indexOf('SneakStart') === -1,
+            'y una almohadilla suelta no abre nada',
+            soloAlmohadilla.join(', ') || 'nada');
   await buscar('');
 
   console.log('\n=== esconder animaciones ===');

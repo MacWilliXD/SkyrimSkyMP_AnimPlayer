@@ -43,6 +43,7 @@ RAIZ = os.path.dirname(AQUI)
 sys.path.insert(0, AQUI)
 import csv
 import decisiones
+import categorias as categoriasPorNombre
 import descartes
 import idles
 import neutral
@@ -643,6 +644,10 @@ def generar(data):
     for a in animaciones:
         fila = revisado.get(a["evento"])
         if not fila:
+            # Si no esta en la hoja, no esta revisada: escondida hasta que lo
+            # este. Es mas seguro que al reves, que es como salian cosas en la
+            # rueda sin que nadie las hubiera mirado.
+            a["visible"] = False
             continue
         nombre = (fila.get("nombre") or "").strip()
         if nombre:
@@ -650,7 +655,12 @@ def generar(data):
         desc = (fila.get("descripción") or fila.get("descripcion") or "").strip()
         if desc:
             a["descripcion"] = neutral.neutral(desc)
-        if (fila.get("estado") or "").strip().lower() == "descartado":
+        # Lo que se ve lo decide la columna "estado", y solo ella: Aceptado
+        # se ve, cualquier otra cosa no. Antes habia tres capas decidiendo lo
+        # mismo —esta, las reglas por familias y las correcciones a mano— y
+        # para saber por que una animacion salia o no habia que seguir las
+        # tres. La hoja ya esta revisada entera, asi que manda ella.
+        if (fila.get("estado") or "").strip().lower() != "aceptado":
             a["visible"] = False
 
     # El espanol neutral, a TODO: hasta ahora solo pasaba por el filtro lo que
@@ -665,34 +675,22 @@ def generar(data):
     for a in animaciones:
         a["categoria"] = FUSIONES_CATEGORIA.get(a["categoria"], a["categoria"])
 
-    numerarRepetidos(animaciones)
+    # Y la categoria se decide por el NOMBRE, no por el id. El id y lo que hace
+    # la animacion no siempre coinciden —el editorId no coincide con el evento
+    # en 456 de las 737— y se notaba: "Golpear el suelo" estaba en magia, y
+    # "Entregar algo" salia partido entre magia y oficios. El nombre esta
+    # escrito mirando la animacion, asi que es mejor dato.
+    # Ver herramientas/categorias.py.
+    cambiadas = categoriasPorNombre.aplicar(animaciones)
+    print("  categoria por el nombre: %d cambian de sitio" % len(cambiadas))
 
-    # Y los descartes automaticos: remates y animaciones de jugabilidad. Lo
-    # escrito a mano manda, asi que esto solo entra si la hoja no dice otra
-    # cosa. Ver herramientas/descartes.py.
-    for a in animaciones:
-        fila = revisado.get(a["evento"], {})
-        decidido = (fila.get("estado") or "").strip()
-        # Los remates se ocultan TODOS, se haya marcado lo que se haya marcado:
-        # son ejecuciones y no aportan nada sueltas. Para el resto, lo escrito
-        # a mano manda. Cualquiera se puede volver a ensenar con ap.mostrar().
-        if (decidido and decidido.lower() != "descartado"
-                and a["categoria"] != "remates"):
-            continue                 # tu lo aceptaste: mandas tu
-        fuera, motivo = descartes.descarte(a["evento"], a["categoria"])
-        if fuera:
-            a["visible"] = False
+    # Numerar solo lo que NO viene de la hoja. Los nombres de la hoja ya
+    # llevan su letra cuando se repiten —"Baile (A)", "Baile (B)"— y numerar
+    # encima daria "Baile (A) (1)".
+    numerarRepetidos([a for a in animaciones if a["evento"] not in revisado])
 
-    # Y lo ultimo, lo decidido a mano probandolas en el juego. Va al final
-    # porque corrige a los demas: una regla acierta en la mayoria, pero quien
-    # las ha visto sabe cuales son la excepcion. Ver herramientas/decisiones.py.
-    def avisarDeLosPerdidos(nombres):
-        print("  OJO: decisiones.py nombra animaciones que no existen:")
-        for n in nombres:
-            print("       " + n)
-
-    puestas, quitadas = decisiones.aplicar(animaciones, avisarDeLosPerdidos)
-    print("  decididas a mano: %d se quedan, %d se esconden" % (puestas, quitadas))
+    seVen = sum(1 for a in animaciones if a.get("visible") is not False)
+    print("  la hoja deja a la vista %d de %d" % (seVen, len(animaciones)))
 
     animaciones.sort(key=lambda a: (a["categoria"], a["nombre"].lower()))
     return animaciones
