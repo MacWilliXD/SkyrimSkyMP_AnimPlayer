@@ -2326,6 +2326,61 @@ app.whenReady().then(async () => {
             nombresEnGuardia.slice(0, 3).join(' / '));
   await buscar('');
 
+  console.log('\n=== al pulsar, la lista no se mueve ===');
+  /* Con muchas a la vista, pulsar un renglon rehacia la lista entera y se
+     pintaba MAS CORTA de lo que ya habia —la cuenta de la tanda miraba lo
+     senalado, no lo puesto—, asi que el navegador subia de golpe. Encima
+     habia un scrollIntoView detras. Entre las dos, la lista daba un salto
+     justo al pulsar. */
+  await verLista();
+  await buscar('');
+  await js(`document.querySelector('#animplayer .ap-chip[data-cat="todas"]').click()`);
+  await esperar(200);
+  const antesDeTocar = await js(`(async () => {
+    const l = document.querySelector('#animplayer .ap-lista');
+    /* Se baja un par de tandas, que es cuando se notaba. */
+    for (let v = 0; v < 3; v++) {
+      l.scrollTop = l.scrollHeight;
+      l.dispatchEvent(new Event('scroll'));
+      await new Promise((r) => setTimeout(r, 40));
+    }
+    l.scrollTop = Math.round(l.scrollHeight / 2);
+    return { alto: l.scrollTop,
+             filas: document.querySelectorAll('#animplayer .ap-fila').length };
+  })()`);
+  comprobar(antesDeTocar.filas > 60,
+            'con la lista larga y desplazada a la mitad',
+            antesDeTocar.filas + ' renglones, scroll ' + antesDeTocar.alto);
+
+  const tocada = await js(`(() => {
+    const l = document.querySelector('#animplayer .ap-lista');
+    const filas = [...document.querySelectorAll('#animplayer .ap-fila')];
+    /* Una que este a la vista de verdad, no la primera de todas. */
+    const cual = filas.find((f) => f.offsetTop > l.scrollTop + 20) || filas[0];
+    const evento = cual.dataset.evento;
+    cual.click();
+    return { alto: l.scrollTop,
+             filas: document.querySelectorAll('#animplayer .ap-fila').length,
+             evento: evento,
+             senalada: (document.querySelector('#animplayer .ap-fila.ap-elegida')
+                        || {}).dataset };
+  })()`);
+  comprobar(tocada.alto === antesDeTocar.alto,
+            'pulsar no mueve el desplazamiento',
+            antesDeTocar.alto + ' -> ' + tocada.alto);
+  comprobar(tocada.filas === antesDeTocar.filas,
+            'ni se encogen los renglones puestos',
+            antesDeTocar.filas + ' -> ' + tocada.filas);
+  comprobar(tocada.senalada && tocada.senalada.evento === tocada.evento,
+            'y la que pulsas queda senalada',
+            tocada.senalada && tocada.senalada.evento);
+  await esperar(150);
+  await pasarMensajesAlPlugin(falso);
+  comprobar(falso.registro.animaciones.some((a) => a.evento === tocada.evento),
+            'y se lanza, que para eso se pulsa',
+            falso.registro.animaciones.map((a) => a.evento).slice(-3).join(', '));
+  await buscar('');
+
   console.log('\n=== #hidden saca las escondidas ===');
   /* Lo que se ve lo decide la columna "estado" de la hoja: Aceptado y nada
      mas. Las demas siguen en el catalogo y el servidor las puede lanzar, pero

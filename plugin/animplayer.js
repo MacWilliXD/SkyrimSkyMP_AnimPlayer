@@ -3221,7 +3221,32 @@
       pintadas = hasta;
     }
 
-    function pintar() {
+    /**
+     * Mueve la marca de un renglon a otro, sin rehacer nada.
+     *
+     * Es lo que hace falta al pulsar con el raton. Rehacer la lista entera
+     * para cambiar de sitio una clase hacia que todo se recolocara debajo del
+     * cursor: la lista daba un salto justo al pulsar.
+     */
+    function marcarElegida(i) {
+      elegida = i;
+      var antes = lista.querySelector('.ap-fila.ap-elegida');
+      if (antes) antes.classList.remove('ap-elegida');
+      var ahora = lista.querySelector('.ap-fila[data-i="' + i + '"]');
+      if (ahora) ahora.classList.add('ap-elegida');
+      return ahora;
+    }
+
+    /**
+     * Rehace los renglones. Solo cuando cambia LO QUE se ve: al buscar, al
+     * elegir categoria, al esconder algo. Para cambiar de senalado esta
+     * marcarElegida, que no toca el HTML.
+     *
+     * `seguirAlSenalado` lo pide el teclado: con las flechas puedes bajar mas
+     * alla de lo que se ve y hay que seguirte. Con el raton no, que ya estabas
+     * mirando ese renglon.
+     */
+    function pintar(seguirAlSenalado) {
       var r = filtrar();
       if (elegida >= r.lista.length) elegida = Math.max(0, r.lista.length - 1);
 
@@ -3232,14 +3257,21 @@
         return;
       }
 
-      /* Si lo senalado cae mas abajo de la primera tanda —se ha bajado con las
-         flechas, o se vuelve a una posicion guardada— se pinta hasta ahi. */
-      var hasta = Math.min(Math.max(TANDA, elegida + 1), r.lista.length);
+      /* NUNCA menos de lo que ya habia puesto. Si se pinta mas corto que el
+         sitio donde estabas mirando, el navegador te sube de golpe, y eso era
+         la mitad del salto al pulsar. Lo otro que hace falta es devolver el
+         desplazamiento: cambiar el innerHTML lo pierde. */
+      var dondeEstabas = lista.scrollTop;
+      var hasta = Math.min(Math.max(TANDA, pintadas, elegida + 1),
+                           r.lista.length);
       lista.innerHTML = filasDe(r, 0, hasta);
       pintadas = hasta;
+      lista.scrollTop = dondeEstabas;
       pintarTitulo();
-      var viva = lista.querySelector('.ap-elegida');
-      if (viva && viva.scrollIntoView) viva.scrollIntoView({ block: 'nearest' });
+      if (seguirAlSenalado) {
+        var viva = lista.querySelector('.ap-elegida');
+        if (viva && viva.scrollIntoView) viva.scrollIntoView({ block: 'nearest' });
+      }
     }
 
     /** Ensena la ficha de una fila, a su altura y a la izquierda del panel. */
@@ -3435,21 +3467,38 @@
          que hace, asi que cuando pulsas sabes lo que va a salir. */
       var fila = e.target.closest ? e.target.closest('.ap-fila') : null;
       if (!fila) return;
-      elegida = parseInt(fila.getAttribute('data-i'), 10) || 0;
-      pintar();
+      /* Solo se mueve la marca. Rehacer la lista aqui hacia que diera un salto
+         justo al pulsar: ver marcarElegida. */
+      marcarElegida(parseInt(fila.getAttribute('data-i'), 10) || 0);
       reproducir(fila.getAttribute('data-evento'));
     });
 
 
+
+    /**
+     * Mueve lo senalado con las flechas, y la lista le sigue.
+     *
+     * Primero se intenta solo mover la marca, que es barato. Si el renglon
+     * todavia no esta pintado —has bajado por debajo de la ultima tanda— se
+     * rehace pidiendo que la lista siga a lo senalado.
+     */
+    function irA(i) {
+      if (!marcarElegida(i)) {
+        pintar(true);
+        return;
+      }
+      var viva = lista.querySelector('.ap-elegida');
+      if (viva && viva.scrollIntoView) viva.scrollIntoView({ block: 'nearest' });
+    }
 
     /* Las flechas y el Enter dentro de la caja: escribir "laud" y dar a Enter
        tiene que reproducirla sin tocar el raton. */
     caja.addEventListener('keydown', function (e) {
       var r = filtrar();
       if (e.key === 'ArrowDown') {
-        elegida = Math.min(elegida + 1, r.lista.length - 1); pintar(); e.preventDefault();
+        irA(Math.min(elegida + 1, r.lista.length - 1)); e.preventDefault();
       } else if (e.key === 'ArrowUp') {
-        elegida = Math.max(elegida - 1, 0); pintar(); e.preventDefault();
+        irA(Math.max(elegida - 1, 0)); e.preventDefault();
       } else if (e.key === 'Enter') {
         if (r.lista[elegida]) reproducir(r.lista[elegida].evento);
         e.preventDefault();
