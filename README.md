@@ -1,31 +1,38 @@
 # AnimPlayer
 
-Un reproductor de animaciones para Skyrim dentro de SkyMP. Pulsas **F3** y se
-descuelga, ya abierta, la lista en la esquina de arriba a la derecha: escribes
-lo que buscas, pulsas la animación y tu personaje la hace. Los demás jugadores
-la ven.
+Un reproductor de animaciones para Skyrim dentro de SkyMP. Pulsas **F3** y sale
+la rueda de tus favoritos en el centro de la pantalla; debajo, un botón abre la
+lista entera, pegada al lado derecho. Escribes lo que buscas, pulsas la
+animación y tu personaje la hace. Los demás jugadores la ven.
 
-Una tecla y la lista. Sin pestañas ni pasos intermedios, y con el panel cerrado
-no hay nada encima del juego.
+Una tecla y ya. Sin pestañas ni pasos intermedios, y con el panel cerrado no
+hay nada encima del juego.
 
-![el panel abierto](docs/panel.png)
+![la rueda de favoritos](docs/rueda.png)
 
-- **611 animaciones**, sacadas del propio Skyrim instalado, no escritas a mano.
-- **Todas con nombre en español**: «Tocar el laúd», no `IdleLuteStart`.
-- **Favoritos**: una estrella en cada fila. Lo que marques se guarda en disco,
-  sale en su propia categoría y aparece siempre el primero al buscar.
-- **Buscador** por nombre, por nombre del evento y por palabras en español:
+![la lista entera](docs/panel.png)
+
+> Las dos capturas salen de la prueba, no de una captura a mano: se
+> rehacen solas cada vez que se pasa la suite.
+
+- **228 animaciones** a la vista, de las 737 que trae el Skyrim instalado.
+  Ninguna está escrita a mano: salen de los registros IDLE del propio juego.
+- **Todas con nombre y descripción en español**: «Tocar el laúd», no
+  `IdleLuteStart`. Y al pasar el ratón, una ficha que cuenta lo que vas a ver.
+- **Una rueda de favoritos.** Una estrella en cada fila; lo que marques sale en
+  la rueda y se guarda en disco.
+- **Diez categorías**, y una animación puede estar en varias: «Rezar en
+  cuclillas» es magia y es estar de rodillas.
+- **Buscador** por nombre, por palabras en español y por el id del evento:
   escribir `sentarse` encuentra las sillas aunque ninguna se llame así.
-- **Diecinueve categorías** con su cuenta: combate, remates, gestos, diálogo,
-  oficios, magia, herido, sentarse, comer, rituales, moverse, música,
-  cautiverio, acarrear, leer, dormir, montar, beber y control.
 - **En bucle**: una casilla que deja la animación repitiéndose hasta que pulsas
-  Parar. Sin marcar, se reproduce una sola vez.
+  Detener. Sin marcar, se reproduce una sola vez.
+- **Detener de verdad**, que no es obvio: Skyrim no tiene un «parar». Hay que
+  mandarle cuatro eventos distintos y devolverte a la guardia si la tenías.
 - **Preparado para otros mods**: se añaden animaciones sin tocar el código.
 - **Llamable desde otros mods**: un mod de bardo puede pedir la animación del
   laúd con una línea, sin saber nada de cómo funciona esto por dentro.
-- **Preparado para que lo lleve el servidor**: reproducir está aislado en su
-  propia capa, y la petición es un objeto plano listo para mandar por la red.
+- **El servidor puede esconder animaciones por jugador**, con una llamada.
 
 ---
 
@@ -54,6 +61,9 @@ Skyrim Special Edition\Data\Platform\PluginsDev\
 `PluginsDev` es la carpeta para plugins propios; `Plugins` la gestionan los
 lanzadores y lo que pongas ahí te lo pueden borrar.
 
+> **Ojo con el lanzador.** Algunos borran `PluginsDev` al arrancar. Si entras y
+> F3 no hace nada, mira si el archivo sigue ahí.
+
 ---
 
 ## Uso
@@ -61,12 +71,18 @@ lanzadores y lo que pongas ahí te lo pueden borrar.
 | | |
 |---|---|
 | **F3** | abre y cierra el panel |
-| **Escribir** | busca. `saludar`, `lute`, `IdleWave`, `chair front`… |
-| **Flechas ↑ ↓ y Enter** | elegir y reproducir sin tocar el ratón |
+| **La rueda** | tus favoritos. Pulsa uno y se reproduce |
+| **‹ ›** | pasa de grupo cuando tienes más de quince favoritos |
+| **Ver todas las animaciones** | abre la lista entera |
+| **Escribir** | busca. `saludar`, `laúd`, `IdleWave`, `sentarse`… |
+| **Pasar el ratón por una fila** | saca su ficha: nombre y qué hace |
 | **Clic en una fila** | la reproduce |
-| **En bucle** | la repite hasta que pulses Parar |
-| **★ La estrella** | guarda en favoritos. Se enciende en dorado |
-| **Detener** | corta la animación y te devuelve al estado en el que estabas |
+| **Flechas ↑ ↓ y Enter** | elegir y reproducir sin tocar el ratón |
+| **Filtro** | abre las categorías |
+| **★ La estrella** | guarda en favoritos y lo manda a la rueda |
+| **En bucle** | la repite hasta que pulses Detener |
+| **Detener** | corta la animación. Si alguna no se corta, púlsalo otra vez |
+| **Reiniciar animaciones** | desatasca al personaje: lo saca del mueble, le devuelve el movimiento y la colisión |
 | **Esc** | cierra el panel |
 
 Mientras el panel está abierto el personaje no se mueve, para que escribir en la
@@ -98,21 +114,41 @@ dos cosas pasarán a la vez.
 
 ---
 
+## Las 228 son las revisadas, no todas las que hay
+
+El juego trae 737 animaciones que se le pueden aplicar al jugador. No todas
+sirven: hay 109 golpes de gracia, decenas que el juego usa él solo mientras
+juegas, unas cuantas que dejan al personaje tirado en el suelo, y otras que
+necesitan un mueble delante y sin él te dejan flotando en el aire.
+
+Así que están **todas revisadas una a una, en el juego**, en una hoja de
+cálculo. Lo que decide si una animación se ve es su columna `estado`: Aceptado
+se ve, cualquier otra cosa no. Nada más — ni reglas, ni excepciones.
+
+Las escondidas no desaparecen: siguen en el catálogo, el servidor las puede
+lanzar, y en el buscador salen escribiendo `#hidden` delante de lo que busques.
+
+Cómo funciona ese circuito —bajar la hoja, pulirla, volver a subirla— está en
+[docs/la-hoja.md](docs/la-hoja.md).
+
+---
+
 ## Los nombres están en español
 
 El juego no los trae así: los suyos son los identificadores de editor de
-Bethesda (`IdleWarmHandsStanding`), en inglés y a veces directamente mal
-puestos — el de `IdleKneeling` dice *CheckCorpse*, el de `blockStart` dice
-*BowZoom*. Se traducen a mano en
-[herramientas/traducciones.py](herramientas/traducciones.py), mirando el
-**nombre del evento**, que es lo único que no miente.
+Bethesda (`IdleWarmHandsStanding`), en inglés y **a veces directamente mal
+puestos** — el de `IdleKneeling` dice *CheckCorpse*, el de `blockStart` dice
+*BowZoom*. El editorId no coincide con el nombre del evento en 456 de las 737,
+así que traducirlo al pie de la letra habría dado nombres falsos.
 
-Los ochenta y pico golpes de gracia (`pa_KillMove...`) se montan con reglas,
-que siguen todos el mismo patrón: arma, criatura, golpe y variante.
+La primera pasada la hace
+[herramientas/traducciones.py](herramientas/traducciones.py) mirando el
+**nombre del evento**, que es lo único que no miente. Pero el nombre bueno sale
+de haber visto la animación, y eso es lo que está escrito en la hoja.
 
-El nombre original no se pierde: entra en las palabras de búsqueda, así que
-buscar `chair` sigue encontrando las sillas, y el nombre del evento se ve
-siempre a la derecha de cada fila.
+El id no se pierde: entra en las palabras de búsqueda, así que buscar
+`IdleWave` sigue funcionando. Lo que ya no hace es salir por pantalla — es dato
+técnico y quien juega no tiene por qué verlo.
 
 ---
 
@@ -133,6 +169,37 @@ sp.getPluginSourceCode('animplayer-favoritos', 'PluginsNoLoad')
 
 El archivo acaba en `Data\Platform\PluginsNoLoad\`, que es la carpeta de la
 que SkyrimPlatform **no** carga nada: su sitio para datos.
+
+---
+
+## Detener no es tan simple como parece
+
+Skyrim no tiene una función de «parar la animación». Lo que hay son eventos
+genéricos de parada en el grafo del personaje, y hacen cosas distintas:
+
+```
+OffsetStop          la pose que va encima de la postura
+AnimObjectStop      lo que el juego te pone en la mano: la copa, la jarra, el libro
+IdleFurnitureExit   te saca de la silla  (solo si no estás en una)
+IdleStop            y el idle en sí
+```
+
+Los cuatro, en ese orden. Dos cosas aprendidas a base de romperlo:
+
+**No se manda `IdleForceDefaultState`.** Su registro IDLE se llama *ResetRoot*:
+no para la animación, devuelve la raíz del grafo a su estado por defecto —de
+pie, manos vacías, fuera de cualquier mueble—. Se llevaba por delante la
+guardia y la silla.
+
+**Con el arma fuera no se manda `AnimObjectStop`.** El arma pasa por el mismo
+sistema que la copa del brindis: en el grafo están `AnimObjectDrawBlade`,
+`AnimObjectIronSword`, `AnimObjectEquip`. Soltar «lo de la mano» soltaba también
+la espada. Y detrás del corte, si el arma sigue fuera, se manda
+`combatStanceStart` para devolverte a la guardia: con el arma desenvainada tu
+sitio no es «de pie con las manos vacías».
+
+Y si aun así alguna no se para —las hay que meten al personaje en un subgrafo
+sin salida propia— **pulsa Detener otra vez** y el corte va a por todas.
 
 ---
 
@@ -177,8 +244,9 @@ comparte entre plugins y donde el propio cliente de SkyMP deja lo que otros
 tienen que poder tocar.
 
 Además de reproducir y parar, se puede buscar en el catálogo, poner y quitar el
-bucle, registrar animaciones propias en caliente (salen en el panel al momento,
-sin tocar ningún archivo) y escuchar lo que se va reproduciendo.
+bucle, esconder y mostrar animaciones por jugador, registrar animaciones propias
+en caliente (salen en el panel al momento, sin tocar ningún archivo) y escuchar
+lo que se va reproduciendo.
 
 Dos reglas: míralo en el momento de usarlo y no al cargar tu plugin (el orden de
 carga no está garantizado), y ten en cuenta que todo se encola hasta el
@@ -195,9 +263,9 @@ El manual entero, con un ejemplo completo de mod de bardo, en
 No hay que mandar nada al servidor: el cliente de SkyMP tiene un enganche en
 `sendAnimationEvent`, ve el evento que acabamos de mandar y lo reenvía él.
 
-Hay excepciones, y el panel las marca en la lista con un aviso en vez de dejar
-un botón que parece roto. Están explicadas una a una en
-[docs/sincronizacion.md](docs/sincronizacion.md).
+Hay excepciones —22 animaciones que SkyMP no reenvía—, y el panel las marca en
+la lista con un «·solo tú» en vez de dejar un botón que parece roto. Están
+explicadas una a una en [docs/sincronizacion.md](docs/sincronizacion.md).
 
 ---
 
@@ -222,11 +290,13 @@ ejemplos en [catalogo/ejemplo-mod.json](catalogo/ejemplo-mod.json).
 ## Regenerar el catálogo
 
 El catálogo no se escribe a mano. Sale de los registros IDLE del Skyrim que
-tengas instalado, que es donde está el nombre real de cada evento.
+tengas instalado, que es donde está el nombre real de cada evento, cruzado con
+lo que esté escrito en la hoja de revisión.
 
 ```bash
-python herramientas/generar-catalogo.py     # lee el juego -> catalogo/vanilla.json
-python herramientas/generar-plugin.py       # lo mete dentro de plugin/animplayer.js
+python herramientas/pulir-hoja.py          # la hoja -> catalogo/hoja-pulida.csv
+python herramientas/generar-catalogo.py    # juego + hoja -> catalogo/vanilla.json
+python herramientas/generar-plugin.py      # lo mete dentro de plugin/animplayer.js
 ```
 
 Si tienes Skyrim en otro sitio, se le pasa la ruta de su `Data`.
@@ -250,8 +320,13 @@ Luego maneja el panel como lo haría una persona y comprueba que el plugin acaba
 llamando a `Debug.sendAnimationEvent` con el evento correcto.
 
 Se prueba la cadena entera: interfaz → mensaje → cola → reproductor, y también
-la puerta para otros mods, llamándola igual que lo haría el mod del bardo. Unas
-ciento veinte comprobaciones.
+la puerta para otros mods, llamándola igual que lo haría el mod del bardo. **350
+comprobaciones.**
+
+Buena parte son de cosas que ya se rompieron una vez: que «En guardia» encadene
+sin bajar las manos, que la lista no dé un salto al pulsar, que buscar «en
+guardia» encuentre las que llevan paréntesis, que los contadores digan lo que se
+ve y no el total.
 
 Lo que **no** se puede probar así, y hay que mirar dentro del juego:
 
@@ -268,18 +343,31 @@ plugin/
   animplayer.js              el mod entero, un solo archivo
   animplayer-settings.txt    ajustes, documentados dentro
 catalogo/
-  vanilla.json               generado desde el juego
+  vanilla.json               generado: juego + hoja
+  revisado.csv               la hoja de revisión, 737 filas
+  hoja-pulida.csv            la hoja lista para volver a subir
   ejemplo-mod.json           cómo añadir las de otros mods
 herramientas/
-  traducciones.py            los nombres en español
-  generar-catalogo.py        lee los IDLE del juego
+  pulir-hoja.py              infinitivos, letras y descripciones
+  descripciones.py           las frases escritas a mano
+  estados.py                 correcciones de estado que no se pierden
+  categorias.py              a qué categorías va cada una, por el nombre
+  generar-catalogo.py        lee los IDLE del juego y cruza con la hoja
   generar-plugin.py          mete el catálogo en el plugin
+  traducciones.py            la primera pasada de nombres al español
+  neutral.py                 español neutral: «olla», no «puchero»
+  estilo.py                  nombres en infinitivo y sinónimos unificados
+  dependencias.py            qué estado necesita el jugador
+  descartes.py               qué se descarta por familias, y por qué
+  decisiones.py              las excepciones que salieron de probarlas
+  hoja-completa.py           genera la hoja desde cero
   idles.py                   lector de registros IDLE de esm/esp
   bsa.py                     lector de BSA de Skyrim
   lz4puro.py                 descompresor LZ4 en Python puro
 docs/
-  api.md                     llamar a AnimPlayer desde otro mod
   arquitectura.md            las seis capas y por qué
+  la-hoja.md                 el circuito de la hoja de revisión
+  api.md                     llamar a AnimPlayer desde otro mod
   sincronizacion.md          cómo sincroniza SkyMP y qué no sincroniza
   anadir-animaciones.md      añadir animaciones de otros mods
 pruebas/

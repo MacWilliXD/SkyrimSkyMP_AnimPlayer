@@ -136,7 +136,12 @@ ap.ocultas()                       // → los eventos escondidos
 ```
 
 Para repartir animaciones por jugador: unas las ve todo el mundo y otras solo
-quien deba. De entrada **no hay ninguna escondida**.
+quien deba.
+
+De entrada ya hay **509 escondidas**: las que la hoja de revisión no marca como
+aceptadas. `ocultar` y `mostrar` se suman a eso, no lo sustituyen, así que
+`mostrar` sirve también para sacar una de las descartadas a un jugador
+concreto. Ver [la-hoja.md](la-hoja.md).
 
 `ocultar` y `mostrar` devuelven cuántas fichas tocaron de verdad, así que
 esconder dos veces la misma devuelve `0`.

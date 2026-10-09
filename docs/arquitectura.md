@@ -45,7 +45,12 @@ Las del usuario ganan si el evento se repite, así que se puede renombrar o
 recategorizar una animación del juego sin regenerar nada.
 
 Se guarda compacto: las palabras de búsqueda de cada categoría no se repiten en
-las 674 fichas, se pegan en el navegador al cargar la lista.
+las 737 fichas, se pegan en el navegador al cargar la lista.
+
+De esas 737 se ven **228**. El resto está escondido, no borrado: el servidor las
+puede lanzar igual, y en el buscador salen escribiendo `#hidden` delante. Quién
+está en cada grupo lo decide la hoja de revisión, no el código — ver
+[la-hoja.md](la-hoja.md).
 
 ### Los nombres, en español
 
@@ -97,10 +102,64 @@ Reproductor.parar(peticion)      // salir del mueble y volver a la postura norma
 Si algún día cambia la forma de reproducir animaciones, se cambia aquí y en
 ningún otro sitio.
 
-`parar` manda **dos** eventos y en ese orden, porque hacen cosas distintas:
-`IdleFurnitureExit` te saca de una silla o una cama (si no estás en una, no hace
-nada), y `IdleForceDefaultState` corta la pose. Con solo el segundo te quedas de
-pie dentro de la silla.
+### Parar es lo más difícil de todo esto
+
+Skyrim no tiene una función de «parar la animación». Lo que hay son eventos
+genéricos de parada en el grafo del personaje, y cada uno hace una cosa:
+
+```
+OffsetStop          la pose que va encima de la postura
+AnimObjectStop      lo que el juego te pone en la mano: la copa, la jarra, el libro
+IdleFurnitureExit   te saca de la silla  (solo si no estás en una)
+IdleStop            y el idle en sí
+```
+
+Los cuatro, en ese orden. Cada uno está ahí porque faltaba:
+
+**`IdleForceDefaultState` NO se manda.** Fue lo primero que se probó, y es el
+consejo que circula por los foros. Su registro IDLE se llama *ResetRoot*: no
+para la animación, devuelve la raíz del grafo a su estado por defecto —de pie,
+manos vacías, fuera de cualquier mueble—. Literalmente eso. Se llevaba por
+delante la guardia y la silla, y de ahí venía que al encadenar animaciones el
+personaje se quedara con las manos bajadas.
+
+> Ojo también con `PlayIdle(IdleStop_Loose)`, que se lee por ahí.
+> `IdleStop_Loose` no es un evento: es el editorId de un registro cuyo evento se
+> llama `IdleStop`. `PlayIdle` recibe registros y `sendAnimationEvent` nombres
+> de evento, así que mandar esa cadena por aquí no hace nada. Y sin dar error,
+> que es lo peor que puede pasar con un evento de animación.
+
+**`AnimObjectStop` apareció con el brindis.** «Brindar» no se detenía. En el
+grafo del personaje —los `.hkx`, que son binarios de Havok pero llevan los
+nombres dentro como texto plano— se ve por qué:
+
+```
+IdleMQ201ToastStart
+AnimObjectMQ201Goblet            <- la copa
+MQ201Party_HoldingDrinkR_ToastHold.HKX
+```
+
+No existe ningún `IdleMQ201ToastStop`. Lo que hay es una copa, y el corte nunca
+le decía al juego que la soltara.
+
+**Pero con el arma fuera ese evento no se manda.** El arma pasa por el mismo
+sistema que la copa: en el grafo están `AnimObjectDrawBlade`,
+`AnimObjectIronSword`, `AnimObjectEquip`, `UnequipAnimObjectState`. Soltar «lo
+de la mano» soltaba también la espada.
+
+**Y detrás del corte, si el arma sigue fuera, va `combatStanceStart`.** Con el
+arma desenvainada tu sitio no es «de pie con las manos vacías»: es la guardia.
+Esto es lo que hace que el arreglo sea general — da igual cuál de los eventos
+del corte tire la postura, detrás se te devuelve a ella. Perseguir uno a uno los
+eventos que la tiraban era ir a ciegas.
+
+**Si insistes, va a por todas.** Quedan animaciones que meten al personaje en un
+subgrafo sin salida propia y solo se sueltan reseteando la raíz. Eso es brusco y
+no puede ser lo que pase al pulsar una vez, así que se escalona: pulsar Detener
+otra vez entre un cuarto de segundo y tres segundos después manda también
+`IdleOffsetStop`, `IdleStopInstant` e `IdleForceDefaultState`. El cuarto de
+segundo de margen es para que un doble clic sin querer no te levante de la
+silla.
 
 ### El bucle
 
@@ -175,9 +234,34 @@ entra por sus parámetros.
   sin haberla pedido.
 - **La categoría Favoritos solo sale si tienes alguno.** Una categoría vacía y
   permanente es un botón que no hace nada.
-- **De entrada salen tus favoritos y las recomendadas.** Abrir un menú de 674 filas que
-  empieza por "Ambush Enter Instant" no le sirve a nadie. En cuanto escribes o
-  eliges una categoría, se busca en todo.
+- **De entrada salen tus favoritos y las recomendadas.** Abrir un menú de 228
+  filas no le sirve a nadie. En cuanto escribes o eliges una categoría, se
+  busca en todo.
+- **La lista se pinta por tandas de sesenta.** Pintar las 228 de golpe se nota
+  en el navegador que SkyrimPlatform monta encima del juego: comparte máquina
+  con Skyrim. Al bajar se van **añadiendo** las siguientes, no rehaciendo las
+  que ya están.
+
+  Lo que costaba de esto eran los rótulos de grupo (`COMBATE`, `COMER Y
+  BEBER`), que se decidían llevando la cuenta de arriba abajo: para empezar por
+  el 120 había que haber pasado por los 119 anteriores. Ahora cada renglón mira
+  el anterior y decide solo —*lleva rótulo si es el primero, o si el de antes
+  era de otra categoría*—, que da el mismo resultado y se puede empezar por
+  donde sea.
+- **Pulsar un renglón no rehace la lista**, solo mueve la marca. Rehacerla
+  pintaba menos renglones de los que ya había —la cuenta de la tanda miraba lo
+  señalado, no lo puesto— y el navegador te subía de golpe. La lista daba un
+  salto justo al pulsar, y solo con muchas a la vista.
+- **Al pasar el ratón sale una ficha** con el nombre y lo que hace. Es lo que
+  permite que pulsar lance la animación directamente sin que sea un disparo a
+  ciegas.
+- **El id no se ve en ningún sitio.** Ocupaba un tercio del renglón, se cortaba
+  a la mitad y le robaba el sitio al nombre, que también se cortaba. Buscar por
+  id sigue funcionando; simplemente no se anuncia.
+- **Los números, solo al buscar.** El panel iba lleno de cuentas —cuántas hay
+  en total, cuántas por categoría— y eso es información de inventario, no de
+  uso. El único que dice algo es cuántas ha encontrado lo que acabas de
+  escribir.
 - **El texto de búsqueda de cada ficha se calcula una vez**, al cargar, no en
   cada tecla.
 - **No hay pestaña ni nada que pulsar antes.** La tecla saca el panel ya
@@ -187,11 +271,37 @@ entra por sus parámetros.
 - **Si SkyMP le quita el foco al navegador, el panel se cierra.** Se escucha
   `skymp5-client:browserUnfocused`, el mismo suceso con el que SkyMP avisa. Si
   no, quedaría una ventana ahí puesta que no se puede ni tocar ni cerrar.
-- **El aspecto copia al panel de inventario del servidor**: mismos colores
-  (`#e8c987` oro, `#6b5a3a` borde, degradado 42,33,24 → 20,16,12), mismas
-  tipografías (`Bankir-Retro` en títulos, `Din-pro` en el resto) y los mismos
-  remaches en las esquinas. Las tipografías ya las carga la página de SkyMP, así
+- **El aspecto copia al inventario del servidor**, y no de memoria: sale de
+  leer su CSS en `Data/Platform/UI/build.js`, que lleva las hojas dentro de un
+  `eval`. Su propio código dice con qué estilo viene de fábrica:
+
+  ```js
+  const AJUSTES_INICIALES = { estilo: 'limpio', ... };
+  const ESTILOS = [ { id: 'limpio', nombre: 'Sin marcos' }, ... ]
+  ```
+
+  Y ese estilo hace dos cosas que no son evidentes:
+
+  1. **El degradado no es el fondo del panel**: es una capa aparte que ocupa la
+     pantalla entera (`inset:0`, de transparente al 25% a casi negro al 62%).
+     Por eso no se le ve el canto. El mismo degradado metido dentro de un panel
+     de 500 px da un desvanecido de 150 px, que se ve como una raya.
+  2. **El panel no tiene fondo propio**: apaga el suyo con
+     `__panel::before{display:none}` y deja el texto encima del velo.
+
+  Las tipografías (`Aes Barlow`, `Din-pro`) ya las carga la página de SkyMP, así
   que se piden por nombre.
+- **Nada de `inset` ni de `min()` en el CSS.** La página no la dibuja Chrome:
+  la dibuja el Chromium que trae el cliente de SkyMP, y cada versión del cliente
+  trae el suyo. `inset` es de Chromium 87 y `min()` de 79; cuando no los
+  entiende no avisa, se salta la línea y sigue — y lo que se salta es justo lo
+  que da la forma. Se escriben `top/right/bottom/left` y `width` + `max-width`,
+  que hacen lo mismo y los entiende cualquiera.
+- **La rueda de favoritos es la otra vista.** Un corro de hasta quince sectores
+  con el hueco en el centro, donde van el nombre de lo que miras y los dos
+  mandos. Los sectores llevan un degradado radial suave y el hueco se oscurece
+  solo, porque sobre un cielo blanco el texto se perdía. El que miras se marca
+  **oscureciéndolo**, no aclarándolo: encima de nieve, aclarar no destaca.
 
 ---
 
@@ -332,21 +442,27 @@ usarlas.
 Las herramientas de `herramientas/` leen el Skyrim instalado:
 
 ```
-Skyrim.esm y los DLC
-      │  registros IDLE:  EDID (nombre legible)
-      │                   ENAM (el evento que se manda al juego)
-      │                   DNAM (la ruta del fichero de animación)
-      ▼
-generar-catalogo.py   se queda con los de "actors/character" (los humanoides),
-      │               clasifica por reglas y marca lo que SkyMP no sincroniza
-      ▼
-catalogo/vanilla.json
-      │
-      ▼
-generar-plugin.py     lo mete compacto dentro del plugin
-      ▼
-plugin/animplayer.js
+Skyrim.esm y los DLC            catalogo/revisado.csv
+      │  registros IDLE:              │  nombre, descripción, estado
+      │    EDID  nombre legible       │  las 737 revisadas en el juego
+      │    ENAM  el evento            │
+      │    DNAM  el fichero .hkx      │
+      └──────────────┬────────────────┘
+                     ▼
+         generar-catalogo.py    se queda con los de "actors/character",
+                     │          cruza con la hoja y reparte por categorías
+                     ▼          mirando el NOMBRE, no el id
+            catalogo/vanilla.json
+                     │
+                     ▼
+         generar-plugin.py      lo mete compacto dentro del plugin
+                     ▼
+            plugin/animplayer.js
 ```
+
+El juego dice **qué animaciones existen**; la hoja dice **cuáles sirven y cómo
+se llaman**. Ninguna de las dos sola basta: el juego no sabe español y la hoja
+no sabe qué hay instalado. Ver [la-hoja.md](la-hoja.md).
 
 El nombre del evento tiene que existir de verdad: si no existe, no pasa nada, ni
 error ni animación. De ahí que la lista se saque del juego y no se escriba a
@@ -356,5 +472,18 @@ nombre de barrer que no existía.
 
 `bsa.py` y `lz4puro.py` están porque los archivos del juego van en BSA
 comprimidos con LZ4 y no hacía falta añadir dependencias para leer unos nombres.
-Hoy solo hacen falta si se quiere mirar dentro de los ficheros de comportamiento
-de Havok; los IDLE salen directos de los `.esm`.
+Los IDLE salen directos de los `.esm`; esos dos hacen falta para lo otro.
+
+### El grafo del personaje
+
+`Data/meshes/actors/character/behaviors/*.hkx` son binarios de Havok, pero los
+nombres de evento van dentro **como texto plano**: se leen las cadenas
+imprimibles y ya. Son 6202.
+
+Eso no es una curiosidad: es de donde han salido las dos cosas más difíciles de
+este mod. La lista completa de eventos genéricos de parada —y darse cuenta de
+que se mandaban tres de cinco— y por qué «Brindar» no se detenía, que fue ver
+`AnimObjectMQ201Goblet` al lado de `IdleMQ201ToastStart` y entender que lo que
+quedaba puesto era la copa.
+
+Cuando una animación se porte raro, el sitio donde mirar es ese.
